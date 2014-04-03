@@ -1,0 +1,3 @@
+rootProject.name='pkr'
+include 'core'
+include 'web'
