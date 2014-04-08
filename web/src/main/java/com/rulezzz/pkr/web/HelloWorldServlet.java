@@ -26,7 +26,7 @@ public class HelloWorldServlet extends HttpServlet {
     	Table t = new Table(GameType.FIVECARD);
     	t.deal(Integer.parseInt(n));
     	req.setAttribute("table", t);
-    	req.getRequestDispatcher("/WEB-INF/jsp/hello.jsp").forward(req, resp);
+    	req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
     	
     }
 }
