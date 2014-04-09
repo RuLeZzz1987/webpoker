@@ -1,0 +1,8 @@
+bin
+build
+META-INF
+.classpath
+.gitignore
+.gradle/
+.project
+.settings
