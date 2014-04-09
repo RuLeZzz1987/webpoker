@@ -49,7 +49,7 @@ public class Hand{
 		}
 	}
 	
-	public ArrayList<Card> getHand() {
+	public ArrayList<Card> getCards() {
 		return hand;
 	}
 	
@@ -188,10 +188,10 @@ public class Hand{
 	public Boolean compareTo(Hand h) {
 		sort();
 		h.sort();
-		if ( hand.size() != h.getHand().size() ) return false; 
+		if ( hand.size() != h.getCards().size() ) return false; 
 			else 
 					for (int i=0; i < hand.size(); i++) 
-						if ( !hand.get(i).isSame(h.getHand().get(i))) return false;				
+						if ( !hand.get(i).isSame(h.getCards().get(i))) return false;				
 		return true;
 	}
 }

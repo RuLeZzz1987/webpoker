@@ -43,7 +43,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.SPADES, '6', 6));
 		hand.add(new Card(CardSuit.DIAMOND, '3', 3));
 		hand.add(new Card(CardSuit.CLUBS, '2', 2));		
-		GameMath.generateCombinations(hand.getHand(), 3);
+		GameMath.generateCombinations(hand.getCards(), 3);
 	}
 	
 	@Test

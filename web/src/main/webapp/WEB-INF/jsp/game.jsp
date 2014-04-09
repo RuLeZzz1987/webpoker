@@ -1,4 +1,4 @@
-<%@page import="com.rulezzz.pkr.core.Table"%>
+<%@page import="com.rulezzz.pkr.core.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,10 +10,11 @@
 <body>
 	<table>
 	<% Table t = (Table) request.getAttribute("table"); %>
-	<% for(int i=0; i< t.getBoxes().size(); i++) { %>
+	<% for(PlayerBox box: t.getBoxes()) { %>
 	<tr>
-	<% 	for(int j=0; j < t.getBox(i).getHand().getHand().size(); j++) {
-		%><td> <%=t.getBox(i).getHand().getHand().get(j).toString()%> </td><%	
+	<%
+		for(Card card: box.getHand().getCards()) {
+	%><td> <%=card.toString()%> </td><%	
 		} %>
 	</tr> <%
 	}
