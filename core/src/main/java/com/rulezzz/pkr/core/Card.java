@@ -50,6 +50,26 @@ public class Card implements Comparable<Card> {
     public CardSuit getSuit(){
             return(suit);           
     }
+    
+    public char getCharSuit(){
+    	switch(suit) {
+    	case HEART : {
+    		return 'h';
+    	}
+    	case SPADES : {
+    		return 's';
+    	}
+    	case DIAMOND : {
+    		return 'd';
+    	}
+    	case CLUBS : {
+    		return 'c';
+    	}
+    	default :
+    		throw new IllegalArgumentException();
+    	}
+    }
+    
     public char getRate(){
             return(rate);
     }
