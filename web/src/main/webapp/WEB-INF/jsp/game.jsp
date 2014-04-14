@@ -17,7 +17,7 @@
 		<tr>
 			<% for(Card card: box.getHand().getCards()) { %>
 				<td>
-					<%=card%><br> 
+					<div class="<%=card.getStringCard()%>"></div><br> 
 					<input type="checkbox" name="<%=card.toString()%>"><br> hold 
 				</td>
 		

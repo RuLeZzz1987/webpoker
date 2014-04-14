@@ -23,6 +23,9 @@ public class StartPageServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String s = req.getParameter("gametype");
+    	if ( s == null ) {
+    		s = "FIVECARD";
+    	}
 		Table t = new Table(GameType.valueOf(s));
     	t.makeBets(5,5,10);
 		t.deal();

@@ -105,7 +105,9 @@ public class Card implements Comparable<Card> {
             }
     }
 
-
+    public String getStringCard() {
+    	return getCharSuit()+String.valueOf(rate);
+    }
     
     @Override
     public String toString() {

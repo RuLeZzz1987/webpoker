@@ -19,6 +19,19 @@
 			<form action="hi" method="GET" name="form1">
 				<input type="submit" value="go test!">
 			</form>
-			<img class="Ac" src="static/images/empty.png">
+			<div class="dA"></div>
+			<div class="dK"></div>
+			<div class="dQ"></div>
+			<div class="dJ"></div>
+			<div class="dT"></div>
+			<div class="d9"></div>
+			<div class="d8"></div>
+			<div class="d7"></div>
+			<div class="d6"></div>
+			<div class="d5"></div>
+			<div class="d4"></div>
+			<div class="d3"></div>
+			<div class="d2"></div>
+			
 	</body>
 </html>
