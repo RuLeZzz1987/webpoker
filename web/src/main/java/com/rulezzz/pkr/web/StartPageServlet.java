@@ -22,12 +22,14 @@ public class StartPageServlet extends HttpServlet {
     
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	String s = req.getParameter("gametype");
-    	if ( s == null ) {
-    		s = "FIVECARD";
+    	String gameType = req.getParameter("gametype");
+    	int boxCount = Integer.parseInt(req.getParameter("boxCount"));
+    	int[] bets = new int[boxCount];
+    	if ( gameType == null ) {
+    		gameType = "FIVECARD";
     	}
-		Table t = new Table(GameType.valueOf(s));
-    	t.makeBets(5,5,10);
+		Table t = new Table(GameType.valueOf(gameType));
+    	t.makeBets(bets);
 		t.deal();
     	req.setAttribute("table", t);
     	req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);

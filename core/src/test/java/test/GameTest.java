@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 
 import org.junit.Before;
@@ -31,6 +33,15 @@ public class GameTest {
 		else	table.getBoxes().get(1).play();
 		table.calculateDealResult();
 		System.out.println(table.toString());
+	}
+	
+	@Test
+	public void testCheckingBoxStatus() throws IOException {
+		table.makeBets(10);
+		table.deal();
+		table.getBox(0).fold();
+		table.checkBoxStatus();
+		assertEquals(0, table.getBoxes().size());
 	}
 
 }

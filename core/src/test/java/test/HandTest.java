@@ -20,6 +20,8 @@ public class HandTest {
 		hand = new Hand();
 	}
 	
+
+	
 	@Test
 	public void testRemoveCardFromHand() {
 		hand = new Hand(GameType.FIVECARD, new Card(CardSuit.CLUBS, 'A', 14) , new Card(CardSuit.HEART, 'K', 13),

@@ -6,12 +6,25 @@
 	</head>
 	<body>
 		<form action="start" method="POST" name="form">
-		<p><strong>Choose game</strong><br>
-			<input type="radio" name="gametype" value="FIVECARD"> Five Card<br>
-			<input type="radio" name="gametype" value="TEXAS"> Texas<br>
-			<input type="radio" name="gametype" value="OMAHA"> Omaha<br>
-		</p>
-		
+		<table>
+			<tr>
+				<td>
+					<p><strong>Choose game</strong><br>
+						<input type="radio" name="gametype" value="FIVECARD" checked="checked"> Five Card<br>
+						<input type="radio" name="gametype" value="TEXAS"> Texas<br>
+						<input type="radio" name="gametype" value="OMAHA"> Omaha<br>
+					</p>
+				</td>
+				<td>
+					<p><strong>Choose boxes count</strong><br>
+						<input type="radio" name="boxCount" value="1" checked="checked"> 1<br>
+						<input type="radio" name="boxCount" value="2"> 2<br>
+						<input type="radio" name="boxCount" value="3"> 3<br>
+						<input type="radio" name="boxCount" value="4"> 4<br>
+					</p>
+				</td>
+			</tr>	
+		</table>
 			<input type="submit" value="Play!"> <br>
 
 		
@@ -19,19 +32,8 @@
 			<form action="hi" method="GET" name="form1">
 				<input type="submit" value="go test!">
 			</form>
-			<div class="dA"></div>
-			<div class="dK"></div>
-			<div class="dQ"></div>
-			<div class="dJ"></div>
-			<div class="dT"></div>
-			<div class="d9"></div>
-			<div class="d8"></div>
-			<div class="d7"></div>
-			<div class="d6"></div>
-			<div class="d5"></div>
-			<div class="d4"></div>
-			<div class="d3"></div>
-			<div class="d2"></div>
+			<div class="whiteChip"></div>
+
 			
 	</body>
 </html>

@@ -22,13 +22,35 @@
 				</td>
 		
 			<% } %>
+			<td class="handDiscription"> <div class="whiteChip"><%=box.getBet()%></div><br>
+				 <%=box.getHand().getCombinationOnFiveCards().toString()%>
+			</td>
 			<td>
-				<input type="radio" name="choise<%=i%>" value="fold" > fold<br>
+				<input type="radio" checked="checked" name="choise<%=i%>" value="fold" > fold<br>
 				<input type="radio" name="choise<%=i%>" value="bet" > bet<br>
 				<input type="radio" name="choise<%=i%>" value="draw" > draw<br>
 				<input type="radio" name="choise<%=i%>" value="buy" > buy
 			</td>
 		</tr> <% } %>
 		</table>
+		<div class="base">
+			<table>
+				<tr>
+					<% for(i=0; i< t.getHand().getCards().size()-1; i++) { %>
+						<td>
+							<div class="backCard"></div>
+						</td>
+					<%}%>
+					<td> 
+						<div class="<%= t.getHand().getCards().get(i).getStringCard() %>"></div>
+					</td>
+					<td class="doSomething">
+						<form action="makeChanges" method="POST" name="form"> 
+							<input type="submit" value="do something!" name="doButton">	
+						</form>
+					</td>
+				</tr>
+			</table> 
+		</div>
 	</body>
 </html>

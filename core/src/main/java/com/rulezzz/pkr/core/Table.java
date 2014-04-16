@@ -2,11 +2,11 @@ package com.rulezzz.pkr.core;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Table extends Box{
 	
-	private int bankroll = 1000;
 	private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
 	private Deck deck = new Deck();
 	private List<Card> cardList = deck.getDeck();
@@ -60,6 +60,9 @@ public class Table extends Box{
 			deck.setUsed(cardList.get(0));
 			cardList.remove(0);
 		}
+		for (PlayerBox b: playerBoxes) {
+			b.sort();
+		}
 		gameStatus = GameStatus.DRAWS;
 	}
 	
@@ -100,6 +103,15 @@ public class Table extends Box{
 			playerBoxes.add(new PlayerBox(bets[i]));
 		}
 		gameStatus = GameStatus.DEAL;
+	}
+	
+	public void checkBoxStatus() {
+		Iterator<PlayerBox> iter = playerBoxes.iterator();
+		while(iter.hasNext()) {
+			if (iter.next().getStatus() == BoxStatus.FOLD) {
+				iter.remove();
+			}
+		}
 	}
 	
 	@Override 
