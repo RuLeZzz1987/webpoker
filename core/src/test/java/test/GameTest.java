@@ -43,5 +43,5 @@ public class GameTest {
 		table.checkBoxStatus();
 		assertEquals(0, table.getBoxes().size());
 	}
-
+	
 }

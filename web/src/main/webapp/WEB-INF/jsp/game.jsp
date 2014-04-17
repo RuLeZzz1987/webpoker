@@ -1,19 +1,24 @@
 <%@ page import="com.rulezzz.pkr.core.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html> 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
 		<link rel="stylesheet" href="static/css/card.css">
 	</head>
 	<body>
-		<table>
+		<table class="broll">
+ <c:forEach var="i" begin="1" end="5">
+   Item ${i}<p>
+</c:forEach>
 		<% int i = 0; %>
 		<% Table t = (Table) request.getAttribute("table"); %>
-		<% for(PlayerBox box: t.getBoxes()) { %>
+		<% for(PlayerBox box: t.getBoxes()) { %>  
 		<% i++; %>
+		<c:forEach items="${table.boxes}" var="box" varStatus="loop">
 		<tr>
 			<% for(Card card: box.getHand().getCards()) { %>
 				<td>
@@ -22,16 +27,35 @@
 				</td>
 		
 			<% } %>
-			<td class="handDiscription"> <div class="whiteChip"><%=box.getBet()%></div><br>
+			<td class="handDiscription"> <div class="whiteChip"><div class="mid"> <%=box.getBet()%> </div></div><br>
 				 <%=box.getHand().getCombinationOnFiveCards().toString()%>
 			</td>
 			<td>
-				<input type="radio" checked="checked" name="choise<%=i%>" value="fold" > fold<br>
-				<input type="radio" name="choise<%=i%>" value="bet" > bet<br>
-				<input type="radio" name="choise<%=i%>" value="draw" > draw<br>
-				<input type="radio" name="choise<%=i%>" value="buy" > buy
+				<% switch ( t.getGameStatus()  )  { 
+					case DRAWS : {%>
+						<input type="radio" checked="checked" name="choise<%=i%>" value="fold" > fold<br>
+						<input type="radio" name="choise<%=i%>" value="bet" > bet<br>
+						<input type="radio" name="choise<%=i%>" value="draw" > draw<br>
+						<input type="radio" name="choise<%=i%>" value="buy" > buy
+					<% break;
+					}  
+					case DEALER_DNQ : { %>
+						<input type="radio" checked="checked" name="choise<%=i%>" value="ante"> ante<br>
+						<input type="radio" name="choise<%=i%>" value="buy_game"> buy game<br>
+					<% break;
+					}
+					 } %>
 			</td>
 		</tr> <% } %>
+		</c:forEach>
+		</table>
+		<table class="broll">
+			<tr>
+				<td class="handDiscription">
+					Bankroll<br>
+					<%=t.getBankroll()%>
+				</td>
+			</tr>
 		</table>
 		<div class="base">
 			<table>

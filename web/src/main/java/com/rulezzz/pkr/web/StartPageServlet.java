@@ -24,11 +24,29 @@ public class StartPageServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	String gameType = req.getParameter("gametype");
     	int boxCount = Integer.parseInt(req.getParameter("boxCount"));
+    	int bankroll = Integer.parseInt(req.getParameter("bankroll"));
+    	int bet;
+    	try {
+    		bet = Integer.parseInt(req.getParameter("bet"));
+    	} catch (NumberFormatException e) {
+    		bet = 10;
+    	}
+    	if (bet > 100) {
+    		bet = 100;
+    	}
+    	if (bet < 5 ) {
+    		bet = 5;
+    	}
     	int[] bets = new int[boxCount];
+    	for (int i=0; i<bets.length; i++) {
+    		bets[i] = bet;
+    		bankroll = bankroll - bet;
+    	}
     	if ( gameType == null ) {
     		gameType = "FIVECARD";
     	}
 		Table t = new Table(GameType.valueOf(gameType));
+		t.setBankroll(bankroll);
     	t.makeBets(bets);
 		t.deal();
     	req.setAttribute("table", t);

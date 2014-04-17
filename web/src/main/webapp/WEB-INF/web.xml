@@ -9,12 +9,5 @@
     <servlet-name>startServlet</servlet-name>
     <url-pattern>/start</url-pattern>
   </servlet-mapping>
-  <servlet>
-  	<servlet-name>myHi</servlet-name>
-  	<servlet-class>com.rulezzz.pkr.web.GiveMeHi</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>myHi</servlet-name>
-  	<url-pattern>/hi</url-pattern></servlet-mapping>
 
 </web-app>

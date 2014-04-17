@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Table extends Box{
 	
+	
+	private int bankroll;
 	private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
 	private Deck deck = new Deck();
 	private List<Card> cardList = deck.getDeck();
@@ -17,7 +19,11 @@ public class Table extends Box{
 		this.gameType = gameType;
 		gameStatus = GameStatus.BETS;
 	}
-
+	
+	public GameStatus getGameStatus(){
+		return gameStatus;
+	}
+	
 	public void deal() throws IOException {
 		if (gameStatus != GameStatus.DEAL) {
 			throw new IOException("No money, no Cards!");
@@ -94,7 +100,7 @@ public class Table extends Box{
 					}
 				}
 		}	else {
-			gameStatus = GameStatus.ANTE;
+			gameStatus = GameStatus.GIVE_ANTE;
 		}
 	}
 	
@@ -121,5 +127,13 @@ public class Table extends Box{
 			result = result + " " + playerBoxes.get(i).toString();
 		}
 		return result + " | " + getHand().toString();
+	}
+
+	public int getBankroll() {
+		return bankroll;
+	}
+
+	public void setBankroll(int bankroll) {
+		this.bankroll = bankroll;
 	}
 }
