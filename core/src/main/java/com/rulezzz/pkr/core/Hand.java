@@ -192,7 +192,7 @@ public class Hand{
 		if ( hand.size() != h.getCards().size() ) return false; 
 			else 
 					for (int i=0; i < hand.size(); i++) 
-						if ( !hand.get(i).isSame(h.getCards().get(i))) return false;				
+						if ( !hand.get(i).equals(h.getCards().get(i))) return false;				
 		return true;
 	}
 }
