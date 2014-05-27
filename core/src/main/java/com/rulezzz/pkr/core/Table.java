@@ -122,11 +122,11 @@ public class Table extends Box{
 	
 	@Override 
 	public String toString() {
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		for(int i=0; i<playerBoxes.size(); i++) {
-			result = result + " " + playerBoxes.get(i).toString();
+			result.append(" " + playerBoxes.get(i).toString());
 		}
-		return result + " | " + getHand().toString();
+		return result.toString() + " | " + getHand().toString();
 	}
 
 	public int getBankroll() {

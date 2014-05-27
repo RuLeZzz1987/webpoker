@@ -119,13 +119,17 @@ public class Card implements Comparable<Card> {
             
     }
     
-    public Boolean isSame(Card card) {
+    public boolean equals(Card card) {
     	return (this.suit == card.suit && this.score == card.score) ? true : false; 
+    }
+    
+    public boolean equalsScore(int score) {
+    	return (this.score == score ) ? true : false;
     }
 
     @Override
     public int compareTo(Card obj) {
-    	if (score == obj.getScore()) return 0;
+    	if (equalsScore(obj.score)) return 0;
     	if (score > obj.getScore()) return -1; 
     			else
     				return 1;
