@@ -55,7 +55,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '6', 6));
 		hand.add(new Card(CardSuit.CLUBS, '3', 3));
 		hand.add(new Card(CardSuit.CLUBS, '2', 2));
-		assertEquals("6 14 13 6 3 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("6 14 13 6 3 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -79,7 +79,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '6'));
 		hand.add(new Card(CardSuit.CLUBS, '3'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("0", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("0 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '6'));
 		hand.add(new Card(CardSuit.CLUBS, '3'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("1 6 3 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("1 6 3 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -99,7 +99,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '7'));
 		hand.add(new Card(CardSuit.CLUBS, '5'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("2 13 13 7 5 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("2 13 13 7 5 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -109,7 +109,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, 'J'));
 		hand.add(new Card(CardSuit.CLUBS, '3'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("2 11 11 14 3 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("2 11 11 14 3 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -119,7 +119,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '6'));
 		hand.add(new Card(CardSuit.HEART, '6'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("2 6 6 14 11 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("2 6 6 14 11 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -129,7 +129,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '6'));
 		hand.add(new Card(CardSuit.HEART, '2'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("2 2 2 14 11 6", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("2 2 2 14 11 6 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -139,7 +139,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '6'));
 		hand.add(new Card(CardSuit.HEART, '6'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("3 14 14 6 6 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("3 14 14 6 6 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -149,7 +149,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '7'));
 		hand.add(new Card(CardSuit.HEART, '6'));
 		hand.add(new Card(CardSuit.CLUBS, '6'));
-		assertEquals("3 14 14 6 6 7", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("3 14 14 6 6 7 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -159,7 +159,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '7'));
 		hand.add(new Card(CardSuit.HEART, '6'));
 		hand.add(new Card(CardSuit.CLUBS, '6'));
-		assertEquals("3 7 7 6 6 14", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("3 7 7 6 6 14 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -169,7 +169,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.SPADES, '7'));
 		hand.add(new Card(CardSuit.CLUBS, '5'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("4 7 7 7 5 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("4 7 7 7 5 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -179,7 +179,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, 'J'));
 		hand.add(new Card(CardSuit.SPADES, 'J'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("4 11 11 11 14 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("4 11 11 11 14 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -189,7 +189,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.DIAMOND, '2'));
 		hand.add(new Card(CardSuit.SPADES, '2'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("4 2 2 2 14 11", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("4 2 2 2 14 11 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -199,7 +199,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.HEART, 'A'));
 		hand.add(new Card(CardSuit.SPADES, '2'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("7 14 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("7 14 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -209,7 +209,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.SPADES, '2'));
 		hand.add(new Card(CardSuit.HEART, '2'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("7 2 14", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("7 2 14 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -219,7 +219,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.HEART, 'A'));
 		hand.add(new Card(CardSuit.SPADES, 'A'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("8 14 2", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("8 14 2 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -229,7 +229,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.HEART, '2'));
 		hand.add(new Card(CardSuit.SPADES, '2'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("8 2 14", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("8 2 14 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -239,7 +239,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.HEART, 'J'));
 		hand.add(new Card(CardSuit.SPADES, 'T'));
 		hand.add(new Card(CardSuit.CLUBS, '9'));
-		assertEquals("5 13", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("5 13 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -249,7 +249,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.HEART, '4'));
 		hand.add(new Card(CardSuit.SPADES, '3'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("5 5", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("5 5 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -259,7 +259,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, 'J'));
 		hand.add(new Card(CardSuit.CLUBS, 'T'));
 		hand.add(new Card(CardSuit.CLUBS, '9'));
-		assertEquals("9 13", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("9 13 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -269,7 +269,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, '4'));
 		hand.add(new Card(CardSuit.CLUBS, '3'));
 		hand.add(new Card(CardSuit.CLUBS, '2'));
-		assertEquals("9 5", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("9 5 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 	@Test
@@ -279,7 +279,7 @@ public class HandTest {
 		hand.add(new Card(CardSuit.CLUBS, 'Q'));
 		hand.add(new Card(CardSuit.CLUBS, 'J'));
 		hand.add(new Card(CardSuit.CLUBS, 'T'));
-		assertEquals("10", hand.getCombinationOnFiveCards().getCombCode());
+		assertEquals("10 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
 

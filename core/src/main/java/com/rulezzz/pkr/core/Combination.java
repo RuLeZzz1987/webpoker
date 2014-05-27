@@ -23,7 +23,7 @@ public class Combination implements Comparable<Combination> {
 	
 	private void setKickersList(String code) {
 		int i = 0;
-		code = code + "  ";
+		code = code + " ";
 		while ( code.compareTo(" ") != 0 ) {
 			String bufstr = code.substring(0, code.indexOf(" "));
 			kickers[i] = Integer.parseInt(bufstr);
