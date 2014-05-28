@@ -5,11 +5,11 @@ public class Card implements Comparable<Card> {
     private char rate;
     private int score;
     private static final int DELTAUTFCHAR = 48; /** needed characters starts from 48+ position in UTF-8 **/
-    private static final int ACESCORE = 14;
-    private static final int KINGSCORE = 13;
-    private static final int QUEENSCORE = 12;
-    private static final int JACKSCORE = 11;
-    private static final int TENSCORE = 10;
+    public static final int ACESCORE = 14;
+    public static final int KINGSCORE = 13;
+    public static final int QUEENSCORE = 12;
+    public static final int JACKSCORE = 11;
+    public static final int TENSCORE = 10;
     
 
     public Card(CardSuit suit, int rate, int score) {

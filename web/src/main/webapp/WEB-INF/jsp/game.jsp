@@ -11,9 +11,7 @@
 	</head>
 	<body>
 		<table class="broll">
- <c:forEach var="i" begin="1" end="5">
-   Item ${i}<p>
-</c:forEach>
+
 		<% int i = 0; %>
 		<% Table t = (Table) request.getAttribute("table"); %>
 		<% for(PlayerBox box: t.getBoxes()) { %>  

@@ -15,6 +15,10 @@ import com.rulezzz.pkr.core.Table;
 
 public class StartPageServlet extends HttpServlet {
 	
+	private static final int MINBET = 5;
+	private static final int MAXBET = 100;
+	private static final int DEFAULTBET = 10;
+	
 	@Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	req.getRequestDispatcher("/WEB-INF/jsp/startPage.jsp").forward(req, resp);
@@ -29,13 +33,13 @@ public class StartPageServlet extends HttpServlet {
     	try {
     		bet = Integer.parseInt(req.getParameter("bet"));
     	} catch (NumberFormatException e) {
-    		bet = 10;
+    		bet = DEFAULTBET;
     	}
-    	if (bet > 100) {
-    		bet = 100;
+    	if (bet > MAXBET) {
+    		bet = MAXBET;
     	}
-    	if (bet < 5 ) {
-    		bet = 5;
+    	if (bet < MINBET ) {
+    		bet = MINBET;
     	}
     	int[] bets = new int[boxCount];
     	for (int i=0; i<bets.length; i++) {

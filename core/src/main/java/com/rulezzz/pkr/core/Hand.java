@@ -6,7 +6,13 @@ import java.util.List;
 
 public class Hand{
 	
-	
+	private static final int OMAHA = 4;
+	private static final int FIVECARD = 5;
+	private static final int TEXAS = 2;
+	private static final int PAIR = 1;
+	private static final int SET = 2;
+	private static final int NOCONSILIENCE = 0;
+	private static final int SQUARE = 3;
 	private static final int DELTAFLC = 4; /** delta between score of first and last card. if it's equally 4 combination is Straight  **/
 	private static final int DELTAFLCWH = 9; /** delta between score of first and second card. if it's equally 9 combination is Wheel Straight  **/
 	private List<Card> hand = new ArrayList<Card>();
@@ -19,19 +25,19 @@ public class Hand{
 		}
 		switch(this.gameType) {
 		case FIVECARD : {
-			if ( hand.size() != 5 ) {
+			if ( hand.size() != FIVECARD ) {
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 5!");
 			}
 			break;
 		}
 		case OMAHA : {
-			if ( hand.size() != 4 ) {
+			if ( hand.size() != OMAHA ) {
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 4!");
 			}
 			break;
 		}
 		case TEXAS : {
-			if ( hand.size() != 2 ) {
+			if ( hand.size() != TEXAS ) {
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 2!");
 			}
 			break;
@@ -66,7 +72,7 @@ public class Hand{
 	}
 	
 	protected Boolean isFlushOnFiveCards(){
-		for (int i=1; i<5; i++) {
+		for (int i = 1; i < hand.size(); i++) {
 			if ( hand.get(0).getSuit() != hand.get(i).getSuit() ) {
 				return false;
 			}
@@ -75,7 +81,7 @@ public class Hand{
 	}
 	
 	public Combination getCombinationOnFiveCards() {
-		if ( hand.size() != 5 ) {
+		if ( hand.size() != FIVECARD ) {
 			throw new IllegalStateException("Cards count in hand != 5");
 		}
 		int pairPosition = 0;
@@ -110,9 +116,9 @@ public class Hand{
 			firstPairPosition = 0;
 		}
 		switch ( consilience ) {
-			case 0: {
+			case NOCONSILIENCE: {
 				if ( !isFlushOnFiveCards() ) {
-					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() != DELTAFLC ) {
+					if ( hand.get(1).getScore() == Card.KINGSCORE && hand.get(0).getScore() - hand.get(4).getScore() != DELTAFLC ) {
 						return new Combination("1" + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore() + " ");
 					}
 					if ( hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC ) {
@@ -126,18 +132,18 @@ public class Hand{
 					if ( hand.get(0).getScore() - hand.get(4).getScore() != DELTAFLC && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH ) {
 						return new Combination("6" + " " + hand.get(0).getScore() + " " + hand.get(1).getScore() + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC && hand.get(0).getScore() != 14) {
+					if ( hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC && hand.get(0).getScore() != Card.ACESCORE) {
 						return new Combination("9" + " " + hand.get(0).getScore() + " ");
 					}
 					if ( hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH ) {
 						return new Combination("9" + " " + hand.get(1).getScore() + " ");
 					}
-					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC) {
+					if ( hand.get(1).getScore() == Card.KINGSCORE && hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC) {
 						return new Combination("10 ");
 					}					
 				}
 			}
-			case 1: { 
+			case PAIR: { 
 				if ( consilience1 == 0 ) {
 					resultBuffer = new StringBuilder("2" + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " ");
 					for (int i = 0; i < hand.size(); i++) {
@@ -160,7 +166,7 @@ public class Hand{
 					return new Combination("7" + " " + hand.get(firstPairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " ") ;
 				}
 			}
-			case 2: {
+			case SET: {
 				if ( consilience1 == 0 ) {
 					resultBuffer = new StringBuilder("4" + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " ");
 					for (int i = 0; i < hand.size(); i++) {
@@ -173,7 +179,7 @@ public class Hand{
 					return new Combination("7" + " " + hand.get(pairPosition).getScore() + " " + hand.get(firstPairPosition).getScore() + " ");
 				}
 			}
-			case 3: {
+			case SQUARE: {
 				resultBuffer = new StringBuilder("8" + " " + hand.get(pairPosition).getScore() + " ");
 				for (int i = 0; i < hand.size(); i++) {
 					if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() ) {
