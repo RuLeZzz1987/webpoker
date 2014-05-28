@@ -25,9 +25,9 @@ public class Combination implements Comparable<Combination> {
 		int i = 0;
 		code = code + " ";
 		while ( code.compareTo(" ") != 0 ) {
-			String bufstr = code.substring(0, code.indexOf(" "));
+			String bufstr = code.substring(0, code.indexOf(' '));
 			kickers[i] = Integer.parseInt(bufstr);
-			code = code.substring(code.indexOf(" ")+1);
+			code = code.substring(code.indexOf(' ')+1);
 			i++;
 		}
 		

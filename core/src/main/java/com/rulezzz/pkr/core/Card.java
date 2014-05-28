@@ -133,17 +133,22 @@ public class Card implements Comparable<Card> {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Card other = (Card) obj;
-		if (score != other.score)
+		if (score != other.score) {
 			return false;
-		if (suit != other.suit)
+		}
+		if (suit != other.suit) {
 			return false;
+		}
 		return true;
 	}
 

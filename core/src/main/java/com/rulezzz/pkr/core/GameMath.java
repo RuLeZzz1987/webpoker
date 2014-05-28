@@ -3,7 +3,7 @@ package com.rulezzz.pkr.core;
 import java.util.ArrayList;
 import java.util.List;
 
-	public class GameMath{
+	public final class GameMath{
 	
 	private static int f = 0;
 	private static List<ArrayList<Card>> combin = new ArrayList<ArrayList<Card>>();

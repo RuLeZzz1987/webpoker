@@ -1,12 +1,13 @@
 package com.rulezzz.pkr.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerBox extends Box{
 	
 	private int bet;
 	private BoxStatus boxStatus = BoxStatus.DEALED;
-	private ArrayList<Hand> handList = new ArrayList<Hand>();
+	private List<Hand> handList = new ArrayList<Hand>();
 	
 	public PlayerBox(Hand hand, int bet) {
 		this.handList.add(hand);
