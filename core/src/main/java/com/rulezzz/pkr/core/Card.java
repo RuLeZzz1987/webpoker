@@ -4,6 +4,13 @@ public class Card implements Comparable<Card> {
     private CardSuit suit;
     private char rate;
     private int score;
+    private final int deltaUtfChar = 48; /** needed characters starts from 48+ position in UTF-8 **/
+    private final int AceScore = 14;
+    private final int KingScore = 13;
+    private final int QueenScore = 12;
+    private final int JackScore = 11;
+    private final int TenScore = 10;
+    
 
     public Card(CardSuit suit, int rate, int score) {
     	this.score = score;
@@ -22,27 +29,27 @@ public class Card implements Comparable<Card> {
     	this.rate = rate;
     	switch (rate) {
     		case 'A' : { 
-    			this.score = 14;
+    			this.score = AceScore;
     			break;
     		}
     		case 'K' : {
-    			this.score = 13;
+    			this.score = KingScore;
     			break;
     		}
     		case 'Q' : { 
-    			this.score = 12;
+    			this.score = QueenScore;
     			break;
     		}
     		case 'J' : { 
-    			this.score = 11;
+    			this.score = JackScore;
     			break;
     		}
     		case 'T' : { 
-    			this.score = 10;
+    			this.score = TenScore;
     			break;
     		}
     		default : {
-    			this.score = (int) rate - 48;
+    			this.score = (int) rate - deltaUtfChar;
     		}
     	}
     }
@@ -74,29 +81,29 @@ public class Card implements Comparable<Card> {
             return(rate);
     }
     
-    public void setRate(int i){
+    private final void setRate(int i){
             if ((i>=2)&&(i<=9)) {
-                    i+=48;
+                    i+=deltaUtfChar;
                     rate=(char) i;
             } else {
                     switch (i) {
-                            case 10: {
+                            case TenScore: {
                                     rate='T';
                                     break;
                             }
-                            case 11: {
+                            case JackScore: {
                                     rate='J';
                                     break;
                             }
-                            case 12: {
+                            case QueenScore: {
                                     rate='Q';
                                     break;
                             }
-                            case 13: {
+                            case KingScore: {
                                     rate='K';
                                     break;
                             }
-                            case 14: {
+                            case AceScore: {
                                     rate='A';
                                     break;
                             }
