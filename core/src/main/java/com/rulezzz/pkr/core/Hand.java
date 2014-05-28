@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Hand{
 	
+	
+	private final int deltaFLC = 4; /** delta between score of first and last card. if it's equally 4 combination is Straight  **/
+	private final int deltaFLCwh = 9; /** delta between score of first and second card. if it's equally 9 combination is Wheel Straight  **/
 	private List<Card> hand = new ArrayList<Card>();
 	private GameType gameType;
 	
@@ -81,7 +84,7 @@ public class Hand{
 		int consilience1 = 0;
 		StringBuilder resultBuffer;
 		int flagFirstPairFound = 0;
-		for (int i=1; i<5; i++) {
+		for (int i = 1; i < hand.size(); i++) {
 			if ( hand.get(pairPosition).getScore() == hand.get(i).getScore() ) {
 				if ( flagFirstPairFound <= 1) {
 					consilience++;
@@ -109,27 +112,27 @@ public class Hand{
 		switch ( consilience ) {
 			case 0: {
 				if ( !isFlushOnFiveCards() ) {
-					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() != 4 ) {
+					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() != deltaFLC ) {
 						return new Combination("1" + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(4).getScore() == 4 ) {
+					if ( hand.get(0).getScore() - hand.get(4).getScore() == deltaFLC ) {
 						return new Combination("5" + " " + hand.get(0).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(1).getScore() == 9 ) {
+					if ( hand.get(0).getScore() - hand.get(1).getScore() == deltaFLCwh ) {
 						return new Combination("5" + " " + hand.get(1).getScore() + " ");
 					}
 					return new Combination("0 ");
 				} else {
-					if ( hand.get(0).getScore() - hand.get(4).getScore() != 4 && hand.get(0).getScore() - hand.get(1).getScore() != 9 ) {
+					if ( hand.get(0).getScore() - hand.get(4).getScore() != deltaFLC && hand.get(0).getScore() - hand.get(1).getScore() != deltaFLCwh ) {
 						return new Combination("6" + " " + hand.get(0).getScore() + " " + hand.get(1).getScore() + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(4).getScore() == 4 && hand.get(0).getScore() != 14) {
+					if ( hand.get(0).getScore() - hand.get(4).getScore() == deltaFLC && hand.get(0).getScore() != 14) {
 						return new Combination("9" + " " + hand.get(0).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(1).getScore() == 9 ) {
+					if ( hand.get(0).getScore() - hand.get(1).getScore() == deltaFLCwh ) {
 						return new Combination("9" + " " + hand.get(1).getScore() + " ");
 					}
-					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() == 4) {
+					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() == deltaFLC) {
 						return new Combination("10 ");
 					}					
 				}
@@ -137,7 +140,7 @@ public class Hand{
 			case 1: { 
 				if ( consilience1 == 0 ) {
 					resultBuffer = new StringBuilder("2" + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " ");
-					for (int i=0; i<5; i++) {
+					for (int i = 0; i < hand.size(); i++) {
 						if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() ) {
 							resultBuffer.append(hand.get(i).getScore() + " ");
 						}
@@ -146,7 +149,7 @@ public class Hand{
 				}
 				if ( consilience1 == 1 ) {
 					resultBuffer = new StringBuilder("3" + " " + hand.get(firstPairPosition).getScore() + " " + hand.get(firstPairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " ");
-					for (int i=0; i<5; i++) {
+					for (int i = 0; i < hand.size(); i++) {
 						if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() && hand.get(firstPairPosition).getScore() != hand.get(i).getScore() ) {
 							resultBuffer.append(hand.get(i).getScore() + " ");
 						}
@@ -160,7 +163,7 @@ public class Hand{
 			case 2: {
 				if ( consilience1 == 0 ) {
 					resultBuffer = new StringBuilder("4" + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " ");
-					for (int i=0; i<5; i++) {
+					for (int i = 0; i < hand.size(); i++) {
 						if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() ) {
 							resultBuffer.append(hand.get(i).getScore() + " ");
 						}
@@ -172,7 +175,7 @@ public class Hand{
 			}
 			case 3: {
 				resultBuffer = new StringBuilder("8" + " " + hand.get(pairPosition).getScore() + " ");
-				for (int i=0; i<5; i++) {
+				for (int i = 0; i < hand.size(); i++) {
 					if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() ) {
 						resultBuffer.append(hand.get(i).getScore() + " ");
 					}
