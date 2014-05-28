@@ -4,12 +4,12 @@ public class Card implements Comparable<Card> {
     private CardSuit suit;
     private char rate;
     private int score;
-    private final int deltaUtfChar = 48; /** needed characters starts from 48+ position in UTF-8 **/
-    private final int AceScore = 14;
-    private final int KingScore = 13;
-    private final int QueenScore = 12;
-    private final int JackScore = 11;
-    private final int TenScore = 10;
+    private final static int deltaUtfChar = 48; /** needed characters starts from 48+ position in UTF-8 **/
+    private final static int AceScore = 14;
+    private final static int KingScore = 13;
+    private final static int QueenScore = 12;
+    private final static int JackScore = 11;
+    private final static int TenScore = 10;
     
 
     public Card(CardSuit suit, int rate, int score) {

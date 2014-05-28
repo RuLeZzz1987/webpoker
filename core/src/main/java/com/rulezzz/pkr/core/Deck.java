@@ -8,7 +8,7 @@ public class Deck {
     
     private List<Card> deck = new LinkedList<Card>();
     private List<Card> used = new LinkedList<Card>();
-    private final int cardRanks = 15; /** 13 different ranks but starts from 2 **/
+    private final static int cardRanks = 15; /** 13 different ranks but starts from 2 **/
 
     public List<Card> getDeck(){
             return deck;
