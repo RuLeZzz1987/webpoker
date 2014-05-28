@@ -7,8 +7,8 @@ import java.util.List;
 public class Hand{
 	
 	
-	private final int deltaFLC = 4; /** delta between score of first and last card. if it's equally 4 combination is Straight  **/
-	private final int deltaFLCwh = 9; /** delta between score of first and second card. if it's equally 9 combination is Wheel Straight  **/
+	private static final int DELTAFLC = 4; /** delta between score of first and last card. if it's equally 4 combination is Straight  **/
+	private static final int DELTAFLCWH = 9; /** delta between score of first and second card. if it's equally 9 combination is Wheel Straight  **/
 	private List<Card> hand = new ArrayList<Card>();
 	private GameType gameType;
 	
@@ -112,27 +112,27 @@ public class Hand{
 		switch ( consilience ) {
 			case 0: {
 				if ( !isFlushOnFiveCards() ) {
-					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() != deltaFLC ) {
+					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() != DELTAFLC ) {
 						return new Combination("1" + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(4).getScore() == deltaFLC ) {
+					if ( hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC ) {
 						return new Combination("5" + " " + hand.get(0).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(1).getScore() == deltaFLCwh ) {
+					if ( hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH ) {
 						return new Combination("5" + " " + hand.get(1).getScore() + " ");
 					}
 					return new Combination("0 ");
 				} else {
-					if ( hand.get(0).getScore() - hand.get(4).getScore() != deltaFLC && hand.get(0).getScore() - hand.get(1).getScore() != deltaFLCwh ) {
+					if ( hand.get(0).getScore() - hand.get(4).getScore() != DELTAFLC && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH ) {
 						return new Combination("6" + " " + hand.get(0).getScore() + " " + hand.get(1).getScore() + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(4).getScore() == deltaFLC && hand.get(0).getScore() != 14) {
+					if ( hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC && hand.get(0).getScore() != 14) {
 						return new Combination("9" + " " + hand.get(0).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(1).getScore() == deltaFLCwh ) {
+					if ( hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH ) {
 						return new Combination("9" + " " + hand.get(1).getScore() + " ");
 					}
-					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() == deltaFLC) {
+					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC) {
 						return new Combination("10 ");
 					}					
 				}

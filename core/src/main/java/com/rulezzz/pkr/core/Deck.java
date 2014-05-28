@@ -8,7 +8,7 @@ public class Deck {
     
     private List<Card> deck = new LinkedList<Card>();
     private List<Card> used = new LinkedList<Card>();
-    private final static int cardRanks = 15; /** 13 different ranks but starts from 2 **/
+    private static final int CARDRANKS = 15; /** 13 different ranks but starts from 2 **/
 
     public List<Card> getDeck(){
             return deck;
@@ -19,7 +19,7 @@ public class Deck {
             
 
                     for (CardSuit suit: CardSuit.values()){
-                            for (int j = 2; j < cardRanks; j++) {
+                            for (int j = 2; j < CARDRANKS; j++) {
                                     Card card= new Card(suit,j,j);
                                     deck.add(card);
                             }
