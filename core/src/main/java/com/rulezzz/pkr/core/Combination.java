@@ -21,7 +21,7 @@ public class Combination implements Comparable<Combination> {
 		return code;
 	}
 	
-	private void setKickersList(String code) {
+	private final void setKickersList(String code) {
 		int i = 0;
 		code = code + " ";
 		while ( code.compareTo(" ") != 0 ) {
@@ -43,7 +43,7 @@ public class Combination implements Comparable<Combination> {
       return name;
     }
 	
-	private void setName(String code) {
+	private final void setName(String code) {
 		switch (code.charAt(0)) {
 			case '0' : {
 				this.name = "Don't qualify";
@@ -107,6 +107,38 @@ public class Combination implements Comparable<Combination> {
 	}
 
 	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Combination other = (Combination) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else { 
+			if (!code.equals(other.code)) {
+				return false; 
+			} 
+		}
+		return true;
+	}
+
 	@Override
 	public int compareTo(Combination comb) {
 		for (int i = 0; i < kickers.length; i++) {

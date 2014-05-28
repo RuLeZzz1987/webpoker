@@ -18,7 +18,7 @@ public class Hand{
 	private List<Card> hand = new ArrayList<Card>();
 	private GameType gameType;
 	
-	public Hand(GameType gameType, Card... card) throws IllegalArgumentException{
+	public Hand(GameType gameType, Card... card) {
 		this.gameType = gameType;
 		for (int i=0; i<card.length; i++) {
 			hand.add(card[i]);
