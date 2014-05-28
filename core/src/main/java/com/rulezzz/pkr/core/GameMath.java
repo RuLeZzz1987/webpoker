@@ -24,8 +24,9 @@ import java.util.ArrayList;
 		 if (index == k)
 		    {		
 			 combin.add(new ArrayList<Card>());
-		        for (int j=0; j<k; j++)
-		            combin.get(f).add(data[j]); 
+		        for (int j=0; j<k; j++) {
+		            combin.get(f).add(data[j]);
+		        }
 			 	f++;
 			 	return;
 		    }

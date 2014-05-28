@@ -83,7 +83,7 @@ public class Table extends Box{
 	public void calculateDealResult() {
 		if ( getHand().getCombinationOnFiveCards().getHighness() != 0 && gameStatus == GameStatus.DETERMINATION) {
 			for (int i=0; i < playerBoxes.size(); i++ ) {
-				if ( playerBoxes.get(i).getStatus().equals(BoxStatus.BET) )	
+				if ( playerBoxes.get(i).getStatus().equals(BoxStatus.BET) )	{
 					switch ( playerBoxes.get(i).getHand().getCombinationOnFiveCards().compareTo(getHand().getCombinationOnFiveCards()) ) {
 						case 1 : {
 							
@@ -99,6 +99,7 @@ public class Table extends Box{
 						}
 					}
 				}
+			}
 		}	else {
 			gameStatus = GameStatus.GIVE_ANTE;
 		}

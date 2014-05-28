@@ -129,9 +129,12 @@ public class Card implements Comparable<Card> {
     
     @Override
     public int compareTo(Card obj) {
-    	if (score == obj.score) return 0;
-    	if (score > obj.getScore()) return -1; 
-    			else
-    				return 1;
+    	if (score == obj.score) { 
+    		return 0; 
+    	}
+    	if (score > obj.getScore()) { 
+    		return -1; 
+    	}
+		return 1;
     }
 }

@@ -10,22 +10,26 @@ public class Hand{
 	
 	public Hand(GameType gameType, Card... card) throws IllegalArgumentException{
 		this.gameType = gameType;
-		for (int i=0; i<card.length; i++) 
+		for (int i=0; i<card.length; i++) {
 			hand.add(card[i]);
+		}
 		switch(this.gameType) {
 		case FIVECARD : {
-			if ( hand.size() != 5 ) 
+			if ( hand.size() != 5 ) {
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 5!");
+			}
 			break;
 		}
 		case OMAHA : {
-			if ( hand.size() != 4 ) 
+			if ( hand.size() != 4 ) {
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 4!");
+			}
 			break;
 		}
 		case TEXAS : {
-			if ( hand.size() != 2 ) 
+			if ( hand.size() != 2 ) {
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 2!");
+			}
 			break;
 		}
 		default :
@@ -189,10 +193,14 @@ public class Hand{
 	public Boolean compareTo(Hand h) {
 		sort();
 		h.sort();
-		if ( hand.size() != h.getCards().size() ) return false; 
-			else 
-					for (int i=0; i < hand.size(); i++) 
-						if ( !hand.get(i).equals(h.getCards().get(i))) return false;				
+		if ( hand.size() != h.getCards().size() ) { return false; 
+		} else {
+					for (int i=0; i < hand.size(); i++) {
+						if ( !hand.get(i).equals(h.getCards().get(i))) {
+							return false;	
+						}
+					}
+				}
 		return true;
 	}
 }
