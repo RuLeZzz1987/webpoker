@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class PlayerBox extends Box{
 	
 	private int bet;
-	private GameMath handMath = new GameMath();
 	private BoxStatus boxStatus = BoxStatus.DEALED;
 	private ArrayList<Hand> handList = new ArrayList<Hand>();
 	
@@ -38,9 +37,5 @@ public class PlayerBox extends Box{
 		return boxStatus;
 	}
 	
-	
-	public GameMath getMath(){
-		return handMath;
-	}
 	
 }

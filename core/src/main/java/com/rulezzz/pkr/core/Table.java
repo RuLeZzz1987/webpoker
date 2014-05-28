@@ -34,9 +34,6 @@ public class Table extends Box{
 	
 	public void deal(int boxCount)
 	{	
-		/*if (playerBoxes.size() != 0) {
-			boxCount = playerBoxes.size();
-		}*/
 		int k = 5;
 		switch (gameType) {
 			case FIVECARD : {

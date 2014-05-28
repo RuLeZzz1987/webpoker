@@ -66,7 +66,7 @@ public class Card implements Comparable<Card> {
     		return 'c';
     	}
     	default :
-    		throw new IllegalArgumentException();
+    		throw new IllegalArgumentException("unknown card suit. It should be h, s, d or c");
     	}
     }
     
@@ -100,6 +100,9 @@ public class Card implements Comparable<Card> {
                                     rate='A';
                                     break;
                             }
+                            default : {
+                            	throw new IllegalArgumentException("Unknow card rate. It should be in range 2-9, T, J, Q, K or A");
+                            }
                                     
                     }               
             }
@@ -118,16 +121,33 @@ public class Card implements Comparable<Card> {
             return score;
             
     }
-    
-    public int hashCode() {
-    	return this.hashCode();
-    }
-    
-    public boolean equals(Card card) {
-    	return (this.suit == card.suit && this.score == card.score) ? true : false; 
-    }
-    
+       
     @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + score;
+		result = prime * result + ((suit == null) ? 0 : suit.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		if (score != other.score)
+			return false;
+		if (suit != other.suit)
+			return false;
+		return true;
+	}
+
+	@Override
     public int compareTo(Card obj) {
     	if (score == obj.score) { 
     		return 0; 

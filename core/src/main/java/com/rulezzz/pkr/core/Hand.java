@@ -2,10 +2,11 @@ package com.rulezzz.pkr.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Hand{
 	
-	private ArrayList<Card> hand = new ArrayList<Card>();
+	private List<Card> hand = new ArrayList<Card>();
 	private GameType gameType;
 	
 	public Hand(GameType gameType, Card... card) throws IllegalArgumentException{
@@ -53,7 +54,7 @@ public class Hand{
 		}
 	}
 	
-	public ArrayList<Card> getCards() {
+	public List<Card> getCards() {
 		return hand;
 	}
 	
@@ -193,7 +194,8 @@ public class Hand{
 	public Boolean compareTo(Hand h) {
 		sort();
 		h.sort();
-		if ( hand.size() != h.getCards().size() ) { return false; 
+		if ( hand.size() != h.getCards().size() ) { 
+			return false; 
 		} else {
 					for (int i=0; i < hand.size(); i++) {
 						if ( !hand.get(i).equals(h.getCards().get(i))) {

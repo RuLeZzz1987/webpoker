@@ -100,6 +100,9 @@ public class Combination implements Comparable<Combination> {
 				this.highness = 9;
 				break;
 			}
+			default : {
+				throw new IllegalArgumentException("Unknown combination code. It should be in range 0-10");
+			}
 		}
 	}
 

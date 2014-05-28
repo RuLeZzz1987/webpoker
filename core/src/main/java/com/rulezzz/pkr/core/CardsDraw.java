@@ -2,14 +2,15 @@ package com.rulezzz.pkr.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class CardsDraw{
 	
-	private ArrayList<Card> knownCards;
+	private List<Card> knownCards;
 	private Hand hand;
-	private ArrayList<Card> cardsForChange;
+	private List<Card> cardsForChange;
 	
-	public CardsDraw(Hand hand, ArrayList<Card> knownCards, ArrayList<Card> cardsForChange) {
+	public CardsDraw(Hand hand, List<Card> knownCards, List<Card> cardsForChange) {
 		this.knownCards = knownCards;
 		this.hand = hand;
 		this.cardsForChange = cardsForChange;		
@@ -19,7 +20,7 @@ public class CardsDraw{
 		this.cardsForChange.add(card);
 	}
 	
-	public ArrayList<Card> getDrawList(){
+	public List<Card> getDrawList(){
 		return cardsForChange;
 	}
 	
