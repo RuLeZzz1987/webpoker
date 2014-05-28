@@ -21,7 +21,7 @@ public class Combination implements Comparable<Combination> {
 		return code;
 	}
 	
-	private final void setKickersList(String code) {
+	private void setKickersList(String code) {
 		int i = 0;
 		code = code + " ";
 		while ( code.compareTo(" ") != 0 ) {
@@ -43,7 +43,7 @@ public class Combination implements Comparable<Combination> {
       return name;
     }
 	
-	private final void setName(String code) {
+	private void setName(String code) {
 		switch (code.charAt(0)) {
 			case '0' : {
 				this.name = "Don't qualify";
@@ -129,8 +129,9 @@ public class Combination implements Comparable<Combination> {
 		}
 		Combination other = (Combination) obj;
 		if (code == null) {
-			if (other.code != null)
+			if (other.code != null) {
 				return false;
+			}
 		} else { 
 			if (!code.equals(other.code)) {
 				return false; 

@@ -14,24 +14,21 @@
 
 		<% int i = 0; %>
 		<% Table t = (Table) request.getAttribute("table"); %>
-		<% for(PlayerBox box: t.getBoxes()) { %>  
-		<% i++; %>
 		<c:forEach items="${table.boxes}" var="box" varStatus="loop">
 		<tr>
-			<% for(Card card: box.getHand().getCards()) { %>
+			<c:forEach items="${box.hand.cards}" var="card">
 				<td>
-					<div class="<%=card.getStringCard()%>"></div><br> 
-					<input type="checkbox" name="<%=card.toString()%>"><br> hold 
+					<div class="${card.stringCard}"></div><br> 
+					<input type="checkbox" name="${card}"><br> hold 
 				</td>
-		
-			<% } %>
-			<td class="handDiscription"> <div class="whiteChip"><div class="mid"> <%=box.getBet()%> </div></div><br>
-				 <%=box.getHand().getCombinationOnFiveCards().toString()%>
+			</c:forEach>
+			<td class="handDiscription"> <div class="whiteChip"><div class="mid"> ${box.bet} </div></div><br>
+				 ${box.hand.combinationOnFiveCards.toString()}
 			</td>
 			<td>
 				<% switch ( t.getGameStatus()  )  { 
 					case DRAWS : {%>
-						<input type="radio" checked="checked" name="choise<%=i%>" value="fold" > fold<br>
+						<input type="radio" checked="checked" name="choise${i}" value="fold" > fold<br>
 						<input type="radio" name="choise<%=i%>" value="bet" > bet<br>
 						<input type="radio" name="choise<%=i%>" value="draw" > draw<br>
 						<input type="radio" name="choise<%=i%>" value="buy" > buy
@@ -42,9 +39,9 @@
 						<input type="radio" name="choise<%=i%>" value="buy_game"> buy game<br>
 					<% break;
 					}
-					 } %>
+				 } %>
 			</td>
-		</tr> <% } %>
+		</tr> 
 		</c:forEach>
 		</table>
 		<table class="broll">
@@ -58,11 +55,13 @@
 		<div class="base">
 			<table>
 				<tr>
-					<% for(i=0; i< t.getHand().getCards().size()-1; i++) { %>
+					<%-- for(i=0; i< t.getHand().getCards().size()-1; i++) { --%>
+					<c:forEach begin="0" end="${t.hand.cards.size}" step="1">
 						<td>
 							<div class="backCard"></div>
 						</td>
-					<%}%>
+					<%--}--%>
+					</c:forEach>
 					<td> 
 						<div class="<%= t.getHand().getCards().get(i).getStringCard() %>"></div>
 					</td>
