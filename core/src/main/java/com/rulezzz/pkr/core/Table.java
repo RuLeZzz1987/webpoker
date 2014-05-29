@@ -1,11 +1,13 @@
 package com.rulezzz.pkr.core;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Table extends Box {
+
+public class Table extends Box implements Serializable {
 
     private int bankroll;
     private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
