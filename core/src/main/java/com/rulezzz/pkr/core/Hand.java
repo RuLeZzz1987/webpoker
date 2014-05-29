@@ -13,8 +13,8 @@ public class Hand{
 	private static final int SET = 2;
 	private static final int NOCONSILIENCE = 0;
 	private static final int SQUARE = 3;
-	private static final int DELTAFLC = 4; // delta between score of first and last card. if it's equally 4 combination is Straight  
-	private static final int DELTAFLCWH = 9; // delta between score of first and second card. if it's equally 9 combination is Wheel Straight 
+	private static final int DELTAFLC = 4; 
+	private static final int DELTAFLCWH = 9;
 	private List<Card> hand = new ArrayList<Card>();
 	private GameType gameType;
 	
@@ -119,7 +119,7 @@ public class Hand{
 			case NOCONSILIENCE: {
 				if ( !isFlushOnFiveCards() ) {
 					if ( hand.get(1).getScore() == Card.KINGSCORE && hand.get(0).getScore() - hand.get(hand.size()-1).getScore() != DELTAFLC ) {
-						return new Combination("1" + " " + hand.get(hand.size()-3).getScore() + " " + hand.get(hand.size()-2).getScore() + " " + hand.get(hand.size()-1).getScore() + " ");
+						return new Combination("1" + " " + hand.get(2).getScore() + " " + hand.get(hand.size()-2).getScore() + " " + hand.get(hand.size()-1).getScore() + " ");
 					}
 					if ( hand.get(0).getScore() - hand.get(hand.size()-1).getScore() == DELTAFLC ) {
 						return new Combination("5" + " " + hand.get(0).getScore() + " ");
@@ -130,7 +130,7 @@ public class Hand{
 					return new Combination("0 ");
 				} else {
 					if ( hand.get(0).getScore() - hand.get(hand.size()-1).getScore() != DELTAFLC && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH ) {
-						return new Combination("6" + " " + hand.get(0).getScore() + " " + hand.get(hand.size()-4).getScore() + " " + hand.get(hand.size()-3).getScore() + " " + hand.get(hand.size()-2).getScore() + " " + hand.get(hand.size()-1).getScore() + " ");
+						return new Combination("6" + " " + hand.get(0).getScore() + " " + hand.get(1).getScore() + " " + hand.get(2).getScore() + " " + hand.get(hand.size()-2).getScore() + " " + hand.get(hand.size()-1).getScore() + " ");
 					}
 					if ( hand.get(0).getScore() - hand.get(hand.size()-1).getScore() == DELTAFLC && hand.get(0).getScore() != Card.ACESCORE) {
 						return new Combination("9" + " " + hand.get(0).getScore() + " ");

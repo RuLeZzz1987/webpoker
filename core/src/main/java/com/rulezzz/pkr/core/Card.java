@@ -4,12 +4,13 @@ public class Card implements Comparable<Card> {
     private CardSuit suit;
     private char rate;
     private int score;
-    private static final int DELTAUTFCHAR = 48; /** needed characters starts from 48+ position in UTF-8 **/
+    private static final int DELTAUTFCHAR = 48;
     public static final int ACESCORE = 14;
     public static final int KINGSCORE = 13;
     public static final int QUEENSCORE = 12;
     public static final int JACKSCORE = 11;
     public static final int TENSCORE = 10;
+    public static final int MAXNONCHARRANK = 9;
     
 
     public Card(CardSuit suit, int rate, int score) {
@@ -82,7 +83,7 @@ public class Card implements Comparable<Card> {
     }
     
     private void setRate(int i){
-            if ((i>=2)&&(i<=9)) {
+            if ( ( i >= 2 ) && ( i <= MAXNONCHARRANK ) ) {
                     i+=DELTAUTFCHAR;
                     rate=(char) i;
             } else {
