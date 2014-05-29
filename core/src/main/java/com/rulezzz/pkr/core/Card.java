@@ -1,7 +1,8 @@
 package com.rulezzz.pkr.core;
 
 public class Card implements Comparable<Card> {
-    private CardSuit suit;
+
+	private CardSuit suit;
     private char rate;
     private int score;
 
@@ -104,8 +105,33 @@ public class Card implements Comparable<Card> {
                     }               
             }
     }
+        
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + rate;
+		result = prime * result + ((suit == null) ? 0 : suit.hashCode());
+		return result;
+	}
 
-    public String getStringCard() {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		if (rate != other.rate)
+			return false;
+		if (suit != other.suit)
+			return false;
+		return true;
+	}
+
+	public String getStringCard() {
     	return getCharSuit()+String.valueOf(rate);
     }
     
@@ -118,20 +144,17 @@ public class Card implements Comparable<Card> {
             return score;
             
     }
-    
-    public boolean equals(Card card) {
-    	return (this.suit == card.suit && this.score == card.score) ? true : false; 
-    }
-    
-    public boolean equalsScore(int score) {
-    	return (this.score == score ) ? true : false;
-    }
 
     @Override
     public int compareTo(Card obj) {
-    	if (equalsScore(obj.score)) return 0;
-    	if (score > obj.getScore()) return -1; 
-    			else
+    	if (this.score == obj.score) { 
+    		return 0;
+    	}
+    	if (score > obj.getScore()) {
+    		return -1; 
+    	}
+    			else {
     				return 1;
+    			}    				
     }
 }
