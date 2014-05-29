@@ -34,18 +34,18 @@ public class Table extends Box{
 	
 	public void deal(int boxCount)
 	{	
-		int k = 5;
+		int k = Hand.FIVECARD;
 		switch (gameType) {
 			case FIVECARD : {
-				k = 5;
+				k = Hand.FIVECARD;
 				break;
 			}
 			case OMAHA : {
-				k = 4;
+				k = Hand.OMAHA;
 				break;
 			}
 			case TEXAS : {
-				k = 2;
+				k = Hand.TEXAS;
 				break;
 			}
 			default :

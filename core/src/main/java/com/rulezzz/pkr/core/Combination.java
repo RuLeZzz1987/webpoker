@@ -5,7 +5,8 @@ public class Combination implements Comparable<Combination> {
 	private String code;
 	private String name;
 	private int highness;
-	private int[] kickers = new int[6];
+	private static final int MAXCARDSCOUNT = 6;
+	private int[] kickers = new int[MAXCARDSCOUNT];
 	private static final int ACEKINGHIGH = 1;
 	private static final int DNQ = 0;
 	private static final int ROYALFLUSH = 10;
