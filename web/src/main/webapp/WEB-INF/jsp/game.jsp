@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="static/css/card.css">
 	</head>
 	<body>
+	<form action="makeChanges" method="POST" name="form"> 
 		<table class="broll">
 			<c:forEach items="${table.boxes}" var="box" varStatus="loop">
 			<tr>
@@ -27,13 +28,13 @@
 				</td>
 				<td>
 					<c:choose>
-						<c:when test="${table.gameStatus eq DRAWS}">
+						<c:when test="${table.gameStatus eq 'DRAWS'}">
 							<input type="radio" checked="checked" name="choise${i}" value="fold" > fold<br>
 							<input type="radio" name="choise${i}" value="bet" > bet<br>
 							<input type="radio" name="choise${i}" value="draw" > draw<br>
 							<input type="radio" name="choise${i}" value="buy" > buy
 						</c:when>
-						<c:when test="${table.gameStatus eq DEALER_DNQ}">
+						<c:when test="${table.gameStatus eq 'DEALER_DNQ'}">
 							<input type="radio" checked="checked" name="choise${i}" value="ante"> ante<br>
 							<input type="radio" name="choise${i}" value="buy_game"> buy game<br>
 						</c:when>
@@ -53,21 +54,22 @@
 		<div class="base">
 			<table>
 				<tr>
-					<c:forEach begin="1" end="${t.hand.cards.size}">
+					<c:forEach begin="1" end="${table.hand.cards.size()-1}">
 						<td>
 							<div class="backCard"></div>
 						</td>
 					</c:forEach>
 					<td> 
-						<div class="${t.hand.cards.i.stringCard}"></div>
+						<div class="${table.hand.cards[0].stringCard}"></div>
 					</td>
 					<td class="doSomething">
-						<form action="makeChanges" method="POST" name="form"> 
+						
 							<input type="submit" value="do something!" name="doButton">	
-						</form>
+						
 					</td>
 				</tr>
 			</table> 
 		</div>
+		</form>
 	</body>
 </html>

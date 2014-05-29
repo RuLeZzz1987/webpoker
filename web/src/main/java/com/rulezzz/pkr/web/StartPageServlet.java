@@ -5,11 +5,13 @@ import java.io.IOException;
 
 
 
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rulezzz.pkr.core.GameStatus;
 import com.rulezzz.pkr.core.GameType;
 import com.rulezzz.pkr.core.Table;
 
@@ -18,6 +20,7 @@ public class StartPageServlet extends HttpServlet {
 	private static final int MINBET = 5;
 	private static final int MAXBET = 100;
 	private static final int DEFAULTBET = 10;
+	private GameStatus gameStatus;
 	
 	@Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -53,7 +56,8 @@ public class StartPageServlet extends HttpServlet {
 		t.setBankroll(bankroll);
     	t.makeBets(bets);
 		t.deal();
-    	req.setAttribute("table", t);
+    	req.getSession().setAttribute("table", t);
+    	req.getSession().setAttribute("gameStatus", gameStatus);
     	req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
     	
     }
