@@ -1,9 +1,10 @@
 package com.rulezzz.pkr.core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerBox extends Box {
+public class PlayerBox extends Box implements Serializable {
 
     private int bet;
     private BoxStatus boxStatus = BoxStatus.DEALED;
