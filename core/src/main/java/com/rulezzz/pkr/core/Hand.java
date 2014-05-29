@@ -118,10 +118,10 @@ public class Hand{
 		switch ( consilience ) {
 			case NOCONSILIENCE: {
 				if ( !isFlushOnFiveCards() ) {
-					if ( hand.get(1).getScore() == Card.KINGSCORE && hand.get(0).getScore() - hand.get(4).getScore() != DELTAFLC ) {
+					if ( hand.get(1).getScore() == Card.KINGSCORE && hand.get(0).getScore() - hand.get(hand.size()-1).getScore() != DELTAFLC ) {
 						return new Combination("1" + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC ) {
+					if ( hand.get(0).getScore() - hand.get(hand.size()-1).getScore() == DELTAFLC ) {
 						return new Combination("5" + " " + hand.get(0).getScore() + " ");
 					}
 					if ( hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH ) {
@@ -129,16 +129,16 @@ public class Hand{
 					}
 					return new Combination("0 ");
 				} else {
-					if ( hand.get(0).getScore() - hand.get(4).getScore() != DELTAFLC && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH ) {
+					if ( hand.get(0).getScore() - hand.get(hand.size()-1).getScore() != DELTAFLC && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH ) {
 						return new Combination("6" + " " + hand.get(0).getScore() + " " + hand.get(1).getScore() + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore() + " ");
 					}
-					if ( hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC && hand.get(0).getScore() != Card.ACESCORE) {
+					if ( hand.get(0).getScore() - hand.get(hand.size()-1).getScore() == DELTAFLC && hand.get(0).getScore() != Card.ACESCORE) {
 						return new Combination("9" + " " + hand.get(0).getScore() + " ");
 					}
 					if ( hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH ) {
 						return new Combination("9" + " " + hand.get(1).getScore() + " ");
 					}
-					if ( hand.get(1).getScore() == Card.KINGSCORE && hand.get(0).getScore() - hand.get(4).getScore() == DELTAFLC) {
+					if ( hand.get(1).getScore() == Card.KINGSCORE && hand.get(0).getScore() - hand.get(hand.size()-1).getScore() == DELTAFLC) {
 						return new Combination("10 ");
 					}					
 				}

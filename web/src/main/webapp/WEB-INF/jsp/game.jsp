@@ -11,59 +11,55 @@
 	</head>
 	<body>
 		<table class="broll">
-
-		<% int i = 0; %>
-		<% Table t = (Table) request.getAttribute("table"); %>
-		<c:forEach items="${table.boxes}" var="box" varStatus="loop">
-		<tr>
-			<c:forEach items="${box.hand.cards}" var="card">
-				<td>
-					<div class="${card.stringCard}"></div><br> 
-					<input type="checkbox" name="${card}"><br> hold 
+			<c:forEach items="${table.boxes}" var="box" varStatus="loop">
+			<tr>
+				<c:forEach items="${box.hand.cards}" var="card">
+					<td>
+						<div class="${card.stringCard}"></div><br> 
+						<input type="checkbox" name="${card}"><br> hold 
+					</td>
+				</c:forEach>
+				<td class="handDiscription"> 
+					<div class="whiteChip">
+						<div class="mid"> ${box.bet} </div>
+					</div><br>
+					 ${box.hand.combinationOnFiveCards.toString()}
 				</td>
+				<td>
+					<c:choose>
+						<c:when test="${table.gameStatus eq DRAWS}">
+							<input type="radio" checked="checked" name="choise${i}" value="fold" > fold<br>
+							<input type="radio" name="choise${i}" value="bet" > bet<br>
+							<input type="radio" name="choise${i}" value="draw" > draw<br>
+							<input type="radio" name="choise${i}" value="buy" > buy
+						</c:when>
+						<c:when test="${table.gameStatus eq DEALER_DNQ}">
+							<input type="radio" checked="checked" name="choise${i}" value="ante"> ante<br>
+							<input type="radio" name="choise${i}" value="buy_game"> buy game<br>
+						</c:when>
+				 </c:choose>
+				</td>
+			</tr> 
 			</c:forEach>
-			<td class="handDiscription"> <div class="whiteChip"><div class="mid"> ${box.bet} </div></div><br>
-				 ${box.hand.combinationOnFiveCards.toString()}
-			</td>
-			<td>
-				<% switch ( t.getGameStatus()  )  { 
-					case DRAWS : {%>
-						<input type="radio" checked="checked" name="choise${i}" value="fold" > fold<br>
-						<input type="radio" name="choise<%=i%>" value="bet" > bet<br>
-						<input type="radio" name="choise<%=i%>" value="draw" > draw<br>
-						<input type="radio" name="choise<%=i%>" value="buy" > buy
-					<% break;
-					}  
-					case DEALER_DNQ : { %>
-						<input type="radio" checked="checked" name="choise<%=i%>" value="ante"> ante<br>
-						<input type="radio" name="choise<%=i%>" value="buy_game"> buy game<br>
-					<% break;
-					}
-				 } %>
-			</td>
-		</tr> 
-		</c:forEach>
 		</table>
 		<table class="broll">
 			<tr>
 				<td class="handDiscription">
 					Bankroll<br>
-					<%=t.getBankroll()%>
+					${table.bankroll}
 				</td>
 			</tr>
 		</table>
 		<div class="base">
 			<table>
 				<tr>
-					<%-- for(i=0; i< t.getHand().getCards().size()-1; i++) { --%>
-					<c:forEach begin="0" end="${t.hand.cards.size}" step="1">
+					<c:forEach begin="1" end="${t.hand.cards.size}">
 						<td>
 							<div class="backCard"></div>
 						</td>
-					<%--}--%>
 					</c:forEach>
 					<td> 
-						<div class="<%= t.getHand().getCards().get(i).getStringCard() %>"></div>
+						<div class="${t.hand.cards.i.stringCard}"></div>
 					</td>
 					<td class="doSomething">
 						<form action="makeChanges" method="POST" name="form"> 
