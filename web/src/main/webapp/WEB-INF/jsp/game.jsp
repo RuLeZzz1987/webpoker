@@ -17,7 +17,7 @@
 				<c:forEach items="${box.hand.cards}" var="card">
 					<td>
 						<div class="${card.stringCard}"></div><br> 
-						<input type="checkbox" name="${card}"><br> hold 
+						<input type="checkbox" name="${card.stringCard}"><br> hold 
 					</td>
 				</c:forEach>
 				<td class="handDiscription"> 
@@ -29,14 +29,14 @@
 				<td>
 					<c:choose>
 						<c:when test="${table.gameStatus eq 'DRAWS'}">
-							<input type="radio" checked="checked" name="choise${i}" value="fold" > fold<br>
-							<input type="radio" name="choise${i}" value="bet" > bet<br>
-							<input type="radio" name="choise${i}" value="draw" > draw<br>
-							<input type="radio" name="choise${i}" value="buy" > buy
+							<input type="radio" checked="checked" name="choise${loop.index}" value="fold" > fold<br>
+							<input type="radio" name="choise${loop.index}" value="bet" > bet<br>
+							<input type="radio" name="choise${loop.index}" value="draw" > draw<br>
+							<input type="radio" name="choise${loop.index}" value="buy" > buy
 						</c:when>
 						<c:when test="${table.gameStatus eq 'DEALER_DNQ'}">
-							<input type="radio" checked="checked" name="choise${i}" value="ante"> ante<br>
-							<input type="radio" name="choise${i}" value="buy_game"> buy game<br>
+							<input type="radio" checked="checked" name="choise${loop.index}" value="ante"> ante<br>
+							<input type="radio" name="choise${loop.index}" value="buy_game"> buy game<br>
 						</c:when>
 				 </c:choose>
 				</td>

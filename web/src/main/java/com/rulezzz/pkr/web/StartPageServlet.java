@@ -20,8 +20,7 @@ public class StartPageServlet extends HttpServlet {
 	private static final int MINBET = 5;
 	private static final int MAXBET = 100;
 	private static final int DEFAULTBET = 10;
-	private GameStatus gameStatus;
-	
+
 	@Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	req.getRequestDispatcher("/WEB-INF/jsp/startPage.jsp").forward(req, resp);
@@ -57,7 +56,6 @@ public class StartPageServlet extends HttpServlet {
     	t.makeBets(bets);
 		t.deal();
     	req.getSession().setAttribute("table", t);
-    	req.getSession().setAttribute("gameStatus", gameStatus);
     	req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
     	
     }

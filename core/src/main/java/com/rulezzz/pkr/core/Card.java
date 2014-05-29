@@ -117,12 +117,12 @@ public class Card implements Comparable<Card> {
     }
 
     public String getStringCard() {
-    	return getCharSuit()+String.valueOf(rate);
+    	return "" + getCharSuit()+rate;
     }
     
     @Override
     public String toString() {
-      return String.valueOf(rate)+suit;
+      return "" + rate + suit;
     }
     
     public int getScore() {
