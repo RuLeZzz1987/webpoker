@@ -9,5 +9,12 @@
     <servlet-name>startServlet</servlet-name>
     <url-pattern>/start</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-class>com.rulezzz.pkr.web.GameEngineServlet</servlet-class>
+  	<servlet-name>engineServlet</servlet-name></servlet>
+  <servlet-mapping>
+  	<servlet-name>engineServlet</servlet-name>
+  	<url-pattern>/makeChanges</url-pattern>
+  </servlet-mapping>
 
 </web-app>
