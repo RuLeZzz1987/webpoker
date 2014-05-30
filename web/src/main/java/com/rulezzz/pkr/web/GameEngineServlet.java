@@ -18,9 +18,28 @@ public class GameEngineServlet extends HttpServlet{
 	
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		Table table = (Table) req.getSession().getAttribute("table");
-		
+		switch(table.getGameStatus()) {
+		case DRAWS : {
+		    for (int i = table.getBoxes().size() - 1; i >= 0; i++) {
+		    	String choise = req.getParameter("choise"+String.valueOf(i));
+		    	switch (choise) {
+		    		case "fold" : {
+		    			table.getBoxes().remove(i);
+		    			break;
+		    		}
+		    		case "bet" : {
+		    			table.setBankroll(table.getBankroll() - table.getBox(i).getAnte() * 2);
+		    			table.getBox(i).play();		    			
+		    		}
+		    	}
+		    }
+			break;
+		}
+		default : {
+			break;
+		}
+		}
 		
 		req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
 	}

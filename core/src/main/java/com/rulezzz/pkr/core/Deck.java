@@ -1,11 +1,10 @@
 package com.rulezzz.pkr.core;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Deck implements Serializable {
+public class Deck {
 
     private List<Card> deck = new LinkedList<Card>();
     private List<Card> used = new LinkedList<Card>();

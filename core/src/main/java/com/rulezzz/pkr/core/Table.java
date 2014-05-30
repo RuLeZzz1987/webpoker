@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class Table extends Box implements Serializable {
 
+    private static final long serialVersionUID = -3327856908669194148L;
     private int bankroll;
     private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
     private Deck deck = new Deck();
