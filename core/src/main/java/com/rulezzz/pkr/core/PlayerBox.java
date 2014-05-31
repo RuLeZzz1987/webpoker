@@ -1,18 +1,18 @@
 package com.rulezzz.pkr.core;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerBox extends Box implements Serializable {
+public class PlayerBox extends Box {
 
-    private int bet;
+    private int ante;
+    private int bet = 0;
     private BoxStatus boxStatus = BoxStatus.DEALED;
     private List<Hand> handList = new ArrayList<Hand>();
 
     public PlayerBox(Hand hand, int bet) {
         this.handList.add(hand);
-        this.bet = bet;
+        this.ante = bet;
     }
 
     public PlayerBox() {
@@ -20,15 +20,16 @@ public class PlayerBox extends Box implements Serializable {
     }
 
     public PlayerBox(int bet) {
-        this.bet = bet;
+        this.ante = bet;
     }
 
-    public int getBet() {
-        return bet;
+    public int getAnte() {
+        return ante;
     }
 
     public void play() {
         boxStatus = BoxStatus.BET;
+        this.bet = ante*2;
     }
 
     public void fold() {
