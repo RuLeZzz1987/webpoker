@@ -47,7 +47,7 @@
 				<td class="handDiscription">Bankroll<br> ${table.bankroll}
 				</td>
 			</tr>
-		</table>
+		</table><br>
 		<div class="base">
 			<table>
 				<tr>

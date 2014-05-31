@@ -55,6 +55,10 @@ td.doSomething {
 	padding-right: 16px;
 }
 
+div.base {
+	clear: both;
+}
+
 div.mid {
 	vertical-align: middle;
 	line-height: 80px;
