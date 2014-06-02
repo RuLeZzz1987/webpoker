@@ -75,7 +75,7 @@ public class Card implements Comparable<Card> {
 		}
 		default:
 			throw new IllegalArgumentException(
-					"unknown card suit. It should be h, s, d or c");
+			        "unknown card suit. It should be h, s, d or c");
 		}
 	}
 
@@ -111,7 +111,7 @@ public class Card implements Comparable<Card> {
 			}
 			default: {
 				throw new IllegalArgumentException(
-						"Unknow card rate. It should be in range 2-9, T, J, Q, K or A");
+				        "Unknow card rate. It should be in range 2-9, T, J, Q, K or A");
 			}
 
 			}

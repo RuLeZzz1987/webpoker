@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.rulezzz.pkr.core.GameType;
 import com.rulezzz.pkr.core.Table;
 
+
 public class StartPageServlet extends HttpServlet {
 
     private static final int MINBET = 5;

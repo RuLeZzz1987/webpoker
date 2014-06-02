@@ -22,7 +22,7 @@
 					</c:forEach>
 					<td class="handDiscription">
 						<div class="whiteChip">
-							<div class="mid">${box.bet}</div>
+							<div class="mid">${box.ante}</div>
 						</div> <br> ${box.hand.combinationOnFiveCards.toString()}
 					</td>
 					<td><c:choose>
