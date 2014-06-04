@@ -31,7 +31,7 @@
 									value="fold"> fold<br>
 								<input type="radio" name="choise${loop.index}" value="bet"> bet<br>
 								<input type="radio" name="choise${loop.index}" value="draw"> draw<br>
-								<input type="radio" name="choise${loop.index}" value="buy"> buy
+								<input type="radio" name="choise${loop.index}" value="buy" disabled="disabled"> buy
 						</c:when>
 							<c:when test="${table.gameStatus eq 'DEALER_DNQ'}">
 								<input type="radio" checked="checked" name="choise${loop.index}"

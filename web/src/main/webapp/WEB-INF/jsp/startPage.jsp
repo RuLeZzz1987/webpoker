@@ -12,8 +12,8 @@
 					<p>
 						<strong>Choose game</strong><br> <input type="radio"
 							name="gametype" value="FIVECARD" checked="checked"> Five
-						Card<br> <input type="radio" name="gametype" value="TEXAS">
-						Texas<br> <input type="radio" name="gametype" value="OMAHA">
+						Card<br> <input type="radio" disabled="disabled" name="gametype" value="TEXAS">
+						Texas<br> <input type="radio" disabled="disabled" name="gametype" value="OMAHA">
 						Omaha<br>
 					</p>
 				</td>
