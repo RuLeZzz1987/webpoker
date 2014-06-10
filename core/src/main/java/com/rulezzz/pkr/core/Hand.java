@@ -84,8 +84,8 @@ public class Hand {
     }
 
     public Combination getCombinationOnFiveCards() {
-    	StringBuilder resultBuffer;
-    	ConsilienceCounter counter = new ConsilienceCounter(hand);
+        StringBuilder resultBuffer;
+        ConsilienceCounter counter = new ConsilienceCounter(hand);
         switch (counter.getConsilience()) {
         case NOCONSILIENCE: {
             if (!isFlushOnFiveCards()) {
@@ -139,8 +139,8 @@ public class Hand {
                         + hand.get(counter.getPairPosition()).getScore() + " "
                         + hand.get(counter.getPairPosition()).getScore() + " ");
                 for (int i = 0; i < hand.size(); i++) {
-                    if (hand.get(counter.getPairPosition()).getScore() != hand.get(i)
-                            .getScore()) {
+                    if (hand.get(counter.getPairPosition()).getScore() != hand
+                            .get(i).getScore()) {
                         resultBuffer.append(hand.get(i).getScore() + " ");
                     }
                 }
@@ -148,15 +148,17 @@ public class Hand {
             }
             if (counter.getConsilience1() == 1) {
                 resultBuffer = new StringBuilder("3" + " "
-                        + hand.get(counter.getFirstPairPosition()).getScore() + " "
-                        + hand.get(counter.getFirstPairPosition()).getScore() + " "
-                        + hand.get(counter.getPairPosition()).getScore() + " "
-                        + hand.get(counter.getPairPosition()).getScore() + " ");
+                        + hand.get(counter.getFirstPairPosition()).getScore()
+                        + " "
+                        + hand.get(counter.getFirstPairPosition()).getScore()
+                        + " " + hand.get(counter.getPairPosition()).getScore()
+                        + " " + hand.get(counter.getPairPosition()).getScore()
+                        + " ");
                 for (int i = 0; i < hand.size(); i++) {
-                    if (hand.get(counter.getPairPosition()).getScore() != hand.get(i)
-                            .getScore()
-                            && hand.get(counter.getFirstPairPosition()).getScore() != hand
-                                    .get(i).getScore()) {
+                    if (hand.get(counter.getPairPosition()).getScore() != hand
+                            .get(i).getScore()
+                            && hand.get(counter.getFirstPairPosition())
+                                    .getScore() != hand.get(i).getScore()) {
                         resultBuffer.append(hand.get(i).getScore() + " ");
                     }
                 }
@@ -164,8 +166,9 @@ public class Hand {
             }
             if (counter.getConsilience1() == 2) {
                 return new Combination("7" + " "
-                        + hand.get(counter.getFirstPairPosition()).getScore() + " "
-                        + hand.get(counter.getPairPosition()).getScore() + " ");
+                        + hand.get(counter.getFirstPairPosition()).getScore()
+                        + " " + hand.get(counter.getPairPosition()).getScore()
+                        + " ");
             }
         }
         case SET: {
@@ -175,8 +178,8 @@ public class Hand {
                         + hand.get(counter.getPairPosition()).getScore() + " "
                         + hand.get(counter.getPairPosition()).getScore() + " ");
                 for (int i = 0; i < hand.size(); i++) {
-                    if (hand.get(counter.getPairPosition()).getScore() != hand.get(i)
-                            .getScore()) {
+                    if (hand.get(counter.getPairPosition()).getScore() != hand
+                            .get(i).getScore()) {
                         resultBuffer.append(hand.get(i).getScore() + " ");
                     }
                 }
@@ -184,14 +187,16 @@ public class Hand {
             } else {
                 return new Combination("7" + " "
                         + hand.get(counter.getPairPosition()).getScore() + " "
-                        + hand.get(counter.getFirstPairPosition()).getScore() + " ");
+                        + hand.get(counter.getFirstPairPosition()).getScore()
+                        + " ");
             }
         }
         case SQUARE: {
             resultBuffer = new StringBuilder("8" + " "
                     + hand.get(counter.getPairPosition()).getScore() + " ");
             for (int i = 0; i < hand.size(); i++) {
-                if (hand.get(counter.getPairPosition()).getScore() != hand.get(i).getScore()) {
+                if (hand.get(counter.getPairPosition()).getScore() != hand.get(
+                        i).getScore()) {
                     resultBuffer.append(hand.get(i).getScore() + " ");
                 }
             }

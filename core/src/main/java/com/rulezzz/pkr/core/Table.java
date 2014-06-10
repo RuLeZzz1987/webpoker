@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Table extends Box implements Serializable {
@@ -103,6 +104,50 @@ public class Table extends Box implements Serializable {
         }
     }
 
+    public void handleDraws(LinkedList<String> boxChoise) {
+        if ( gameStatus != GameStatus.DRAWS) {
+            throw new IllegalStateException("game status don't match this operation. Expected: DRAWS. Actual: " + gameStatus);
+        }
+        Iterator<PlayerBox> boxIterator = playerBoxes.iterator();
+        Iterator<String> choiseIterator = boxChoise.iterator();
+        while ( boxIterator.hasNext() ) {
+            String choise = choiseIterator.next();
+            switch(choise) {
+                case "fold" : {
+                    boxIterator.next();
+                    boxIterator.remove();
+                    break;
+                }
+                case "bet" : {
+                    boxIterator.next().play();
+                    break;
+                }
+                case "buy" : {
+                    break;
+                }
+                default : {
+                    boxIterator.next().drawCards(parseChoise(choise));
+                    break;
+                    
+                }
+            }
+        }
+    }
+    
+    public LinkedList<Boolean> parseChoise(String choise) {
+        LinkedList<Boolean> result = new LinkedList<Boolean>();
+        if (choise.substring(0, 4).equals("draw")) {
+            choise = choise.substring(5);
+            for (int i = 0; i < choise.length(); i++) {
+                if ( choise.charAt(i) == '1' ) {
+                    result.add(true);
+                } else {
+                    result.add(false);
+                }
+            }
+        }
+        return result;
+    }
     public void makeBets(int... bets) {
         for (int i = 0; i < bets.length; i++) {
             playerBoxes.add(new PlayerBox(bets[i]));

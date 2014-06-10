@@ -56,6 +56,8 @@ td.doSomething {
 }
 
 div.base {
+
+	display: block;
 	clear: both;
 }
 

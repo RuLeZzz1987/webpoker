@@ -1,6 +1,8 @@
 package com.rulezzz.pkr.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PlayerBox extends Box {
@@ -22,6 +24,24 @@ public class PlayerBox extends Box {
     public PlayerBox(int bet) {
         this.ante = bet;
     }
+    
+    public Hand getHandHigheness(int i) {
+        return handList.get(i);
+    }
+    
+    public void drawCards(LinkedList<Boolean> holdList) {
+        this.boxStatus = BoxStatus.DRAW;
+        Iterator<Card> cardsIter = handList.get(0).getCards().iterator();
+        Iterator<Boolean> holdListIter = holdList.iterator();
+        while (holdListIter.hasNext()) {
+            if ( holdListIter.next() ) {
+                cardsIter.next();
+            } else {
+                cardsIter.next();
+                cardsIter.remove();
+            }
+        }
+    }
 
     public int getAnte() {
         return ante;
@@ -30,6 +50,10 @@ public class PlayerBox extends Box {
     public void play() {
         boxStatus = BoxStatus.BET;
         this.bet = ante*2;
+    }
+    
+    public int getBet() {
+        return this.bet;
     }
 
     public void fold() {

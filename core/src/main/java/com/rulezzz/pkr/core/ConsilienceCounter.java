@@ -10,16 +10,16 @@ public class ConsilienceCounter {
     private int consilience1 = 0;
     private int flagFirstPairFound = 0;
     private List<Card> hand = new ArrayList<Card>();
-    
+
     public ConsilienceCounter(List<Card> hand) {
         if (hand.size() != Hand.FIVECARD) {
             throw new IllegalStateException("Cards count in hand != 5");
         }
-    	this.hand = hand;
-    	count();
+        this.hand = hand;
+        count();
     }
-	
-    private void count(){
+
+    private void count() {
         for (int i = 1; i < hand.size(); i++) {
             if (hand.get(pairPosition).getScore() == hand.get(i).getScore()) {
                 if (flagFirstPairFound <= 1) {
@@ -47,26 +47,24 @@ public class ConsilienceCounter {
         }
     }
 
-	public int getPairPosition() {
-		return pairPosition;
-	}
+    public int getPairPosition() {
+        return pairPosition;
+    }
 
-	public int getConsilience() {
-		return consilience;
-	}
+    public int getConsilience() {
+        return consilience;
+    }
 
-	public int getFirstPairPosition() {
-		return firstPairPosition;
-	}
+    public int getFirstPairPosition() {
+        return firstPairPosition;
+    }
 
-	public int getConsilience1() {
-		return consilience1;
-	}
+    public int getConsilience1() {
+        return consilience1;
+    }
 
-	public int getFlagFirstPairFound() {
-		return flagFirstPairFound;
-	}
-    
-    
-    
+    public int getFlagFirstPairFound() {
+        return flagFirstPairFound;
+    }
+
 }
