@@ -31,6 +31,10 @@ public class PlayerBox extends Box {
         boxStatus = BoxStatus.BET;
         this.bet = ante*2;
     }
+    
+    public int getBet() {
+        return this.bet;
+    }
 
     public void fold() {
         boxStatus = BoxStatus.FOLD;

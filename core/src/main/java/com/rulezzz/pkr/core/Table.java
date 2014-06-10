@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Table extends Box implements Serializable {
@@ -103,6 +104,29 @@ public class Table extends Box implements Serializable {
         }
     }
 
+    public void handleDraws(LinkedList<String> boxChoise) {
+        if ( gameStatus != GameStatus.DRAWS) {
+            throw new IllegalStateException("game status don't match this operation. Expected: DRAWS. Actual: " + gameStatus);
+        }
+        Iterator<PlayerBox> boxIterator = playerBoxes.iterator();
+        Iterator<String> choiseIterator = boxChoise.iterator();
+        int i = 0;
+        while ( boxIterator.hasNext() ) {
+            switch(choiseIterator.next()) {
+                case "fold" : {
+                    boxIterator.next();
+                    boxIterator.remove();
+                    break;
+                }
+                case "bet" : {
+                    boxIterator.next().play();
+                    i++;
+                    break;
+                }
+            }
+        }
+    }
+    
     public void makeBets(int... bets) {
         for (int i = 0; i < bets.length; i++) {
             playerBoxes.add(new PlayerBox(bets[i]));
