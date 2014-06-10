@@ -81,6 +81,7 @@ public class GameTest {
         assertEquals(BoxStatus.BET, table.getBox(1).getStatus());
 
     }
+    
     @Test
     public void testHandleDrawsChooseBetBetFold() throws IOException {
         table.makeBets(10, 15, 25);
@@ -97,4 +98,32 @@ public class GameTest {
         assertEquals(BoxStatus.BET, table.getBox(1).getStatus());
 
     }
+    
+    @Test
+    public void testHandleDrawsChooseBetDrawFold() throws IOException {
+        table.makeBets(10, 15, 25);
+        table.deal();
+        LinkedList<String> boxChoises = new LinkedList<String>();
+        boxChoises.add("bet");
+        boxChoises.add("draw 11001");
+        boxChoises.add("fold");
+        table.handleDraws(boxChoises);
+        assertEquals(2, table.getBoxes().size());
+        assertEquals(20, table.getBox(0).getBet());
+        assertEquals(BoxStatus.BET, table.getBox(0).getStatus());
+        assertEquals(BoxStatus.DRAW, table.getBox(1).getStatus());
+        assertEquals(3, table.getBox(1).getHand().getCards().size());
+    }
+    
+    @Test
+    public void testParseChoise() {
+        LinkedList<Boolean> result = new LinkedList<Boolean>();
+        result.add(true);
+        result.add(false);
+        result.add(true);
+        result.add(false);
+        result.add(true);
+        assertEquals(result, table.parseChoise("draw 10101"));
+    }
+
 }

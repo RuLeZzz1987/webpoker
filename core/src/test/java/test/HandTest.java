@@ -2,6 +2,9 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+import java.util.LinkedList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,6 +13,7 @@ import com.rulezzz.pkr.core.CardSuit;
 import com.rulezzz.pkr.core.GameMath;
 import com.rulezzz.pkr.core.GameType;
 import com.rulezzz.pkr.core.Hand;
+import com.rulezzz.pkr.core.PlayerBox;
 
 public class HandTest {
 	
@@ -282,5 +286,22 @@ public class HandTest {
 		assertEquals("10 ", hand.getCombinationOnFiveCards().getCombCode());
 	}
 	
-
+    @Test
+    public void testDrawCards() throws IOException {
+        hand.add(new Card(CardSuit.CLUBS, 'A'));
+        hand.add(new Card(CardSuit.DIAMOND, 'J'));
+        hand.add(new Card(CardSuit.CLUBS, 'J'));
+        hand.add(new Card(CardSuit.CLUBS, '3'));
+        hand.add(new Card(CardSuit.CLUBS, '2'));
+        PlayerBox box = new PlayerBox(hand, 10);
+        LinkedList<Boolean> holdList = new LinkedList<Boolean>();
+        holdList.add(false);
+        holdList.add(true);
+        holdList.add(true);
+        holdList.add(false);
+        holdList.add(false);
+        box.drawCards(holdList);
+        assertEquals(new Card(CardSuit.DIAMOND, 'J'), box.getHandHigheness(0).getCards().get(0));
+        assertEquals(new Card(CardSuit.CLUBS, 'J'), box.getHandHigheness(0).getCards().get(1));
+    }
 }
