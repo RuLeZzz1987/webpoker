@@ -137,6 +137,27 @@ public class Table extends Box implements Serializable {
         this.gameStatus = GameStatus.DETERMINATION;
     }
     
+    public void handleDetermination() {
+        if (gameStatus != GameStatus.DETERMINATION) {
+            throw new IllegalStateException(
+                    "game status don't match this operation. Expected: DETERMINATION. Actual: "
+                            + gameStatus);
+        }
+        for (PlayerBox box : playerBoxes) {
+            if (box.getStatus() == BoxStatus.DRAW) {
+                List<Card> cards = new LinkedList<Card>();
+                for ( int i = 0; i < box.getHand().getStandardCardsCount() - box.getHand().getCards().size(); i++) {
+                    cards.add(cardList.get(0));
+                    deck.setUsed(cardList.get(0));
+                    cardList.remove(0);
+                }
+                box.getCardsAfterDraw(cards);
+            }
+
+        }
+    }
+    
+    
     private Boolean choiseDrawCheck(String choise) {
     	return ( choise.substring(0, 4).equals("draw")) ? true : false;
     }

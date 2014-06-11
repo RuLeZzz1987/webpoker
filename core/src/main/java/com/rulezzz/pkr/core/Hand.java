@@ -2,6 +2,7 @@ package com.rulezzz.pkr.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Hand {
@@ -19,12 +20,25 @@ public class Hand {
     private GameType gameType;
     private Boolean drawStatus = false;
 
-    public void removeAll() {
-        hand.removeAll(hand);
-    }
-
     public void setDrawStatus(Boolean status) {
         this.drawStatus = status;
+    }
+    
+    public int getStandardCardsCount() {
+        switch(gameType) {
+        case FIVECARD : {
+            return FIVECARD;
+        }
+        case OMAHA : {
+            return OMAHA;
+        }
+        case TEXAS : {
+            return TEXAS;
+        }
+        default : {
+            return FIVECARD;
+        }
+        }
     }
     
     public Hand(GameType gameType, Card... card) {
@@ -66,6 +80,10 @@ public class Hand {
         hand.add(card);
     }
 
+    public void add(List<Card> cards){
+        hand.addAll(cards);
+    }
+    
     public void removeCardByMask(int... mask) {
         for (int i = mask.length - 1; i >= 0; i--) {
             if (mask[i] == 1) {

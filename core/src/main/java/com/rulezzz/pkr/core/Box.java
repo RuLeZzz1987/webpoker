@@ -1,5 +1,7 @@
 package com.rulezzz.pkr.core;
 
+import java.util.List;
+
 public abstract class Box {
 
     private Hand hand = new Hand();
@@ -14,6 +16,10 @@ public abstract class Box {
 
     public void setHand(Card card) {
         this.hand.add(card);
+    }
+    
+    public void setHand(List<Card> cards){
+        hand.add(cards);
     }
 
     public void setHand(Hand hand) {

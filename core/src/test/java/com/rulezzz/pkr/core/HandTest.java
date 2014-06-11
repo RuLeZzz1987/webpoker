@@ -1,4 +1,4 @@
-package test;
+package com.rulezzz.pkr.core;
 
 import static org.junit.Assert.assertEquals;
 
@@ -288,7 +288,7 @@ public class HandTest {
 	
     @Test
     public void testDrawCards() throws IOException {
-        hand.removeAll();
+        hand.getCards().clear();
         hand.add(new Card(CardSuit.CLUBS, 'A'));
         hand.add(new Card(CardSuit.DIAMOND, 'J'));
         hand.add(new Card(CardSuit.CLUBS, 'J'));

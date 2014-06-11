@@ -68,4 +68,10 @@ public class PlayerBox extends Box {
         return boxStatus;
     }
 
+    public void getCardsAfterDraw(List<Card> cards) {
+        this.boxStatus = BoxStatus.DETERMINATION;
+        setHand(cards);
+    }
 }
+
+

@@ -1,4 +1,4 @@
-package test;
+package com.rulezzz.pkr.core;
 
 import static org.junit.Assert.*;
 
