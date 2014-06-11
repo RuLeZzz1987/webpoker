@@ -47,8 +47,11 @@ public class GameEngineServlet extends HttpServlet {
                     }
                 }
                 table.handleDraws(choiseList);
+                break;
         }
-        default: {}
+        default: {
+                break;
+        }
         }
         req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
     }

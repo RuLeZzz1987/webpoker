@@ -2,7 +2,6 @@ package com.rulezzz.pkr.core;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 public class PlayerBox extends Box {
@@ -29,14 +28,14 @@ public class PlayerBox extends Box {
         return handList.get(i);
     }
     
-    public void drawCards(LinkedList<Boolean> holdList) {
+    public void drawCards(List<Boolean> list) {
         this.boxStatus = BoxStatus.DRAW;
-        if ( holdList.size() != getHand().getCards().size()) {
+        if ( list.size() != getHand().getCards().size()) {
             throw new ArithmeticException("count of holding cards don't match count of cards on box");
         }
         getHand().setDrawStatus(true);
         Iterator<Card> cardsIter = getHand().getCards().iterator();
-        Iterator<Boolean> holdListIter = holdList.iterator();
+        Iterator<Boolean> holdListIter = list.iterator();
         while (holdListIter.hasNext()) {
             if ( holdListIter.next() ) {
                 cardsIter.next();

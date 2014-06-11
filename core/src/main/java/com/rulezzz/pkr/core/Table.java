@@ -104,7 +104,7 @@ public class Table extends Box implements Serializable {
         }
     }
 
-    public void handleDraws(LinkedList<String> boxChoise) {
+    public void handleDraws(List<String> boxChoise) {
         if ( gameStatus != GameStatus.DRAWS) {
             throw new IllegalStateException("game status don't match this operation. Expected: DRAWS. Actual: " + gameStatus);
         }
@@ -159,15 +159,16 @@ public class Table extends Box implements Serializable {
     
     
     private Boolean choiseDrawCheck(String choise) {
-    	return ( choise.substring(0, 4).equals("draw")) ? true : false;
+    	return ( choise.substring(0, "draw".length()).equals("draw")) ? true : false;
     }
     
-    public LinkedList<Boolean> parseChoise(String choise) {
+    public List<Boolean> parseChoise(String choise) {
+        String buf = choise;
         LinkedList<Boolean> result = new LinkedList<Boolean>();
-        if (choise.substring(0, 4).equals("draw")) {
-            choise = choise.substring(5);
-            for (int i = 0; i < choise.length(); i++) {
-                if ( choise.charAt(i) == '1' ) {
+        if (choise.substring(0, "draw".length()).equals("draw")) {
+            buf = choise.substring(5);
+            for (int i = 0; i < buf.length(); i++) {
+                if ( buf.charAt(i) == '1' ) {
                     result.add(true);
                 } else {
                     result.add(false);
