@@ -18,7 +18,6 @@ public class PlayerBox extends Box {
     }
 
     public PlayerBox() {
-        // TODO Auto-generated constructor stub
     }
 
     public PlayerBox(int bet) {
@@ -31,7 +30,10 @@ public class PlayerBox extends Box {
     
     public void drawCards(LinkedList<Boolean> holdList) {
         this.boxStatus = BoxStatus.DRAW;
-        Iterator<Card> cardsIter = handList.get(0).getCards().iterator();
+        if ( holdList.size() != getHand().getCards().size()) {
+            throw new ArithmeticException("count of holding cards don't match count of cards on box");
+        }
+        Iterator<Card> cardsIter = getHand().getCards().iterator();
         Iterator<Boolean> holdListIter = holdList.iterator();
         while (holdListIter.hasNext()) {
             if ( holdListIter.next() ) {

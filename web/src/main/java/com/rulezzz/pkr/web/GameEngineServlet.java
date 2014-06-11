@@ -1,13 +1,15 @@
 package com.rulezzz.pkr.web;
 
 import java.io.IOException;
-import java.util.ListIterator;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rulezzz.pkr.core.Card;
 import com.rulezzz.pkr.core.PlayerBox;
 import com.rulezzz.pkr.core.Table;
 
@@ -25,13 +27,23 @@ public class GameEngineServlet extends HttpServlet {
         Table table = (Table) req.getSession().getAttribute("table");
         switch (table.getGameStatus()) {
         case DRAWS: {
-            ListIterator<PlayerBox> iter = table.getBoxes().listIterator();
-            int i=0;
-             while ( iter.hasNext() ){
-                if (req.getParameter("choise" + i) == "fold" ) {
-                    iter.remove();
+                LinkedList<String> choiseList = new LinkedList<String>();
+                for(int i = 0; i < table.getBoxes().size(); i++) {
+                    if ( !req.getParameter("choise" + i).equals("draw")) {
+                        choiseList.add(req.getParameter("choise" + i));
+                    } else {
+                        StringBuilder drawChoise = new StringBuilder("draw ");
+                        for(Card card : table.getBox(i).getHand().getCards()) {
+                            if ( req.getParameter(card.getStringCard()) != null) {
+                                drawChoise.append(1);
+                            } else {
+                                drawChoise.append(0);
+                            }
+                        }
+                        choiseList.add(drawChoise.toString());
+                    }
                 }
-             }
+                table.handleDraws(choiseList);
         }
         default: {}
         }
