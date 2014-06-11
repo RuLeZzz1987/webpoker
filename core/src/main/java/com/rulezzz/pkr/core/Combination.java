@@ -25,8 +25,8 @@ public class Combination implements Comparable<Combination> {
             setName(code);
             setKickersList(code);
         } else {
-            this.name = "draw";
-            this.code = "draw";
+            this.name = null;
+            this.code = null;
             this.highness = -1;
         }
     }
