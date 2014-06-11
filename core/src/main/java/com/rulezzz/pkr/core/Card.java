@@ -83,7 +83,8 @@ public class Card implements Comparable<Card> {
         return (rate);
     }
 
-    private void setRate(int i) {
+    private void setRate(int intRate) {
+    	int i = intRate;
         if ((i >= 2) && (i <= MAXNONCHARRANK)) {
             i += DELTAUTFCHAR;
             rate = (char) i;

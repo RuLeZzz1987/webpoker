@@ -39,13 +39,13 @@ public class Combination implements Comparable<Combination> {
         return code;
     }
 
-    private void setKickersList(String code) {
+    private void setKickersList(String comboCode) {
         int i = 0;
-        code = code + " ";
-        while (code.compareTo(" ") != 0) {
-            String bufstr = code.substring(0, code.indexOf(' '));
+        String bufCode = comboCode + " ";
+        while (bufCode.compareTo(" ") != 0) {
+            String bufstr = bufCode.substring(0, bufCode.indexOf(' '));
             kickers[i] = Integer.parseInt(bufstr);
-            code = code.substring(code.indexOf(' ') + 1);
+            bufCode = bufCode.substring(bufCode.indexOf(' ') + 1);
             i++;
         }
 
