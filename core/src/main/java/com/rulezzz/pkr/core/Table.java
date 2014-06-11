@@ -16,6 +16,7 @@ public class Table extends Box implements Serializable {
     private List<Card> cardList = deck.getDeck();
     private GameType gameType;
     private GameStatus gameStatus;
+    private static final String DRAW = "draw";
 
     public Table(GameType gameType) {
         this.gameType = gameType;
@@ -105,38 +106,40 @@ public class Table extends Box implements Serializable {
     }
 
     public void handleDraws(List<String> boxChoise) {
-        if ( gameStatus != GameStatus.DRAWS) {
-            throw new IllegalStateException("game status don't match this operation. Expected: DRAWS. Actual: " + gameStatus);
+        if (gameStatus != GameStatus.DRAWS) {
+            throw new IllegalStateException(
+                    "game status don't match this operation. Expected: DRAWS. Actual: "
+                            + gameStatus);
         }
         Iterator<PlayerBox> boxIterator = playerBoxes.iterator();
         Iterator<String> choiseIterator = boxChoise.iterator();
-        while ( boxIterator.hasNext() ) {
+        while (boxIterator.hasNext()) {
             String choise = choiseIterator.next();
-            switch(choise) {
-                case "fold" : {
-                    boxIterator.next();
-                    boxIterator.remove();
-                    break;
+            switch (choise) {
+            case "fold": {
+                boxIterator.next();
+                boxIterator.remove();
+                break;
+            }
+            case "bet": {
+                boxIterator.next().play();
+                break;
+            }
+            case "buy": {
+                break;
+            }
+            default: {
+                if (choiseDrawCheck(choise)) {
+                    boxIterator.next().drawCards(parseChoise(choise));
                 }
-                case "bet" : {
-                    boxIterator.next().play();
-                    break;
-                }
-                case "buy" : {
-                    break;
-                }
-                default : {
-                	if ( choiseDrawCheck(choise) ) {
-                		boxIterator.next().drawCards(parseChoise(choise));
-                	}
-                    break;
-                    
-                }
+                break;
+
+            }
             }
         }
         this.gameStatus = GameStatus.DETERMINATION;
     }
-    
+
     public void handleDetermination() {
         if (gameStatus != GameStatus.DETERMINATION) {
             throw new IllegalStateException(
@@ -146,7 +149,8 @@ public class Table extends Box implements Serializable {
         for (PlayerBox box : playerBoxes) {
             if (box.getStatus() == BoxStatus.DRAW) {
                 List<Card> cards = new LinkedList<Card>();
-                for ( int i = 0; i < box.getHand().getStandardCardsCount() - box.getHand().getCards().size(); i++) {
+                for (int i = 0; i < box.getHand().getStandardCardsCount()
+                        - box.getHand().getCards().size(); i++) {
                     cards.add(cardList.get(0));
                     deck.setUsed(cardList.get(0));
                     cardList.remove(0);
@@ -156,19 +160,18 @@ public class Table extends Box implements Serializable {
 
         }
     }
-    
-    
+
     private Boolean choiseDrawCheck(String choise) {
-    	return ( choise.substring(0, "draw".length()).equals("draw")) ? true : false;
+        return (choise.substring(0, DRAW.length()).equals(DRAW)) ? true : false;
     }
-    
+
     public List<Boolean> parseChoise(String choise) {
         String buf = choise;
         LinkedList<Boolean> result = new LinkedList<Boolean>();
-        if (choise.substring(0, "draw".length()).equals("draw")) {
-            buf = choise.substring(5);
+        if (choiseDrawCheck(choise)) {
+            buf = choise.substring(DRAW.length() + 1);
             for (int i = 0; i < buf.length(); i++) {
-                if ( buf.charAt(i) == '1' ) {
+                if (buf.charAt(i) == '1') {
                     result.add(true);
                 } else {
                     result.add(false);
@@ -177,6 +180,7 @@ public class Table extends Box implements Serializable {
         }
         return result;
     }
+
     public void makeBets(int... bets) {
         for (int i = 0; i < bets.length; i++) {
             playerBoxes.add(new PlayerBox(bets[i]));
