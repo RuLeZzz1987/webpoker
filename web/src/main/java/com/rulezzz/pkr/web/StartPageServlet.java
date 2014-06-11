@@ -13,6 +13,10 @@ import com.rulezzz.pkr.core.Table;
 
 public class StartPageServlet extends HttpServlet {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static final int MINBET = 5;
     private static final int MAXBET = 100;
     private static final int DEFAULTBET = 10;

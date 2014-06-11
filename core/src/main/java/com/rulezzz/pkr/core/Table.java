@@ -134,6 +134,7 @@ public class Table extends Box implements Serializable {
                 }
             }
         }
+        this.gameStatus = GameStatus.DETERMINATION;
     }
     
     private Boolean choiseDrawCheck(String choise) {

@@ -17,7 +17,16 @@ public class Hand {
     private static final int DELTAFLCWH = 9;
     private List<Card> hand = new ArrayList<Card>();
     private GameType gameType;
+    private Boolean drawStatus = false;
 
+    public void removeAll() {
+        hand.removeAll(hand);
+    }
+
+    public void setDrawStatus(Boolean status) {
+        this.drawStatus = status;
+    }
+    
     public Hand(GameType gameType, Card... card) {
         this.gameType = gameType;
         for (int i = 0; i < card.length; i++) {
@@ -51,7 +60,6 @@ public class Hand {
     }
 
     public Hand() {
-        // TODO Auto-generated constructor stub
     }
 
     public void add(Card card) {
@@ -84,6 +92,9 @@ public class Hand {
     }
 
     public Combination getCombinationOnFiveCards() {
+        if (drawStatus) {
+            return new Combination("draw");
+        }
         StringBuilder resultBuffer;
         ConsilienceCounter counter = new ConsilienceCounter(hand);
         switch (counter.getConsilience()) {

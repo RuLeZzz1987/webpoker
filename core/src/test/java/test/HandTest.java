@@ -288,6 +288,7 @@ public class HandTest {
 	
     @Test
     public void testDrawCards() throws IOException {
+        hand.removeAll();
         hand.add(new Card(CardSuit.CLUBS, 'A'));
         hand.add(new Card(CardSuit.DIAMOND, 'J'));
         hand.add(new Card(CardSuit.CLUBS, 'J'));

@@ -1,7 +1,6 @@
 package com.rulezzz.pkr.web;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -10,10 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rulezzz.pkr.core.Card;
-import com.rulezzz.pkr.core.PlayerBox;
 import com.rulezzz.pkr.core.Table;
 
 public class GameEngineServlet extends HttpServlet {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)

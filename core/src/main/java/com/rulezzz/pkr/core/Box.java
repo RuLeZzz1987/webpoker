@@ -16,6 +16,9 @@ public abstract class Box {
         this.hand.add(card);
     }
 
+    public void setHand(Hand hand) {
+        this.hand = hand;
+    }
     public int getPower() {
         return Integer.parseInt(hand.getCombinationOnFiveCards().getCombCode());
     }

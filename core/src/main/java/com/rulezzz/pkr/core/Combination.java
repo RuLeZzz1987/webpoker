@@ -20,9 +20,13 @@ public class Combination implements Comparable<Combination> {
     private static final int STRAIGHTFLUSH = 9;
 
     public Combination(String code) {
-        this.code = code;
-        setName(code);
-        setKickersList(code);
+        if (!code.equals("draw")) {
+            this.code = code;
+            setName(code);
+            setKickersList(code);
+        } else {
+            this.name = "draw";
+        }
     }
 
     public int getHighness() {

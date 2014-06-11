@@ -15,6 +15,7 @@ public class PlayerBox extends Box {
     public PlayerBox(Hand hand, int bet) {
         this.handList.add(hand);
         this.ante = bet;
+        setHand(hand);
     }
 
     public PlayerBox() {
@@ -33,6 +34,7 @@ public class PlayerBox extends Box {
         if ( holdList.size() != getHand().getCards().size()) {
             throw new ArithmeticException("count of holding cards don't match count of cards on box");
         }
+        getHand().setDrawStatus(true);
         Iterator<Card> cardsIter = getHand().getCards().iterator();
         Iterator<Boolean> holdListIter = holdList.iterator();
         while (holdListIter.hasNext()) {
