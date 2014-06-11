@@ -1,7 +1,7 @@
 package com.rulezzz.pkr.core;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Hand {
@@ -15,7 +15,7 @@ public class Hand {
     private static final int SQUARE = 3;
     private static final int DELTAFLC = 4;
     private static final int DELTAFLCWH = 9;
-    private List<Card> hand = new ArrayList<Card>();
+    private List<Card> hand = new LinkedList<Card>();
     private GameType gameType;
     private Boolean drawStatus = false;
 

@@ -25,9 +25,6 @@ public abstract class Box {
     public void setHand(Hand hand) {
         this.hand = hand;
     }
-    public int getPower() {
-        return Integer.parseInt(hand.getCombinationOnFiveCards().getCombCode());
-    }
 
     @Override
     public String toString() {

@@ -75,7 +75,7 @@ public class Card implements Comparable<Card> {
         }
         default:
             throw new IllegalArgumentException(
-                    "unknown card suit. It should be h, s, d or c");
+                    "unknown card suit. It should be h, s, d or c"); 
         }
     }
 
