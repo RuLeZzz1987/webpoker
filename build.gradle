@@ -11,3 +11,19 @@ sonarRunner {
     property "sonar.jdbc.username", "sonar"
   }
 }
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    
+    apply plugin: 'java'
+    apply from: "${parent.projectDir.canonicalPath}/cobertura.gradle"
+    
+    sourceCompatibility = 1.7
+    
+    dependencies {
+        testCompile 'junit:junit:4.11'
+        testCompile 'org.mockito:mockito-all:1.9.5'
+    }
+}
