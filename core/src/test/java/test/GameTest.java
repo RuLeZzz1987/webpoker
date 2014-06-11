@@ -125,5 +125,16 @@ public class GameTest {
         result.add(true);
         assertEquals(result, table.parseChoise("draw 10101"));
     }
+    
+    @Test
+    public void testHandleDrawsChooseDraw() throws IOException {
+    	table.makeBets(10);
+    	table.deal();
+    	LinkedList<String> boxChoises = new LinkedList<String>();
+    	boxChoises.add("draw 11001");
+    	table.handleDraws(boxChoises);
+    	assertEquals(BoxStatus.DRAW, table.getBox(0).getStatus());
+    	assertEquals(3, table.getBox(0).getHand().getCards().size());
+    }
 
 }

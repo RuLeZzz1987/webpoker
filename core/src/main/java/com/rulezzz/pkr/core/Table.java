@@ -126,12 +126,18 @@ public class Table extends Box implements Serializable {
                     break;
                 }
                 default : {
-                    boxIterator.next().drawCards(parseChoise(choise));
+                	if ( choiseDrawCheck(choise) ) {
+                		boxIterator.next().drawCards(parseChoise(choise));
+                	}
                     break;
                     
                 }
             }
         }
+    }
+    
+    private Boolean choiseDrawCheck(String choise) {
+    	return ( choise.substring(0, 4).equals("draw")) ? true : false;
     }
     
     public LinkedList<Boolean> parseChoise(String choise) {
