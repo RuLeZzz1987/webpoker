@@ -46,8 +46,8 @@ public class CombinationTest {
 		assertEquals(false, combo.equals(combo2));
 		combo2 = new Combination("draw");
 		assertEquals(false, combo2.equals(combo));
-		Object comb = new Object();
-		assertEquals(false, combo.equals(comb));
+		Object combo3 = new Object();
+		assertEquals(false, combo.equals(combo3));
 		combo = new Combination("draw");
 		assertEquals(true, combo2.equals(combo));
 	}

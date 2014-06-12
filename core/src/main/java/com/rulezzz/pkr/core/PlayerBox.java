@@ -7,7 +7,8 @@ import java.util.List;
 public class PlayerBox extends Box {
 
     private int ante;
-    private int bet = 0;
+    private int bet;
+    private int countOfNeededCards;
     private BoxStatus boxStatus = BoxStatus.DEALED;
     private List<Hand> handList = new ArrayList<Hand>();
 
@@ -42,10 +43,15 @@ public class PlayerBox extends Box {
             } else {
                 cardsIter.next();
                 cardsIter.remove();
+                countOfNeededCards++;
             }
         }
     }
-
+    
+    public int getCountOfNeededCards() {
+        return countOfNeededCards;
+    }
+    
     public int getAnte() {
         return ante;
     }

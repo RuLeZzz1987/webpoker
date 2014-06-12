@@ -148,17 +148,21 @@ public class Table extends Box implements Serializable {
         }
         for (PlayerBox box : playerBoxes) {
             if (box.getStatus() == BoxStatus.DRAW) {
-                List<Card> cards = new LinkedList<Card>();
-                for (int i = 0; i < box.getHand().getStandardCardsCount()
-                        - box.getHand().getCards().size(); i++) {
-                    cards.add(cardList.get(0));
-                    deck.setUsed(cardList.get(0));
-                    cardList.remove(0);
-                }
-                box.getCardsAfterDraw(cards);
+                box.getCardsAfterDraw(generateDrawCardList(box
+                        .getCountOfNeededCards()));
+                break;
             }
-
         }
+    }
+
+    private List<Card> generateDrawCardList(int count) {
+        List<Card> result = new LinkedList<Card>();
+        for (int i = 0; i < count; i++) {
+            result.add(cardList.get(0));
+            deck.setUsed(cardList.get(0));
+            cardList.remove(0);
+        }
+        return result;
     }
 
     private Boolean choiseDrawCheck(String choise) {
