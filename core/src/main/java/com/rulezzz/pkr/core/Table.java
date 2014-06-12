@@ -126,6 +126,7 @@ public class Table extends Box implements Serializable {
                     break;
                 }
                 case "buy": {
+                    boxIterator.next().buyCard();
                     break;
                 }
                 default: {

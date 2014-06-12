@@ -123,9 +123,8 @@ public class TableTest {
         table.handleDraws(boxChoises);
         assertEquals(2, table.getBoxes().size());
         assertEquals(20, table.getBox(0).getBet());
-        assertEquals(30, table.getBox(1).getBet());
         assertEquals(BoxStatus.BET, table.getBox(0).getStatus());
-        assertEquals(BoxStatus.BET, table.getBox(1).getStatus());
+        assertEquals(BoxStatus.BUY_CARD, table.getBox(1).getStatus());
 
     }
     

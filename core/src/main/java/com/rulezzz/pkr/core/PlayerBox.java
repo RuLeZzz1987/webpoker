@@ -77,6 +77,10 @@ public class PlayerBox extends Box {
         this.boxStatus = BoxStatus.DETERMINATION;
         setHand(cards);
     }
+
+    public void buyCard() {
+        this.boxStatus = BoxStatus.BUY_CARD;
+    }
 }
 
 
