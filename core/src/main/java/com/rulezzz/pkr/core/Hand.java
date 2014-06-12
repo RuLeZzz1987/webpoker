@@ -22,24 +22,24 @@ public class Hand {
     public void setDrawStatus(Boolean status) {
         this.drawStatus = status;
     }
-    
+
     public int getStandardCardsCount() {
-        switch(gameType) {
-        case FIVECARD : {
+        switch (gameType) {
+        case FIVECARD: {
             return FIVECARD;
         }
-        case OMAHA : {
+        case OMAHA: {
             return OMAHA;
         }
-        case TEXAS : {
+        case TEXAS: {
             return TEXAS;
         }
-        default : {
+        default: {
             return FIVECARD;
         }
         }
     }
-    
+
     public Hand(GameType gameType, Card... card) {
         this.gameType = gameType;
         for (int i = 0; i < card.length; i++) {
@@ -79,10 +79,10 @@ public class Hand {
         hand.add(card);
     }
 
-    public void add(List<Card> cards){
+    public void add(List<Card> cards) {
         hand.addAll(cards);
     }
-    
+
     public void removeCardByMask(int... mask) {
         for (int i = mask.length - 1; i >= 0; i--) {
             if (mask[i] == 1) {
@@ -198,39 +198,31 @@ public class Hand {
             if (hand.get(1).getScore() == Card.KINGSCORE
                     && hand.get(0).getScore()
                             - hand.get(hand.size() - 1).getScore() != DELTAFLC) {
-                return new Combination("1" + " " + hand.get(2).getScore()
-                        + " " + hand.get(hand.size() - 2).getScore() + " "
-                        + hand.get(hand.size() - 1).getScore() + " ");
-            }
-            if (hand.get(0).getScore()
-                    - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
-                return new Combination("5" + " " + hand.get(0).getScore()
-                        + " ");
-            }
-            if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
-                return new Combination("5" + " " + hand.get(1).getScore()
-                        + " ");
-            }
-            return new Combination("0 ");
-        } else {
-            if (hand.get(0).getScore()
-                    - hand.get(hand.size() - 1).getScore() != DELTAFLC
-                    && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH) {
-                return new Combination("6" + " " + hand.get(0).getScore()
-                        + " " + hand.get(1).getScore() + " "
-                        + hand.get(2).getScore() + " "
+                return new Combination("1" + " " + hand.get(2).getScore() + " "
                         + hand.get(hand.size() - 2).getScore() + " "
                         + hand.get(hand.size() - 1).getScore() + " ");
             }
-            if (hand.get(0).getScore()
-                    - hand.get(hand.size() - 1).getScore() == DELTAFLC
-                    && hand.get(0).getScore() != Card.ACESCORE) {
-                return new Combination("9" + " " + hand.get(0).getScore()
-                        + " ");
+            if (hand.get(0).getScore() - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
+                return new Combination("5" + " " + hand.get(0).getScore() + " ");
             }
             if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
-                return new Combination("9" + " " + hand.get(1).getScore()
-                        + " ");
+                return new Combination("5" + " " + hand.get(1).getScore() + " ");
+            }
+            return new Combination("0 ");
+        } else {
+            if (hand.get(0).getScore() - hand.get(hand.size() - 1).getScore() != DELTAFLC
+                    && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH) {
+                return new Combination("6" + " " + hand.get(0).getScore() + " "
+                        + hand.get(1).getScore() + " " + hand.get(2).getScore()
+                        + " " + hand.get(hand.size() - 2).getScore() + " "
+                        + hand.get(hand.size() - 1).getScore() + " ");
+            }
+            if (hand.get(0).getScore() - hand.get(hand.size() - 1).getScore() == DELTAFLC
+                    && hand.get(0).getScore() != Card.ACESCORE) {
+                return new Combination("9" + " " + hand.get(0).getScore() + " ");
+            }
+            if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
+                return new Combination("9" + " " + hand.get(1).getScore() + " ");
             }
             if (hand.get(1).getScore() == Card.KINGSCORE
                     && hand.get(0).getScore()
