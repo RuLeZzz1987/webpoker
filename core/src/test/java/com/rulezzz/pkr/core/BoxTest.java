@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
-
 public class BoxTest {
 
 	@Test
@@ -18,4 +17,5 @@ public class BoxTest {
 		box.setHand(cardList);
 		assertEquals(cardList, box.getHand().getCards());
 	}
+	
 }

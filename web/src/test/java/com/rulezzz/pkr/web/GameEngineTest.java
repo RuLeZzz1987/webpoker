@@ -13,6 +13,10 @@ public class GameEngineTest {
     public void testGameEngineServlet() {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
+        request.getParameter("gametype");
+        when(request.getParameter("gametype")).thenReturn("FIVECARD");
+        when(request.getParameter("gametype")).thenReturn("TEXAS");
+        when(request.getParameter("gametype")).thenReturn("OMAHA");
         
     }
 }
