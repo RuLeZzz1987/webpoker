@@ -132,9 +132,9 @@ public class Table extends Box implements Serializable {
                 default: {
                     if (choiseDrawCheck(choise)) {
                         boxIterator.next().drawCards(parseChoise(choise));
-                    } /*else {
+                    } else {
                         throw new IllegalStateException("unknown box choise");
-                    } */
+                    } 
                     break;
                 }
             }
@@ -171,17 +171,15 @@ public class Table extends Box implements Serializable {
         return (choise.substring(0, DRAW.length()).equals(DRAW)) ? true : false;
     }
 
-    public List<Boolean> parseChoise(String choise) {
+    private List<Boolean> parseChoise(String choise) {
         String buf = choise;
         LinkedList<Boolean> result = new LinkedList<Boolean>();
-        if (choiseDrawCheck(choise)) {
-            buf = choise.substring(DRAW.length() + 1);
-            for (int i = 0; i < buf.length(); i++) {
-                if (buf.charAt(i) == '1') {
-                    result.add(true);
-                } else {
-                    result.add(false);
-                }
+        buf = choise.substring(DRAW.length() + 1);
+        for (int i = 0; i < buf.length(); i++) {
+            if (buf.charAt(i) == '1') {
+                result.add(true);
+            } else {
+                result.add(false);
             }
         }
         return result;
