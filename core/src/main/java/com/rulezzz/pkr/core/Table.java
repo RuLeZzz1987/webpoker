@@ -35,7 +35,7 @@ public class Table extends Box implements Serializable {
         }
     }
 
-    public void deal(int boxCount) {
+    private void deal(int boxCount) {
         int k = Hand.FIVECARD;
         switch (gameType) {
         case FIVECARD: {
@@ -116,25 +116,26 @@ public class Table extends Box implements Serializable {
         while (boxIterator.hasNext()) {
             String choise = choiseIterator.next();
             switch (choise) {
-            case "fold": {
-                boxIterator.next();
-                boxIterator.remove();
-                break;
-            }
-            case "bet": {
-                boxIterator.next().play();
-                break;
-            }
-            case "buy": {
-                break;
-            }
-            default: {
-                if (choiseDrawCheck(choise)) {
-                    boxIterator.next().drawCards(parseChoise(choise));
+                case "fold": {
+                    boxIterator.next();
+                    boxIterator.remove();
+                    break;
                 }
-                break;
-
-            }
+                case "bet": {
+                    boxIterator.next().play();
+                    break;
+                }
+                case "buy": {
+                    break;
+                }
+                default: {
+                    if (choiseDrawCheck(choise)) {
+                        boxIterator.next().drawCards(parseChoise(choise));
+                    } /*else {
+                        throw new IllegalStateException("unknown box choise");
+                    } */
+                    break;
+                }
             }
         }
         this.gameStatus = GameStatus.DETERMINATION;
@@ -164,7 +165,7 @@ public class Table extends Box implements Serializable {
         }
         return result;
     }
-
+    
     private Boolean choiseDrawCheck(String choise) {
         return (choise.substring(0, DRAW.length()).equals(DRAW)) ? true : false;
     }

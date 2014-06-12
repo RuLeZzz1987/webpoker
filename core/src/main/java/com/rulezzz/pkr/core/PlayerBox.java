@@ -6,9 +6,9 @@ import java.util.List;
 
 public class PlayerBox extends Box {
 
-    private int ante;
-    private int bet = 0;
-    private int countOfNeededCards = 0;
+    private int ante = 10;
+    private int bet;
+    private int countOfNeededCards;
     private BoxStatus boxStatus = BoxStatus.DEALED;
     private List<Hand> handList = new ArrayList<Hand>();
 
