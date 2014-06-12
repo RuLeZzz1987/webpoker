@@ -7,8 +7,8 @@ import java.util.List;
 public class PlayerBox extends Box {
 
     private int ante;
-    private int bet;
-    private int countOfNeededCards;
+    private int bet = 0;
+    private int countOfNeededCards = 0;
     private BoxStatus boxStatus = BoxStatus.DEALED;
     private List<Hand> handList = new ArrayList<Hand>();
 
@@ -73,7 +73,7 @@ public class PlayerBox extends Box {
         return boxStatus;
     }
 
-    public void getCardsAfterDraw(List<Card> cards) {
+    public void setCardsAfterDraw(List<Card> cards) {
         this.boxStatus = BoxStatus.DETERMINATION;
         setHand(cards);
     }

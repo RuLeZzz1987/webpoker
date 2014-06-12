@@ -148,7 +148,7 @@ public class Table extends Box implements Serializable {
         }
         for (PlayerBox box : playerBoxes) {
             if (box.getStatus() == BoxStatus.DRAW) {
-                box.getCardsAfterDraw(generateDrawCardList(box
+                box.setCardsAfterDraw(generateDrawCardList(box
                         .getCountOfNeededCards()));
                 break;
             }
