@@ -15,8 +15,6 @@ public class GameEngineTest {
         HttpServletResponse response = mock(HttpServletResponse.class);
         request.getParameter("gametype");
         when(request.getParameter("gametype")).thenReturn("FIVECARD");
-        when(request.getParameter("gametype")).thenReturn("TEXAS");
-        when(request.getParameter("gametype")).thenReturn("OMAHA");
         
     }
 }

@@ -116,50 +116,7 @@ public class Hand {
         ConsilienceCounter counter = new ConsilienceCounter(hand);
         switch (counter.getConsilience()) {
         case NOCONSILIENCE: {
-            if (!isFlushOnFiveCards()) {
-                if (hand.get(1).getScore() == Card.KINGSCORE
-                        && hand.get(0).getScore()
-                                - hand.get(hand.size() - 1).getScore() != DELTAFLC) {
-                    return new Combination("1" + " " + hand.get(2).getScore()
-                            + " " + hand.get(hand.size() - 2).getScore() + " "
-                            + hand.get(hand.size() - 1).getScore() + " ");
-                }
-                if (hand.get(0).getScore()
-                        - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
-                    return new Combination("5" + " " + hand.get(0).getScore()
-                            + " ");
-                }
-                if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
-                    return new Combination("5" + " " + hand.get(1).getScore()
-                            + " ");
-                }
-                return new Combination("0 ");
-            } else {
-                if (hand.get(0).getScore()
-                        - hand.get(hand.size() - 1).getScore() != DELTAFLC
-                        && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH) {
-                    return new Combination("6" + " " + hand.get(0).getScore()
-                            + " " + hand.get(1).getScore() + " "
-                            + hand.get(2).getScore() + " "
-                            + hand.get(hand.size() - 2).getScore() + " "
-                            + hand.get(hand.size() - 1).getScore() + " ");
-                }
-                if (hand.get(0).getScore()
-                        - hand.get(hand.size() - 1).getScore() == DELTAFLC
-                        && hand.get(0).getScore() != Card.ACESCORE) {
-                    return new Combination("9" + " " + hand.get(0).getScore()
-                            + " ");
-                }
-                if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
-                    return new Combination("9" + " " + hand.get(1).getScore()
-                            + " ");
-                }
-                if (hand.get(1).getScore() == Card.KINGSCORE
-                        && hand.get(0).getScore()
-                                - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
-                    return new Combination("10 ");
-                }
-            }
+            return createNonPairCombination();
         }
         case PAIR: {
             if (counter.getConsilience1() == 0) {
@@ -234,6 +191,54 @@ public class Hand {
             throw new IllegalStateException("Unknown combination");
         }
         }
+    }
+
+    private Combination createNonPairCombination() {
+        if (!isFlushOnFiveCards()) {
+            if (hand.get(1).getScore() == Card.KINGSCORE
+                    && hand.get(0).getScore()
+                            - hand.get(hand.size() - 1).getScore() != DELTAFLC) {
+                return new Combination("1" + " " + hand.get(2).getScore()
+                        + " " + hand.get(hand.size() - 2).getScore() + " "
+                        + hand.get(hand.size() - 1).getScore() + " ");
+            }
+            if (hand.get(0).getScore()
+                    - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
+                return new Combination("5" + " " + hand.get(0).getScore()
+                        + " ");
+            }
+            if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
+                return new Combination("5" + " " + hand.get(1).getScore()
+                        + " ");
+            }
+            return new Combination("0 ");
+        } else {
+            if (hand.get(0).getScore()
+                    - hand.get(hand.size() - 1).getScore() != DELTAFLC
+                    && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH) {
+                return new Combination("6" + " " + hand.get(0).getScore()
+                        + " " + hand.get(1).getScore() + " "
+                        + hand.get(2).getScore() + " "
+                        + hand.get(hand.size() - 2).getScore() + " "
+                        + hand.get(hand.size() - 1).getScore() + " ");
+            }
+            if (hand.get(0).getScore()
+                    - hand.get(hand.size() - 1).getScore() == DELTAFLC
+                    && hand.get(0).getScore() != Card.ACESCORE) {
+                return new Combination("9" + " " + hand.get(0).getScore()
+                        + " ");
+            }
+            if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
+                return new Combination("9" + " " + hand.get(1).getScore()
+                        + " ");
+            }
+            if (hand.get(1).getScore() == Card.KINGSCORE
+                    && hand.get(0).getScore()
+                            - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
+                return new Combination("10 ");
+            }
+        }
+        throw new IllegalStateException("unknown non-pair combination");
     }
 
     @Override
