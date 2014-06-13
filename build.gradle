@@ -1,41 +1,54 @@
 apply plugin: 'sonar-runner'
 
 sonarRunner {
-  sonarProperties {
-    // Address of SonarQube server
-    property "sonar.host.url", "http://quixxxy.com/sonar"
-    
-    // Database config
-    property "sonar.jdbc.url", "jdbc:postgresql://localhost/sonar"
-    property "sonar.jdbc.driverClassName", "org.postgresql.Driver"
-    property "sonar.jdbc.username", "sonar"
-    
-    property "sonar.dynamicAnalysis", "reuseReports"
-    property "sonar.jacoco.reportPath", "${buildDir}/jacoco/test.exec"
-  }
+    sonarProperties {
+        // Address of SonarQube server
+        property "sonar.host.url", "http://quixxxy.com/sonar"
+
+        // Database config
+        property "sonar.jdbc.url", "jdbc:postgresql://localhost/sonar"
+        property "sonar.jdbc.driverClassName", "org.postgresql.Driver"
+        property "sonar.jdbc.username", "sonar"
+
+        property "sonar.dynamicAnalysis", "reuseReports"
+        property "sonar.jacoco.reportPath", "${buildDir}/jacoco/test.exec"
+    }
 }
 
 subprojects {
-    repositories {
-        mavenCentral()
-    }
-    
+    repositories { mavenCentral() }
+
     apply plugin: 'java'
     apply plugin: 'jacoco'
+    apply plugin: 'checkstyle'
     apply from: "${parent.projectDir.canonicalPath}/cobertura.gradle"
-    
+
     sourceCompatibility = 1.7
-    
+
     dependencies {
         testCompile 'junit:junit:4.11'
         testCompile 'org.mockito:mockito-all:1.9.5'
     }
-    
+
     jacocoTestReport {
         reports {
             xml.enabled true
             csv.enabled false
             html.destination "${buildDir}/jacocoHtml"
+        }
+    }
+
+    checkstyle {
+        configFile = new File("${parent.projectDir.canonicalPath}/config/checkstyle/checkstyle.xml")
+    }
+    
+    checkstyleMain {
+        ignoreFailures = true
+        doLast {
+            ant.xslt(in: "$buildDir/reports/checkstyle/main.xml",
+                style:"${parent.projectDir.canonicalPath}/config/checkstyle/checkstyle-simple.xsl",
+                out:"$buildDir/reports/checkstyle/checkstyle.html"
+            )
         }
     }
 }
