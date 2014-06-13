@@ -1,5 +1,7 @@
 package com.rulezzz.pkr.core;
 
+import com.google.common.base.Objects;
+
 public class Card implements Comparable<Card> {
 
     private CardSuit suit;
@@ -75,7 +77,7 @@ public class Card implements Comparable<Card> {
         }
         default:
             throw new IllegalArgumentException(
-                    "unknown card suit. It should be h, s, d or c"); 
+                    "unknown card suit. It should be h, s, d or c");
         }
     }
 
@@ -84,7 +86,7 @@ public class Card implements Comparable<Card> {
     }
 
     private void setRate(int intRate) {
-    	int i = intRate;
+        int i = intRate;
         if ((i >= 2) && (i <= MAXNONCHARRANK)) {
             i += DELTAUTFCHAR;
             rate = (char) i;
@@ -121,32 +123,16 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + rate;
-        result = prime * result + ((suit == null) ? 0 : suit.hashCode());
-        return result;
+        return Objects.hashCode(this.suit, this.rate);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Card other = (Card) obj;
-        if (rate != other.rate) {
-            return false;
-        }
-        if (suit != other.suit) {
-            return false;
-        }
-        return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        final Card other = (Card) obj;
+        return Objects.equal(this.suit, other.suit) 
+                && Objects.equal(this.rate, other.rate);
     }
 
     public String getStringCard() {

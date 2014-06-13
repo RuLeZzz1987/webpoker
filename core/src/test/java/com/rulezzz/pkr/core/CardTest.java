@@ -25,13 +25,6 @@ public class CardTest {
     }
 
     @Test
-    public void testHashCodeCard() {
-        assertEquals(31 * (31 + '2') + CardSuit.CLUBS.hashCode(), new Card(
-                CardSuit.CLUBS, '2').hashCode());
-        assertEquals(31 * (31 + '2'), new Card(null, '2').hashCode());
-    }
-
-    @Test
     public void testCreateCard() {
         Card card1 = new Card(CardSuit.CLUBS, 'A');
         assertEquals(14, card1.getScore());

@@ -132,81 +132,77 @@ public class Hand {
         }
     }
 
-	private Combination createPairTypeCombination(ConsilienceCounter counter) {
-		StringBuilder resultBuffer;
-		if (counter.getConsilience1() == 0) {
-		    resultBuffer = new StringBuilder("2" + " "
-		            + hand.get(counter.getPairPosition()).getScore() + " "
-		            + hand.get(counter.getPairPosition()).getScore() + " ");
-		    for (int i = 0; i < hand.size(); i++) {
-		        if (hand.get(counter.getPairPosition()).getScore() != hand
-		                .get(i).getScore()) {
-		            resultBuffer.append(hand.get(i).getScore() + " ");
-		        }
-		    }
-		    return new Combination(resultBuffer.toString());
-		}
-		if (counter.getConsilience1() == 1) {
-		    resultBuffer = new StringBuilder("3" + " "
-		            + hand.get(counter.getFirstPairPosition()).getScore()
-		            + " "
-		            + hand.get(counter.getFirstPairPosition()).getScore()
-		            + " " + hand.get(counter.getPairPosition()).getScore()
-		            + " " + hand.get(counter.getPairPosition()).getScore()
-		            + " ");
-		    for (int i = 0; i < hand.size(); i++) {
-		        if (hand.get(counter.getPairPosition()).getScore() != hand
-		                .get(i).getScore()
-		                && hand.get(counter.getFirstPairPosition())
-		                        .getScore() != hand.get(i).getScore()) {
-		            resultBuffer.append(hand.get(i).getScore() + " ");
-		        }
-		    }
-		    return new Combination(resultBuffer.toString());
-		}
-		if (counter.getConsilience1() == 2) {
-		    return new Combination("7" + " "
-		            + hand.get(counter.getFirstPairPosition()).getScore()
-		            + " " + hand.get(counter.getPairPosition()).getScore()
-		            + " ");
-		}
-		throw new IllegalStateException("Unknown combination");
-	}
+    private Combination createPairTypeCombination(ConsilienceCounter counter) {
+        StringBuilder resultBuffer;
+        if (counter.getConsilience1() == 0) {
+            resultBuffer = new StringBuilder("2" + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " ");
+            for (int i = 0; i < hand.size(); i++) {
+                if (hand.get(counter.getPairPosition()).getScore() != hand.get(
+                        i).getScore()) {
+                    resultBuffer.append(hand.get(i).getScore() + " ");
+                }
+            }
+            return new Combination(resultBuffer.toString());
+        }
+        if (counter.getConsilience1() == 1) {
+            resultBuffer = new StringBuilder("3" + " "
+                    + hand.get(counter.getFirstPairPosition()).getScore() + " "
+                    + hand.get(counter.getFirstPairPosition()).getScore() + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " ");
+            for (int i = 0; i < hand.size(); i++) {
+                if (hand.get(counter.getPairPosition()).getScore() != hand.get(
+                        i).getScore()
+                        && hand.get(counter.getFirstPairPosition()).getScore() != hand
+                                .get(i).getScore()) {
+                    resultBuffer.append(hand.get(i).getScore() + " ");
+                }
+            }
+            return new Combination(resultBuffer.toString());
+        }
+        if (counter.getConsilience1() == 2) {
+            return new Combination("7" + " "
+                    + hand.get(counter.getFirstPairPosition()).getScore() + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " ");
+        }
+        throw new IllegalStateException("Unknown combination");
+    }
 
-	private Combination createSetTypeCombination(ConsilienceCounter counter) {
-		StringBuilder resultBuffer;
-		if (counter.getConsilience1() == 0) {
-		    resultBuffer = new StringBuilder("4" + " "
-		            + hand.get(counter.getPairPosition()).getScore() + " "
-		            + hand.get(counter.getPairPosition()).getScore() + " "
-		            + hand.get(counter.getPairPosition()).getScore() + " ");
-		    for (int i = 0; i < hand.size(); i++) {
-		        if (hand.get(counter.getPairPosition()).getScore() != hand
-		                .get(i).getScore()) {
-		            resultBuffer.append(hand.get(i).getScore() + " ");
-		        }
-		    }
-		    return new Combination(resultBuffer.toString());
-		} else {
-		    return new Combination("7" + " "
-		            + hand.get(counter.getPairPosition()).getScore() + " "
-		            + hand.get(counter.getFirstPairPosition()).getScore()
-		            + " ");
-		}
-	}
+    private Combination createSetTypeCombination(ConsilienceCounter counter) {
+        StringBuilder resultBuffer;
+        if (counter.getConsilience1() == 0) {
+            resultBuffer = new StringBuilder("4" + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " ");
+            for (int i = 0; i < hand.size(); i++) {
+                if (hand.get(counter.getPairPosition()).getScore() != hand.get(
+                        i).getScore()) {
+                    resultBuffer.append(hand.get(i).getScore() + " ");
+                }
+            }
+            return new Combination(resultBuffer.toString());
+        } else {
+            return new Combination("7" + " "
+                    + hand.get(counter.getPairPosition()).getScore() + " "
+                    + hand.get(counter.getFirstPairPosition()).getScore() + " ");
+        }
+    }
 
-	private Combination createFourOfaKindCombination(ConsilienceCounter counter) {
-		StringBuilder resultBuffer;
-		resultBuffer = new StringBuilder("8" + " "
-		        + hand.get(counter.getPairPosition()).getScore() + " ");
-		for (int i = 0; i < hand.size(); i++) {
-		    if (hand.get(counter.getPairPosition()).getScore() != hand.get(
-		            i).getScore()) {
-		        resultBuffer.append(hand.get(i).getScore() + " ");
-		    }
-		}
-		return new Combination(resultBuffer.toString());
-	}
+    private Combination createFourOfaKindCombination(ConsilienceCounter counter) {
+        StringBuilder resultBuffer;
+        resultBuffer = new StringBuilder("8" + " "
+                + hand.get(counter.getPairPosition()).getScore() + " ");
+        for (int i = 0; i < hand.size(); i++) {
+            if (hand.get(counter.getPairPosition()).getScore() != hand.get(i)
+                    .getScore()) {
+                resultBuffer.append(hand.get(i).getScore() + " ");
+            }
+        }
+        return new Combination(resultBuffer.toString());
+    }
 
     private Combination createNonPairCombination() {
         if (!isFlushOnFiveCards()) {
