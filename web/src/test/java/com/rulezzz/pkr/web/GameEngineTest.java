@@ -36,27 +36,7 @@ public class GameEngineTest {
         table.makeBets(20, 25, 15);
         table.deal();
         List<Card> handThatDraw = table.getBox(0).getHand().getCards();
-        session.setAttribute("table", table);
-        
-        when(req.getParameter(handThatDraw.get(0).getStringCard())).thenReturn(null);
-        when(req.getParameter(handThatDraw.get(2).getStringCard())).thenReturn(null);
-        when(req.getParameter(handThatDraw.get(4).getStringCard())).thenReturn(null);
-        when(req.getParameter("choise0")).thenReturn("draw");
-        when(req.getParameter("choise1")).thenReturn("fold");
-        when(req.getParameter("choise2")).thenReturn("bet");
-        when(req.getSession()).thenReturn(session);
-        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp"))
-        .thenReturn(reqDispatcher);
-
         final Map<String, Object> sessionAttributes = new HashMap<>();
-        doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                sessionAttributes.put((String) args[0], args[1]);
-                return null;
-            }
-        }).when(session).setAttribute(anyString(), anyObject());
         when(session.getAttribute(anyString())).then(
                 new Answer<Object>() {
 
@@ -67,6 +47,26 @@ public class GameEngineTest {
                                 .getArguments()[0]);
                     }
                 });
+        doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                sessionAttributes.put((String) args[0], args[1]);
+                return null;
+            }
+        }).when(session).setAttribute(anyString(), anyObject());
+        when(req.getParameter(handThatDraw.get(0).getStringCard())).thenReturn(null);
+        when(req.getParameter(handThatDraw.get(2).getStringCard())).thenReturn(null);
+        when(req.getParameter(handThatDraw.get(4).getStringCard())).thenReturn(null);
+        when(req.getParameter("choise0")).thenReturn("draw");
+        when(req.getParameter("choise1")).thenReturn("fold");
+        when(req.getParameter("choise2")).thenReturn("bet");
+        when(req.getSession()).thenReturn(session);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp"))
+        .thenReturn(reqDispatcher);
+
+        
+        session.setAttribute("table", table);       
         
         GameEngineServlet engine = new GameEngineServlet();
         engine.doPost(req, resp);
