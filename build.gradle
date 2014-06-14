@@ -26,9 +26,11 @@ subprojects {
     sourceCompatibility = 1.7
 
     dependencies {
+        compile 'com.google.guava:guava:17.0'
+        
         testCompile 'junit:junit:4.11'
         testCompile 'org.mockito:mockito-all:1.9.5'
-	compile group: 'com.google.guava', name: 'guava', version: '12.0'
+	
     }
 
     jacocoTestReport {
