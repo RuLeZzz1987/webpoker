@@ -37,7 +37,7 @@ public class GameEngineServlet extends HttpServlet {
                     } else {
                         StringBuilder drawChoise = new StringBuilder("draw ");
                         for(Card card : table.getBox(i).getHand().getCards()) {
-                            if ( req.getParameter(card.getStringCard()) != null) {
+                            if ( req.getParameter(card.toString()) != null) {
                                 drawChoise.append(1);
                             } else {
                                 drawChoise.append(0);

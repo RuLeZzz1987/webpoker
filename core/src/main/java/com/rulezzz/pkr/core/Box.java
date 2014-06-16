@@ -6,29 +6,31 @@ public class Box {
 
     private Hand hand = new Hand();
 
+    public Box() {}
+    
     public Hand getHand() {
-        return hand;
+        return this.hand;
     }
 
     public void sort() {
-        hand.sort();
+        this.hand.sort();
     }
 
-    public void setHand(Card card) {
+    public void setHand(final Card card) {
         this.hand.add(card);
     }
     
-    public void setHand(List<Card> cards){
-        hand.add(cards);
+    public void setHand(final List<Card> cards) {
+        this.hand.add(cards);
     }
 
-    public void setHand(Hand hand) {
-        this.hand = hand;
+    public void setHand(final Hand preparedHand) {
+        this.hand = preparedHand;
     }
 
     @Override
     public String toString() {
-        return hand.toString();
+        return this.hand.toString();
     }
 
 }

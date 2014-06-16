@@ -40,15 +40,15 @@ public class GameEngineTest {
         testHand.add(table.getBox(0).getHand().getCards().get(3));
         List<Card> handThatDraw = table.getBox(0).getHand().getCards();
 
-        when(req.getParameter(handThatDraw.get(0).getStringCard())).thenReturn(
+        when(req.getParameter(handThatDraw.get(0).toString())).thenReturn(
                 null);
-        when(req.getParameter(handThatDraw.get(1).getStringCard())).thenReturn(
+        when(req.getParameter(handThatDraw.get(1).toString())).thenReturn(
                 new String());
-        when(req.getParameter(handThatDraw.get(2).getStringCard())).thenReturn(
+        when(req.getParameter(handThatDraw.get(2).toString())).thenReturn(
                 null);
-        when(req.getParameter(handThatDraw.get(3).getStringCard())).thenReturn(
+        when(req.getParameter(handThatDraw.get(3).toString())).thenReturn(
                 new String());
-        when(req.getParameter(handThatDraw.get(4).getStringCard())).thenReturn(
+        when(req.getParameter(handThatDraw.get(4).toString())).thenReturn(
                 null);
         when(req.getParameter("choise0")).thenReturn("draw");
         when(req.getParameter("choise1")).thenReturn("fold");

@@ -63,27 +63,6 @@ public class Card implements Comparable<Card> {
         return this.suit;
     }
 
-    public char getCharSuit() {
-        switch (this.suit) {
-            case HEART: {
-                return 'h';
-            }
-            case SPADES: {
-                return 's';
-            }
-            case DIAMOND: {
-                return 'd';
-            }
-            case CLUBS: {
-                return 'c';
-            }
-            default: {
-                throw new IllegalArgumentException(
-                        "unknown card suit. It should be h, s, d or c");
-            }
-        }
-    }
-
     public char getRate() {
         return this.rate;
     }
@@ -106,13 +85,12 @@ public class Card implements Comparable<Card> {
                 && Objects.equal(this.rate, other.rate);
     }
 
-    public String getStringCard() {
-        return "" + this.getCharSuit() + this.rate;
-    }
-
     @Override
     public String toString() {
-        return "" + this.rate + this.suit;
+        StringBuilder result = new StringBuilder();
+        result.append(this.suit.getCharSuit());
+        result.append(this.rate);
+        return result.toString();
     }
 
     public int getScore() {
@@ -122,14 +100,7 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(final Card obj) {
-        if (this.score == obj.score) {
-            return 0;
-        }
-        if (this.score > obj.getScore()) {
-            return -1;
-        } else {
-            return 1;
-        }
+        return Integer.compare(this.score, obj.score);
     }
 
     private void setRate(final int intRate) {

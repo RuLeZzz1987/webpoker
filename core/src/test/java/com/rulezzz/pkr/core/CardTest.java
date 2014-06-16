@@ -44,10 +44,10 @@ public class CardTest {
 
     @Test
     public void testGetCharSuit() {
-        assertEquals('h', new Card(CardSuit.HEART, 'K').getCharSuit());
-        assertEquals('s', new Card(CardSuit.SPADES, '3').getCharSuit());
-        assertEquals('d', new Card(CardSuit.DIAMOND, '7').getCharSuit());
-        assertEquals('c', new Card(CardSuit.CLUBS, 'J').getCharSuit());
+        assertEquals('h', new Card(CardSuit.HEART, 'K').getSuit().getCharSuit());
+        assertEquals('s', new Card(CardSuit.SPADES, '3').getSuit().getCharSuit());
+        assertEquals('d', new Card(CardSuit.DIAMOND, '7').getSuit().getCharSuit());
+        assertEquals('c', new Card(CardSuit.CLUBS, 'J').getSuit().getCharSuit());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -101,18 +101,18 @@ public class CardTest {
 
     @Test
     public void testGetStringCard() {
-        assertEquals("cA", new Card(CardSuit.CLUBS, 'A').getStringCard());
-        assertEquals("cJ", new Card(CardSuit.CLUBS, 'J').getStringCard());
-        assertEquals("hT", new Card(CardSuit.HEART, 'T').getStringCard());
-        assertEquals("d9", new Card(CardSuit.DIAMOND, '9').getStringCard());
-        assertEquals("sK", new Card(CardSuit.SPADES, 'K').getStringCard());
-        assertEquals("h8", new Card(CardSuit.HEART, '8').getStringCard());
-        assertEquals("d2", new Card(CardSuit.DIAMOND, '2').getStringCard());
-        assertEquals("s3", new Card(CardSuit.SPADES, '3').getStringCard());
-        assertEquals("c4", new Card(CardSuit.CLUBS, '4').getStringCard());
-        assertEquals("h5", new Card(CardSuit.HEART, '5').getStringCard());
-        assertEquals("d6", new Card(CardSuit.DIAMOND, '6').getStringCard());
-        assertEquals("s7", new Card(CardSuit.SPADES, '7').getStringCard());
-        assertEquals("cQ", new Card(CardSuit.CLUBS, 'Q').getStringCard());
+        assertEquals("cA", new Card(CardSuit.CLUBS, 'A').toString());
+        assertEquals("cJ", new Card(CardSuit.CLUBS, 'J').toString());
+        assertEquals("hT", new Card(CardSuit.HEART, 'T').toString());
+        assertEquals("d9", new Card(CardSuit.DIAMOND, '9').toString());
+        assertEquals("sK", new Card(CardSuit.SPADES, 'K').toString());
+        assertEquals("h8", new Card(CardSuit.HEART, '8').toString());
+        assertEquals("d2", new Card(CardSuit.DIAMOND, '2').toString());
+        assertEquals("s3", new Card(CardSuit.SPADES, '3').toString());
+        assertEquals("c4", new Card(CardSuit.CLUBS, '4').toString());
+        assertEquals("h5", new Card(CardSuit.HEART, '5').toString());
+        assertEquals("d6", new Card(CardSuit.DIAMOND, '6').toString());
+        assertEquals("s7", new Card(CardSuit.SPADES, '7').toString());
+        assertEquals("cQ", new Card(CardSuit.CLUBS, 'Q').toString());
     }
 }
