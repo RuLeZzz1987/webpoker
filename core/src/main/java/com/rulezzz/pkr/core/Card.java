@@ -15,13 +15,15 @@ public class Card implements Comparable<Card> {
     private char rate;
     private int score;
 
-    public Card(final CardSuit cardSuit,final int cardRate,final int cardScore) {
+    public Card(final CardSuit cardSuit, final int cardRate,
+            final int cardScore) {
         this.score = cardScore;
         this.suit = cardSuit;
         setRate(cardRate);
     }
 
-    public Card(final CardSuit cardSuit,final char cardRate,final int cardScore) {
+    public Card(final CardSuit cardSuit, final char cardRate,
+            final int cardScore) {
         this.score = cardScore;
         this.suit = cardSuit;
         this.rate = cardRate;
@@ -58,7 +60,7 @@ public class Card implements Comparable<Card> {
     }
 
     public CardSuit getSuit() {
-        return (this.suit);
+        return this.suit;
     }
 
     public char getCharSuit() {
@@ -83,7 +85,7 @@ public class Card implements Comparable<Card> {
     }
 
     public char getRate() {
-        return (this.rate);
+        return this.rate;
     }
 
     @Override
@@ -105,7 +107,7 @@ public class Card implements Comparable<Card> {
     }
 
     public String getStringCard() {
-        return "" + getCharSuit() + this.rate;
+        return "" + this.getCharSuit() + this.rate;
     }
 
     @Override
@@ -159,7 +161,7 @@ public class Card implements Comparable<Card> {
                 }
                 default: {
                     throw new IllegalArgumentException(
-                            "Unknow card rate. It should be in range 2-9, T, J, Q, K or A");
+                            "Unknow card rate.(2-9, T, J, Q, K, A");
                 }
             }
         }
