@@ -15,22 +15,22 @@ public class Card implements Comparable<Card> {
     private char rate;
     private int score;
 
-    public Card(CardSuit suit, int rate, int score) {
-        this.score = score;
-        this.suit = suit;
-        setRate(rate);
+    public Card(final CardSuit cardSuit,final int cardRate,final int cardScore) {
+        this.score = cardScore;
+        this.suit = cardSuit;
+        setRate(cardRate);
     }
 
-    public Card(CardSuit suit, char rate, int score) {
-        this.score = score;
-        this.suit = suit;
-        this.rate = rate;
+    public Card(final CardSuit cardSuit,final char cardRate,final int cardScore) {
+        this.score = cardScore;
+        this.suit = cardSuit;
+        this.rate = cardRate;
     }
 
-    public Card(CardSuit suit, char rate) {
-        this.suit = suit;
-        this.rate = rate;
-        switch (rate) {
+    public Card(final CardSuit cardSuit, final char cardRate) {
+        this.suit = cardSuit;
+        this.rate = cardRate;
+        switch (cardRate) {
             case 'A': {
                 this.score = ACESCORE;
                 break;
@@ -52,17 +52,17 @@ public class Card implements Comparable<Card> {
                 break;
             }
             default: {
-                this.score = (int) rate - DELTAUTFCHAR;
+                this.score = (int) cardRate - DELTAUTFCHAR;
             }
         }
     }
 
     public CardSuit getSuit() {
-        return (suit);
+        return (this.suit);
     }
 
     public char getCharSuit() {
-        switch (suit) {
+        switch (this.suit) {
             case HEART: {
                 return 'h';
             }
@@ -75,14 +75,15 @@ public class Card implements Comparable<Card> {
             case CLUBS: {
                 return 'c';
             }
-            default:
+            default: {
                 throw new IllegalArgumentException(
                         "unknown card suit. It should be h, s, d or c");
             }
+        }
     }
 
     public char getRate() {
-        return (rate);
+        return (this.rate);
     }
 
     @Override
@@ -91,65 +92,69 @@ public class Card implements Comparable<Card> {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final Card other = (Card) obj;
         return Objects.equal(this.suit, other.suit) 
                 && Objects.equal(this.rate, other.rate);
     }
 
     public String getStringCard() {
-        return "" + getCharSuit() + rate;
+        return "" + getCharSuit() + this.rate;
     }
 
     @Override
     public String toString() {
-        return "" + rate + suit;
+        return "" + this.rate + this.suit;
     }
 
     public int getScore() {
-        return score;
+        return this.score;
 
     }
 
     @Override
-    public int compareTo(Card obj) {
+    public int compareTo(final Card obj) {
         if (this.score == obj.score) {
             return 0;
         }
-        if (score > obj.getScore()) {
+        if (this.score > obj.getScore()) {
             return -1;
         } else {
             return 1;
         }
     }
 
-    private void setRate(int intRate) {
+    private void setRate(final int intRate) {
         int i = intRate;
         if ((i >= 2) && (i <= MAXNONCHARRANK)) {
             i += DELTAUTFCHAR;
-            rate = (char) i;
+            this.rate = (char) i;
         } else {
             switch (i) {
                 case TENSCORE: {
-                    rate = 'T';
+                    this.rate = 'T';
                     break;
                 }
                 case JACKSCORE: {
-                    rate = 'J';
+                    this.rate = 'J';
                     break;
                 }
                 case QUEENSCORE: {
-                    rate = 'Q';
+                    this.rate = 'Q';
                     break;
                 }
                 case KINGSCORE: {
-                    rate = 'K';
+                    this.rate = 'K';
                     break;
                 }
                 case ACESCORE: {
-                    rate = 'A';
+                    this.rate = 'A';
                     break;
                 }
                 default: {
