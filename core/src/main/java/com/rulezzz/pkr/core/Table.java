@@ -7,10 +7,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Table extends Box implements Serializable {
+public class Table implements Serializable {
 
     private static final long serialVersionUID = -3327856908669194148L;
     private int bankroll;
+    private Box dealerBox = new Box();
     private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
     private Deck deck = new Deck();
     private List<Card> cardList = deck.getDeck();
@@ -35,6 +36,10 @@ public class Table extends Box implements Serializable {
         }
     }
 
+    public Box getDealerBox(){
+        return dealerBox;
+    }
+    
     private void deal(int boxCount) {
         int k = Hand.FIVECARD;
         switch (gameType) {
@@ -59,7 +64,7 @@ public class Table extends Box implements Serializable {
                 deck.setUsed(cardList.get(0));
                 cardList.remove(0);
             }
-            setHand(cardList.get(0));
+            dealerBox.setHand(cardList.get(0));
             deck.setUsed(cardList.get(0));
             cardList.remove(0);
         }
@@ -78,13 +83,13 @@ public class Table extends Box implements Serializable {
     }
 
     public void calculateDealResult() {
-        if (getHand().getCombinationOnFiveCards().getHighness() != 0
+        if (dealerBox.getHand().getCombinationOnFiveCards().getHighness() != 0
                 && gameStatus == GameStatus.DETERMINATION) {
             for (int i = 0; i < playerBoxes.size(); i++) {
                 if (playerBoxes.get(i).getStatus().equals(BoxStatus.BET)) {
                     switch (playerBoxes.get(i).getHand()
                             .getCombinationOnFiveCards()
-                            .compareTo(getHand().getCombinationOnFiveCards())) {
+                            .compareTo(dealerBox.getHand().getCombinationOnFiveCards())) {
                     case 1: {
 
                         break;
@@ -168,7 +173,11 @@ public class Table extends Box implements Serializable {
     }
     
     private Boolean choiseDrawCheck(String choise) {
-        return (choise.substring(0, DRAW.length()).equals(DRAW)) ? true : false;
+        if (choise.substring(0, DRAW.length()).equals(DRAW)) { 
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private List<Boolean> parseChoise(String choise) {
@@ -207,7 +216,7 @@ public class Table extends Box implements Serializable {
         for (int i = 0; i < playerBoxes.size(); i++) {
             result.append(" " + playerBoxes.get(i).toString());
         }
-        return result.toString() + " | " + getHand().toString();
+        return result.toString() + " | " + dealerBox.getHand().toString();
     }
 
     public int getBankroll() {

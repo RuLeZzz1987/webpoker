@@ -1,5 +1,7 @@
 package com.rulezzz.pkr.core;
 
+import com.google.common.base.Objects;
+
 public class Combination implements Comparable<Combination> {
 
     private String code;
@@ -126,34 +128,15 @@ public class Combination implements Comparable<Combination> {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((code == null) ? 0 : code.hashCode());
-        return result;
+        return Objects.hashCode(this.code);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Combination other = (Combination) obj;
-        if (code == null) {
-            if (other.code != null) {
-                return false;
-            }
-        } else {
-            if (!code.equals(other.code)) {
-                return false;
-            }
-        }
-        return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        final Combination other = (Combination) obj;
+        return Objects.equal(this.code, other.code);
     }
 
     @Override

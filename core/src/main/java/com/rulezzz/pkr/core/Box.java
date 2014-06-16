@@ -2,7 +2,7 @@ package com.rulezzz.pkr.core;
 
 import java.util.List;
 
-public abstract class Box {
+public class Box {
 
     private Hand hand = new Hand();
 
