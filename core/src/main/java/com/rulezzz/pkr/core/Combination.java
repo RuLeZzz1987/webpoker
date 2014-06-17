@@ -38,7 +38,7 @@ public class Combination implements Comparable<Combination> {
     }
 
     public String getCombCode() {
-        return code;
+        return this.code;
     }
 
     private void setKickersList(String comboCode) {
@@ -54,12 +54,12 @@ public class Combination implements Comparable<Combination> {
     }
 
     public int[] getKickers() {
-        return kickers;
+        return this.kickers;
     }
 
     @Override
     public String toString() {
-        return name;
+        return this.name;
     }
 
     private void setName(String code) {

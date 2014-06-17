@@ -16,10 +16,8 @@ import org.mockito.stubbing.Answer;
 
 public class MockSession {
 
-    private static HttpSession session;
-    
     public static HttpSession createMockSession() {
-        session = mock(HttpSession.class);
+        HttpSession session = mock(HttpSession.class);
         final Map<String, Object> sessionAttributes = new HashMap<>();
         doAnswer(new Answer<Object>() {
             @Override
@@ -29,16 +27,13 @@ public class MockSession {
                 return null;
             }
         }).when(session).setAttribute(anyString(), anyObject());
-        when(session.getAttribute(anyString())).then(
-                new Answer<Object>() {
+        when(session.getAttribute(anyString())).then(new Answer<Object>() {
 
-                    @Override
-                    public Object answer(InvocationOnMock invocation)
-                            throws Throwable {
-                        return sessionAttributes.get(invocation
-                                .getArguments()[0]);
-                    }
-                });
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                return sessionAttributes.get(invocation.getArguments()[0]);
+            }
+        });
         return session;
     }
 }

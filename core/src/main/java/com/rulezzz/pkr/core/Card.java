@@ -4,13 +4,13 @@ import com.google.common.base.Objects;
 
 public class Card implements Comparable<Card> {
 
-    public static final int ACESCORE = 14;
-    public static final int KINGSCORE = 13;
-    public static final int QUEENSCORE = 12;
-    public static final int JACKSCORE = 11;
-    public static final int TENSCORE = 10;
-    public static final int MAXNONCHARRANK = 9;
-    private static final int DELTAUTFCHAR = 48;
+    public static final int ACE_SCORE = 14;
+    public static final int KING_SCORE = 13;
+    public static final int QUEEN_SCORE = 12;
+    public static final int JACK_SCORE = 11;
+    public static final int TEN_SCORE = 10;
+    public static final int MAX_NONCHAR_RANK = 9;
+    private static final int DELTAUT_FCHAR = 48;
     private CardSuit suit;
     private char rate;
     private int score;
@@ -34,27 +34,27 @@ public class Card implements Comparable<Card> {
         this.rate = cardRate;
         switch (cardRate) {
             case 'A': {
-                this.score = ACESCORE;
+                this.score = ACE_SCORE;
                 break;
             }
             case 'K': {
-                this.score = KINGSCORE;
+                this.score = KING_SCORE;
                 break;
             }
             case 'Q': {
-                this.score = QUEENSCORE;
+                this.score = QUEEN_SCORE;
                 break;
             }
             case 'J': {
-                this.score = JACKSCORE;
+                this.score = JACK_SCORE;
                 break;
             }
             case 'T': {
-                this.score = TENSCORE;
+                this.score = TEN_SCORE;
                 break;
             }
             default: {
-                this.score = (int) cardRate - DELTAUTFCHAR;
+                this.score = (int) cardRate - DELTAUT_FCHAR;
             }
         }
     }
@@ -87,7 +87,7 @@ public class Card implements Comparable<Card> {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
         result.append(this.suit.getCharSuit());
         result.append(this.rate);
         return result.toString();
@@ -105,28 +105,28 @@ public class Card implements Comparable<Card> {
 
     private void setRate(final int intRate) {
         int i = intRate;
-        if ((i >= 2) && (i <= MAXNONCHARRANK)) {
-            i += DELTAUTFCHAR;
+        if ((i >= 2) && (i <= MAX_NONCHAR_RANK)) {
+            i += DELTAUT_FCHAR;
             this.rate = (char) i;
         } else {
             switch (i) {
-                case TENSCORE: {
+                case TEN_SCORE: {
                     this.rate = 'T';
                     break;
                 }
-                case JACKSCORE: {
+                case JACK_SCORE: {
                     this.rate = 'J';
                     break;
                 }
-                case QUEENSCORE: {
+                case QUEEN_SCORE: {
                     this.rate = 'Q';
                     break;
                 }
-                case KINGSCORE: {
+                case KING_SCORE: {
                     this.rate = 'K';
                     break;
                 }
-                case ACESCORE: {
+                case ACE_SCORE: {
                     this.rate = 'A';
                     break;
                 }

@@ -11,7 +11,7 @@ public class Deck {
     private static final int CARDRANKS = 15;
 
     public List<Card> getDeck() {
-        return deck;
+        return this.deck;
 
     }
 
@@ -20,16 +20,16 @@ public class Deck {
         for (CardSuit suit : CardSuit.values()) {
             for (int j = 2; j < CARDRANKS; j++) {
                 Card card = new Card(suit, j, j);
-                deck.add(card);
+                this.deck.add(card);
             }
 
         }
-        Collections.shuffle(deck);
+        Collections.shuffle(this.deck);
 
     }
 
     public List<Card> getUsed() {
-        return used;
+        return this.used;
     }
 
     public void setUsed(Card usedCard) {
