@@ -4,28 +4,27 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.Card;
 
-public class Pair implements ICombination {
-    
-	private static final int PAIR_HIGHNESS = 2;
+public class RoyalFlush implements ICombination{
+	
+	private static final int ROYAL_FLUSH_HIGHNESS = 10;
     private List<Card> kickers;
-
-    public Pair(List<Card> cardList) {
+	
+    public RoyalFlush(List<Card> cardList){
     	this.kickers = cardList;
     }
     
     @Override
     public int getHighness() {
-        return Pair.PAIR_HIGHNESS;
+        return RoyalFlush.ROYAL_FLUSH_HIGHNESS;
     }
 
     @Override
     public String getName() {
-        return "Pair";
+        return "Royal Flush";
     }
 
     @Override
     public List<Card> getKickersList() {
         return this.kickers;
     }
-
 }

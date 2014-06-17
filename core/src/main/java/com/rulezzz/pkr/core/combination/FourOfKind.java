@@ -4,28 +4,27 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.Card;
 
-public class Pair implements ICombination {
-    
-	private static final int PAIR_HIGHNESS = 2;
-    private List<Card> kickers;
+public class FourOfKind implements ICombination{
 
-    public Pair(List<Card> cardList) {
+	private static final int FOUR_OF_A_KIND_HIGHNESS = 8;
+    private List<Card> kickers;
+	
+    public FourOfKind(List<Card> cardList){
     	this.kickers = cardList;
     }
     
     @Override
     public int getHighness() {
-        return Pair.PAIR_HIGHNESS;
+        return FourOfKind.FOUR_OF_A_KIND_HIGHNESS;
     }
 
     @Override
     public String getName() {
-        return "Pair";
+        return "Four Of a Kind";
     }
 
     @Override
     public List<Card> getKickersList() {
         return this.kickers;
     }
-
 }
