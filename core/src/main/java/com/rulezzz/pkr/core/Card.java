@@ -15,8 +15,7 @@ public class Card implements Comparable<Card> {
     private char rate;
     private int score;
 
-    public Card(final CardSuit cardSuit, final int cardRate,
-            final int cardScore) {
+    public Card(final CardSuit cardSuit, final int cardRate, final int cardScore) {
         this.score = cardScore;
         this.suit = cardSuit;
         setRate(cardRate);
@@ -32,28 +31,28 @@ public class Card implements Comparable<Card> {
     public Card(final CardSuit cardSuit, final char cardRate) {
         this.suit = cardSuit;
         this.rate = cardRate;
-        switch (cardRate) {
-            case 'A': {
+        switch ( cardRate ) {
+            case 'A' : {
                 this.score = ACE_SCORE;
                 break;
             }
-            case 'K': {
+            case 'K' : {
                 this.score = KING_SCORE;
                 break;
             }
-            case 'Q': {
+            case 'Q' : {
                 this.score = QUEEN_SCORE;
                 break;
             }
-            case 'J': {
+            case 'J' : {
                 this.score = JACK_SCORE;
                 break;
             }
-            case 'T': {
+            case 'T' : {
                 this.score = TEN_SCORE;
                 break;
             }
-            default: {
+            default : {
                 this.score = (int) cardRate - DELTAUT_FCHAR;
             }
         }
@@ -81,7 +80,7 @@ public class Card implements Comparable<Card> {
             return false;
         }
         final Card other = (Card) obj;
-        return Objects.equal(this.suit, other.suit) 
+        return Objects.equal(this.suit, other.suit)
                 && Objects.equal(this.rate, other.rate);
     }
 
@@ -109,28 +108,28 @@ public class Card implements Comparable<Card> {
             i += DELTAUT_FCHAR;
             this.rate = (char) i;
         } else {
-            switch (i) {
-                case TEN_SCORE: {
+            switch ( i ) {
+                case TEN_SCORE : {
                     this.rate = 'T';
                     break;
                 }
-                case JACK_SCORE: {
+                case JACK_SCORE : {
                     this.rate = 'J';
                     break;
                 }
-                case QUEEN_SCORE: {
+                case QUEEN_SCORE : {
                     this.rate = 'Q';
                     break;
                 }
-                case KING_SCORE: {
+                case KING_SCORE : {
                     this.rate = 'K';
                     break;
                 }
-                case ACE_SCORE: {
+                case ACE_SCORE : {
                     this.rate = 'A';
                     break;
                 }
-                default: {
+                default : {
                     throw new IllegalArgumentException(
                             "Unknow card rate.(2-9, T, J, Q, K, A");
                 }
