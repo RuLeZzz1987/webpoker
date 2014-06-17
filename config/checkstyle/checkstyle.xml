@@ -291,7 +291,7 @@
         <!-- Restricts throws statements to a specified count. !-->
         <!-- See http://checkstyle.sf.net/config_design.html !-->
         <module name="ThrowsCount">
-            <property name="max" value="1"/>
+            <property name="max" value="3"/>
         </module>
 
         <!-- Checks visibility of class members. !-->
