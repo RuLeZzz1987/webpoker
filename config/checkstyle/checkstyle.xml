@@ -141,7 +141,7 @@
     <!-- Checks for long source files. !-->
     <!-- See http://checkstyle.sf.net/config_sizes.html !-->
     <module name="FileLength">
-        <property name="max"            value="500"/>
+        <property name="max"            value="1000"/>
         <property name="fileExtensions" value=""/>
     </module>
 
@@ -291,7 +291,7 @@
         <!-- Restricts throws statements to a specified count. !-->
         <!-- See http://checkstyle.sf.net/config_design.html !-->
         <module name="ThrowsCount">
-            <property name="max" value="1"/>
+            <property name="max" value="3"/>
         </module>
 
         <!-- Checks visibility of class members. !-->
@@ -995,7 +995,7 @@
         <!-- Checks for long lines. !-->
         <module name="LineLength">
             <property name="ignorePattern" value="^$"/>
-            <property name="max"           value="80"/>
+            <property name="max"           value="120"/>
         </module>
 
         <!-- Checks the number of methods declared in each type. This includes the number of each scope !-->
