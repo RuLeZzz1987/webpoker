@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsilienceCounter {
+    
     private int pairPosition = 0;
     private int consilience = 0;
     private int firstPairPosition = 0;
@@ -11,60 +12,60 @@ public class ConsilienceCounter {
     private int flagFirstPairFound = 0;
     private List<Card> hand = new ArrayList<Card>();
 
-    public ConsilienceCounter(List<Card> hand) {
-        if (hand.size() != Hand.FIVECARD) {
+    public ConsilienceCounter(List<Card> incomeHand) {
+        if (incomeHand.size() != Hand.FIVECARD) {
             throw new IllegalStateException("Cards count in hand != 5");
         }
-        this.hand = hand;
+        this.hand = incomeHand;
         count();
     }
 
     private void count() {
-        for (int i = 1; i < hand.size(); i++) {
-            if (hand.get(pairPosition).getScore() == hand.get(i).getScore()) {
-                if (flagFirstPairFound <= 1) {
-                    consilience++;
+        for (int i = 1; i < this.hand.size(); i++) {
+            if (this.hand.get(pairPosition).getScore() == this.hand.get(i).getScore()) {
+                if (this.flagFirstPairFound <= 1) {
+                    this.consilience++;
                 }
             } else {
-                if (consilience == 0) {
-                    pairPosition = i;
+                if (this.consilience == 0) {
+                    this.pairPosition = i;
                 } else {
-                    if (flagFirstPairFound == 0) {
-                        firstPairPosition = pairPosition;
-                        pairPosition = i;
-                        consilience1 = consilience;
-                        consilience = 0;
-                        flagFirstPairFound = 1;
+                    if (this.flagFirstPairFound == 0) {
+                        this.firstPairPosition = this.pairPosition;
+                        this.pairPosition = i;
+                        this.consilience1 = this.consilience;
+                        this.consilience = 0;
+                        this.flagFirstPairFound = 1;
                     }
                 }
             }
         }
-        if (consilience == 0 && consilience1 != 0) {
-            consilience = consilience1;
-            consilience1 = 0;
-            pairPosition = firstPairPosition;
-            firstPairPosition = 0;
+        if (this.consilience == 0 && this.consilience1 != 0) {
+            this.consilience = this.consilience1;
+            this.consilience1 = 0;
+            this.pairPosition = this.firstPairPosition;
+            this.firstPairPosition = 0;
         }
     }
 
     public int getPairPosition() {
-        return pairPosition;
+        return this.pairPosition;
     }
 
     public int getConsilience() {
-        return consilience;
+        return this.consilience;
     }
 
     public int getFirstPairPosition() {
-        return firstPairPosition;
+        return this.firstPairPosition;
     }
 
     public int getConsilience1() {
-        return consilience1;
+        return this.consilience1;
     }
 
     public int getFlagFirstPairFound() {
-        return flagFirstPairFound;
+        return this.flagFirstPairFound;
     }
 
 }

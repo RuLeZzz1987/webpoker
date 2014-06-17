@@ -24,7 +24,7 @@ public class Hand {
     }
 
     public int getStandardCardsCount() {
-        switch (gameType) {
+        switch (this.gameType) {
         case FIVECARD: {
             return FIVECARD;
         }
@@ -43,25 +43,25 @@ public class Hand {
     public Hand(GameType gameType, Card... card) {
         this.gameType = gameType;
         for (int i = 0; i < card.length; i++) {
-            hand.add(card[i]);
+            this.hand.add(card[i]);
         }
         switch (this.gameType) {
         case FIVECARD: {
-            if (hand.size() != FIVECARD) {
+            if (this.hand.size() != FIVECARD) {
                 throw new IllegalArgumentException(
                         "Illegal cards count for this type of game. Correct number is 5!");
             }
             break;
         }
         case OMAHA: {
-            if (hand.size() != OMAHA) {
+            if (this.hand.size() != OMAHA) {
                 throw new IllegalArgumentException(
                         "Illegal cards count for this type of game. Correct number is 4!");
             }
             break;
         }
         case TEXAS: {
-            if (hand.size() != TEXAS) {
+            if (this.hand.size() != TEXAS) {
                 throw new IllegalArgumentException(
                         "Illegal cards count for this type of game. Correct number is 2!");
             }
@@ -76,32 +76,32 @@ public class Hand {
     }
 
     public void add(Card card) {
-        hand.add(card);
+        this.hand.add(card);
     }
 
     public void add(List<Card> cards) {
-        hand.addAll(cards);
+        this.hand.addAll(cards);
     }
 
     public void removeCardByMask(int... mask) {
         for (int i = mask.length - 1; i >= 0; i--) {
             if (mask[i] == 1) {
-                hand.remove(i);
+                this.hand.remove(i);
             }
         }
     }
 
     public List<Card> getCards() {
-        return hand;
+        return this.hand;
     }
 
     public void sort() {
-        Collections.sort(hand);
+        Collections.sort(this.hand);
     }
 
     protected Boolean isFlushOnFiveCards() {
-        for (int i = 1; i < hand.size(); i++) {
-            if (hand.get(0).getSuit() != hand.get(i).getSuit()) {
+        for (int i = 1; i < this.hand.size(); i++) {
+            if (this.hand.get(0).getSuit() != this.hand.get(i).getSuit()) {
                 return false;
             }
         }
@@ -112,7 +112,7 @@ public class Hand {
         if (drawStatus) {
             return new Combination("draw");
         }
-        ConsilienceCounter counter = new ConsilienceCounter(hand);
+        ConsilienceCounter counter = new ConsilienceCounter(this.hand);
         switch (counter.getConsilience()) {
         case NOCONSILIENCE: {
             return createNonPairCombination();
@@ -136,36 +136,36 @@ public class Hand {
         StringBuilder resultBuffer;
         if (counter.getConsilience1() == 0) {
             resultBuffer = new StringBuilder("2" + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " ");
-            for (int i = 0; i < hand.size(); i++) {
-                if (hand.get(counter.getPairPosition()).getScore() != hand.get(
+                    + this.hand.get(counter.getPairPosition()).getScore() + " "
+                    + this.hand.get(counter.getPairPosition()).getScore() + " ");
+            for (int i = 0; i < this.hand.size(); i++) {
+                if (this.hand.get(counter.getPairPosition()).getScore() != this.hand.get(
                         i).getScore()) {
-                    resultBuffer.append(hand.get(i).getScore() + " ");
+                    resultBuffer.append(this.hand.get(i).getScore() + " ");
                 }
             }
             return new Combination(resultBuffer.toString());
         }
         if (counter.getConsilience1() == 1) {
             resultBuffer = new StringBuilder("3" + " "
-                    + hand.get(counter.getFirstPairPosition()).getScore() + " "
-                    + hand.get(counter.getFirstPairPosition()).getScore() + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " ");
-            for (int i = 0; i < hand.size(); i++) {
-                if (hand.get(counter.getPairPosition()).getScore() != hand.get(
+                    + this.hand.get(counter.getFirstPairPosition()).getScore() + " "
+                    + this.hand.get(counter.getFirstPairPosition()).getScore() + " "
+                    + this.hand.get(counter.getPairPosition()).getScore() + " "
+                    + this.hand.get(counter.getPairPosition()).getScore() + " ");
+            for (int i = 0; i < this.hand.size(); i++) {
+                if (this.hand.get(counter.getPairPosition()).getScore() != this.hand.get(
                         i).getScore()
-                        && hand.get(counter.getFirstPairPosition()).getScore() != hand
+                        && this.hand.get(counter.getFirstPairPosition()).getScore() != this.hand
                                 .get(i).getScore()) {
-                    resultBuffer.append(hand.get(i).getScore() + " ");
+                    resultBuffer.append(this.hand.get(i).getScore() + " ");
                 }
             }
             return new Combination(resultBuffer.toString());
         }
         if (counter.getConsilience1() == 2) {
             return new Combination("7" + " "
-                    + hand.get(counter.getFirstPairPosition()).getScore() + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " ");
+                    + this.hand.get(counter.getFirstPairPosition()).getScore() + " "
+                    + this.hand.get(counter.getPairPosition()).getScore() + " ");
         }
         throw new IllegalStateException("Unknown combination");
     }
@@ -174,31 +174,31 @@ public class Hand {
         StringBuilder resultBuffer;
         if (counter.getConsilience1() == 0) {
             resultBuffer = new StringBuilder("4" + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " ");
-            for (int i = 0; i < hand.size(); i++) {
-                if (hand.get(counter.getPairPosition()).getScore() != hand.get(
+                    + this.hand.get(counter.getPairPosition()).getScore() + " "
+                    + this.hand.get(counter.getPairPosition()).getScore() + " "
+                    + this.hand.get(counter.getPairPosition()).getScore() + " ");
+            for (int i = 0; i < this.hand.size(); i++) {
+                if (this.hand.get(counter.getPairPosition()).getScore() != this.hand.get(
                         i).getScore()) {
-                    resultBuffer.append(hand.get(i).getScore() + " ");
+                    resultBuffer.append(this.hand.get(i).getScore() + " ");
                 }
             }
             return new Combination(resultBuffer.toString());
         } else {
             return new Combination("7" + " "
-                    + hand.get(counter.getPairPosition()).getScore() + " "
-                    + hand.get(counter.getFirstPairPosition()).getScore() + " ");
+                    + this.hand.get(counter.getPairPosition()).getScore() + " "
+                    + this.hand.get(counter.getFirstPairPosition()).getScore() + " ");
         }
     }
 
     private Combination createFourOfaKindCombination(ConsilienceCounter counter) {
         StringBuilder resultBuffer;
         resultBuffer = new StringBuilder("8" + " "
-                + hand.get(counter.getPairPosition()).getScore() + " ");
-        for (int i = 0; i < hand.size(); i++) {
-            if (hand.get(counter.getPairPosition()).getScore() != hand.get(i)
+                + this.hand.get(counter.getPairPosition()).getScore() + " ");
+        for (int i = 0; i < this.hand.size(); i++) {
+            if (this.hand.get(counter.getPairPosition()).getScore() != this.hand.get(i)
                     .getScore()) {
-                resultBuffer.append(hand.get(i).getScore() + " ");
+                resultBuffer.append(this.hand.get(i).getScore() + " ");
             }
         }
         return new Combination(resultBuffer.toString());
@@ -206,38 +206,38 @@ public class Hand {
 
     private Combination createNonPairCombination() {
         if (!isFlushOnFiveCards()) {
-            if (hand.get(1).getScore() == Card.KING_SCORE
-                    && hand.get(0).getScore()
-                            - hand.get(hand.size() - 1).getScore() != DELTAFLC) {
-                return new Combination("1" + " " + hand.get(2).getScore() + " "
-                        + hand.get(hand.size() - 2).getScore() + " "
-                        + hand.get(hand.size() - 1).getScore() + " ");
+            if (this.hand.get(1).getScore() == Card.KING_SCORE
+                    && this.hand.get(0).getScore()
+                            - this.hand.get(this.hand.size() - 1).getScore() != DELTAFLC) {
+                return new Combination("1" + " " + this.hand.get(2).getScore() + " "
+                        + this.hand.get(this.hand.size() - 2).getScore() + " "
+                        + this.hand.get(this.hand.size() - 1).getScore() + " ");
             }
-            if (hand.get(0).getScore() - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
-                return new Combination("5" + " " + hand.get(0).getScore() + " ");
+            if (this.hand.get(0).getScore() - this.hand.get(this.hand.size() - 1).getScore() == DELTAFLC) {
+                return new Combination("5" + " " + this.hand.get(0).getScore() + " ");
             }
-            if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
-                return new Combination("5" + " " + hand.get(1).getScore() + " ");
+            if (this.hand.get(0).getScore() - this.hand.get(1).getScore() == DELTAFLCWH) {
+                return new Combination("5" + " " + this.hand.get(1).getScore() + " ");
             }
             return new Combination("0 ");
         } else {
-            if (hand.get(0).getScore() - hand.get(hand.size() - 1).getScore() != DELTAFLC
-                    && hand.get(0).getScore() - hand.get(1).getScore() != DELTAFLCWH) {
-                return new Combination("6" + " " + hand.get(0).getScore() + " "
-                        + hand.get(1).getScore() + " " + hand.get(2).getScore()
-                        + " " + hand.get(hand.size() - 2).getScore() + " "
-                        + hand.get(hand.size() - 1).getScore() + " ");
+            if (this.hand.get(0).getScore() - this.hand.get(this.hand.size() - 1).getScore() != DELTAFLC
+                    && this.hand.get(0).getScore() - this.hand.get(1).getScore() != DELTAFLCWH) {
+                return new Combination("6" + " " + this.hand.get(0).getScore() + " "
+                        + this.hand.get(1).getScore() + " " + this.hand.get(2).getScore()
+                        + " " + this.hand.get(this.hand.size() - 2).getScore() + " "
+                        + this.hand.get(this.hand.size() - 1).getScore() + " ");
             }
-            if (hand.get(0).getScore() - hand.get(hand.size() - 1).getScore() == DELTAFLC
-                    && hand.get(0).getScore() != Card.ACE_SCORE) {
-                return new Combination("9" + " " + hand.get(0).getScore() + " ");
+            if (this.hand.get(0).getScore() - this.hand.get(this.hand.size() - 1).getScore() == DELTAFLC
+                    && this.hand.get(0).getScore() != Card.ACE_SCORE) {
+                return new Combination("9" + " " + this.hand.get(0).getScore() + " ");
             }
-            if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
-                return new Combination("9" + " " + hand.get(1).getScore() + " ");
+            if (this.hand.get(0).getScore() - this.hand.get(1).getScore() == DELTAFLCWH) {
+                return new Combination("9" + " " + this.hand.get(1).getScore() + " ");
             }
-            if (hand.get(1).getScore() == Card.KING_SCORE
-                    && hand.get(0).getScore()
-                            - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
+            if (this.hand.get(1).getScore() == Card.KING_SCORE
+                    && this.hand.get(0).getScore()
+                            - this.hand.get(this.hand.size() - 1).getScore() == DELTAFLC) {
                 return new Combination("10 ");
             }
         }
@@ -246,17 +246,17 @@ public class Hand {
 
     @Override
     public String toString() {
-        return hand.toString();
+        return this.hand.toString();
     }
 
     public Boolean compareTo(Hand h) {
         sort();
         h.sort();
-        if (hand.size() != h.getCards().size()) {
+        if (this.hand.size() != h.getCards().size()) {
             return false;
         } else {
-            for (int i = 0; i < hand.size(); i++) {
-                if (!hand.get(i).equals(h.getCards().get(i))) {
+            for (int i = 0; i < this.hand.size(); i++) {
+                if (!this.hand.get(i).equals(h.getCards().get(i))) {
                     return false;
                 }
             }
