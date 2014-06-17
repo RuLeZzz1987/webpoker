@@ -29,7 +29,7 @@
     <!-- Performs a line-by-line comparison of all code lines and reports duplicate code. !-->
     <!-- See http://checkstyle.sf.net/config_duplicates.html !-->
     <module name="StrictDuplicateCode">
-        <property name="min"            value="12"/>
+        <property name="min"            value="6"/>
         <property name="fileExtensions" value=""/>
     </module>
 
@@ -141,7 +141,7 @@
     <!-- Checks for long source files. !-->
     <!-- See http://checkstyle.sf.net/config_sizes.html !-->
     <module name="FileLength">
-        <property name="max"            value="2000"/>
+        <property name="max"            value="500"/>
         <property name="fileExtensions" value=""/>
     </module>
 
@@ -212,7 +212,7 @@
         <!-- Finds nested blocks, i.e. blocks that are used freely in the code. !-->
         <!-- See http://checkstyle.sf.net/config_blocks.html !-->
         <module name="AvoidNestedBlocks">
-            <property name="allowInSwitchCase" value="false"/>
+            <property name="allowInSwitchCase" value="true"/>
         </module>
 
         <!-- Checks for empty blocks. !-->
@@ -579,9 +579,11 @@
 
         <!-- Checks that there are no static import statements. !-->
         <!-- See http://checkstyle.sourceforge.net/config_imports.html#AvoidStaticImport !-->
+        <!-- 
         <module name="AvoidStaticImport">
             <property name="excludes" value=""/>
         </module>
+         -->
 
         <!-- Checks for imports from a set of illegal packages. !-->
         <!-- See http://checkstyle.sf.net/config_import.html !-->
@@ -927,7 +929,7 @@
         <!-- Checks for type name naming conventions. !-->
         <!-- See http://checkstyle.sf.net/config_naming.html !-->
         <module name="TypeName">
-            <property name="format"           value="^[a-z][a-zA-Z0-9]*$"/>
+            <property name="format"           value="^[A-Z][a-zA-Z0-9]*$"/>
             <property name="tokens"           value="CLASS_DEF, INTERFACE_DEF"/>
             <property name="applyToPublic"    value="true"/>
             <property name="applyToProtected" value="true"/>
