@@ -206,7 +206,7 @@ public class Hand {
 
     private Combination createNonPairCombination() {
         if (!isFlushOnFiveCards()) {
-            if (hand.get(1).getScore() == Card.KINGSCORE
+            if (hand.get(1).getScore() == Card.KING_SCORE
                     && hand.get(0).getScore()
                             - hand.get(hand.size() - 1).getScore() != DELTAFLC) {
                 return new Combination("1" + " " + hand.get(2).getScore() + " "
@@ -229,13 +229,13 @@ public class Hand {
                         + hand.get(hand.size() - 1).getScore() + " ");
             }
             if (hand.get(0).getScore() - hand.get(hand.size() - 1).getScore() == DELTAFLC
-                    && hand.get(0).getScore() != Card.ACESCORE) {
+                    && hand.get(0).getScore() != Card.ACE_SCORE) {
                 return new Combination("9" + " " + hand.get(0).getScore() + " ");
             }
             if (hand.get(0).getScore() - hand.get(1).getScore() == DELTAFLCWH) {
                 return new Combination("9" + " " + hand.get(1).getScore() + " ");
             }
-            if (hand.get(1).getScore() == Card.KINGSCORE
+            if (hand.get(1).getScore() == Card.KING_SCORE
                     && hand.get(0).getScore()
                             - hand.get(hand.size() - 1).getScore() == DELTAFLC) {
                 return new Combination("10 ");
