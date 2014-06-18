@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.common.base.Objects;
 import com.rulezzz.pkr.core.Card;
 
-public class Pair implements ICombination, Comparable<ICombination> {
+public class Pair extends ICombination {
     
 	private static final int PAIR_HIGHNESS = 2;
     private List<Card> kickers;
@@ -46,33 +46,6 @@ public class Pair implements ICombination, Comparable<ICombination> {
         return Objects.equal(this.kickers, other.kickers);
     }
 
-    @Override
-    public int compareTo(final ICombination o) {
-        if ( this.getHighness() > o.getHighness() ) {
-            return 1;
-        }
-        if ( this.getHighness() < o.getHighness() ) {
-            return -1;
-        }
-        if ( this.equals(o) )  {
-            return 0;
-        } else {
-            for (int i = 0; i < this.kickers.size(); i++) {
-                switch(this.kickers.get(i).compareTo(o.getKickersList().get(i))) {
-                    case -1 : {
-                        return -1;
-                    }
-                    case 1 : {
-                        return 1;
-                    }
-                    default : {
-                        break;
-                    }
-                }
-                
-            }
-        }
-        return 0;
-    }
+
 
 }

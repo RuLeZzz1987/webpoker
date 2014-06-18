@@ -2,9 +2,10 @@ package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
 
+import com.google.common.base.Objects;
 import com.rulezzz.pkr.core.Card;
 
-public class Flush implements ICombination{
+public class Flush extends ICombination {
 
 	private static final int FLUSH_HIGHNESS = 6;
     private List<Card> kickers;
@@ -27,4 +28,22 @@ public class Flush implements ICombination{
     public List<Card> getKickersList() {
         return this.kickers;
     }
+    
+    @Override
+	public int hashCode() {
+        return Objects.hashCode(this.kickers, this.getHighness());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Flush other = (Flush) obj;
+        return Objects.equal(this.kickers, other.kickers);
+	}
+
 }
