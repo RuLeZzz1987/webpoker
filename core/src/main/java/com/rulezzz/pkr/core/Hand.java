@@ -1,8 +1,10 @@
 package com.rulezzz.pkr.core;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
+
+import com.rulezzz.pkr.core.combination.*;
 
 public class Hand {
 
@@ -15,7 +17,7 @@ public class Hand {
     private static final int SQUARE = 3;
     private static final int DELTAFLC = 4;
     private static final int DELTAFLCWH = 9;
-    private List<Card> hand = new LinkedList<Card>();
+    private List<Card> hand = new ArrayList<Card>();
     private GameType gameType;
     private Boolean drawStatus = false;
 
@@ -131,6 +133,37 @@ public class Hand {
                 throw new IllegalStateException("Unknown combination");
             }
         }
+    }
+    
+    private ICombination createPairTypeICombination(ConsilienceCounter counter) {
+        List<Card> cardsCompare = new ArrayList<Card>();
+        switch(counter.getConsilience1()) {
+            case 0 : {
+            cardsCompare.add(this.hand.get(counter.getPairPosition()));
+            for(Card card : this.hand) {
+                if ( !card.equals(cardsCompare.get(0))) {
+                    cardsCompare.add(card);
+                }
+            }
+            return new Pair(cardsCompare);
+        }
+            case 1 : {
+            cardsCompare.add(this.hand.get(counter.getFirstPairPosition()));
+            cardsCompare.add(this.hand.get(counter.getPairPosition()));
+            for(Card card : this.hand) {
+                if (!card.equals(cardsCompare.get(0)) && !card.equals(cardsCompare.get(1))) {
+                    cardsCompare.add(card);
+                }
+            }
+            return new TwoPairs(cardsCompare);
+        }
+            case 2 : {
+                cardsCompare.add(this.hand.get(counter.getFirstPairPosition()));
+                cardsCompare.add(this.hand.get(counter.getPairPosition()));
+                return new FullHouse(cardsCompare);
+            }
+        }
+        throw new IllegalStateException("Unknown combination");
     }
 
     private Combination createPairTypeCombination(ConsilienceCounter counter) {

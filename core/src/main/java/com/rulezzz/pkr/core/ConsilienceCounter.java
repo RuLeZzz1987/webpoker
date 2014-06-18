@@ -10,7 +10,7 @@ public class ConsilienceCounter {
     private int firstPairPosition = 0;
     private int consilience1 = 0;
     private int flagFirstPairFound = 0;
-    private List<Card> hand = new ArrayList<Card>();
+    private List<Card> hand;
 
     public ConsilienceCounter(List<Card> incomeHand) {
         if (incomeHand.size() != Hand.FIVECARD) {
