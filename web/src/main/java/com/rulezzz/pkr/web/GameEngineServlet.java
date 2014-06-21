@@ -47,6 +47,7 @@ public class GameEngineServlet extends HttpServlet {
                     }
                 }
                 table.handleDraws(choiseList);
+                table.handleDetermination();
                 break;
         }
         default: {

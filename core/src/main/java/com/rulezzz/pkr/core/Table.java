@@ -157,6 +157,7 @@ public class Table implements Serializable {
             if (box.getStatus() == BoxStatus.DRAW) {
                 box.setCardsAfterDraw(generateDrawCardList(box
                         .getCountOfNeededCards()));
+                box.sort();
                 break;
             }
         }
