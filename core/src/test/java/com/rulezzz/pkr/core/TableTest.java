@@ -67,7 +67,7 @@ public class TableTest {
     }
 
 
-    @Test
+/*    @Test
     public void testDeal() throws IOException {
         table.makeBets(10, 15);
         table.deal();
@@ -83,7 +83,7 @@ public class TableTest {
             table.getBoxes().get(1).play();
         table.calculateDealResult();
         System.out.println(table.toString());
-    }
+    }*/
 
     @Test
     public void testCheckingBoxStatus() throws IOException {

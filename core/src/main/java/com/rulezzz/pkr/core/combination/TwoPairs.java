@@ -7,7 +7,7 @@ import com.rulezzz.pkr.core.Card;
 
 public class TwoPairs extends ICombination {
 
-	private static final int TWO_PAIRS_HIGHNESS = 4;
+	private static final int TWO_PAIRS_HIGHNESS = 3;
     private List<Card> kickers;
 	
     public TwoPairs(List<Card> cardList){

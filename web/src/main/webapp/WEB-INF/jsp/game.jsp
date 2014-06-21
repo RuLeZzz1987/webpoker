@@ -16,14 +16,14 @@
 				<tr>
 					<c:forEach items="${box.hand.cards}" var="card">
 						<td>
-							<div class="${card.stringCard}"></div> <br> <input
-							type="checkbox" name="${card.stringCard}"><br> hold
+							<div class="${card}"></div> <br> <input
+							type="checkbox" name="${card}"><br> hold
 						</td>
 					</c:forEach>
 					<td class="handDiscription">
 						<div class="whiteChip">
 							<div class="mid">${box.ante}</div>
-						</div> <br> ${box.hand.combinationOnFiveCards.toString()}
+						</div> <br> ${box.hand.handICombination.name}
 					</td>
 					<td><c:choose>
 							<c:when test="${table.gameStatus eq 'DRAWS'}">
@@ -51,13 +51,13 @@
 		<div class="base">
 			<table>
 				<tr>
-					<c:forEach begin="1" end="${table.hand.cards.size()-1}">
+					<c:forEach begin="1" end="${table.dealerBox.hand.cards.size()-1}">
 						<td>
 							<div class="backCard"></div>
 						</td>
 					</c:forEach>
 					<td>
-						<div class="${table.hand.cards[0].stringCard}"></div>
+						<div class="${table.dealerBox.hand.cards[0]}"></div>
 					</td>
 					<td class="doSomething"><input type="submit"
 						value="do something!" name="doButton"></td>

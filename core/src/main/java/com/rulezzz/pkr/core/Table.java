@@ -82,7 +82,7 @@ public class Table implements Serializable {
         return this.playerBoxes.get(i);
     }
 
-    public void calculateDealResult() {
+/*    public void calculateDealResult() {
         if (dealerBox.getHand().getCombinationOnFiveCards().getHighness() != 0
                 && gameStatus == GameStatus.DETERMINATION) {
             for (int i = 0; i < playerBoxes.size(); i++) {
@@ -108,7 +108,7 @@ public class Table implements Serializable {
         } else {
             gameStatus = GameStatus.GIVE_ANTE;
         }
-    }
+    } */
 
     public void handleDraws(List<String> boxChoise) {
         if (gameStatus != GameStatus.DRAWS) {

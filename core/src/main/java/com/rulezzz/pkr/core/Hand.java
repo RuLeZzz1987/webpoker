@@ -111,30 +111,17 @@ public class Hand {
         return true;
     }
 
-    public Combination getCombinationOnFiveCards() {
-        if (drawStatus) {
-            return new Combination("draw");
-        }
-        ConsilienceCounter counter = new ConsilienceCounter(this.hand);
-        switch (counter.getConsilience()) {
-            case NOCONSILIENCE: {
-                return createNonPairCombination();
-            }
-            case PAIR: {
-                return createPairTypeCombination(counter);
-            }
-            case SET: {
-                return createSetTypeCombination(counter);
-            }
-            case SQUARE: {
-                return createFourOfaKindCombination(counter);
-            }
-            default: {
-                throw new IllegalStateException("Unknown combination");
-            }
-        }
-    }
-    
+    /*
+     * public Combination getCombinationOnFiveCards() { if (drawStatus) { return
+     * new Combination("draw"); } ConsilienceCounter counter = new
+     * ConsilienceCounter(this.hand); switch (counter.getConsilience()) { case
+     * NOCONSILIENCE: { return createNonPairCombination(); } case PAIR: { return
+     * createPairTypeCombination(counter); } case SET: { return
+     * createSetTypeCombination(counter); } case SQUARE: { return
+     * createFourOfaKindCombination(counter); } default: { throw new
+     * IllegalStateException("Unknown combination"); } } }
+     */
+
     public ICombination getHandICombination() {
         Collections.sort(this.hand);
         Collections.reverse(this.hand);
@@ -206,63 +193,6 @@ public class Hand {
         throw new IllegalStateException("Unknown combination");
     }
 
-    private Combination createPairTypeCombination(ConsilienceCounter counter) {
-        StringBuilder resultBuffer;
-        if (counter.getConsilience1() == 0) {
-            resultBuffer = new StringBuilder("2 ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            for (int i = 0; i < this.hand.size(); i++) {
-                if (this.hand.get(counter.getPairPosition()).getScore() != this.hand
-                        .get(i).getScore()) {
-                    resultBuffer.append(this.hand.get(i).getScore());
-                    resultBuffer.append(" ");
-                }
-            }
-            return new Combination(resultBuffer.toString());
-        }
-        if (counter.getConsilience1() == 1) {
-            resultBuffer = new StringBuilder("3 ");
-            resultBuffer.append(this.hand.get(counter.getFirstPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            resultBuffer.append(this.hand.get(counter.getFirstPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            for (int i = 0; i < this.hand.size(); i++) {
-                if (this.hand.get(counter.getPairPosition()).getScore() != this.hand
-                        .get(i).getScore()
-                        && this.hand.get(counter.getFirstPairPosition())
-                                .getScore() != this.hand.get(i).getScore()) {
-                    resultBuffer.append(this.hand.get(i).getScore());
-                    resultBuffer.append(" ");
-                }
-            }
-            return new Combination(resultBuffer.toString());
-        }
-        if (counter.getConsilience1() == 2) {
-            resultBuffer = new StringBuilder("7 ");
-            resultBuffer.append(this.hand.get(counter.getFirstPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            return new Combination(resultBuffer.toString());
-        }
-        throw new IllegalStateException("Unknown combination");
-    }
-
     private ICombination createSetTypeICombination(ConsilienceCounter counter) {
         List<Card> cardsCompare = new ArrayList<Card>();
         if (counter.getConsilience1() == 0) {
@@ -281,39 +211,6 @@ public class Hand {
 
     }
 
-    private Combination createSetTypeCombination(ConsilienceCounter counter) {
-        StringBuilder resultBuffer;
-        if (counter.getConsilience1() == 0) {
-            resultBuffer = new StringBuilder("4 ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            for (int i = 0; i < this.hand.size(); i++) {
-                if (this.hand.get(counter.getPairPosition()).getScore() != this.hand
-                        .get(i).getScore()) {
-                    resultBuffer.append(this.hand.get(i).getScore());
-                    resultBuffer.append(" ");
-                }
-            }
-            return new Combination(resultBuffer.toString());
-        } else {
-            resultBuffer = new StringBuilder("7 ");
-            resultBuffer.append(this.hand.get(counter.getPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            resultBuffer.append(this.hand.get(counter.getFirstPairPosition())
-                    .getScore());
-            resultBuffer.append(" ");
-            return new Combination(resultBuffer.toString());
-        }
-    }
-
     private ICombination createFourOfaKindICombination(
             ConsilienceCounter counter) {
         List<Card> cardsCompare = new ArrayList<Card>();
@@ -324,22 +221,6 @@ public class Hand {
             }
         }
         return new FourOfKind(cardsCompare);
-    }
-
-    private Combination createFourOfaKindCombination(ConsilienceCounter counter) {
-        StringBuilder resultBuffer;
-        resultBuffer = new StringBuilder("8 ");
-        resultBuffer
-                .append(this.hand.get(counter.getPairPosition()).getScore());
-        resultBuffer.append(" ");
-        for (int i = 0; i < this.hand.size(); i++) {
-            if (this.hand.get(counter.getPairPosition()).getScore() != this.hand
-                    .get(i).getScore()) {
-                resultBuffer.append(this.hand.get(i).getScore());
-                resultBuffer.append(" ");
-            }
-        }
-        return new Combination(resultBuffer.toString());
     }
 
     private ICombination createNonPairICombination() {
@@ -371,17 +252,17 @@ public class Hand {
             }
         } else {
             switch (this.isStraight()) {
-                case -1 : {
+                case -1: {
                     for (Card card : this.hand) {
                         cardsCompare.add(card);
                     }
                     return new Flush(cardsCompare);
                 }
-                case 0 : {
+                case 0: {
                     cardsCompare.add(this.hand.get(1));
                     return new StraightFlush(cardsCompare);
                 }
-                case 1 : {
+                case 1: {
                     if (this.hand.get(1).getScore() == Card.KING_SCORE) {
                         return new RoyalFlush(cardsCompare);
                     } else {
@@ -389,79 +270,12 @@ public class Hand {
                         return new StraightFlush(cardsCompare);
                     }
                 }
-                default : {
+                default: {
                     throw new IllegalStateException(
                             "unknown non-pair combination");
                 }
             }
         }
-    }
-
-    private Combination createNonPairCombination() {
-        StringBuilder resultBuffer;
-        resultBuffer = new StringBuilder();
-        if (!isFlush()) {
-            if (this.hand.get(1).getScore() == Card.KING_SCORE
-                    && this.hand.get(0).getScore()
-                            - this.hand.get(this.hand.size() - 1).getScore() != DELTAFLC) {
-                resultBuffer.append("1 ");
-                resultBuffer.append(this.hand.get(2).getScore());
-                resultBuffer.append(" ");
-                resultBuffer.append(this.hand.get(this.hand.size() - 2)
-                        .getScore());
-                resultBuffer.append(" ");
-                resultBuffer.append(this.hand.get(this.hand.size() - 1)
-                        .getScore());
-                resultBuffer.append(" ");
-                return new Combination(resultBuffer.toString());
-            }
-            if (this.hand.get(0).getScore()
-                    - this.hand.get(this.hand.size() - 1).getScore() == DELTAFLC) {
-                resultBuffer.append("5 ");
-                resultBuffer.append(this.hand.get(0).getScore());
-                resultBuffer.append(" ");
-                return new Combination(resultBuffer.toString());
-            }
-            if (this.hand.get(0).getScore() - this.hand.get(1).getScore() == DELTAFLCWH) {
-                resultBuffer.append("5 ");
-                resultBuffer.append(this.hand.get(1).getScore());
-                resultBuffer.append(" ");
-                return new Combination(resultBuffer.toString());
-            }
-            return new Combination("0 ");
-        } else {
-            if (this.hand.get(0).getScore()
-                    - this.hand.get(this.hand.size() - 1).getScore() != DELTAFLC
-                    && this.hand.get(0).getScore()
-                            - this.hand.get(1).getScore() != DELTAFLCWH) {
-                resultBuffer.append("6 ");
-                for (Card card : this.hand) {
-                    resultBuffer.append(card.getScore());
-                    resultBuffer.append(" ");
-                }
-                return new Combination(resultBuffer.toString());
-            }
-            if (this.hand.get(0).getScore()
-                    - this.hand.get(this.hand.size() - 1).getScore() == DELTAFLC
-                    && this.hand.get(0).getScore() != Card.ACE_SCORE) {
-                resultBuffer.append("9 ");
-                resultBuffer.append(this.hand.get(0).getScore());
-                resultBuffer.append(" ");
-                return new Combination(resultBuffer.toString());
-            }
-            if (this.hand.get(0).getScore() - this.hand.get(1).getScore() == DELTAFLCWH) {
-                resultBuffer.append("9 ");
-                resultBuffer.append(this.hand.get(1).getScore());
-                resultBuffer.append(" ");
-                return new Combination(resultBuffer.toString());
-            }
-            if (this.hand.get(1).getScore() == Card.KING_SCORE
-                    && this.hand.get(0).getScore()
-                            - this.hand.get(this.hand.size() - 1).getScore() == DELTAFLC) {
-                return new Combination("10 ");
-            }
-        }
-        throw new IllegalStateException("unknown non-pair combination");
     }
 
     @Override
