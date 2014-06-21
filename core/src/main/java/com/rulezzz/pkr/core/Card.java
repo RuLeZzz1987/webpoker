@@ -80,8 +80,7 @@ public class Card implements Comparable<Card> {
             return false;
         }
         final Card other = (Card) obj;
-        return Objects.equal(this.suit, other.suit)
-                && Objects.equal(this.rate, other.rate);
+        return Objects.equal(this.rate, other.rate);
     }
 
     @Override

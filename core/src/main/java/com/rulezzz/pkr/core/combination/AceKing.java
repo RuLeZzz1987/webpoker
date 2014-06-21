@@ -1,5 +1,6 @@
 package com.rulezzz.pkr.core.combination;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Objects;
@@ -11,7 +12,7 @@ public class AceKing extends ICombination {
     private List<Card> kickers;
 	
     public AceKing(List<Card> cardList){
-    	this.kickers = cardList;
+        this.kickers = cardList;
     }
     
     @Override

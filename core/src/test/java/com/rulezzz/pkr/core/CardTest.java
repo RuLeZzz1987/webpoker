@@ -14,7 +14,7 @@ public class CardTest {
         Card card2 = new Card(CardSuit.CLUBS, 'A');
         assertEquals(true, card1.equals(card2));
         card2 = new Card(CardSuit.DIAMOND, 'A');
-        assertEquals(false, card1.equals(card2));
+        assertEquals(true, card1.equals(card2));
         card2 = new Card(CardSuit.CLUBS, 'K');
         assertEquals(false, card1.equals(card2));
         card2 = null;

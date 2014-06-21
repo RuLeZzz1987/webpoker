@@ -102,7 +102,7 @@ public class Hand {
         Collections.sort(this.hand);
     }
 
-    protected boolean isFlushOnFiveCards() {
+    protected boolean isFlush() {
         for (int i = 1; i < this.hand.size(); i++) {
             if (this.hand.get(0).getSuit() != this.hand.get(i).getSuit()) {
                 return false;
@@ -128,6 +128,32 @@ public class Hand {
             }
             case SQUARE: {
                 return createFourOfaKindCombination(counter);
+            }
+            default: {
+                throw new IllegalStateException("Unknown combination");
+            }
+        }
+    }
+    
+    public ICombination getHandICombination() {
+        Collections.sort(this.hand);
+        Collections.reverse(this.hand);
+        if (drawStatus) {
+            return null;
+        }
+        ConsilienceCounter counter = new ConsilienceCounter(this.hand);
+        switch (counter.getConsilience()) {
+            case NOCONSILIENCE: {
+                return createNonPairICombination();
+            }
+            case PAIR: {
+                return createPairTypeICombination(counter);
+            }
+            case SET: {
+                return createSetTypeICombination(counter);
+            }
+            case SQUARE: {
+                return createFourOfaKindICombination(counter);
             }
             default: {
                 throw new IllegalStateException("Unknown combination");
@@ -318,7 +344,7 @@ public class Hand {
 
     private ICombination createNonPairICombination() {
         List<Card> cardsCompare = new ArrayList<Card>();
-        if (!isFlushOnFiveCards()) {
+        if (!isFlush()) {
             switch (this.isStraight()) {
                 case -1: {
                     if (this.hand.get(1).getScore() == Card.KING_SCORE) {
@@ -374,7 +400,7 @@ public class Hand {
     private Combination createNonPairCombination() {
         StringBuilder resultBuffer;
         resultBuffer = new StringBuilder();
-        if (!isFlushOnFiveCards()) {
+        if (!isFlush()) {
             if (this.hand.get(1).getScore() == Card.KING_SCORE
                     && this.hand.get(0).getScore()
                             - this.hand.get(this.hand.size() - 1).getScore() != DELTAFLC) {
