@@ -120,23 +120,27 @@ public class Table implements Serializable {
         Iterator<String> choiseIterator = boxChoise.iterator();
         while (boxIterator.hasNext()) {
             String choise = choiseIterator.next();
+            PlayerBox currentBox = boxIterator.next();
             switch (choise) {
                 case "fold": {
-                    boxIterator.next();
                     boxIterator.remove();
                     break;
                 }
                 case "bet": {
-                    boxIterator.next().play();
+                    
+                    currentBox.play();
+                    this.bankroll -= currentBox.getBet();
                     break;
                 }
                 case "buy": {
-                    boxIterator.next().buyCard();
+                    currentBox.buyCard();
+                    this.bankroll -= currentBox.getAnte();
                     break;
                 }
                 default: {
                     if (choiseDrawCheck(choise)) {
-                        boxIterator.next().drawCards(parseChoise(choise));
+                        this.bankroll -= currentBox.getAnte();
+                        currentBox.drawCards(parseChoise(choise));
                     } else {
                         throw new IllegalStateException("unknown box choise");
                     } 
@@ -145,6 +149,19 @@ public class Table implements Serializable {
             }
         }
         this.gameStatus = GameStatus.DETERMINATION;
+    }
+    
+    public boolean checkAllDeterminated(){
+        if (this.gameStatus.equals(GameStatus.DETERMINATION)) {
+            for (PlayerBox box : this.playerBoxes) {
+                if ( box.getStatus() != BoxStatus.BET) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void handleDetermination() {
