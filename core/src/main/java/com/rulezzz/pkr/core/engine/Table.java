@@ -1,6 +1,5 @@
 package com.rulezzz.pkr.core.engine;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,19 +25,14 @@ public class Table implements Serializable {
         return gameStatus;
     }
 
-    public void deal() throws IOException {
-        if (gameStatus != GameStatus.DEAL) {
-            throw new IOException("No money, no Cards!");
-        } else {
-            deal(playerBoxes.size());
-        }
-    }
-
     public Box getDealerBox(){
         return dealerBox;
     }
     
-    private void deal(int boxCount) {
+    public void deal() {
+        if (gameStatus != GameStatus.DEAL) {
+            throw new IllegalStateException("No money, no Cards!");
+        }
         int k = Hand.FIVECARD;
         for (int i = 0; i < k; i++) {
             for (PlayerBox b : playerBoxes) {
