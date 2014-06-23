@@ -7,8 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rulezzz.pkr.core.GameType;
-import com.rulezzz.pkr.core.Table;
+import com.rulezzz.pkr.core.engine.Table;
 
 
 public class StartPageServlet extends HttpServlet {
@@ -54,7 +53,7 @@ public class StartPageServlet extends HttpServlet {
         if (gameType == null) {
             gameType = "FIVECARD";
         }
-        Table t = new Table(GameType.valueOf(gameType));
+        Table t = new Table();
         t.setBankroll(bankroll);
         t.makeBets(bets);
         t.deal();

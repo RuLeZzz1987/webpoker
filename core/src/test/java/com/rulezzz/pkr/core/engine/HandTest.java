@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core;
+package com.rulezzz.pkr.core.engine;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,12 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.rulezzz.pkr.core.engine.Card;
+import com.rulezzz.pkr.core.engine.CardSuit;
+import com.rulezzz.pkr.core.engine.GameMath;
+import com.rulezzz.pkr.core.engine.Hand;
+import com.rulezzz.pkr.core.engine.PlayerBox;
 
 public class HandTest {
 

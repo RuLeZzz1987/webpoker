@@ -2,7 +2,11 @@ package com.rulezzz.pkr.web;
 
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,9 +23,8 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import com.rulezzz.pkr.core.Card;
-import com.rulezzz.pkr.core.GameType;
-import com.rulezzz.pkr.core.Table;
+import com.rulezzz.pkr.core.engine.Card;
+import com.rulezzz.pkr.core.engine.Table;
 
 public class GameEngineTest {
     
@@ -31,7 +34,7 @@ public class GameEngineTest {
         HttpServletResponse resp = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
         RequestDispatcher reqDispatcher = mock(RequestDispatcher.class);
-        Table table = new Table(GameType.FIVECARD);
+        Table table = new Table();
         table.makeBets(20, 25, 15);
         table.deal();
         List<Card> handThatDraw = table.getBox(0).getHand().getCards();

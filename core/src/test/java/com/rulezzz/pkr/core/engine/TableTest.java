@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core;
+package com.rulezzz.pkr.core.engine;
 
 import static org.junit.Assert.*;
 
@@ -8,13 +8,16 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.rulezzz.pkr.core.engine.BoxStatus;
+import com.rulezzz.pkr.core.engine.Table;
+
 public class TableTest {
 
     private Table table;
     
     @Before
     public void setUp() {
-        table = new Table(GameType.FIVECARD);
+        table = new Table();
     }
     
     @Test
@@ -23,26 +26,7 @@ public class TableTest {
         assertEquals(1000, table.getBankroll());
     }
     
-    @Test (expected = IOException.class)
-    public void testDealWithIncorrectStatus() throws IOException {
-        table = new Table(GameType.OMAHA);
-        assertEquals(GameStatus.BETS, table.getGameStatus());
-        table.deal();
-    }
-    
-    @Test (expected = IllegalStateException.class)
-    public void testHandleDrawsWithIncorrectStatus() throws IOException{
-        table = new Table(GameType.OMAHA);
-        table.makeBets(20, 25);
-        LinkedList<String> boxChoises = new LinkedList<String>();
-        boxChoises.add("fold");
-        boxChoises.add("bet");
-        boxChoises.add("bet");
-        table.handleDraws(boxChoises);
-    }
-
-
-/*    @Test
+    /*    @Test
     public void testDeal() throws IOException {
         table.makeBets(10, 15);
         table.deal();

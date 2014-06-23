@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core;
+package com.rulezzz.pkr.core.engine;
 
 import java.util.Collections;
 import java.util.List;

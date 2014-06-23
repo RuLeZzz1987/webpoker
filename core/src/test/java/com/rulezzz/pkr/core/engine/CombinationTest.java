@@ -1,8 +1,10 @@
-package com.rulezzz.pkr.core;
+package com.rulezzz.pkr.core.engine;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.rulezzz.pkr.core.engine.Combination;
 
 public class CombinationTest {
 

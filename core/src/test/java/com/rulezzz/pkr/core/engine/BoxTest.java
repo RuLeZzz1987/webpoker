@@ -1,9 +1,15 @@
-package com.rulezzz.pkr.core;
+package com.rulezzz.pkr.core.engine;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import static org.junit.Assert.*;
+
 import org.junit.Test;
+
+import com.rulezzz.pkr.core.engine.Card;
+import com.rulezzz.pkr.core.engine.CardSuit;
+import com.rulezzz.pkr.core.engine.PlayerBox;
 public class BoxTest {
 
 	@Test

@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core;
+package com.rulezzz.pkr.core.engine;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -18,7 +18,7 @@ public class Table implements Serializable {
     private GameStatus gameStatus;
     private static final String DRAW = "draw";
 
-    public Table(GameType gameType) {
+    public Table() {
         gameStatus = GameStatus.BETS;
     }
 

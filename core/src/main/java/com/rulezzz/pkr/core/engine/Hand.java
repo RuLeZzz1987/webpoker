@@ -1,10 +1,11 @@
-package com.rulezzz.pkr.core;
+package com.rulezzz.pkr.core.engine;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.rulezzz.pkr.core.combination.*;
+import com.sun.org.apache.xalan.internal.utils.Objects;
 
 public class Hand implements Comparable<Hand>{
 
@@ -221,6 +222,23 @@ public class Hand implements Comparable<Hand>{
                 }
             }
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(cards);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Hand other = (Hand) obj;
+        return Objects.equals(this.getHandICombination(), other.getHandICombination());
     }
 
     @Override

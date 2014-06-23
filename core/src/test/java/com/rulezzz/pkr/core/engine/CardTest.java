@@ -1,10 +1,11 @@
-package com.rulezzz.pkr.core;
+package com.rulezzz.pkr.core.engine;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
-import com.rulezzz.pkr.core.Card;
-import com.rulezzz.pkr.core.CardSuit;
+import com.rulezzz.pkr.core.engine.Card;
+import com.rulezzz.pkr.core.engine.CardSuit;
 
 public class CardTest {
 
