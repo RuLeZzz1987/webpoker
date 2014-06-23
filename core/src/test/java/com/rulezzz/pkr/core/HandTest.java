@@ -8,13 +8,6 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.rulezzz.pkr.core.Card;
-import com.rulezzz.pkr.core.CardSuit;
-import com.rulezzz.pkr.core.GameMath;
-import com.rulezzz.pkr.core.GameType;
-import com.rulezzz.pkr.core.Hand;
-import com.rulezzz.pkr.core.PlayerBox;
-
 public class HandTest {
 
     private Hand hand;
@@ -26,23 +19,24 @@ public class HandTest {
 
     @Test
     public void testRemoveCardFromHand() {
-        hand = new Hand(GameType.FIVECARD, new Card(CardSuit.CLUBS, 'A', 14),
-                new Card(CardSuit.HEART, 'K', 13), new Card(CardSuit.SPADES,
-                        '6', 6), new Card(CardSuit.DIAMOND, '3', 3), new Card(
-                        CardSuit.DIAMOND, '2', 2));
+        hand = new Hand(new Card(CardSuit.CLUBS, 'A', 14),
+                        new Card(CardSuit.HEART, 'K', 13), 
+                        new Card(CardSuit.SPADES, '6', 6), 
+                        new Card(CardSuit.DIAMOND, '3', 3), 
+                        new Card(CardSuit.DIAMOND, '2', 2));
         hand.removeCardByMask(1, 0, 1, 0, 1);
-        assertEquals(true, hand.compareTo(new Hand(GameType.UNKNOWN, new Card(
-                CardSuit.DIAMOND, '3', 3), new Card(CardSuit.HEART, 'K', 13))));
+        assertEquals(2, hand.getCards().size());
+        assertEquals(new Card(CardSuit.HEART, 'K', 13), hand.getCards().get(0));
+        assertEquals(new Card(CardSuit.DIAMOND, '3', 3), hand.getCards().get(1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testHandCreate() {
-        hand = new Hand(GameType.FIVECARD, new Card(CardSuit.CLUBS, 'A', 14),
+        hand = new Hand(new Card(CardSuit.CLUBS, 'A', 14),
                 new Card(CardSuit.HEART, 'K', 13), new Card(CardSuit.SPADES,
                         '6', 6), new Card(CardSuit.DIAMOND, '3', 3));
-        hand = new Hand(GameType.TEXAS, new Card(CardSuit.CLUBS, 'A', 14),
-                new Card(CardSuit.HEART, 'K', 13), new Card(CardSuit.SPADES,
-                        '6', 6), new Card(CardSuit.DIAMOND, '3', 3));
+        assertEquals(4, hand.getCards().size());
+
     }
 
     @Test

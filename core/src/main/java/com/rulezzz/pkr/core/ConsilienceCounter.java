@@ -1,6 +1,5 @@
 package com.rulezzz.pkr.core;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConsilienceCounter {
@@ -22,7 +21,7 @@ public class ConsilienceCounter {
 
     private void count() {
         for (int i = 1; i < this.hand.size(); i++) {
-            if (this.hand.get(pairPosition).getScore() == this.hand.get(i).getScore()) {
+            if (this.hand.get(this.pairPosition).getScore() == this.hand.get(i).getScore()) {
                 if (this.flagFirstPairFound <= 1) {
                     this.consilience++;
                 }
@@ -52,20 +51,40 @@ public class ConsilienceCounter {
         return this.pairPosition;
     }
 
-    public int getConsilience() {
-        return this.consilience;
+    public ConsilienceCount getConsilience() {
+        return getEnumCountFromInt(this.consilience);
     }
 
     public int getFirstPairPosition() {
         return this.firstPairPosition;
     }
 
-    public int getConsilience1() {
-        return this.consilience1;
+    public ConsilienceCount getConsilience1() {
+        return getEnumCountFromInt(this.consilience1);
     }
 
     public int getFlagFirstPairFound() {
         return this.flagFirstPairFound;
+    }
+    
+    private ConsilienceCount getEnumCountFromInt(int count) {
+        switch(count) {
+            case 0: {
+                return ConsilienceCount.NOCONSILIENCE;
+            }
+            case 1: {
+                return ConsilienceCount.PAIR;
+            }
+            case 2: {
+                return ConsilienceCount.SET;
+            }
+            case 3: {
+                return ConsilienceCount.SQUARE;
+            }
+            default : {
+                throw new ArithmeticException("unknown consilience count");
+            }
+        }
     }
 
 }

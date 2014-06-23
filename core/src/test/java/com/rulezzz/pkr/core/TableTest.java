@@ -30,31 +30,6 @@ public class TableTest {
         table.deal();
     }
     
-    @Test
-    public void testDealDifferentGameTypes() throws IOException {
-        table = new Table(GameType.OMAHA);
-        table.makeBets(20, 25);
-        table.deal();
-        assertEquals(GameStatus.DRAWS, table.getGameStatus());
-        assertEquals(2, table.getBoxes().size());
-        assertEquals(4, table.getBoxes().get(0).getHand().getCards().size());
-        table = new Table(GameType.TEXAS);
-        table.makeBets(20, 25);
-        table.deal();
-        assertEquals(2, table.getBoxes().get(0).getHand().getCards().size());
-        table = new Table(GameType.FIVECARD);
-        table.makeBets(20, 25);
-        table.deal();
-        assertEquals(5, table.getBoxes().get(0).getHand().getCards().size());       
-    }
-    
-    @Test (expected = IllegalStateException.class)
-    public void testDealUnknownGameType() throws IOException {
-        table = new Table(GameType.UNKNOWN);
-        table.makeBets(20, 25);
-        table.deal();
-    }
-    
     @Test (expected = IllegalStateException.class)
     public void testHandleDrawsWithIncorrectStatus() throws IOException{
         table = new Table(GameType.OMAHA);

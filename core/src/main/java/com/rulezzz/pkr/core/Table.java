@@ -15,12 +15,10 @@ public class Table implements Serializable {
     private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
     private Deck deck = new Deck();
     private List<Card> cardList = deck.getDeck();
-    private GameType gameType;
     private GameStatus gameStatus;
     private static final String DRAW = "draw";
 
     public Table(GameType gameType) {
-        this.gameType = gameType;
         gameStatus = GameStatus.BETS;
     }
 
@@ -42,22 +40,6 @@ public class Table implements Serializable {
     
     private void deal(int boxCount) {
         int k = Hand.FIVECARD;
-        switch (gameType) {
-        case FIVECARD: {
-            k = Hand.FIVECARD;
-            break;
-        }
-        case OMAHA: {
-            k = Hand.OMAHA;
-            break;
-        }
-        case TEXAS: {
-            k = Hand.TEXAS;
-            break;
-        }
-        default:
-            throw new IllegalStateException("Unknown game type");
-        }
         for (int i = 0; i < k; i++) {
             for (PlayerBox b : playerBoxes) {
                 b.setHand(cardList.get(0));
