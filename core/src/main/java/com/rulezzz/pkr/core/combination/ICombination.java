@@ -18,7 +18,9 @@ public abstract class ICombination implements Comparable<ICombination> {
             return 0;
         } else {
             for (int i = 0; i < this.getKickersList().size(); i++) {
-                int comparRes = this.getKickersList().get(i).compareTo(combo.getKickersList().get(i));
+                Card cardThis = this.getKickersList().get(i);
+                Card cardOther = combo.getKickersList().get(i);
+                int comparRes = cardThis.compareTo(cardOther);
                 if (comparRes != 0) {
                     return comparRes;
                 }
