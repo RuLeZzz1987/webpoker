@@ -6,14 +6,14 @@ import com.google.common.base.Objects;
 import com.rulezzz.pkr.core.engine.Card;
 
 public class Pair extends ICombination {
-    
-	private static final int PAIR_HIGHNESS = 2;
+
+    private static final int PAIR_HIGHNESS = 2;
     private List<Card> kickers;
 
     public Pair(List<Card> cardList) {
-    	this.kickers = cardList;
+        this.kickers = cardList;
     }
-    
+
     @Override
     public int getHighness() {
         return Pair.PAIR_HIGHNESS;
@@ -45,7 +45,5 @@ public class Pair extends ICombination {
         final Pair other = (Pair) obj;
         return Objects.equal(this.kickers, other.kickers);
     }
-
-
 
 }

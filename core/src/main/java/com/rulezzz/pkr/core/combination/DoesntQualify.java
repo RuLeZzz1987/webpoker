@@ -9,11 +9,11 @@ public class DoesntQualify extends ICombination {
 
     private static final int DNQ_HIGHNESS = 0;
     private List<Card> kickers;
-    
+
     public DoesntQualify(List<Card> cardHand) {
         this.kickers = cardHand;
     }
-    
+
     @Override
     public int getHighness() {
         return DoesntQualify.DNQ_HIGHNESS;
@@ -28,14 +28,14 @@ public class DoesntQualify extends ICombination {
     public List<Card> getKickersList() {
         return this.kickers;
     }
-    
-    @Override
-	public int hashCode() {
-        return Objects.hashCode(this.kickers, this.getHighness());
-	}
 
-	@Override
-	public boolean equals(Object obj) {
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.kickers, this.getHighness());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -43,6 +43,6 @@ public class DoesntQualify extends ICombination {
             return false;
         }
         return true;
-	}
+    }
 
 }

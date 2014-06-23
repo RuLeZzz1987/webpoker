@@ -8,12 +8,12 @@ import com.rulezzz.pkr.core.engine.Card;
 public class StraightFlush extends ICombination {
 
     private static final int STRAIGHT_FLUSH_HIGHNESS = 9;
-	private List<Card> kickers;
-	
-    public StraightFlush(List<Card> cardList){
-    	this.kickers = cardList;
+    private List<Card> kickers;
+
+    public StraightFlush(List<Card> cardList) {
+        this.kickers = cardList;
     }
-    
+
     @Override
     public int getHighness() {
         return StraightFlush.STRAIGHT_FLUSH_HIGHNESS;
@@ -28,14 +28,14 @@ public class StraightFlush extends ICombination {
     public List<Card> getKickersList() {
         return this.kickers;
     }
-    
-    @Override
-	public int hashCode() {
-        return Objects.hashCode(this.kickers, this.getHighness());
-	}
 
-	@Override
-	public boolean equals(Object obj) {
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.kickers, this.getHighness());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -44,6 +44,6 @@ public class StraightFlush extends ICombination {
         }
         final StraightFlush other = (StraightFlush) obj;
         return Objects.equal(this.kickers, other.kickers);
-	}
-	
+    }
+
 }

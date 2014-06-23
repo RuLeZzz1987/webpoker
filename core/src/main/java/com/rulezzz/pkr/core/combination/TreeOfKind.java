@@ -7,13 +7,13 @@ import com.rulezzz.pkr.core.engine.Card;
 
 public class TreeOfKind extends ICombination {
 
-	private static final int TREE_OF_A_KIND_HIGHNESS = 4;
+    private static final int TREE_OF_A_KIND_HIGHNESS = 4;
     private List<Card> kickers;
-	
-    public TreeOfKind(List<Card> cardList){
-    	this.kickers = cardList;
+
+    public TreeOfKind(List<Card> cardList) {
+        this.kickers = cardList;
     }
-    
+
     @Override
     public int getHighness() {
         return TreeOfKind.TREE_OF_A_KIND_HIGHNESS;
@@ -28,14 +28,14 @@ public class TreeOfKind extends ICombination {
     public List<Card> getKickersList() {
         return this.kickers;
     }
-    
-    @Override
-	public int hashCode() {
-        return Objects.hashCode(this.kickers, this.getHighness());
-	}
 
-	@Override
-	public boolean equals(Object obj) {
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.kickers, this.getHighness());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -44,6 +44,6 @@ public class TreeOfKind extends ICombination {
         }
         final TreeOfKind other = (TreeOfKind) obj;
         return Objects.equal(this.kickers, other.kickers);
-	}
-	
+    }
+
 }

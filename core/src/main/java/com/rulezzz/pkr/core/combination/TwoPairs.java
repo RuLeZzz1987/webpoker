@@ -7,13 +7,13 @@ import com.rulezzz.pkr.core.engine.Card;
 
 public class TwoPairs extends ICombination {
 
-	private static final int TWO_PAIRS_HIGHNESS = 3;
+    private static final int TWO_PAIRS_HIGHNESS = 3;
     private List<Card> kickers;
-	
-    public TwoPairs(List<Card> cardList){
-    	this.kickers = cardList;
+
+    public TwoPairs(List<Card> cardList) {
+        this.kickers = cardList;
     }
-    
+
     @Override
     public int getHighness() {
         return TwoPairs.TWO_PAIRS_HIGHNESS;
@@ -28,14 +28,14 @@ public class TwoPairs extends ICombination {
     public List<Card> getKickersList() {
         return this.kickers;
     }
-    
-    @Override
-	public int hashCode() {
-        return Objects.hashCode(this.kickers, this.getHighness());
-	}
 
-	@Override
-	public boolean equals(Object obj) {
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.kickers, this.getHighness());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -44,7 +44,6 @@ public class TwoPairs extends ICombination {
         }
         final TwoPairs other = (TwoPairs) obj;
         return Objects.equal(this.kickers, other.kickers);
-	}
-	
+    }
 
 }
