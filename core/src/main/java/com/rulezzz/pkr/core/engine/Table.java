@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.rulezzz.pkr.core.combination.Card;
+
 public class Table implements Serializable {
 
     private static final long serialVersionUID = -3327856908669194148L;

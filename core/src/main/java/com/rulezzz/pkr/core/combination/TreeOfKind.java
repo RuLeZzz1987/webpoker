@@ -2,8 +2,6 @@ package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
 
-import com.rulezzz.pkr.core.engine.Card;
-
 public class TreeOfKind extends ICombination {
 
     private static final int TREE_OF_A_KIND_HIGHNESS = 4;

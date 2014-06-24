@@ -3,6 +3,8 @@ package com.rulezzz.pkr.core.engine;
 import java.util.Collections;
 import java.util.List;
 
+import com.rulezzz.pkr.core.combination.Card;
+
 public class CardsDraw {
 
     private List<Card> cardsForChange;

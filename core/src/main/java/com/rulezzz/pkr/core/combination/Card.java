@@ -1,6 +1,7 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.combination;
 
 import com.google.common.base.Objects;
+import com.rulezzz.pkr.core.engine.CardSuit;
 
 public class Card implements Comparable<Card> {
 

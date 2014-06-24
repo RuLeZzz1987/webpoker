@@ -2,8 +2,6 @@ package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
 
-import com.rulezzz.pkr.core.engine.Card;
-
 public class Straight extends ICombination {
 
     private static final int STRAIGHT_HIGHNESS = 5;

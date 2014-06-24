@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.rulezzz.pkr.core.combination.Card;
+
 public class PlayerBox extends Box {
 
     private int ante;

@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.rulezzz.pkr.core.combination.Card;
+
 public class Deck {
 
     private List<Card> deck = new LinkedList<Card>();

@@ -3,7 +3,6 @@ package com.rulezzz.pkr.core.combination;
 import java.util.List;
 
 import com.google.common.base.Objects;
-import com.rulezzz.pkr.core.engine.Card;
 
 public abstract class ICombination implements Comparable<ICombination> {
 
@@ -35,14 +34,15 @@ public abstract class ICombination implements Comparable<ICombination> {
         return Objects.hashCode(this.getKickersList(), this.getHighness());
     }
 
-    public boolean equals(ICombination obj) {
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
-        return Objects.equal(this.getKickersList(), obj.getKickersList());
+        ICombination other = (ICombination) obj;
+        return Objects.equal(this.getKickersList(), other.getKickersList());
     }
     
     public abstract int getHighness();
