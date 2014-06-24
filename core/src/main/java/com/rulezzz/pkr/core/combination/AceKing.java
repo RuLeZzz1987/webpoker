@@ -4,13 +4,13 @@ import java.util.List;
 
 public class AceKing extends ICombination {
 
-	private static final int ACE_KING_HIGHNESS = 1;
+    private static final int ACE_KING_HIGHNESS = 1;
     private List<Card> kickers;
-	
-    public AceKing(List<Card> cardList){
+
+    public AceKing(List<Card> cardList) {
         this.kickers = cardList;
     }
-    
+
     @Override
     public int getHighness() {
         return AceKing.ACE_KING_HIGHNESS;
@@ -21,7 +21,7 @@ public class AceKing extends ICombination {
         return "Ace & King";
     }
 
-	@Override
+    @Override
     public List<Card> getKickersList() {
         return this.kickers;
     }
