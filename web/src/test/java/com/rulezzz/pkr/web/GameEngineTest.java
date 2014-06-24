@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import com.rulezzz.pkr.core.engine.Card;
+import com.rulezzz.pkr.core.combination.Card;
 import com.rulezzz.pkr.core.engine.Table;
 
 public class GameEngineTest {
