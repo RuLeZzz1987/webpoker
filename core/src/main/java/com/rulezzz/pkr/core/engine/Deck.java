@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.rulezzz.pkr.core.combination.Card;
+import com.rulezzz.pkr.core.combination.CardSuit;
 
 public class Deck {
 
