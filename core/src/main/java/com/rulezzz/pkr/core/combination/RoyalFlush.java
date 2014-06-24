@@ -30,11 +30,6 @@ public class RoyalFlush extends ICombination {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(this.kickers, this.getHighness());
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;

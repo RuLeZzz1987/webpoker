@@ -29,21 +29,4 @@ public class StraightFlush extends ICombination {
         return this.kickers;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(this.kickers, this.getHighness());
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final StraightFlush other = (StraightFlush) obj;
-        return Objects.equal(this.kickers, other.kickers);
-    }
-
 }
