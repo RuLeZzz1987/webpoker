@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.rulezzz.pkr.core.engine.Hand;
 
-public class AceKingCompareTest {
+public class CombinationCompareTest {
 
     private Hand hand, otherHand;
 
