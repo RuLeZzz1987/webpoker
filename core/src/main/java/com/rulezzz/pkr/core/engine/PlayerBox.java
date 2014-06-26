@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.rulezzz.pkr.core.basestructures.Card;
+
 public class PlayerBox extends Box {
 
     private int ante;
@@ -80,6 +82,10 @@ public class PlayerBox extends Box {
 
     public void buyCard() {
         this.boxStatus = BoxStatus.BUY_CARD;
+    }
+
+    public int getPayment() {
+        return this.handList.get(0).getHandICombination().getMultiplier() * this.bet;
     }
 }
 

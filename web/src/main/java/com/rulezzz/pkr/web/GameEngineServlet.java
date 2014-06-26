@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rulezzz.pkr.core.basestructures.Card;
 import com.rulezzz.pkr.core.engine.BoxStatus;
-import com.rulezzz.pkr.core.engine.Card;
 import com.rulezzz.pkr.core.engine.PlayerBox;
 import com.rulezzz.pkr.core.engine.Table;
 
@@ -33,6 +33,10 @@ public class GameEngineServlet extends HttpServlet {
         Table table = (Table) req.getSession().getAttribute("table");
         List<String> choiseList = new LinkedList<String>();
         switch (table.getGameStatus()) {
+            case BETS: {
+                //req.getRequestDispatcher("/WEB-INF/jsp/nextDealParameters.jsp").forward(req, resp);
+                break;
+            }
             case DRAWS: {
                 
                 for (int i = 0; i < table.getBoxes().size(); i++) {
@@ -52,6 +56,9 @@ public class GameEngineServlet extends HttpServlet {
                 }
                 table.handleDraws(choiseList);
                 table.handleDetermination();
+                if (table.checkAllDeterminated()) {
+                    table.calculateDealResult();
+                }
                 break;
             }
             case DETERMINATION: {
@@ -62,6 +69,10 @@ public class GameEngineServlet extends HttpServlet {
                 }
                 table.handleDraws(choiseList);
                 break;
+            }
+            case SHOWDOWN: {
+                req.getRequestDispatcher("/WEB-INF/jsp/nextDealParameters.jsp").forward(req, resp);
+                return;
             }
             default: {
                 break;

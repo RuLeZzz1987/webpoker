@@ -3,6 +3,8 @@ package com.rulezzz.pkr.core.engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rulezzz.pkr.core.basestructures.Card;
+
 public final class GameMath {
 
     private static int f = 0;

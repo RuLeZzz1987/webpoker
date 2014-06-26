@@ -16,5 +16,14 @@
   	<servlet-name>engineServlet</servlet-name>
   	<url-pattern>/makeChanges</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-class>com.rulezzz.pkr.web.DealPreferences</servlet-class>
+    <servlet-name>dealPrefServlet</servlet-name>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>dealPrefServlet</servlet-name>
+    <url-pattern>/chooseParam</url-pattern>
+  </servlet-mapping>
+  
 
 </web-app>

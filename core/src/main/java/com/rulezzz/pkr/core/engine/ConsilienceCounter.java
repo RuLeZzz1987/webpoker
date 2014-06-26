@@ -2,6 +2,8 @@ package com.rulezzz.pkr.core.engine;
 
 import java.util.List;
 
+import com.rulezzz.pkr.core.basestructures.Card;
+
 public class ConsilienceCounter {
     
     private int pairPosition = 0;

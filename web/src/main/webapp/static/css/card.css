@@ -1,258 +1,193 @@
 @CHARSET "UTF-8";
-body {
-	background-color: #0AC100;
-	margin-left: 20px; 
-	margin-top: 40px;
-}
-table.broll {
-	float: left;
-	display: inline;
-}
 
-table, tr {
-	border: 2px solid;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-right: 5px;
-	padding-left: 5px;
-	margin-top: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-}
-
-input[type=submit]
-{
-    background-color: #1E1E1E;
-    color: #979797;
-    height: 75px;
-    width: 130px;
-    color: #bbbbbb;
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-bottom: 5px;
-    box-shadow:-1px 2px #6E6B6A inset;
-
-}
-input[type=number]{
-	color: #bbbbbb;
-	background-color: #1E1E1E;
-	box-shadow:-1px 2px #6E6B6A inset;
-	font-size: 25px;
-}
-
-input[type=submit], input[type=text], input[type=number]
-{
-    border: 0;
-    border-radius:5px;
-    font-family: Sansation,Arial;
-}
-
-td.doSomething {
-	padding-left: 16px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	padding-right: 16px;
-}
-
-div.base {
-
-	display: block;
-	clear: both;
-}
-
-div.mid {
-	vertical-align: middle;
-	line-height: 80px;
-	height: 80px
-}
-
-td {
-	border: 1px solid;
-	padding-left: 5px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-right: 5px;
-}
-
-td.handDiscription {
-	border: 1px solid;
-	padding-left: 5px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-right: 5px;
-	text-align: center;
-}
-
-div.whiteChip {
-	width: 87px;
-	height: 80px;
-	font-size: 30px;
-	text-align: center;
-	font-weight: bold;
-	background: url(../../static/images/chips.jpg) -1px 0px;
-}
 
 div.backCard {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/backCard.png) 0px 0px;
+	margin: auto;
 }
 
 div.cA {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 0px 0px;
+	margin: auto;
 }
 
 div.cK {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 74px 0px;
+	margin: auto;
 }
 
 div.cQ {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 147px 0px;
+	margin: auto;
 }
 
 div.cJ {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 220px 0px;
+	margin: auto;
 }
 
 div.cT {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 293px 0px;
+	margin: auto;
 }
 
 div.c9 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 366px 0px;
+	margin: auto;
 }
 
 div.c8 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 439px 0px;
+	margin: auto;
 }
 
 div.c7 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 512px 0px;
+	margin: auto;
 }
 
 div.c6 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 585px 0px;
+	margin: auto;
 }
 
 div.c5 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 658px 0px;
+	margin: auto;
 }
 
 div.c4 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 731px 0px;
+	margin: auto;
 }
 
 div.c3 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 804px 0px;
+	margin: auto;
 }
 
 div.c2 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 877px 0px;
+	margin: auto;
 }
 
 div.dA {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 0px 98px;
+	margin: auto;
 }
 
 div.dK {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 74px 98px;
+	margin: auto;
 }
 
 div.dQ {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 147px 98px;
+	margin: auto;
 }
 
 div.dJ {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 220px 98px;
+	margin: auto;
 }
 
 div.dT {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 293px 98px;
+	margin: auto;
 }
 
 div.d9 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 366px 98px;
+	margin: auto;
 }
 
 div.d8 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 439px 98px;
+	margin: auto;
 }
 
 div.d7 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 512px 98px;
+	margin: auto;
 }
 
 div.d6 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 585px 98px;
+	margin: auto;
 }
 
 div.d5 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 658px 98px;
+	margin: auto;
 }
 
 div.d4 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 731px 98px;
+	margin: auto;
 }
 
 div.d3 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 804px 98px;
+	margin: auto;
 }
 
 div.d2 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 877px 98px;
+	margin: auto;
 }
 
 
@@ -260,78 +195,91 @@ div.hA {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 0px 196px;
+	margin: auto;
 }
 
 div.hK {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 74px 196px;
+	margin: auto;
 }
 
 div.hQ {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 147px 196px;
+	margin: auto;
 }
 
 div.hJ {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 220px 196px;
+	margin: auto;
 }
 
 div.hT {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 293px 196px;
+	margin: auto;
 }
 
 div.h9 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 366px 196px;
+	margin: auto;
 }
 
 div.h8 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 439px 196px;
+	margin: auto;
 }
 
 div.h7 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 512px 196px;
+	margin: auto;
 }
 
 div.h6 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 585px 196px;
+	margin: auto;
 }
 
 div.h5 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 658px 196px;
+	margin: auto;
 }
 
 div.h4 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 731px 196px;
+	margin: auto;
 }
 
 div.h3 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 804px 196px;
+	margin: auto;
 }
 
 div.h2 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 877px 196px;
+	margin: auto;
 }
 
 
@@ -340,76 +288,89 @@ div.sA {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 0px 294px;
+	margin: auto;
 }
 
 div.sK {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 74px 294px;
+	margin: auto;
 }
 
 div.sQ {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 147px 294px;
+	margin: auto;
 }
 
 div.sJ {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 220px 294px;
+	margin: auto;
 }
 
 div.sT {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 293px 294px;
+	margin: auto;
 }
 
 div.s9 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 366px 294px;
+	margin: auto;
 }
 
 div.s8 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 439px 294px;
+	margin: auto;
 }
 
 div.s7 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 512px 294px;
+	margin: auto;
 }
 
 div.s6 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 585px 294px;
+	margin: auto;
 }
 
 div.s5 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 658px 294px;
+	margin: auto;
 }
 
 div.s4 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 731px 294px;
+	margin: auto;
 }
 
 div.s3 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 804px 294px;
+	margin: auto;
 }
 
 div.s2 {
 	width: 74px;
 	height: 98px;
 	background: url(../../static/images/classic-playing-cards.png) 877px 294px;
+	margin: auto;
 }

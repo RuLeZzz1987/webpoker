@@ -1,0 +1,116 @@
+@CHARSET "UTF-8";
+body {
+    background-color: #0AC100;
+    margin-left: 20px; 
+    margin-top: 40px;
+}
+table.broll {
+    float: left;
+    display: inline;
+    width: 67px;
+    padding-bottom: 8px;
+}
+tr.broll {
+	
+}
+
+table, tr {
+    height: 135px;
+    width: 700px;
+    border: 2px solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+input[type=submit]
+{
+    background-color: #1E1E1E;
+    color: #979797;
+    height: 75px;
+    width: 130px;
+    color: #bbbbbb;
+    margin: auto;
+    box-shadow:-1px 2px #6E6B6A inset;
+
+}
+input[type=number]{
+    color: #bbbbbb;
+    background-color: #1E1E1E;
+    box-shadow:-1px 2px #6E6B6A inset;
+    font-size: 25px;
+    display: inherit;
+}
+
+input[type=submit], input[type=text], input[type=number]
+{
+    border: 0;
+    border-radius:5px;
+    font-family: Sansation,Arial;
+}
+
+td.choises {
+    width: 80px;
+}
+
+td.doSomething {
+    padding-left: 16px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 16px;
+}
+
+div.base {
+    display: block;
+    clear: both;
+    margin: auto;
+    padding: auto;
+    float: left;
+}
+
+div.mid {
+    vertical-align: middle;
+    line-height: 80px;
+    height: 80px
+}
+
+td {
+    border: 1px solid;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+td.cards {
+    width: 89px;
+    hieght: 160px;
+}
+
+td.handDiscription {
+    border: 1px solid;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+div.whiteChip {
+    width: 87px;
+    height: 80px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin: auto;
+    background: url(../../static/images/chips.jpg) -1px 0px;
+}
+
+div.boxes {
+    clear: left;
+}

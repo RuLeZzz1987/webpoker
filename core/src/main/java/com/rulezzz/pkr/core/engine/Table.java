@@ -2,9 +2,14 @@ package com.rulezzz.pkr.core.engine;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.rulezzz.pkr.core.basestructures.Card;
+import com.rulezzz.pkr.core.basestructures.Deck;
+import com.rulezzz.pkr.core.combination.ICombination;
 
 public class Table implements Serializable {
 
@@ -15,10 +20,20 @@ public class Table implements Serializable {
     private Deck deck = new Deck();
     private List<Card> cardList = deck.getDeck();
     private GameStatus gameStatus;
+    private List<Integer> defaultBets = new ArrayList<Integer>();
+    private int defaultBoxCount = 1;
     private static final String DRAW = "draw";
 
     public Table() {
         gameStatus = GameStatus.BETS;
+    }
+    
+    public int getDefaultBoxCount(){
+        return this.defaultBoxCount;
+    }
+    
+    public List<Integer> getDefaultBets() {
+        return this.defaultBets;
     }
 
     public GameStatus getGameStatus() {
@@ -30,24 +45,27 @@ public class Table implements Serializable {
     }
     
     public void deal() {
-        if (gameStatus != GameStatus.DEAL) {
+        if (this.gameStatus != GameStatus.DEAL) {
             throw new IllegalStateException("No money, no Cards!");
         }
         int k = Hand.FIVECARD;
         for (int i = 0; i < k; i++) {
-            for (PlayerBox b : playerBoxes) {
-                b.setHand(cardList.get(0));
-                deck.setUsed(cardList.get(0));
-                cardList.remove(0);
+            for (PlayerBox b : this.playerBoxes) {
+                b.setHand(this.cardList.get(0));
+                this.deck.setUsed(this.cardList.get(0));
+                this.cardList.remove(0);
             }
-            dealerBox.setHand(cardList.get(0));
-            deck.setUsed(cardList.get(0));
-            cardList.remove(0);
+            this.dealerBox.setHand(this.cardList.get(0));
+            this.deck.setUsed(this.cardList.get(0));
+            this.cardList.remove(0);
         }
-        for (PlayerBox b : playerBoxes) {
+        for (PlayerBox b : this.playerBoxes) {
             b.sort();
+            Collections.reverse(b.getHand().getCards());
+            this.defaultBets.add(b.getAnte());
         }
-        gameStatus = GameStatus.DRAWS;
+        this.defaultBoxCount = this.playerBoxes.size();
+        this.gameStatus = GameStatus.DRAWS;
     }
 
     public List<PlayerBox> getBoxes() {
@@ -58,33 +76,33 @@ public class Table implements Serializable {
         return this.playerBoxes.get(i);
     }
 
-/*    public void calculateDealResult() {
-        if (dealerBox.getHand().getCombinationOnFiveCards().getHighness() != 0
-                && gameStatus == GameStatus.DETERMINATION) {
-            for (int i = 0; i < playerBoxes.size(); i++) {
-                if (playerBoxes.get(i).getStatus().equals(BoxStatus.BET)) {
-                    switch (playerBoxes.get(i).getHand()
-                            .getCombinationOnFiveCards()
-                            .compareTo(dealerBox.getHand().getCombinationOnFiveCards())) {
-                    case 1: {
-
+    public void calculateDealResult() {
+        if (this.dealerBox.getHand().getHandICombination().getHighness() != 0) {
+            ICombination dealerCombo = this.dealerBox.getHand().getHandICombination();
+            for (PlayerBox box : this.playerBoxes) {
+                int compareResult = dealerCombo.compareTo(box.getHand().getHandICombination());
+                switch ( compareResult ) {
+                    case 0 : {
+                        this.bankroll += box.getAnte() + box.getBet();
                         break;
                     }
-                    case 0: {
-
+                    case -1 : {
+                        this.bankroll += box.getAnte() + box.getPayment();
                         break;
                     }
-                    case -1: {
-
-                        break;
-                    }
+                    default : {
                     }
                 }
             }
+            this.gameStatus = GameStatus.SHOWDOWN;
         } else {
-            gameStatus = GameStatus.GIVE_ANTE;
+            if (this.playerBoxes.size() != 0) {
+                this.gameStatus = GameStatus.DEALER_DNQ;
+            } else {
+                this.gameStatus = GameStatus.SHOWDOWN;
+            }
         }
-    } */
+    }
 
     public void handleDraws(List<String> boxChoise) {
         if (gameStatus != GameStatus.DRAWS) {
@@ -134,6 +152,8 @@ public class Table implements Serializable {
                     return false;
                 }
             }
+            this.dealerBox.sort();
+            Collections.reverse(this.dealerBox.getHand().getCards());
             return true;
         } else {
             return false;
@@ -151,6 +171,7 @@ public class Table implements Serializable {
                 box.setCardsAfterDraw(generateDrawCardList(box
                         .getCountOfNeededCards()));
                 box.sort();
+                Collections.reverse(box.getHand().getCards());
                 break;
             }
         }

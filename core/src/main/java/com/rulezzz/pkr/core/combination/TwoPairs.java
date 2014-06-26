@@ -2,12 +2,12 @@ package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
 
-import com.google.common.base.Objects;
-import com.rulezzz.pkr.core.engine.Card;
+import com.rulezzz.pkr.core.basestructures.Card;
 
 public class TwoPairs extends ICombination {
 
     private static final int TWO_PAIRS_HIGHNESS = 3;
+    private static final int MULTIPLIER = 2;
     private List<Card> kickers;
 
     public TwoPairs(List<Card> cardList) {
@@ -30,20 +30,8 @@ public class TwoPairs extends ICombination {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(this.kickers, this.getHighness());
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final TwoPairs other = (TwoPairs) obj;
-        return Objects.equal(this.kickers, other.kickers);
+    public int getMultiplier() {
+        return MULTIPLIER;
     }
 
 }
