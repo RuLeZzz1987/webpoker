@@ -10,26 +10,37 @@
 <title>Choose deal</title>
 <link rel="stylesheet" href="static/css/card.css">
 <link rel="stylesheet" href="static/css/basePageProp.css">
+<link rel="stylesheet" href="static/css/dealProps.css">
 </head>
 <body>
     <form action="chooseParam" method="POST" name="form">
         <table>
             <tr>
                 <td>
-                    <p>
-                        <strong>
-                            Choose boxes count
-                        </strong>
+                    
+                        <div class="boxChooseLabel">
+	                        <strong>
+	                            Choose boxes count
+	                        </strong>
+                        </div>
                         <br>
+                        <div>
                         <input type="radio" name="boxCount" value="1" checked="checked"> 1
+                        </div>
                         <br>
+                        <div>
                         <input type="radio" name="boxCount" value="2"> 2
+                        </div>
                         <br>
+                        <div>
                         <input type="radio" name="boxCount" value="3"> 3
+                        </div>
                         <br>
+                        <div>
                         <input type="radio" name="boxCount" value="4"> 4
+                        </div>
                         <br>
-                    </p>
+                    
                 </td>
                 <td>
                     <p>
@@ -42,6 +53,12 @@
                         <input type="number" name="bet2" min="5" max="100" step="5" value="10" >
                         <input type="number" name="bet3" min="5" max="100" step="5" value="10" >
                     </p>
+                </td>
+                <td>
+                bankroll
+                </td>
+                <td>
+                <input type="submit" value="Deal!">
                 </td>
             </tr>
         </table>

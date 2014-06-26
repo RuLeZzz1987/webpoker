@@ -70,6 +70,8 @@ public class GameEngineTest {
         when(req.getSession()).thenReturn(session);
         when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp"))
         .thenReturn(reqDispatcher);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/nextDealParameters.jsp"))
+        .thenReturn(reqDispatcher);
         
         session.setAttribute("table", table);
         GameEngineServlet engine = new GameEngineServlet();
