@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.rulezzz.pkr.core.engine.BoxStatus;
 import com.rulezzz.pkr.core.engine.Table;
 
 public class TableTest {

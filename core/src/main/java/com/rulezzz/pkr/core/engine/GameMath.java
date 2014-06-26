@@ -3,7 +3,7 @@ package com.rulezzz.pkr.core.engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rulezzz.pkr.core.combination.Card;
+import com.rulezzz.pkr.core.basestructures.Card;
 
 public final class GameMath {
 

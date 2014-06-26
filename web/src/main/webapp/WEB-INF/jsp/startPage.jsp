@@ -3,6 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Choose Game</title>
 <link rel="stylesheet" href="static/css/card.css">
+<link rel="stylesheet" href="static/css/basePageProp.css">
 </head>
 <body>
 	<form action="start" method="POST" name="form">

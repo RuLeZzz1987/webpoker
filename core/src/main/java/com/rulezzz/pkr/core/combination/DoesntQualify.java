@@ -2,9 +2,12 @@ package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
 
+import com.rulezzz.pkr.core.basestructures.Card;
+
 public class DoesntQualify extends ICombination {
 
     private static final int DNQ_HIGHNESS = 0;
+    private static final int MULTIPLIER = 0;
     private List<Card> kickers;
 
     public DoesntQualify(List<Card> cardHand) {
@@ -24,6 +27,11 @@ public class DoesntQualify extends ICombination {
     @Override
     public List<Card> getKickersList() {
         return this.kickers;
+    }
+
+    @Override
+    public int getMultiplier() {
+        return MULTIPLIER;
     }
 
 }

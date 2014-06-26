@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Objects;
+import com.rulezzz.pkr.core.basestructures.Card;
 import com.rulezzz.pkr.core.combination.*;
 
 public class Hand implements Comparable<Hand>{

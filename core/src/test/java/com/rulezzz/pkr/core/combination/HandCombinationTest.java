@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.rulezzz.pkr.core.basestructures.Card;
+import com.rulezzz.pkr.core.basestructures.CardSuit;
 import com.rulezzz.pkr.core.engine.Hand;
 
 public class HandCombinationTest {

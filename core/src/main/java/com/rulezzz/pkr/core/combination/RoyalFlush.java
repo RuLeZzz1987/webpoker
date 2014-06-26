@@ -2,9 +2,12 @@ package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
 
+import com.rulezzz.pkr.core.basestructures.Card;
+
 public class RoyalFlush extends ICombination {
 
     private static final int ROYAL_FLUSH_HIGHNESS = 10;
+    private static final int MULTIPLIER = 100;
     private List<Card> kickers;
 
     public RoyalFlush(List<Card> cardList) {
@@ -24,6 +27,11 @@ public class RoyalFlush extends ICombination {
     @Override
     public List<Card> getKickersList() {
         return this.kickers;
+    }
+
+    @Override
+    public int getMultiplier() {
+        return MULTIPLIER;
     }
 
 }

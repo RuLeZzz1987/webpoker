@@ -8,14 +8,48 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="static/css/card.css">
+<link rel="stylesheet" href="static/css/basePageProp.css">
 </head>
 <body>
     <form action="makeChanges" method="POST" name="form">
+          <div class="base">
+            <table class="dealer">
+                <tr>
+                    <td>
+                        <div class="${table.dealerBox.hand.cards[0]}"></div>
+                    </td>
+                    <c:forEach begin="1" end="${table.dealerBox.hand.cards.size()-1}" var="loop">
+                        <td>
+                        <c:choose>
+                            <c:when test="${table.gameStatus eq 'SHOWDOWN'}">
+                                <div class="${table.dealerBox.hand.cards[loop]}"></div>
+                            </c:when>
+                            <c:when test="${table.gameStatus eq 'DEALER_DNQ'}">
+                                <div class="${table.dealerBox.hand.cards[loop]}"></div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="backCard"></div>
+                            </c:otherwise>
+                        </c:choose>
+                        </td>
+                    </c:forEach>
+                    <td class="doSomething"><input type="submit"
+                        value="do something!" name="doButton"></td>
+                </tr>
+            </table>
+        </div>
         <table class="broll">
+            <tr>
+                <td class="handDiscription">Bankroll<br> ${table.bankroll}
+                </td>
+            </tr>
+        </table>
+        <div class="boxes">
+        <table class="boxes">
             <c:forEach items="${table.boxes}" var="box" varStatus="loop">
                 <tr>
                     <c:forEach items="${box.hand.cards}" var="card">
-                        <td>
+                        <td class="cards">
                             <div class="${card}"></div> <br> 
                             <c:if test="${table.gameStatus eq 'DRAWS'}">
                                 <input type="checkbox" name="${card}"><br> hold
@@ -27,7 +61,7 @@
                             <div class="mid">${box.ante}</div>
                         </div> <br> ${box.hand.handICombination.name}
                     </td>
-                    <td><c:choose>
+                    <td class="choises"><c:choose>
                             <c:when test="${table.gameStatus eq 'DRAWS'}">
                                 <input type="radio" checked="checked" name="choise${loop.index}"
                                     value="fold"> fold<br>
@@ -52,29 +86,8 @@
                 </tr>
             </c:forEach>
         </table>
-        <table class="broll">
-            <tr>
-                <td class="handDiscription">Bankroll<br> ${table.bankroll}
-                </td>
-            </tr>
-        </table>
-        <br>
-        <div class="base">
-            <table>
-                <tr>
-                    <c:forEach begin="1" end="${table.dealerBox.hand.cards.size()-1}">
-                        <td>
-                            <div class="backCard"></div>
-                        </td>
-                    </c:forEach>
-                    <td>
-                        <div class="${table.dealerBox.hand.cards[0]}"></div>
-                    </td>
-                    <td class="doSomething"><input type="submit"
-                        value="do something!" name="doButton"></td>
-                </tr>
-            </table>
         </div>
+        <br>
     </form>
 </body>
 </html>

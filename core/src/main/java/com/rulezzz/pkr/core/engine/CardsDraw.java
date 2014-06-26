@@ -3,7 +3,7 @@ package com.rulezzz.pkr.core.engine;
 import java.util.Collections;
 import java.util.List;
 
-import com.rulezzz.pkr.core.combination.Card;
+import com.rulezzz.pkr.core.basestructures.Card;
 
 public class CardsDraw {
 
