@@ -39,11 +39,12 @@
             </table>
         </div>
         <table class="broll">
-            <tr>
+            <tr class="broll">
                 <td class="handDiscription">Bankroll<br> ${table.bankroll}
                 </td>
             </tr>
         </table>
+        <c:if test="${table.boxes.size() != 0}">
         <div class="boxes">
         <table class="boxes">
             <c:forEach items="${table.boxes}" var="box" varStatus="loop">
@@ -87,6 +88,7 @@
             </c:forEach>
         </table>
         </div>
+        </c:if>
         <br>
     </form>
 </body>

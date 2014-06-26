@@ -7,9 +7,16 @@ body {
 table.broll {
     float: left;
     display: inline;
+    width: 67px;
+    padding-bottom: 8px;
+}
+tr.broll {
+	
 }
 
 table, tr {
+    height: 135px;
+    width: 700px;
     border: 2px solid;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -19,15 +26,6 @@ table, tr {
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
-}
-table.dealer {
-    height: 135px;
-    width: 700px;
-    float: left;
-}
-table.boxes {
-    height: 135px;
-    width: 700px;
 }
 
 input[type=submit]
@@ -68,11 +66,11 @@ td.doSomething {
 }
 
 div.base {
-
     display: block;
     clear: both;
     margin: auto;
     padding: auto;
+    float: left;
 }
 
 div.mid {
@@ -114,5 +112,5 @@ div.whiteChip {
 }
 
 div.boxes {
-	clear: left;
+    clear: left;
 }
