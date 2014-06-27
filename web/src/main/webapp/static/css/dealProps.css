@@ -1,4 +1,74 @@
 @CHARSET "UTF-8";
-div.boxChooseLabel {
+div.boxChooseLabel, div.anteProp{
 	text-align: center;
+	font-weight: bold;
+	width: 150px;
+	height: 165px;
+	float: left;
+}
+div.radio{
+	width: 150px;
+    text-align: center;
+    height: 35px;
+    margin-top: -20px;
+    font-size: 25px;
+}
+div.brollStatsAndDeal {
+	width: 150px;
+	height: 165px;
+	float: left;
+}
+div.broll {
+	height: 20px;
+	text-align: center;
+	font-weight: bold;
+}
+div.brollCount {
+	text-align: center;
+	font-weight: bold;
+	font-size: 35px;
+	height: 63px;
+	vertical-align: middle;
+	line-height: 63px;
+	
+}
+div.deal {
+	height: 82px;
+	text-align: center;
+}
+div.number{
+    padding-left: 21px;
+    margin-top: -2px;
+
+}
+input[type=radio] {
+	vertical-align: middle;
+}
+
+body {
+    background-color: #0AC100;
+    margin-left: 20px; 
+    margin-top: 40px;
+}
+input[type=submit]
+{
+    background-color: #1E1E1E;
+    color: #979797;
+    height: 75px;
+    width: 130px;
+    color: #bbbbbb;
+    margin: auto;
+    font-size: 35px;
+    box-shadow:-1px 2px #6E6B6A inset;
+    vertical-align: middle;
+
+}
+input[type=number]{
+    color: #bbbbbb;
+    background-color: #1E1E1E;
+    box-shadow:-1px 2px #6E6B6A inset;
+    font-size: 25px;
+    display: inherit;
+    vertical-align: middle;
+    
 }
