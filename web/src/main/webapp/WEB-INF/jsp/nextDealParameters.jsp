@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Choose deal</title>
 <link rel="stylesheet" href="static/css/dealProps.css">
+<script type="text/javascript" src='static/js/simpledemo.js'></script>
 </head>
 <body>
 	<form action="chooseParam" method="POST" name="form">
@@ -17,48 +18,49 @@
 			<div>Choose boxes count</div>
 			<br>
 			<div class="radio">
-				<input type="radio" name="boxCount" value="1" checked="checked">
-				1
+				<input type="radio" name="boxCount" value="1" checked="checked"
+					onClick="hideAndShowNumIn(this.value)"> 1
 			</div>
 			<br>
 			<div class="radio">
-				<input type="radio" name="boxCount" value="2"> 2
+				<input type="radio" name="boxCount" value="2"
+					onClick="hideAndShowNumIn(this.value)"> 2
 			</div>
 			<br>
 			<div class="radio">
-				<input type="radio" name="boxCount" value="3"> 3
+				<input type="radio" name="boxCount" value="3"
+					onClick="hideAndShowNumIn(this.value)"> 3
 			</div>
 			<br>
 			<div class="radio">
-				<input type="radio" name="boxCount" value="4"> 4
+				<input type="radio" name="boxCount" value="4"
+					onClick="hideAndShowNumIn(this.value)"> 4
 			</div>
 			<br>
 		</div>
 		<div class="anteProp">
-			<div>
-				Choose 1st bet value 
-			</div>
+			<div>Choose 1st bet value</div>
 			<br>
 			<div class="number" style="margin-top: -22px">
-				<input type="number" name="bet0" min="5" max="100" step="5"
-					value="10">
+				<input type="number" class="anteValue" name="bet0" hidden="true"
+					min="5" max="100" step="5" value="10">
 			</div>
 			<div class="number">
-				<input type="number" name="bet1" min="5" max="100" step="5"
-					value="10">
+				<input type="number" class="anteValue" name="bet1" min="5" max="100"
+					step="5" value="10">
 			</div>
 			<div class="number">
-				<input type="number" name="bet2" min="5" max="100" step="5"
-					value="10">
+				<input type="number" class="anteValue" name="bet2" min="5" max="100"
+					step="5" value="10">
 			</div>
 			<div class="number">
-				<input type="number" name="bet3" min="5" max="100" step="5"
-					value="10">
+				<input type="number" class="anteValue" name="bet3" min="5" max="100"
+					step="5" value="10">
 			</div>
 		</div>
 		<div class="brollStatsAndDeal">
 			<div class="broll">Bankroll</div>
-            <div class="brollCount">${table.bankroll}</div>
+			<div class="brollCount">${table.bankroll}</div>
 			<div class="deal">
 				<input type="submit" value="Deal!">
 			</div>
