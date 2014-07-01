@@ -141,12 +141,6 @@ public class TableTest {
     }
     
     @Test (expected = IllegalStateException.class)
-    public void testIncorrectDetermination() {
-        table.makeBets(10, 20, 25);
-        table.handleDetermination();
-    }
-    
-    @Test (expected = IllegalStateException.class)
     public void testHandleDrawsIncorrectChoise() throws IOException {
         table.makeBets(10);
         table.deal();

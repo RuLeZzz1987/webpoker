@@ -21,15 +21,10 @@ public class Table implements Serializable {
     private List<Card> cardList = deck.getDeck();
     private GameStatus gameStatus;
     private List<Integer> defaultBets = new ArrayList<Integer>();
-    private int defaultBoxCount = 1;
     private static final String DRAW = "draw";
 
     public Table() {
         gameStatus = GameStatus.BETS;
-    }
-    
-    public int getDefaultBoxCount(){
-        return this.defaultBoxCount;
     }
     
     public List<Integer> getDefaultBets() {
@@ -64,7 +59,6 @@ public class Table implements Serializable {
             Collections.reverse(b.getHand().getCards());
             this.defaultBets.add(b.getAnte());
         }
-        this.defaultBoxCount = this.playerBoxes.size();
         this.gameStatus = GameStatus.DRAWS;
     }
 
@@ -146,7 +140,6 @@ public class Table implements Serializable {
     }
     
     public boolean checkAllDeterminated(){
-        if (this.gameStatus.equals(GameStatus.DETERMINATION)) {
             for (PlayerBox box : this.playerBoxes) {
                 if ( box.getStatus() != BoxStatus.BET) {
                     return false;
@@ -155,17 +148,9 @@ public class Table implements Serializable {
             this.dealerBox.sort();
             Collections.reverse(this.dealerBox.getHand().getCards());
             return true;
-        } else {
-            return false;
-        }
     }
 
     public void handleDetermination() {
-        if (gameStatus != GameStatus.DETERMINATION) {
-            throw new IllegalStateException(
-                    "game status don't match this operation. Expected: DETERMINATION. Actual: "
-                            + gameStatus);
-        }
         for (PlayerBox box : playerBoxes) {
             if (box.getStatus() == BoxStatus.DRAW) {
                 box.setCardsAfterDraw(generateDrawCardList(box
