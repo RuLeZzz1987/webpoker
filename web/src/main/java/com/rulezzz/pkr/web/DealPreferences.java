@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rulezzz.pkr.core.engine.Table;
+
 public class DealPreferences extends HttpServlet {
 
     /**
@@ -21,6 +23,18 @@ public class DealPreferences extends HttpServlet {
     
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Table table = (Table) req.getSession().getAttribute("table");
+        table.getBoxes().clear();
+        table.getDefaultBets().clear();
+        table.updateDeck();
+        table.getDealerBox().getHand().getCards().clear();
+        int boxCount = Integer.parseInt(req.getParameter("boxCount"));
+        int[] antes = new int[boxCount];
+        for (int i = 0; i < boxCount; i++) {
+            antes[i] = Integer.parseInt(req.getParameter("bet" + i));
+        }
+        table.makeBets(antes);
+        table.deal();
         req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
     }
 }

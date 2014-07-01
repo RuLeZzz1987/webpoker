@@ -27,6 +27,11 @@ public class Table implements Serializable {
         gameStatus = GameStatus.BETS;
     }
     
+    public void updateDeck(){
+        this.deck = new Deck();
+        this.cardList = deck.getDeck();
+    }
+    
     public List<Integer> getDefaultBets() {
         return this.defaultBets;
     }
@@ -196,7 +201,8 @@ public class Table implements Serializable {
 
     public void makeBets(int... bets) {
         for (int i = 0; i < bets.length; i++) {
-            playerBoxes.add(new PlayerBox(bets[i]));
+            this.playerBoxes.add(new PlayerBox(bets[i]));
+            this.bankroll -= bets[i];
         }
         gameStatus = GameStatus.DEAL;
     }

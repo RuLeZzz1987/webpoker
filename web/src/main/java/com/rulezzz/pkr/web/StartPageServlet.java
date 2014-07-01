@@ -48,7 +48,6 @@ public class StartPageServlet extends HttpServlet {
         int[] bets = new int[boxCount];
         for (int i = 0; i < bets.length; i++) {
             bets[i] = bet;
-            bankroll = bankroll - bet;
         }
         if (gameType == null) {
             gameType = "FIVECARD";

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="static/css/dealProps.css">
 <script type="text/javascript" src='static/js/simpledemo.js'></script>
 </head>
-<body>
+<body onload="setPrevAnte(${table.defaultBets})">
 	<form action="chooseParam" method="POST" name="form">
 
 		<div class="boxChooseLabel">
@@ -22,41 +22,28 @@
 					onClick="hideAndShowNumIn(this.value)"> 1
 			</div>
 			<br>
-			<div class="radio">
-				<input type="radio" name="boxCount" value="2"
-					onClick="hideAndShowNumIn(this.value)"> 2
-			</div>
+			<c:forEach begin="2" end="4" var="loop"> 
+				<div class="radio">
+					<input type="radio" name="boxCount" value="${loop}"
+						onClick="hideAndShowNumIn(this.value)"> ${loop}
+				</div>
 			<br>
-			<div class="radio">
-				<input type="radio" name="boxCount" value="3"
-					onClick="hideAndShowNumIn(this.value)"> 3
-			</div>
-			<br>
-			<div class="radio">
-				<input type="radio" name="boxCount" value="4"
-					onClick="hideAndShowNumIn(this.value)"> 4
-			</div>
-			<br>
+			</c:forEach>
 		</div>
 		<div class="anteProp">
 			<div>Choose 1st bet value</div>
 			<br>
 			<div class="number" style="margin-top: -22px">
-				<input type="number" class="anteValue" name="bet0" hidden="true"
+				<input type="number" class="anteValue" name="bet0"
 					min="5" max="100" step="5" value="10">
 			</div>
-			<div class="number">
-				<input type="number" class="anteValue" name="bet1" min="5" max="100"
-					step="5" value="10">
-			</div>
-			<div class="number">
-				<input type="number" class="anteValue" name="bet2" min="5" max="100"
-					step="5" value="10">
-			</div>
-			<div class="number">
-				<input type="number" class="anteValue" name="bet3" min="5" max="100"
-					step="5" value="10">
-			</div>
+			<c:forEach begin="1" end="3" var="loop"> 
+				<div class="number">
+					<input type="number" class="anteValue" name="bet${loop}" min="5" max="100"
+						step="5" value="10">
+				</div>
+            </c:forEach>
+
 		</div>
 		<div class="brollStatsAndDeal">
 			<div class="broll">Bankroll</div>
