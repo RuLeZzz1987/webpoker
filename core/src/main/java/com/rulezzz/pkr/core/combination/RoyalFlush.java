@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class RoyalFlush extends ICombination {
+public class RoyalFlush extends AbstractCombination {
 
     private static final int ROYAL_FLUSH_HIGHNESS = 10;
     private static final int MULTIPLIER = 100;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class TreeOfKind extends ICombination {
+public class TreeOfKind extends AbstractCombination {
 
     private static final int TREE_OF_A_KIND_HIGHNESS = 4;
     private static final int MULTIPLIER = 3;

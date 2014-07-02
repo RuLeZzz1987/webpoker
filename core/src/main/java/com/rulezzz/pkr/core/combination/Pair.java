@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class Pair extends ICombination {
+public class Pair extends AbstractCombination {
 
     private static final int PAIR_HIGHNESS = 2;
     private List<Card> kickers;

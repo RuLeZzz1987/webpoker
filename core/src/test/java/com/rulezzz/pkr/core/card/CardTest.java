@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.card;
 
 import static org.junit.Assert.*;
 
@@ -13,33 +13,35 @@ public class CardTest {
     public void testIsSameCard() {
         Card card1 = new Card(CardSuit.CLUBS, 'A');
         Card card2 = new Card(CardSuit.CLUBS, 'A');
-        assertEquals(true, card1.equals(card2));
-        card2 = new Card(CardSuit.DIAMOND, 'A');
-        assertEquals(true, card1.equals(card2));
+        assertTrue(card1.equals(card2));
+        
         card2 = new Card(CardSuit.CLUBS, 'K');
-        assertEquals(false, card1.equals(card2));
-        card2 = null;
-        assertEquals(false, card1.equals(card2));
-        Object card3 = new Object();
-        assertEquals(false, card1.equals(card3));
-
+        assertFalse(card1.equals(card2));
+        
+        assertFalse(card1.equals(null));
+        assertFalse(card1.equals(new Object()));
     }
 
     @Test
     public void testCreateCard() {
-        Card card1 = new Card(CardSuit.CLUBS, 'A');
-        assertEquals(14, card1.getScore());
-        card1 = new Card(CardSuit.CLUBS, 'K');
-        assertEquals(13, card1.getScore());
-        card1 = new Card(CardSuit.CLUBS, 'Q');
-        assertEquals(12, card1.getScore());
-        card1 = new Card(CardSuit.CLUBS, 'J');
-        assertEquals(11, card1.getScore());
-        card1 = new Card(CardSuit.CLUBS, 'T');
-        assertEquals(10, card1.getScore());
+        Card card = new Card(CardSuit.CLUBS, 'A');
+        assertEquals(14, card.getScore());
+        
+        card = new Card(CardSuit.CLUBS, 'K');
+        assertEquals(13, card.getScore());
+        
+        card = new Card(CardSuit.CLUBS, 'Q');
+        assertEquals(12, card.getScore());
+        
+        card = new Card(CardSuit.CLUBS, 'J');
+        assertEquals(11, card.getScore());
+        
+        card = new Card(CardSuit.CLUBS, 'T');
+        assertEquals(10, card.getScore());
+        
         for (int i = 2; i <= 9; i++) {
-            card1 = new Card(CardSuit.CLUBS, (char) (i + 48));
-            assertEquals(i, card1.getScore());
+            card = new Card(CardSuit.CLUBS, (char) (i + Card.DELTAUT_FCHAR));
+            assertEquals(i, card.getScore());
         }
     }
 
@@ -51,9 +53,8 @@ public class CardTest {
         assertEquals('c', new Card(CardSuit.CLUBS, 'J').getSuit().getCharSuit());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSetRate() {
-        assertEquals(' ', new Card(CardSuit.CLUBS, 1, 1).getRate());
         assertEquals('2', new Card(CardSuit.CLUBS, 2, 2).getRate());
         assertEquals('3', new Card(CardSuit.CLUBS, 3, 3).getRate());
         assertEquals('4', new Card(CardSuit.CLUBS, 4, 4).getRate());
@@ -67,37 +68,11 @@ public class CardTest {
         assertEquals('Q', new Card(CardSuit.CLUBS, 12, 12).getRate());
         assertEquals('K', new Card(CardSuit.CLUBS, 13, 13).getRate());
         assertEquals('A', new Card(CardSuit.CLUBS, 14, 14).getRate());
-        assertEquals(' ', new Card(CardSuit.CLUBS, 15, 15).getRate());
     }
-
-    @Test
-    public void testGetRate() {
-        Card card = new Card(CardSuit.DIAMOND, '2');
-        assertEquals('2', card.getRate());
-        card = new Card(CardSuit.DIAMOND, '3');
-        assertEquals('3', card.getRate());
-        card = new Card(CardSuit.DIAMOND, '4');
-        assertEquals('4', card.getRate());
-        card = new Card(CardSuit.DIAMOND, '5');
-        assertEquals('5', card.getRate());
-        card = new Card(CardSuit.DIAMOND, '6');
-        assertEquals('6', card.getRate());
-        card = new Card(CardSuit.DIAMOND, '7');
-        assertEquals('7', card.getRate());
-        card = new Card(CardSuit.DIAMOND, '8');
-        assertEquals('8', card.getRate());
-        card = new Card(CardSuit.DIAMOND, '9');
-        assertEquals('9', card.getRate());
-        card = new Card(CardSuit.DIAMOND, 'T');
-        assertEquals('T', card.getRate());
-        card = new Card(CardSuit.DIAMOND, 'J');
-        assertEquals('J', card.getRate());
-        card = new Card(CardSuit.DIAMOND, 'Q');
-        assertEquals('Q', card.getRate());
-        card = new Card(CardSuit.DIAMOND, 'K');
-        assertEquals('K', card.getRate());
-        card = new Card(CardSuit.DIAMOND, 'A');
-        assertEquals('A', card.getRate());
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetIllegalRate() {
+        assertEquals(' ', new Card(CardSuit.CLUBS, 1, 1).getRate());
     }
 
     @Test

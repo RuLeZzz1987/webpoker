@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rulezzz.pkr.core.basestructures.BoxStatus;
+import com.rulezzz.pkr.core.basestructures.Box.BoxStatus;
 import com.rulezzz.pkr.core.basestructures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.gameengine.Table;
@@ -39,6 +39,7 @@ public class GameEngineServlet extends HttpServlet {
             }
             case DRAWS: {
                 
+                              
                 for (int i = 0; i < table.getBoxes().size(); i++) {
                     if (!req.getParameter("choise" + i).equals("draw")) {
                         choiseList.add(req.getParameter("choise" + i));
@@ -54,7 +55,7 @@ public class GameEngineServlet extends HttpServlet {
                         choiseList.add(drawChoise.toString());
                     }
                 }
-                table.handleDraws(choiseList);
+                //table.handleChoices(choiseList);
                 table.handleDetermination();
                 if (table.checkAllDeterminated()) {
                     table.calculateDealResult();
@@ -67,7 +68,7 @@ public class GameEngineServlet extends HttpServlet {
                         choiseList.add(req.getParameter("choise" + table.getBoxes().indexOf(box)));
                     }
                 }
-                table.handleDraws(choiseList);
+                //table.handleChoices(choiseList);
                 break;
             }
             case SHOWDOWN: {

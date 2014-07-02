@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class Straight extends ICombination {
+public class Straight extends AbstractCombination {
 
     private static final int STRAIGHT_HIGHNESS = 5;
     private static final int MULTIPLIER = 4;

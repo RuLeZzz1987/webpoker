@@ -64,13 +64,8 @@ public class HandTest {
         hand.add(new Card(CardSuit.CLUBS, '3'));
         hand.add(new Card(CardSuit.CLUBS, '2'));
         PlayerBox box = new PlayerBox(hand, 10);
-        LinkedList<Boolean> holdList = new LinkedList<Boolean>();
-        holdList.add(false);
-        holdList.add(true);
-        holdList.add(true);
-        holdList.add(false);
-        holdList.add(false);
-        box.drawCards(holdList);
+        
+        box.drawCards(new Card(CardSuit.CLUBS, 'A'), new Card(CardSuit.CLUBS, '3'), new Card(CardSuit.CLUBS, '2'));
         assertEquals(new Card(CardSuit.DIAMOND, 'J'), box.getHandHigheness(0)
                 .getCards().get(0));
         assertEquals(new Card(CardSuit.CLUBS, 'J'), box.getHandHigheness(0)

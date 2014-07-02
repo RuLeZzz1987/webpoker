@@ -5,10 +5,10 @@ import java.util.List;
 import com.google.common.base.Objects;
 import com.rulezzz.pkr.core.card.Card;
 
-public abstract class ICombination implements Comparable<ICombination> {
+public abstract class AbstractCombination implements Comparable<AbstractCombination> {
 
     @Override
-    public int compareTo(final ICombination combo) {
+    public int compareTo(final AbstractCombination combo) {
         if (this.getHighness() > combo.getHighness()) {
             return 1;
         }
@@ -35,6 +35,7 @@ public abstract class ICombination implements Comparable<ICombination> {
         return Objects.hashCode(this.getKickersList(), this.getHighness());
     }
 
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -42,8 +43,13 @@ public abstract class ICombination implements Comparable<ICombination> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ICombination other = (ICombination) obj;
-        return Objects.equal(this.getKickersList(), other.getKickersList());
+        AbstractCombination other = (AbstractCombination) obj;
+        for (int i = 0; i < this.getKickersList().size(); i++) {
+            if (!this.getKickersList().get(i).equalsByRate(other.getKickersList().get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
     
     public abstract int getHighness();

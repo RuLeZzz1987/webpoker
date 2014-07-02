@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class StraightFlush extends ICombination {
+public class StraightFlush extends AbstractCombination {
 
     private static final int STRAIGHT_FLUSH_HIGHNESS = 9;
     private static final int MULTIPLIER = 50;

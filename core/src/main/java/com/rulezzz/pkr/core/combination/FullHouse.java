@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class FullHouse extends ICombination {
+public class FullHouse extends AbstractCombination {
 
     private static final int FULL_HOUSE_HIGHNESS = 7;
     private static final int MULTIPLIER = 7;

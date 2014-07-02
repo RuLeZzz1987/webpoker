@@ -8,8 +8,6 @@ public class Box {
 
     private Hand hand = new Hand();
 
-    public Box() {}
-    
     public Hand getHand() {
         return this.hand;
     }
@@ -18,11 +16,11 @@ public class Box {
         this.hand.sort();
     }
 
-    public void setHand(final Card card) {
+    public void addCard(final Card card) {
         this.hand.add(card);
     }
     
-    public void setHand(final List<Card> cards) {
+    public void addCards(final List<Card> cards) {
         this.hand.add(cards);
     }
 
@@ -35,4 +33,7 @@ public class Box {
         return this.hand.toString();
     }
 
+    public enum BoxStatus {
+        DEALED, FOLD, BET, DRAW, DETERMINATION, WAIT_FOR_DRAW, BUY_CARD, BUY_GAME, TAKE_ANTE;
+    }
 }

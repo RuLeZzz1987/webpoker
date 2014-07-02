@@ -20,7 +20,7 @@ public class BoxTest {
 		cardList.add(new Card(CardSuit.HEART, '2'));
 		cardList.add(new Card(CardSuit.DIAMOND, 'T'));
 		cardList.add(new Card(CardSuit.SPADES, '9'));
-		box.setHand(cardList);
+		box.addCards(cardList);
 		assertEquals(cardList, box.getHand().getCards());
 	}
 	

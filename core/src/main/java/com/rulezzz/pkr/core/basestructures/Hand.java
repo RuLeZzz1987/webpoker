@@ -67,7 +67,7 @@ public class Hand implements Comparable<Hand>{
         return true;
     }
 
-    public ICombination getHandICombination() {
+    public AbstractCombination getHandICombination() {
         Collections.sort(this.cards);
         Collections.reverse(this.cards);
         if (drawStatus) {
@@ -106,14 +106,14 @@ public class Hand implements Comparable<Hand>{
         }
     }
 
-    private ICombination createPairTypeICombination(ConsilienceCounter counter) {
+    private AbstractCombination createPairTypeICombination(ConsilienceCounter counter) {
         List<Card> cardsCompare = new ArrayList<Card>();
-        ICombination result;
+        AbstractCombination result;
         switch (counter.getConsilience1()) {
             case NOCONSILIENCE: {
                 cardsCompare.add(this.cards.get(counter.getPairPosition()));
                 for (Card card : this.cards) {
-                    if (!card.equals(cardsCompare.get(0))) {
+                    if (!card.equalsByRate(cardsCompare.get(0))) {
                         cardsCompare.add(card);
                     }
                 }
@@ -124,8 +124,8 @@ public class Hand implements Comparable<Hand>{
                 cardsCompare.add(this.cards.get(counter.getFirstPairPosition()));
                 cardsCompare.add(this.cards.get(counter.getPairPosition()));
                 for (Card card : this.cards) {
-                    if (!card.equals(cardsCompare.get(0))
-                            && !card.equals(cardsCompare.get(1))) {
+                    if (!card.equalsByRate(cardsCompare.get(0))
+                            && !card.equalsByRate(cardsCompare.get(1))) {
                         cardsCompare.add(card);
                     }
                 }
@@ -145,12 +145,12 @@ public class Hand implements Comparable<Hand>{
         return result;
     }
 
-    private ICombination createSetTypeICombination(ConsilienceCounter counter) {
+    private AbstractCombination createSetTypeICombination(ConsilienceCounter counter) {
         List<Card> cardsCompare = new ArrayList<Card>();
         if (counter.getConsilience1().equals(ConsilienceCount.NOCONSILIENCE)) {
             cardsCompare.add(this.cards.get(counter.getPairPosition()));
             for (Card card : this.cards) {
-                if (!card.equals(cardsCompare.get(0))) {
+                if (!card.equalsByRate(cardsCompare.get(0))) {
                     cardsCompare.add(card);
                 }
             }
@@ -163,19 +163,19 @@ public class Hand implements Comparable<Hand>{
 
     }
 
-    private ICombination createFourOfaKindICombination(
+    private AbstractCombination createFourOfaKindICombination(
             ConsilienceCounter counter) {
         List<Card> cardsCompare = new ArrayList<Card>();
         cardsCompare.add(this.cards.get(counter.getPairPosition()));
         for (Card card : this.cards) {
-            if (!card.equals(cardsCompare.get(0))) {
+            if (!card.equalsByRate(cardsCompare.get(0))) {
                 cardsCompare.add(card);
             }
         }
         return new FourOfKind(cardsCompare);
     }
 
-    private ICombination createNonPairICombination() {
+    private AbstractCombination createNonPairICombination() {
         List<Card> cardsCompare = new ArrayList<Card>();
         if (!isFlush()) {
             switch (this.straightCheck()) {

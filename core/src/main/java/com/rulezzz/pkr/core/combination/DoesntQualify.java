@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class DoesntQualify extends ICombination {
+public class DoesntQualify extends AbstractCombination {
 
     private static final int DNQ_HIGHNESS = 0;
     private static final int MULTIPLIER = 0;

@@ -15,17 +15,14 @@ public class Deck {
 
     public List<Card> getDeck() {
         return this.deck;
-
     }
 
     public Deck() {
-
         for (CardSuit suit : CardSuit.values()) {
-            for (int j = 2; j < CARDRANKS; j++) {
-                Card card = new Card(suit, j, j);
+            for (int i = 2; i < CARDRANKS; i++) {
+                Card card = new Card(suit, i, i);
                 this.deck.add(card);
             }
-
         }
         Collections.shuffle(this.deck);
 

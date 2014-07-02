@@ -13,8 +13,6 @@ import com.rulezzz.pkr.core.basestructures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
 
-
-
 public class PlayerBoxTest {
     
     private Hand hand;
@@ -30,7 +28,7 @@ public class PlayerBoxTest {
         hand.add(new Card(CardSuit.DIAMOND, '4'));
     }
     
-    @Test (expected = ArithmeticException.class)
+    @Test
     public void testDrawCards() {
         box = new PlayerBox();
         box.setHand(hand);
@@ -40,7 +38,7 @@ public class PlayerBoxTest {
         drawList.add(true);
         drawList.add(true);
         drawList.add(false);
-        box.drawCards(drawList);
+        box.drawCards(new Card(CardSuit.CLUBS, 'K'), new Card(CardSuit.HEART, 'J'), new Card(CardSuit.DIAMOND, '4'));
         assertEquals(3, box.getCountOfNeededCards());
         assertEquals(2, box.getHand().getCards().size());
         List<Card> newCards = new LinkedList<Card>();
@@ -49,8 +47,6 @@ public class PlayerBoxTest {
         newCards.add(new Card(CardSuit.HEART, '3'));
         box.setCardsAfterDraw(newCards);
         assertEquals(5, box.getHand().getCards().size());
-        drawList.remove(0);
-        box.drawCards(drawList);
     }
     
     @Test

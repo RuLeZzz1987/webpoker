@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class FourOfKind extends ICombination {
+public class FourOfKind extends AbstractCombination {
 
     private static final int FOUR_OF_A_KIND_HIGHNESS = 8;
     private static final int MULTIPLIER = 20;

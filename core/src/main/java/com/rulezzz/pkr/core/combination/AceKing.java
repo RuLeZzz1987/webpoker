@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
 
-public class AceKing extends ICombination {
+public class AceKing extends AbstractCombination {
 
     private static final int ACE_KING_HIGHNESS = 1;
     private static final int MULTIPLIER = 1;

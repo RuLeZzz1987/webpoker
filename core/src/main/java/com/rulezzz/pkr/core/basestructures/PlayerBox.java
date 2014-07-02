@@ -1,7 +1,7 @@
 package com.rulezzz.pkr.core.basestructures;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
@@ -31,23 +31,16 @@ public class PlayerBox extends Box {
         return handList.get(i);
     }
     
-    public void drawCards(List<Boolean> list) {
-        this.boxStatus = BoxStatus.DRAW;
-        if ( list.size() != getHand().getCards().size()) {
+    public void drawCards(Card... foldCards) {
+        if (foldCards.length > getHand().getCards().size()) {
             throw new ArithmeticException("count of holding cards don't match count of cards on box");
         }
+        List<Card> cards = getHand().getCards();
+        cards.removeAll(Arrays.asList(foldCards));
+        
+        countOfNeededCards = foldCards.length;
+        this.boxStatus = BoxStatus.DRAW;
         getHand().setDrawStatus(true);
-        Iterator<Card> cardsIter = getHand().getCards().iterator();
-        Iterator<Boolean> holdListIter = list.iterator();
-        while (holdListIter.hasNext()) {
-            if ( holdListIter.next() ) {
-                cardsIter.next();
-            } else {
-                cardsIter.next();
-                cardsIter.remove();
-                countOfNeededCards++;
-            }
-        }
     }
     
     public int getCountOfNeededCards() {
@@ -77,7 +70,7 @@ public class PlayerBox extends Box {
 
     public void setCardsAfterDraw(List<Card> cards) {
         this.boxStatus = BoxStatus.DETERMINATION;
-        setHand(cards);
+        addCards(cards);
     }
 
     public void buyCard() {

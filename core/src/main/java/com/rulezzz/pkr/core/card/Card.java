@@ -9,8 +9,11 @@ public class Card implements Comparable<Card> {
     public static final int QUEEN_SCORE = 12;
     public static final int JACK_SCORE = 11;
     public static final int TEN_SCORE = 10;
-    public static final int MAX_NONCHAR_RANK = 9;
-    private static final int DELTAUT_FCHAR = 48;
+    
+    private static final int MAX_NONCHAR_RANK = 9;
+    
+    static final int DELTAUT_FCHAR = 48;
+    
     private CardSuit suit;
     private char rate;
     private int score;
@@ -53,7 +56,7 @@ public class Card implements Comparable<Card> {
                 break;
             }
             default : {
-                this.score = (int) cardRate - DELTAUT_FCHAR;
+                this.score = cardRate - DELTAUT_FCHAR;
             }
         }
     }
@@ -65,14 +68,8 @@ public class Card implements Comparable<Card> {
     public char getRate() {
         return this.rate;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(this.suit, this.rate);
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
+    
+    public boolean equalsByRate(final Object obj) {
         if (obj == null) {
             return false;
         }
@@ -84,11 +81,25 @@ public class Card implements Comparable<Card> {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hashCode(this.rate, this.suit);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Card other = (Card) obj;
+        return Objects.equal(this.rate, other.rate) && Objects.equal(this.suit, other.suit);
+    }
+
+    @Override
     public String toString() {
-        final StringBuilder result = new StringBuilder();
-        result.append(this.suit.getCharSuit());
-        result.append(this.rate);
-        return result.toString();
+        return "" + suit.getCharSuit() + rate;
     }
 
     public int getScore() {
@@ -102,12 +113,10 @@ public class Card implements Comparable<Card> {
     }
 
     private void setRate(final int intRate) {
-        int i = intRate;
-        if ((i >= 2) && (i <= MAX_NONCHAR_RANK)) {
-            i += DELTAUT_FCHAR;
-            this.rate = (char) i;
+        if (intRate >= 2 && intRate <= MAX_NONCHAR_RANK) {
+            this.rate = (char) (intRate + DELTAUT_FCHAR);
         } else {
-            switch ( i ) {
+            switch ( intRate ) {
                 case TEN_SCORE : {
                     this.rate = 'T';
                     break;
