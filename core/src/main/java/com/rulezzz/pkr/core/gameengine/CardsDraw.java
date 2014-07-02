@@ -1,9 +1,10 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.gameengine;
 
 import java.util.Collections;
 import java.util.List;
 
 import com.rulezzz.pkr.core.basestructures.Card;
+import com.rulezzz.pkr.core.basestructures.Hand;
 
 public class CardsDraw {
 

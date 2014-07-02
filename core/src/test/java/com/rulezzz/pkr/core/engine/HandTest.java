@@ -10,7 +10,9 @@ import org.junit.Test;
 
 import com.rulezzz.pkr.core.basestructures.Card;
 import com.rulezzz.pkr.core.basestructures.CardSuit;
-import com.rulezzz.pkr.core.engine.GameMath;
+import com.rulezzz.pkr.core.basestructures.Hand;
+import com.rulezzz.pkr.core.basestructures.PlayerBox;
+import com.rulezzz.pkr.core.gameengine.GameMath;
 
 public class HandTest {
 

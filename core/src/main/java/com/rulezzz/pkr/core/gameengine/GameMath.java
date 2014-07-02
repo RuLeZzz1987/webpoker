@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.gameengine;
 
 import java.util.ArrayList;
 import java.util.List;

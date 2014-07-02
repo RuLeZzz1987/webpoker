@@ -1,8 +1,6 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.basestructures;
 
 import java.util.List;
-
-import com.rulezzz.pkr.core.basestructures.Card;
 
 public class Box {
 

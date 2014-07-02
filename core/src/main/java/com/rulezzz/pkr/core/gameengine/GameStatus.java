@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.gameengine;
 
 public enum GameStatus {
 

@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rulezzz.pkr.core.basestructures.BoxStatus;
 import com.rulezzz.pkr.core.basestructures.Card;
-import com.rulezzz.pkr.core.engine.BoxStatus;
-import com.rulezzz.pkr.core.engine.PlayerBox;
-import com.rulezzz.pkr.core.engine.Table;
+import com.rulezzz.pkr.core.basestructures.PlayerBox;
+import com.rulezzz.pkr.core.gameengine.Table;
 
 public class GameEngineServlet extends HttpServlet {
 

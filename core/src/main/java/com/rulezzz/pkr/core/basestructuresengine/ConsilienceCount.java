@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.basestructuresengine;
 
 public enum ConsilienceCount {
     PAIR, SET, NOCONSILIENCE, SQUARE;

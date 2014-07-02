@@ -1,10 +1,8 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.basestructures;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import com.rulezzz.pkr.core.basestructures.Card;
 
 public class PlayerBox extends Box {
 

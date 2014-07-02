@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.rulezzz.pkr.core.basestructures.Card;
-import com.rulezzz.pkr.core.engine.Table;
+import com.rulezzz.pkr.core.gameengine.Table;
 
 public class GameEngineTest {
     

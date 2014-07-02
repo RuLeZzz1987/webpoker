@@ -1,182 +1,23 @@
 package com.rulezzz.pkr.core.combination;
 
 import static org.junit.Assert.*;
+import static com.rulezzz.pkr.core.combination.ComboSamples.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Before;
+
+
 import org.junit.Test;
 
 import com.rulezzz.pkr.core.basestructures.Card;
 import com.rulezzz.pkr.core.basestructures.CardSuit;
-import com.rulezzz.pkr.core.engine.Hand;
+import com.rulezzz.pkr.core.basestructures.Hand;
+
 
 public class HandCombinationTest {
-
-    private Hand doesntQualifyOne;
-    private Hand doesntQualifyTwo;
-    private Hand aceKingHigher;
-    private Hand aceKingLower;
-    private Hand pairAABCD;
-    private Hand pairABBCD;
-    private Hand pairABCCD;
-    private Hand pairABCDD;
-    private Hand twoPairsAABBC;
-    private Hand twoPairsAABCC;
-    private Hand twoPairsABBCC;
-    private Hand setAAABC;
-    private Hand setABBBC;
-    private Hand setABCCC;
-    private Hand straight;
-    private Hand straightWheel;
-    private Hand flushHigher;
-    private Hand flushLower;
-    private Hand fullHouseAAABB;
-    private Hand fullHouseAABBB;
-    private Hand careAAAAB;
-    private Hand careABBBB;
-    private Hand straightFlush;
-    private Hand straightFlushWheel;
-    private Hand royalFlushOne;
-    private Hand royalFlushTwo;
-
-    
-    @Before
-    public void setUp() {
-        doesntQualifyOne = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                    new Card(CardSuit.DIAMOND, 'J'),
-                                    new Card(CardSuit.SPADES, '6'),
-                                    new Card(CardSuit.HEART, '3'),
-                                    new Card(CardSuit.CLUBS, '2'));
-        doesntQualifyTwo = new Hand(new Card(CardSuit.CLUBS, 'K'),
-                                    new Card(CardSuit.DIAMOND, 'T'),
-                                    new Card(CardSuit.SPADES, '9'),
-                                    new Card(CardSuit.HEART, '5'),
-                                    new Card(CardSuit.CLUBS, '4'));
-        aceKingHigher = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                new Card(CardSuit.DIAMOND, 'K'),
-                                new Card(CardSuit.HEART, 'Q'),
-                                new Card(CardSuit.CLUBS, '3'),
-                                new Card(CardSuit.CLUBS, '2'));
-        aceKingLower = new Hand(new Card(CardSuit.SPADES, 'A'),
-                                new Card(CardSuit.HEART, 'K'),
-                                new Card(CardSuit.CLUBS, 'T'),
-                                new Card(CardSuit.DIAMOND, '7'),
-                                new Card(CardSuit.SPADES, '6'));
-        pairAABCD = new Hand(new Card(CardSuit.CLUBS, 'K'),
-                            new Card(CardSuit.DIAMOND, 'K'),
-                            new Card(CardSuit.SPADES, '7'),
-                            new Card(CardSuit.CLUBS, '5'),
-                            new Card(CardSuit.CLUBS, '2'));
-        pairABBCD = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                            new Card(CardSuit.DIAMOND, 'J'),
-                            new Card(CardSuit.CLUBS, 'J'),
-                            new Card(CardSuit.SPADES, '3'),
-                            new Card(CardSuit.SPADES, '2'));
-        pairABCCD = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                            new Card(CardSuit.DIAMOND, 'J'),
-                            new Card(CardSuit.CLUBS, '6'),
-                            new Card(CardSuit.HEART, '6'),
-                            new Card(CardSuit.CLUBS, '2'));
-        pairABCDD = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                            new Card(CardSuit.DIAMOND, 'J'),
-                            new Card(CardSuit.CLUBS, '6'),
-                            new Card(CardSuit.HEART, '2'),
-                            new Card(CardSuit.CLUBS, '2'));
-        twoPairsAABBC = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                            new Card(CardSuit.DIAMOND, 'A'),
-                            new Card(CardSuit.CLUBS, '6'),
-                            new Card(CardSuit.HEART, '6'),
-                            new Card(CardSuit.CLUBS, '2'));
-        twoPairsAABCC = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                            new Card(CardSuit.DIAMOND, 'A'),
-                            new Card(CardSuit.CLUBS, '7'),
-                            new Card(CardSuit.HEART, '6'),
-                            new Card(CardSuit.CLUBS, '6'));
-        twoPairsABBCC = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                            new Card(CardSuit.DIAMOND, '7'),
-                            new Card(CardSuit.CLUBS, '7'),
-                            new Card(CardSuit.HEART, '6'),
-                            new Card(CardSuit.CLUBS, '6'));
-        setAAABC = new Hand(new Card(CardSuit.CLUBS, '7'),
-                            new Card(CardSuit.DIAMOND, '7'),
-                            new Card(CardSuit.SPADES, '7'),
-                            new Card(CardSuit.CLUBS, '5'),
-                            new Card(CardSuit.CLUBS, '2'));
-        setABBBC = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                            new Card(CardSuit.DIAMOND, 'J'),
-                            new Card(CardSuit.CLUBS, 'J'),
-                            new Card(CardSuit.SPADES, 'J'),
-                            new Card(CardSuit.CLUBS, '2'));
-        setABCCC = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                            new Card(CardSuit.DIAMOND, 'J'),
-                            new Card(CardSuit.DIAMOND, '2'),
-                            new Card(CardSuit.SPADES, '2'),
-                            new Card(CardSuit.CLUBS, '2'));
-        fullHouseAAABB = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                new Card(CardSuit.DIAMOND, 'A'),
-                                new Card(CardSuit.HEART, 'A'),
-                                new Card(CardSuit.SPADES, '2'),
-                                new Card(CardSuit.CLUBS, '2'));
-        fullHouseAABBB = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                new Card(CardSuit.DIAMOND, 'A'),
-                                new Card(CardSuit.SPADES, '2'),
-                                new Card(CardSuit.HEART, '2'),
-                                new Card(CardSuit.CLUBS, '2'));
-        careAAAAB = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                new Card(CardSuit.DIAMOND, 'A'),
-                                new Card(CardSuit.HEART, 'A'),
-                                new Card(CardSuit.SPADES, 'A'),
-                                new Card(CardSuit.CLUBS, '2'));
-        careABBBB = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                new Card(CardSuit.DIAMOND, '2'),
-                                new Card(CardSuit.HEART, '2'),
-                                new Card(CardSuit.SPADES, '2'),
-                                new Card(CardSuit.CLUBS, '2'));
-        straight = new Hand(new Card(CardSuit.CLUBS, 'K'),
-                            new Card(CardSuit.DIAMOND, 'Q'),
-                            new Card(CardSuit.HEART, 'J'),
-                            new Card(CardSuit.SPADES, 'T'),
-                            new Card(CardSuit.CLUBS, '9'));
-        straightWheel = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                new Card(CardSuit.DIAMOND, '5'),
-                                new Card(CardSuit.HEART, '4'),
-                                new Card(CardSuit.SPADES, '3'),
-                                new Card(CardSuit.CLUBS, '2'));
-        straightFlush = new Hand(new Card(CardSuit.CLUBS, 'K'),
-                                new Card(CardSuit.CLUBS, 'Q'),
-                                new Card(CardSuit.CLUBS, 'J'),
-                                new Card(CardSuit.CLUBS, 'T'),
-                                new Card(CardSuit.CLUBS, '9'));
-        straightFlushWheel = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                    new Card(CardSuit.CLUBS, '5'),
-                                    new Card(CardSuit.CLUBS, '4'),
-                                    new Card(CardSuit.CLUBS, '3'),
-                                    new Card(CardSuit.CLUBS, '2'));
-        royalFlushOne = new Hand(new Card(CardSuit.CLUBS, 'A'),
-                                new Card(CardSuit.CLUBS, 'K'),
-                                new Card(CardSuit.CLUBS, 'Q'),
-                                new Card(CardSuit.CLUBS, 'J'),
-                                new Card(CardSuit.CLUBS, 'T'));
-        royalFlushTwo = new Hand(new Card(CardSuit.DIAMOND, 'A'),
-                                new Card(CardSuit.DIAMOND, 'K'),
-                                new Card(CardSuit.DIAMOND, 'Q'),
-                                new Card(CardSuit.DIAMOND, 'J'),
-                                new Card(CardSuit.DIAMOND, 'T'));
-        flushHigher  = new Hand(new Card(CardSuit.SPADES, 'A'),
-                                new Card(CardSuit.SPADES, 'J'),
-                                new Card(CardSuit.SPADES, '6'),
-                                new Card(CardSuit.SPADES, '3'),
-                                new Card(CardSuit.SPADES, '2'));
-        flushLower  = new Hand(new Card(CardSuit.HEART, 'Q'),
-                                new Card(CardSuit.HEART, '9'),
-                                new Card(CardSuit.HEART, '6'),
-                                new Card(CardSuit.HEART, '5'),
-                                new Card(CardSuit.HEART, '2'));
-    }
-    
+   
     private Hand getCloneHand(List<Card> cards) {
         Hand result = new Hand();
         result.add(cards);
@@ -185,23 +26,23 @@ public class HandCombinationTest {
     
     @Test
     public void testIComboDoesntQualify() {
-        assertEquals(DoesntQualify.class, doesntQualifyOne.getHandICombination().getClass());
-        assertEquals(0, doesntQualifyOne.getHandICombination().getHighness());
-        assertEquals("Doesn't qualifier", doesntQualifyOne.getHandICombination().getName());
-        assertEquals(-1, doesntQualifyOne.compareTo(aceKingHigher));
-        assertEquals(-1, doesntQualifyOne.compareTo(pairAABCD));
-        assertEquals(-1, doesntQualifyOne.compareTo(twoPairsAABBC));
-        assertEquals(-1, doesntQualifyOne.compareTo(setAAABC));
-        assertEquals(-1, doesntQualifyOne.compareTo(straight));
-        assertEquals(-1, doesntQualifyOne.compareTo(flushHigher));
-        assertEquals(-1, doesntQualifyOne.compareTo(fullHouseAAABB));
-        assertEquals(-1, doesntQualifyOne.compareTo(careAAAAB));
-        assertEquals(-1, doesntQualifyOne.compareTo(straightFlush));
-        assertEquals(-1, doesntQualifyOne.compareTo(royalFlushTwo));
-        assertEquals(0, doesntQualifyOne.compareTo(doesntQualifyTwo));
-        assertEquals(true, doesntQualifyOne.equals(doesntQualifyTwo));
-        assertEquals(false, doesntQualifyOne.equals(royalFlushTwo));
-        assertEquals(false, doesntQualifyOne.equals(null));
+        assertEquals(DoesntQualify.class, getDoesntQualifyOne().getHandICombination().getClass());
+        assertEquals(0, getDoesntQualifyOne().getHandICombination().getHighness());
+        assertEquals("Doesn't qualifier", getDoesntQualifyOne().getHandICombination().getName());
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getAceKingHigher()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getPairAABCD()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getTwoPairsAABBC()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getSetAAABC()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getStraight()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getFlushHigher()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getCareAAAAB()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getStraightFlush()));
+        assertEquals(-1, getDoesntQualifyOne().compareTo(getRoyalFlushTwo()));
+        assertEquals(0, getDoesntQualifyOne().compareTo(getDoesntQualifyTwo()));
+        assertEquals(true, getDoesntQualifyOne().equals(getDoesntQualifyTwo()));
+        assertEquals(false, getDoesntQualifyOne().equals(getRoyalFlushTwo()));
+        assertEquals(false, getDoesntQualifyOne().equals(null));
         
     }
 
@@ -213,25 +54,25 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.CLUBS, '2'));
         Collections.sort(checkKickersList);
         Collections.reverse(checkKickersList);
-        assertEquals(AceKing.class, aceKingHigher.getHandICombination().getClass());
-        assertEquals(checkKickersList, aceKingHigher.getHandICombination().getKickersList());
-        assertEquals(1, aceKingHigher.getHandICombination().getHighness());
-        assertEquals("Ace & King", aceKingHigher.getHandICombination().getName());
-        assertEquals(1, aceKingHigher.compareTo(doesntQualifyOne));
-        assertEquals(1, aceKingHigher.compareTo(aceKingLower));
-        assertEquals(0, aceKingHigher.compareTo(getCloneHand(aceKingHigher.getCards()))); 
-        assertEquals(-1, aceKingHigher.compareTo(pairAABCD));
-        assertEquals(-1, aceKingHigher.compareTo(twoPairsAABBC));
-        assertEquals(-1, aceKingHigher.compareTo(setAAABC));
-        assertEquals(-1, aceKingHigher.compareTo(straight));
-        assertEquals(-1, aceKingHigher.compareTo(flushHigher));
-        assertEquals(-1, aceKingHigher.compareTo(fullHouseAAABB));
-        assertEquals(-1, aceKingHigher.compareTo(careAAAAB));
-        assertEquals(-1, aceKingHigher.compareTo(straightFlush));
-        assertEquals(-1, aceKingHigher.compareTo(royalFlushTwo));
-        assertEquals(true, aceKingHigher.equals(getCloneHand(aceKingHigher.getCards())));
-        assertEquals(false, aceKingHigher.equals(royalFlushTwo));
-        assertEquals(false, aceKingHigher.equals(null));
+        assertEquals(AceKing.class, getAceKingHigher().getHandICombination().getClass());
+        assertEquals(checkKickersList, getAceKingHigher().getHandICombination().getKickersList());
+        assertEquals(1, getAceKingHigher().getHandICombination().getHighness());
+        assertEquals("Ace & King", getAceKingHigher().getHandICombination().getName());
+        assertEquals(1, getAceKingHigher().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getAceKingHigher().compareTo(getAceKingLower()));
+        assertEquals(0, getAceKingHigher().compareTo(getCloneHand(getAceKingHigher().getCards()))); 
+        assertEquals(-1, getAceKingHigher().compareTo(getPairAABCD()));
+        assertEquals(-1, getAceKingHigher().compareTo(getTwoPairsAABBC()));
+        assertEquals(-1, getAceKingHigher().compareTo(getSetAAABC()));
+        assertEquals(-1, getAceKingHigher().compareTo(getStraight()));
+        assertEquals(-1, getAceKingHigher().compareTo(getFlushHigher()));
+        assertEquals(-1, getAceKingHigher().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getAceKingHigher().compareTo(getCareAAAAB()));
+        assertEquals(-1, getAceKingHigher().compareTo(getStraightFlush()));
+        assertEquals(-1, getAceKingHigher().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getAceKingHigher().equals(getCloneHand(getAceKingHigher().getCards())));
+        assertEquals(false, getAceKingHigher().equals(getRoyalFlushTwo()));
+        assertEquals(false, getAceKingHigher().equals(null));
     }
     
     @Test
@@ -243,25 +84,25 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.CLUBS, '5'));
         Collections.sort(checkKickersList);
         Collections.reverse(checkKickersList);
-        assertEquals(Pair.class, pairAABCD.getHandICombination().getClass());
-        assertEquals(checkKickersList, pairAABCD.getHandICombination().getKickersList());
-        assertEquals(2, pairAABCD.getHandICombination().getHighness());
-        assertEquals("Pair", pairAABCD.getHandICombination().getName());
-        assertEquals(1, pairAABCD.compareTo(doesntQualifyOne));
-        assertEquals(1, pairAABCD.compareTo(aceKingLower));
-        assertEquals(1, pairAABCD.compareTo(pairABBCD));
-        assertEquals(0, pairAABCD.compareTo(getCloneHand(pairAABCD.getCards()))); 
-        assertEquals(-1, pairAABCD.compareTo(twoPairsAABBC));
-        assertEquals(-1, pairAABCD.compareTo(setAAABC));
-        assertEquals(-1, pairAABCD.compareTo(straight));
-        assertEquals(-1, pairAABCD.compareTo(flushHigher));
-        assertEquals(-1, pairAABCD.compareTo(fullHouseAAABB));
-        assertEquals(-1, pairAABCD.compareTo(careAAAAB));
-        assertEquals(-1, pairAABCD.compareTo(straightFlush));
-        assertEquals(-1, pairAABCD.compareTo(royalFlushTwo));
-        assertEquals(true, pairAABCD.equals(getCloneHand(pairAABCD.getCards())));
-        assertEquals(false, pairAABCD.equals(royalFlushTwo));
-        assertEquals(false, pairAABCD.equals(null));
+        assertEquals(Pair.class, getPairAABCD().getHandICombination().getClass());
+        assertEquals(checkKickersList, getPairAABCD().getHandICombination().getKickersList());
+        assertEquals(2, getPairAABCD().getHandICombination().getHighness());
+        assertEquals("Pair", getPairAABCD().getHandICombination().getName());
+        assertEquals(1, getPairAABCD().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getPairAABCD().compareTo(getAceKingLower()));
+        assertEquals(1, getPairAABCD().compareTo(getPairABBCD()));
+        assertEquals(0, getPairAABCD().compareTo(getCloneHand(getPairAABCD().getCards()))); 
+        assertEquals(-1, getPairAABCD().compareTo(getTwoPairsAABBC()));
+        assertEquals(-1, getPairAABCD().compareTo(getSetAAABC()));
+        assertEquals(-1, getPairAABCD().compareTo(getStraight()));
+        assertEquals(-1, getPairAABCD().compareTo(getFlushHigher()));
+        assertEquals(-1, getPairAABCD().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getPairAABCD().compareTo(getCareAAAAB()));
+        assertEquals(-1, getPairAABCD().compareTo(getStraightFlush()));
+        assertEquals(-1, getPairAABCD().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getPairAABCD().equals(getCloneHand(getPairAABCD().getCards())));
+        assertEquals(false, getPairAABCD().equals(getRoyalFlushTwo()));
+        assertEquals(false, getPairAABCD().equals(null));
         
     }
     
@@ -272,26 +113,26 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '3'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '2'));
-        assertEquals(Pair.class, pairABBCD.getHandICombination().getClass());
-        assertEquals(checkKickersList, pairABBCD.getHandICombination().getKickersList());
-        assertEquals(2, pairABBCD.getHandICombination().getHighness());
-        assertEquals("Pair", pairABBCD.getHandICombination().getName());
-        assertEquals(1, pairABBCD.compareTo(doesntQualifyOne));
-        assertEquals(1, pairABBCD.compareTo(aceKingLower));
-        assertEquals(1, pairABBCD.compareTo(pairABCDD));
-        assertEquals(0, pairABBCD.compareTo(getCloneHand(pairABBCD.getCards())));
-        assertEquals(-1, pairABBCD.compareTo(pairAABCD));
-        assertEquals(-1, pairABBCD.compareTo(twoPairsAABBC));
-        assertEquals(-1, pairABBCD.compareTo(setAAABC));
-        assertEquals(-1, pairABBCD.compareTo(straight));
-        assertEquals(-1, pairABBCD.compareTo(flushHigher));
-        assertEquals(-1, pairABBCD.compareTo(fullHouseAAABB));
-        assertEquals(-1, pairABBCD.compareTo(careAAAAB));
-        assertEquals(-1, pairABBCD.compareTo(straightFlush));
-        assertEquals(-1, pairABBCD.compareTo(royalFlushTwo));
-        assertEquals(true, pairABBCD.equals(getCloneHand(pairABBCD.getCards())));
-        assertEquals(false, pairABBCD.equals(pairAABCD));
-        assertEquals(false, pairABBCD.equals(null));
+        assertEquals(Pair.class, getPairABBCD().getHandICombination().getClass());
+        assertEquals(checkKickersList, getPairABBCD().getHandICombination().getKickersList());
+        assertEquals(2, getPairABBCD().getHandICombination().getHighness());
+        assertEquals("Pair", getPairABBCD().getHandICombination().getName());
+        assertEquals(1, getPairABBCD().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getPairABBCD().compareTo(getAceKingLower()));
+        assertEquals(1, getPairABBCD().compareTo(getPairABCDD()));
+        assertEquals(0, getPairABBCD().compareTo(getCloneHand(getPairABBCD().getCards())));
+        assertEquals(-1, getPairABBCD().compareTo(getPairAABCD()));
+        assertEquals(-1, getPairABBCD().compareTo(getTwoPairsAABBC()));
+        assertEquals(-1, getPairABBCD().compareTo(getSetAAABC()));
+        assertEquals(-1, getPairABBCD().compareTo(getStraight()));
+        assertEquals(-1, getPairABBCD().compareTo(getFlushHigher()));
+        assertEquals(-1, getPairABBCD().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getPairABBCD().compareTo(getCareAAAAB()));
+        assertEquals(-1, getPairABBCD().compareTo(getStraightFlush()));
+        assertEquals(-1, getPairABBCD().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getPairABBCD().equals(getCloneHand(getPairABBCD().getCards())));
+        assertEquals(false, getPairABBCD().equals(getPairAABCD()));
+        assertEquals(false, getPairABBCD().equals(null));
     }
     
     @Test
@@ -301,161 +142,161 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
         checkKickersList.add(new Card(CardSuit.CLUBS, 'J'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '2'));
-        assertEquals(Pair.class, pairABCCD.getHandICombination().getClass());
-        assertEquals(checkKickersList, pairABCCD.getHandICombination().getKickersList());
-        assertEquals(2, pairABCCD.getHandICombination().getHighness());
-        assertEquals("Pair", pairABCCD.getHandICombination().getName());
-        assertEquals(1, pairABCCD.compareTo(doesntQualifyOne));
-        assertEquals(1, pairABCCD.compareTo(aceKingLower));
-        assertEquals(1, pairABCCD.compareTo(pairABCDD));
-        assertEquals(0, pairABCCD.compareTo(getCloneHand(pairABCCD.getCards())));
-        assertEquals(-1, pairABCCD.compareTo(pairAABCD));
-        assertEquals(-1, pairABCCD.compareTo(twoPairsAABBC));
-        assertEquals(-1, pairABCCD.compareTo(setAAABC));
-        assertEquals(-1, pairABCCD.compareTo(straight));
-        assertEquals(-1, pairABCCD.compareTo(flushHigher));
-        assertEquals(-1, pairABCCD.compareTo(fullHouseAAABB));
-        assertEquals(-1, pairABCCD.compareTo(careAAAAB));
-        assertEquals(-1, pairABCCD.compareTo(straightFlush));
-        assertEquals(-1, pairABCCD.compareTo(royalFlushTwo));
-        assertEquals(true, pairABCCD.equals(getCloneHand(pairABCCD.getCards())));
-        assertEquals(false, pairABCCD.equals(pairAABCD));
-        assertEquals(false, pairABCCD.equals(null));
+        assertEquals(Pair.class, getPairABCCD().getHandICombination().getClass());
+        assertEquals(checkKickersList, getPairABCCD().getHandICombination().getKickersList());
+        assertEquals(2, getPairABCCD().getHandICombination().getHighness());
+        assertEquals("Pair", getPairABCCD().getHandICombination().getName());
+        assertEquals(1, getPairABCCD().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getPairABCCD().compareTo(getAceKingLower()));
+        assertEquals(1, getPairABCCD().compareTo(getPairABCDD()));
+        assertEquals(0, getPairABCCD().compareTo(getCloneHand(getPairABCCD().getCards())));
+        assertEquals(-1, getPairABCCD().compareTo(getPairAABCD()));
+        assertEquals(-1, getPairABCCD().compareTo(getTwoPairsAABBC()));
+        assertEquals(-1, getPairABCCD().compareTo(getSetAAABC()));
+        assertEquals(-1, getPairABCCD().compareTo(getStraight()));
+        assertEquals(-1, getPairABCCD().compareTo(getFlushHigher()));
+        assertEquals(-1, getPairABCCD().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getPairABCCD().compareTo(getCareAAAAB()));
+        assertEquals(-1, getPairABCCD().compareTo(getStraightFlush()));
+        assertEquals(-1, getPairABCCD().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getPairABCCD().equals(getCloneHand(getPairABCCD().getCards())));
+        assertEquals(false, getPairABCCD().equals(getPairAABCD()));
+        assertEquals(false, getPairABCCD().equals(null));
     }
     
     @Test
-    public void testIComboPairABCDD() {
+    public void testICombogetPairABCDD() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, '2'));
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
         checkKickersList.add(new Card(CardSuit.CLUBS, 'J'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '6'));
-        assertEquals(Pair.class, pairABCDD.getHandICombination().getClass());
-        assertEquals(checkKickersList, pairABCDD.getHandICombination().getKickersList());
-        assertEquals(2, pairABCDD.getHandICombination().getHighness());
-        assertEquals("Pair", pairABCDD.getHandICombination().getName());
-        assertEquals(1, pairABCDD.compareTo(doesntQualifyOne));
-        assertEquals(1, pairABCDD.compareTo(aceKingLower));
-        assertEquals(0, pairABCDD.compareTo(getCloneHand(pairABCDD.getCards())));
-        assertEquals(-1, pairABCDD.compareTo(pairAABCD));
-        assertEquals(-1, pairABCDD.compareTo(twoPairsAABBC));
-        assertEquals(-1, pairABCDD.compareTo(setAAABC));
-        assertEquals(-1, pairABCDD.compareTo(straight));
-        assertEquals(-1, pairABCDD.compareTo(flushHigher));
-        assertEquals(-1, pairABCDD.compareTo(fullHouseAAABB));
-        assertEquals(-1, pairABCDD.compareTo(careAAAAB));
-        assertEquals(-1, pairABCDD.compareTo(straightFlush));
-        assertEquals(-1, pairABCDD.compareTo(royalFlushTwo));
-        assertEquals(true, pairABCDD.equals(getCloneHand(pairABCDD.getCards())));
-        assertEquals(false, pairABCDD.equals(straightFlush));
-        assertEquals(false, pairABCDD.equals(null));
+        assertEquals(Pair.class, getPairABCDD().getHandICombination().getClass());
+        assertEquals(checkKickersList, getPairABCDD().getHandICombination().getKickersList());
+        assertEquals(2, getPairABCDD().getHandICombination().getHighness());
+        assertEquals("Pair", getPairABCDD().getHandICombination().getName());
+        assertEquals(1, getPairABCDD().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getPairABCDD().compareTo(getAceKingLower()));
+        assertEquals(0, getPairABCDD().compareTo(getCloneHand(getPairABCDD().getCards())));
+        assertEquals(-1, getPairABCDD().compareTo(getPairAABCD()));
+        assertEquals(-1, getPairABCDD().compareTo(getTwoPairsAABBC()));
+        assertEquals(-1, getPairABCDD().compareTo(getSetAAABC()));
+        assertEquals(-1, getPairABCDD().compareTo(getStraight()));
+        assertEquals(-1, getPairABCDD().compareTo(getFlushHigher()));
+        assertEquals(-1, getPairABCDD().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getPairABCDD().compareTo(getCareAAAAB()));
+        assertEquals(-1, getPairABCDD().compareTo(getStraightFlush()));
+        assertEquals(-1, getPairABCDD().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getPairABCDD().equals(getCloneHand(getPairABCDD().getCards())));
+        assertEquals(false, getPairABCDD().equals(getStraightFlush()));
+        assertEquals(false, getPairABCDD().equals(null));
     }
     
     @Test
-    public void testIComboTwoPairsAABBC() {
+    public void testICombogetTwoPairsAABBC() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, 'A'));
         checkKickersList.add(new Card(CardSuit.SPADES, '6'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '2'));
-        assertEquals(TwoPairs.class, twoPairsAABBC.getHandICombination().getClass());
-        assertEquals(checkKickersList, twoPairsAABBC.getHandICombination().getKickersList());
-        assertEquals(3, twoPairsAABBC.getHandICombination().getHighness());
-        assertEquals("Two Pairs", twoPairsAABBC.getHandICombination().getName());
-        assertEquals(1, twoPairsAABBC.compareTo(doesntQualifyOne));
-        assertEquals(1, twoPairsAABBC.compareTo(aceKingLower));
-        assertEquals(1, twoPairsAABBC.compareTo(pairABCDD));
-        assertEquals(1, twoPairsAABBC.compareTo(twoPairsABBCC));
-        assertEquals(0, twoPairsAABBC.compareTo(getCloneHand(twoPairsAABBC.getCards())));
-        assertEquals(-1, twoPairsAABBC.compareTo(setAAABC));
-        assertEquals(-1, twoPairsAABBC.compareTo(straight));
-        assertEquals(-1, twoPairsAABBC.compareTo(flushHigher));
-        assertEquals(-1, twoPairsAABBC.compareTo(fullHouseAAABB));
-        assertEquals(-1, twoPairsAABBC.compareTo(careAAAAB));
-        assertEquals(-1, twoPairsAABBC.compareTo(straightFlush));
-        assertEquals(-1, twoPairsAABBC.compareTo(royalFlushTwo));
-        assertEquals(true, twoPairsAABBC.equals(getCloneHand(twoPairsAABBC.getCards())));
-        assertEquals(false, twoPairsAABBC.equals(pairABCDD));
-        assertEquals(false, twoPairsAABBC.equals(null));
+        assertEquals(TwoPairs.class, getTwoPairsAABBC().getHandICombination().getClass());
+        assertEquals(checkKickersList, getTwoPairsAABBC().getHandICombination().getKickersList());
+        assertEquals(3, getTwoPairsAABBC().getHandICombination().getHighness());
+        assertEquals("Two Pairs", getTwoPairsAABBC().getHandICombination().getName());
+        assertEquals(1, getTwoPairsAABBC().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getTwoPairsAABBC().compareTo(getAceKingLower()));
+        assertEquals(1, getTwoPairsAABBC().compareTo(getPairABCDD()));
+        assertEquals(1, getTwoPairsAABBC().compareTo(getTwoPairsABBCC()));
+        assertEquals(0, getTwoPairsAABBC().compareTo(getCloneHand(getTwoPairsAABBC().getCards())));
+        assertEquals(-1, getTwoPairsAABBC().compareTo(getSetAAABC()));
+        assertEquals(-1, getTwoPairsAABBC().compareTo(getStraight()));
+        assertEquals(-1, getTwoPairsAABBC().compareTo(getFlushHigher()));
+        assertEquals(-1, getTwoPairsAABBC().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getTwoPairsAABBC().compareTo(getCareAAAAB()));
+        assertEquals(-1, getTwoPairsAABBC().compareTo(getStraightFlush()));
+        assertEquals(-1, getTwoPairsAABBC().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getTwoPairsAABBC().equals(getCloneHand(getTwoPairsAABBC().getCards())));
+        assertEquals(false, getTwoPairsAABBC().equals(getPairABCDD()));
+        assertEquals(false, getTwoPairsAABBC().equals(null));
     }
     
     @Test
-    public void testIComboTwoPairsAABCC() {
+    public void testICombogetTwoPairsAABCC() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, 'A'));
         checkKickersList.add(new Card(CardSuit.SPADES, '6'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '7'));
-        assertEquals(TwoPairs.class, twoPairsAABCC.getHandICombination().getClass());
-        assertEquals(checkKickersList, twoPairsAABCC.getHandICombination().getKickersList());
-        assertEquals(3, twoPairsAABCC.getHandICombination().getHighness());
-        assertEquals("Two Pairs", twoPairsAABCC.getHandICombination().getName());
-        assertEquals(1, twoPairsAABCC.compareTo(doesntQualifyOne));
-        assertEquals(1, twoPairsAABCC.compareTo(aceKingLower));
-        assertEquals(1, twoPairsAABCC.compareTo(pairABCDD));
-        assertEquals(1, twoPairsAABCC.compareTo(twoPairsABBCC));
-        assertEquals(0, twoPairsAABCC.compareTo(getCloneHand(twoPairsAABCC.getCards())));
-        assertEquals(-1, twoPairsAABCC.compareTo(setAAABC));
-        assertEquals(-1, twoPairsAABCC.compareTo(straight));
-        assertEquals(-1, twoPairsAABCC.compareTo(flushHigher));
-        assertEquals(-1, twoPairsAABCC.compareTo(fullHouseAAABB));
-        assertEquals(-1, twoPairsAABCC.compareTo(careAAAAB));
-        assertEquals(-1, twoPairsAABCC.compareTo(straightFlush));
-        assertEquals(-1, twoPairsAABCC.compareTo(royalFlushTwo));
-        assertEquals(true, twoPairsAABCC.equals(getCloneHand(twoPairsAABCC.getCards())));
-        assertEquals(false, twoPairsAABCC.equals(pairABCDD));
-        assertEquals(false, twoPairsAABCC.equals(null));
+        assertEquals(TwoPairs.class, getTwoPairsAABCC().getHandICombination().getClass());
+        assertEquals(checkKickersList, getTwoPairsAABCC().getHandICombination().getKickersList());
+        assertEquals(3, getTwoPairsAABCC().getHandICombination().getHighness());
+        assertEquals("Two Pairs", getTwoPairsAABCC().getHandICombination().getName());
+        assertEquals(1, getTwoPairsAABCC().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getTwoPairsAABCC().compareTo(getAceKingLower()));
+        assertEquals(1, getTwoPairsAABCC().compareTo(getPairABCDD()));
+        assertEquals(1, getTwoPairsAABCC().compareTo(getTwoPairsABBCC()));
+        assertEquals(0, getTwoPairsAABCC().compareTo(getCloneHand(getTwoPairsAABCC().getCards())));
+        assertEquals(-1, getTwoPairsAABCC().compareTo(getSetAAABC()));
+        assertEquals(-1, getTwoPairsAABCC().compareTo(getStraight()));
+        assertEquals(-1, getTwoPairsAABCC().compareTo(getFlushHigher()));
+        assertEquals(-1, getTwoPairsAABCC().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getTwoPairsAABCC().compareTo(getCareAAAAB()));
+        assertEquals(-1, getTwoPairsAABCC().compareTo(getStraightFlush()));
+        assertEquals(-1, getTwoPairsAABCC().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getTwoPairsAABCC().equals(getCloneHand(getTwoPairsAABCC().getCards())));
+        assertEquals(false, getTwoPairsAABCC().equals(getPairABCDD()));
+        assertEquals(false, getTwoPairsAABCC().equals(null));
     }
     
     @Test
-    public void testIComboTwoPairsABBCC() {
+    public void testICombogetTwoPairsABBCC() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, '7'));
         checkKickersList.add(new Card(CardSuit.SPADES, '6'));
         checkKickersList.add(new Card(CardSuit.CLUBS, 'A'));
-        assertEquals(TwoPairs.class, twoPairsABBCC.getHandICombination().getClass());
-        assertEquals(checkKickersList, twoPairsABBCC.getHandICombination().getKickersList());
-        assertEquals(3, twoPairsABBCC.getHandICombination().getHighness());
-        assertEquals("Two Pairs", twoPairsABBCC.getHandICombination().getName());
-        assertEquals(1, twoPairsABBCC.compareTo(doesntQualifyOne));
-        assertEquals(1, twoPairsABBCC.compareTo(aceKingLower));
-        assertEquals(1, twoPairsABBCC.compareTo(pairABCDD));
-        assertEquals(0, twoPairsABBCC.compareTo(getCloneHand(twoPairsABBCC.getCards())));
-        assertEquals(-1, twoPairsABBCC.compareTo(setAAABC));
-        assertEquals(-1, twoPairsABBCC.compareTo(straight));
-        assertEquals(-1, twoPairsABBCC.compareTo(flushHigher));
-        assertEquals(-1, twoPairsABBCC.compareTo(fullHouseAAABB));
-        assertEquals(-1, twoPairsABBCC.compareTo(careAAAAB));
-        assertEquals(-1, twoPairsABBCC.compareTo(straightFlush));
-        assertEquals(-1, twoPairsABBCC.compareTo(royalFlushTwo));
-        assertEquals(true, twoPairsABBCC.equals(getCloneHand(twoPairsABBCC.getCards())));
-        assertEquals(false, twoPairsABBCC.equals(pairABCDD));
-        assertEquals(false, twoPairsABBCC.equals(null));
+        assertEquals(TwoPairs.class, getTwoPairsABBCC().getHandICombination().getClass());
+        assertEquals(checkKickersList, getTwoPairsABBCC().getHandICombination().getKickersList());
+        assertEquals(3, getTwoPairsABBCC().getHandICombination().getHighness());
+        assertEquals("Two Pairs", getTwoPairsABBCC().getHandICombination().getName());
+        assertEquals(1, getTwoPairsABBCC().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getTwoPairsABBCC().compareTo(getAceKingLower()));
+        assertEquals(1, getTwoPairsABBCC().compareTo(getPairABCDD()));
+        assertEquals(0, getTwoPairsABBCC().compareTo(getCloneHand(getTwoPairsABBCC().getCards())));
+        assertEquals(-1, getTwoPairsABBCC().compareTo(getSetAAABC()));
+        assertEquals(-1, getTwoPairsABBCC().compareTo(getStraight()));
+        assertEquals(-1, getTwoPairsABBCC().compareTo(getFlushHigher()));
+        assertEquals(-1, getTwoPairsABBCC().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getTwoPairsABBCC().compareTo(getCareAAAAB()));
+        assertEquals(-1, getTwoPairsABBCC().compareTo(getStraightFlush()));
+        assertEquals(-1, getTwoPairsABBCC().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getTwoPairsABBCC().equals(getCloneHand(getTwoPairsABBCC().getCards())));
+        assertEquals(false, getTwoPairsABBCC().equals(getPairABCDD()));
+        assertEquals(false, getTwoPairsABBCC().equals(null));
     }
     
     @Test
-    public void testCombinationSetAAABC() {
+    public void testCombinationgetSetAAABC() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, '7'));
         checkKickersList.add(new Card(CardSuit.SPADES, '5'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '2'));
-        assertEquals(TreeOfKind.class, setAAABC.getHandICombination().getClass());
-        assertEquals(checkKickersList, setAAABC.getHandICombination().getKickersList());
-        assertEquals(4, setAAABC.getHandICombination().getHighness());
-        assertEquals("Tree of a Kind", setAAABC.getHandICombination().getName());
-        assertEquals(1, setAAABC.compareTo(doesntQualifyOne));
-        assertEquals(1, setAAABC.compareTo(aceKingLower));
-        assertEquals(1, setAAABC.compareTo(pairABCDD));
-        assertEquals(1, setAAABC.compareTo(twoPairsABBCC));
-        assertEquals(0, setAAABC.compareTo(getCloneHand(setAAABC.getCards())));
-        assertEquals(-1, setAAABC.compareTo(setABBBC));
-        assertEquals(-1, setAAABC.compareTo(straight));
-        assertEquals(-1, setAAABC.compareTo(flushHigher));
-        assertEquals(-1, setAAABC.compareTo(fullHouseAAABB));
-        assertEquals(-1, setAAABC.compareTo(careAAAAB));
-        assertEquals(-1, setAAABC.compareTo(straightFlush));
-        assertEquals(-1, setAAABC.compareTo(royalFlushTwo));
-        assertEquals(true, setAAABC.equals(getCloneHand(setAAABC.getCards())));
-        assertEquals(false, setAAABC.equals(pairABCDD));
-        assertEquals(false, setAAABC.equals(null));
+        assertEquals(TreeOfKind.class, getSetAAABC().getHandICombination().getClass());
+        assertEquals(checkKickersList, getSetAAABC().getHandICombination().getKickersList());
+        assertEquals(4, getSetAAABC().getHandICombination().getHighness());
+        assertEquals("Tree of a Kind", getSetAAABC().getHandICombination().getName());
+        assertEquals(1, getSetAAABC().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getSetAAABC().compareTo(getAceKingLower()));
+        assertEquals(1, getSetAAABC().compareTo(getPairABCDD()));
+        assertEquals(1, getSetAAABC().compareTo(getTwoPairsABBCC()));
+        assertEquals(0, getSetAAABC().compareTo(getCloneHand(getSetAAABC().getCards())));
+        assertEquals(-1, getSetAAABC().compareTo(getSetABBBC()));
+        assertEquals(-1, getSetAAABC().compareTo(getStraight()));
+        assertEquals(-1, getSetAAABC().compareTo(getFlushHigher()));
+        assertEquals(-1, getSetAAABC().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getSetAAABC().compareTo(getCareAAAAB()));
+        assertEquals(-1, getSetAAABC().compareTo(getStraightFlush()));
+        assertEquals(-1, getSetAAABC().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getSetAAABC().equals(getCloneHand(getSetAAABC().getCards())));
+        assertEquals(false, getSetAAABC().equals(getPairABCDD()));
+        assertEquals(false, getSetAAABC().equals(null));
     }
     
     @Test
@@ -464,25 +305,25 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.DIAMOND, 'J'));
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '2'));
-        assertEquals(TreeOfKind.class, setABBBC.getHandICombination().getClass());
-        assertEquals(checkKickersList, setABBBC.getHandICombination().getKickersList());
-        assertEquals(4, setABBBC.getHandICombination().getHighness());
-        assertEquals("Tree of a Kind", setABBBC.getHandICombination().getName());
-        assertEquals(1, setABBBC.compareTo(doesntQualifyOne));
-        assertEquals(1, setABBBC.compareTo(aceKingLower));
-        assertEquals(1, setABBBC.compareTo(pairABCDD));
-        assertEquals(1, setABBBC.compareTo(twoPairsABBCC));
-        assertEquals(1, setABBBC.compareTo(setABCCC));
-        assertEquals(0, setABBBC.compareTo(getCloneHand(setABBBC.getCards())));
-        assertEquals(-1, setABBBC.compareTo(straight));
-        assertEquals(-1, setABBBC.compareTo(flushHigher));
-        assertEquals(-1, setABBBC.compareTo(fullHouseAAABB));
-        assertEquals(-1, setABBBC.compareTo(careAAAAB));
-        assertEquals(-1, setABBBC.compareTo(straightFlush));
-        assertEquals(-1, setABBBC.compareTo(royalFlushTwo));
-        assertEquals(true, setABBBC.equals(getCloneHand(setABBBC.getCards())));
-        assertEquals(false, setABBBC.equals(pairABCDD));
-        assertEquals(false, setABBBC.equals(null));
+        assertEquals(TreeOfKind.class, getSetABBBC().getHandICombination().getClass());
+        assertEquals(checkKickersList, getSetABBBC().getHandICombination().getKickersList());
+        assertEquals(4, getSetABBBC().getHandICombination().getHighness());
+        assertEquals("Tree of a Kind", getSetABBBC().getHandICombination().getName());
+        assertEquals(1, getSetABBBC().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getSetABBBC().compareTo(getAceKingLower()));
+        assertEquals(1, getSetABBBC().compareTo(getPairABCDD()));
+        assertEquals(1, getSetABBBC().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getSetABBBC().compareTo(getSetABCCC()));
+        assertEquals(0, getSetABBBC().compareTo(getCloneHand(getSetABBBC().getCards())));
+        assertEquals(-1, getSetABBBC().compareTo(getStraight()));
+        assertEquals(-1, getSetABBBC().compareTo(getFlushHigher()));
+        assertEquals(-1, getSetABBBC().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getSetABBBC().compareTo(getCareAAAAB()));
+        assertEquals(-1, getSetABBBC().compareTo(getStraightFlush()));
+        assertEquals(-1, getSetABBBC().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getSetABBBC().equals(getCloneHand(getSetABBBC().getCards())));
+        assertEquals(false, getSetABBBC().equals(getPairABCDD()));
+        assertEquals(false, getSetABBBC().equals(null));
     }
         
     @Test
@@ -491,76 +332,76 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.DIAMOND, '2'));
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
         checkKickersList.add(new Card(CardSuit.CLUBS, 'J'));
-        assertEquals(TreeOfKind.class, setABCCC.getHandICombination().getClass());
-        assertEquals(checkKickersList, setABCCC.getHandICombination().getKickersList());
-        assertEquals(4, setABCCC.getHandICombination().getHighness());
-        assertEquals("Tree of a Kind", setABCCC.getHandICombination().getName());
-        assertEquals(1, setABCCC.compareTo(doesntQualifyOne));
-        assertEquals(1, setABCCC.compareTo(aceKingLower));
-        assertEquals(1, setABCCC.compareTo(pairABCDD));
-        assertEquals(1, setABCCC.compareTo(twoPairsABBCC));
-        assertEquals(0, setABCCC.compareTo(getCloneHand(setABCCC.getCards())));
-        assertEquals(-1, setABCCC.compareTo(setAAABC));
-        assertEquals(-1, setABCCC.compareTo(straight));
-        assertEquals(-1, setABCCC.compareTo(flushHigher));
-        assertEquals(-1, setABCCC.compareTo(fullHouseAAABB));
-        assertEquals(-1, setABCCC.compareTo(careAAAAB));
-        assertEquals(-1, setABCCC.compareTo(straightFlush));
-        assertEquals(-1, setABCCC.compareTo(royalFlushTwo));
-        assertEquals(true, setABCCC.equals(getCloneHand(setABCCC.getCards())));
-        assertEquals(false, setABCCC.equals(pairABCDD));
-        assertEquals(false, setABCCC.equals(null));
+        assertEquals(TreeOfKind.class, getSetABCCC().getHandICombination().getClass());
+        assertEquals(checkKickersList, getSetABCCC().getHandICombination().getKickersList());
+        assertEquals(4, getSetABCCC().getHandICombination().getHighness());
+        assertEquals("Tree of a Kind", getSetABCCC().getHandICombination().getName());
+        assertEquals(1, getSetABCCC().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getSetABCCC().compareTo(getAceKingLower()));
+        assertEquals(1, getSetABCCC().compareTo(getPairABCDD()));
+        assertEquals(1, getSetABCCC().compareTo(getTwoPairsABBCC()));
+        assertEquals(0, getSetABCCC().compareTo(getCloneHand(getSetABCCC().getCards())));
+        assertEquals(-1, getSetABCCC().compareTo(getSetAAABC()));
+        assertEquals(-1, getSetABCCC().compareTo(getStraight()));
+        assertEquals(-1, getSetABCCC().compareTo(getFlushHigher()));
+        assertEquals(-1, getSetABCCC().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getSetABCCC().compareTo(getCareAAAAB()));
+        assertEquals(-1, getSetABCCC().compareTo(getStraightFlush()));
+        assertEquals(-1, getSetABCCC().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getSetABCCC().equals(getCloneHand(getSetABCCC().getCards())));
+        assertEquals(false, getSetABCCC().equals(getPairABCDD()));
+        assertEquals(false, getSetABCCC().equals(null));
     }
     
     @Test
-    public void testIComboStraight() {
+    public void testICombogetStraight() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, 'K'));
-        assertEquals(Straight.class, straight.getHandICombination().getClass());
-        assertEquals(checkKickersList, straight.getHandICombination().getKickersList());
-        assertEquals(5, straight.getHandICombination().getHighness());
-        assertEquals("Straight", straight.getHandICombination().getName());
-        assertEquals(1, straight.compareTo(doesntQualifyOne));
-        assertEquals(1, straight.compareTo(aceKingLower));
-        assertEquals(1, straight.compareTo(pairABCDD));
-        assertEquals(1, straight.compareTo(twoPairsABBCC));
-        assertEquals(1, straight.compareTo(setAAABC));
-        assertEquals(1, straight.compareTo(straightWheel));
-        assertEquals(0, straight.compareTo(getCloneHand(straight.getCards())));
-        assertEquals(-1, straight.compareTo(flushHigher));
-        assertEquals(-1, straight.compareTo(fullHouseAAABB));
-        assertEquals(-1, straight.compareTo(careAAAAB));
-        assertEquals(-1, straight.compareTo(straightFlush));
-        assertEquals(-1, straight.compareTo(royalFlushTwo));
-        assertEquals(true, straight.equals(getCloneHand(straight.getCards())));
-        assertEquals(false, straight.equals(pairABCDD));
-        assertEquals(false, straight.equals(null));
+        assertEquals(Straight.class, getStraight().getHandICombination().getClass());
+        assertEquals(checkKickersList, getStraight().getHandICombination().getKickersList());
+        assertEquals(5, getStraight().getHandICombination().getHighness());
+        assertEquals("getStraight()", getStraight().getHandICombination().getName());
+        assertEquals(1, getStraight().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getStraight().compareTo(getAceKingLower()));
+        assertEquals(1, getStraight().compareTo(getPairABCDD()));
+        assertEquals(1, getStraight().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getStraight().compareTo(getSetAAABC()));
+        assertEquals(1, getStraight().compareTo(getStraightWheel()));
+        assertEquals(0, getStraight().compareTo(getCloneHand(getStraight().getCards())));
+        assertEquals(-1, getStraight().compareTo(getFlushHigher()));
+        assertEquals(-1, getStraight().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getStraight().compareTo(getCareAAAAB()));
+        assertEquals(-1, getStraight().compareTo(getStraightFlush()));
+        assertEquals(-1, getStraight().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getStraight().equals(getCloneHand(getStraight().getCards())));
+        assertEquals(false, getStraight().equals(getPairABCDD()));
+        assertEquals(false, getStraight().equals(null));
 
     }
     
     @Test
-    public void testIComboWheelStraight() {
+    public void testIComboWheelgetStraight() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, '5'));
-        assertEquals(Straight.class, straightWheel.getHandICombination().getClass());
-        assertEquals(checkKickersList, straightWheel.getHandICombination().getKickersList());
-        assertEquals(5, straightWheel.getHandICombination().getHighness());
-        assertEquals("Straight", straightWheel.getHandICombination().getName());
-        assertEquals(1, straightWheel.compareTo(doesntQualifyOne));
-        assertEquals(1, straightWheel.compareTo(aceKingLower));
-        assertEquals(1, straightWheel.compareTo(pairABCDD));
-        assertEquals(1, straightWheel.compareTo(twoPairsABBCC));
-        assertEquals(1, straightWheel.compareTo(setAAABC));
-        assertEquals(0, straightWheel.compareTo(getCloneHand(straightWheel.getCards())));
-        assertEquals(-1, straightWheel.compareTo(straight));
-        assertEquals(-1, straightWheel.compareTo(flushHigher));
-        assertEquals(-1, straightWheel.compareTo(fullHouseAAABB));
-        assertEquals(-1, straightWheel.compareTo(careAAAAB));
-        assertEquals(-1, straightWheel.compareTo(straightFlush));
-        assertEquals(-1, straightWheel.compareTo(royalFlushTwo));
-        assertEquals(true, straightWheel.equals(getCloneHand(straightWheel.getCards())));
-        assertEquals(false, straightWheel.equals(pairABCDD));
-        assertEquals(false, straightWheel.equals(null));
+        assertEquals(Straight.class, getStraightWheel().getHandICombination().getClass());
+        assertEquals(checkKickersList, getStraightWheel().getHandICombination().getKickersList());
+        assertEquals(5, getStraightWheel().getHandICombination().getHighness());
+        assertEquals("getStraight()", getStraightWheel().getHandICombination().getName());
+        assertEquals(1, getStraightWheel().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getStraightWheel().compareTo(getAceKingLower()));
+        assertEquals(1, getStraightWheel().compareTo(getPairABCDD()));
+        assertEquals(1, getStraightWheel().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getStraightWheel().compareTo(getSetAAABC()));
+        assertEquals(0, getStraightWheel().compareTo(getCloneHand(getStraightWheel().getCards())));
+        assertEquals(-1, getStraightWheel().compareTo(getStraight()));
+        assertEquals(-1, getStraightWheel().compareTo(getFlushHigher()));
+        assertEquals(-1, getStraightWheel().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getStraightWheel().compareTo(getCareAAAAB()));
+        assertEquals(-1, getStraightWheel().compareTo(getStraightFlush()));
+        assertEquals(-1, getStraightWheel().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getStraightWheel().equals(getCloneHand(getStraightWheel().getCards())));
+        assertEquals(false, getStraightWheel().equals(getPairABCDD()));
+        assertEquals(false, getStraightWheel().equals(null));
     }
     
     @Test
@@ -571,25 +412,25 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.SPADES, '6'));
         checkKickersList.add(new Card(CardSuit.SPADES, '3'));
         checkKickersList.add(new Card(CardSuit.SPADES, '2'));
-        assertEquals(Flush.class, flushHigher.getHandICombination().getClass());
-        assertEquals(checkKickersList, flushHigher.getHandICombination().getKickersList());
-        assertEquals(6, flushHigher.getHandICombination().getHighness());
-        assertEquals("Flush", flushHigher.getHandICombination().getName());
-        assertEquals(1, flushHigher.compareTo(doesntQualifyOne));
-        assertEquals(1, flushHigher.compareTo(aceKingLower));
-        assertEquals(1, flushHigher.compareTo(pairABCDD));
-        assertEquals(1, flushHigher.compareTo(twoPairsABBCC));
-        assertEquals(1, flushHigher.compareTo(setAAABC));
-        assertEquals(1, flushHigher.compareTo(straight));
-        assertEquals(1, flushHigher.compareTo(flushLower));
-        assertEquals(0, flushHigher.compareTo(getCloneHand(flushHigher.getCards())));
-        assertEquals(-1, flushHigher.compareTo(fullHouseAAABB));
-        assertEquals(-1, flushHigher.compareTo(careAAAAB));
-        assertEquals(-1, flushHigher.compareTo(straightFlush));
-        assertEquals(-1, flushHigher.compareTo(royalFlushTwo));
-        assertEquals(true, flushHigher.equals(getCloneHand(flushHigher.getCards())));
-        assertEquals(false, flushHigher.equals(pairABCDD));
-        assertEquals(false, flushHigher.equals(null));
+        assertEquals(Flush.class, getFlushHigher().getHandICombination().getClass());
+        assertEquals(checkKickersList, getFlushHigher().getHandICombination().getKickersList());
+        assertEquals(6, getFlushHigher().getHandICombination().getHighness());
+        assertEquals("Flush", getFlushHigher().getHandICombination().getName());
+        assertEquals(1, getFlushHigher().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getFlushHigher().compareTo(getAceKingLower()));
+        assertEquals(1, getFlushHigher().compareTo(getPairABCDD()));
+        assertEquals(1, getFlushHigher().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getFlushHigher().compareTo(getSetAAABC()));
+        assertEquals(1, getFlushHigher().compareTo(getStraight()));
+        assertEquals(1, getFlushHigher().compareTo(getFlushLower()));
+        assertEquals(0, getFlushHigher().compareTo(getCloneHand(getFlushHigher().getCards())));
+        assertEquals(-1, getFlushHigher().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getFlushHigher().compareTo(getCareAAAAB()));
+        assertEquals(-1, getFlushHigher().compareTo(getStraightFlush()));
+        assertEquals(-1, getFlushHigher().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getFlushHigher().equals(getCloneHand(getFlushHigher().getCards())));
+        assertEquals(false, getFlushHigher().equals(getPairABCDD()));
+        assertEquals(false, getFlushHigher().equals(null));
     }
     
     @Test
@@ -597,25 +438,25 @@ public class HandCombinationTest {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, 'A'));
         checkKickersList.add(new Card(CardSuit.SPADES, '2'));
-        assertEquals(FullHouse.class, fullHouseAAABB.getHandICombination().getClass());
-        assertEquals(checkKickersList, fullHouseAAABB.getHandICombination().getKickersList());
-        assertEquals(7, fullHouseAAABB.getHandICombination().getHighness());
-        assertEquals("Full House", fullHouseAAABB.getHandICombination().getName());
-        assertEquals(1, fullHouseAAABB.compareTo(doesntQualifyOne));
-        assertEquals(1, fullHouseAAABB.compareTo(aceKingLower));
-        assertEquals(1, fullHouseAAABB.compareTo(pairABCDD));
-        assertEquals(1, fullHouseAAABB.compareTo(twoPairsABBCC));
-        assertEquals(1, fullHouseAAABB.compareTo(setAAABC));
-        assertEquals(1, fullHouseAAABB.compareTo(straight));
-        assertEquals(1, fullHouseAAABB.compareTo(flushLower));
-        assertEquals(1, fullHouseAAABB.compareTo(fullHouseAABBB));
-        assertEquals(0, fullHouseAAABB.compareTo(getCloneHand(fullHouseAAABB.getCards())));
-        assertEquals(-1, fullHouseAAABB.compareTo(careAAAAB));
-        assertEquals(-1, fullHouseAAABB.compareTo(straightFlush));
-        assertEquals(-1, fullHouseAAABB.compareTo(royalFlushTwo));
-        assertEquals(true, fullHouseAAABB.equals(getCloneHand(fullHouseAAABB.getCards())));
-        assertEquals(false, fullHouseAAABB.equals(pairABCDD));
-        assertEquals(false, fullHouseAAABB.equals(null));
+        assertEquals(FullHouse.class, getFullHouseAAABB().getHandICombination().getClass());
+        assertEquals(checkKickersList, getFullHouseAAABB().getHandICombination().getKickersList());
+        assertEquals(7, getFullHouseAAABB().getHandICombination().getHighness());
+        assertEquals("Full House", getFullHouseAAABB().getHandICombination().getName());
+        assertEquals(1, getFullHouseAAABB().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getFullHouseAAABB().compareTo(getAceKingLower()));
+        assertEquals(1, getFullHouseAAABB().compareTo(getPairABCDD()));
+        assertEquals(1, getFullHouseAAABB().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getFullHouseAAABB().compareTo(getSetAAABC()));
+        assertEquals(1, getFullHouseAAABB().compareTo(getStraight()));
+        assertEquals(1, getFullHouseAAABB().compareTo(getFlushLower()));
+        assertEquals(1, getFullHouseAAABB().compareTo(getFullHouseAABBB()));
+        assertEquals(0, getFullHouseAAABB().compareTo(getCloneHand(getFullHouseAAABB().getCards())));
+        assertEquals(-1, getFullHouseAAABB().compareTo(getCareAAAAB()));
+        assertEquals(-1, getFullHouseAAABB().compareTo(getStraightFlush()));
+        assertEquals(-1, getFullHouseAAABB().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getFullHouseAAABB().equals(getCloneHand(getFullHouseAAABB().getCards())));
+        assertEquals(false, getFullHouseAAABB().equals(getPairABCDD()));
+        assertEquals(false, getFullHouseAAABB().equals(null));
     }
     
     @Test
@@ -623,25 +464,25 @@ public class HandCombinationTest {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, '2'));
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
-        assertEquals(FullHouse.class, fullHouseAABBB.getHandICombination().getClass());
-        assertEquals(checkKickersList, fullHouseAABBB.getHandICombination().getKickersList());
-        assertEquals(7, fullHouseAABBB.getHandICombination().getHighness());
-        assertEquals("Full House", fullHouseAABBB.getHandICombination().getName());
-        assertEquals(1, fullHouseAABBB.compareTo(doesntQualifyOne));
-        assertEquals(1, fullHouseAABBB.compareTo(aceKingLower));
-        assertEquals(1, fullHouseAABBB.compareTo(pairABCDD));
-        assertEquals(1, fullHouseAABBB.compareTo(twoPairsABBCC));
-        assertEquals(1, fullHouseAABBB.compareTo(setAAABC));
-        assertEquals(1, fullHouseAABBB.compareTo(straight));
-        assertEquals(1, fullHouseAABBB.compareTo(flushLower));
-        assertEquals(0, fullHouseAABBB.compareTo(getCloneHand(fullHouseAABBB.getCards())));
-        assertEquals(-1, fullHouseAABBB.compareTo(fullHouseAAABB));
-        assertEquals(-1, fullHouseAABBB.compareTo(careAAAAB));
-        assertEquals(-1, fullHouseAABBB.compareTo(straightFlush));
-        assertEquals(-1, fullHouseAABBB.compareTo(royalFlushTwo));
-        assertEquals(true, fullHouseAABBB.equals(getCloneHand(fullHouseAABBB.getCards())));
-        assertEquals(false, fullHouseAABBB.equals(pairABCDD));
-        assertEquals(false, fullHouseAABBB.equals(null));
+        assertEquals(FullHouse.class, getFullHouseAABBB().getHandICombination().getClass());
+        assertEquals(checkKickersList, getFullHouseAABBB().getHandICombination().getKickersList());
+        assertEquals(7, getFullHouseAABBB().getHandICombination().getHighness());
+        assertEquals("Full House", getFullHouseAABBB().getHandICombination().getName());
+        assertEquals(1, getFullHouseAABBB().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getFullHouseAABBB().compareTo(getAceKingLower()));
+        assertEquals(1, getFullHouseAABBB().compareTo(getPairABCDD()));
+        assertEquals(1, getFullHouseAABBB().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getFullHouseAABBB().compareTo(getSetAAABC()));
+        assertEquals(1, getFullHouseAABBB().compareTo(getStraight()));
+        assertEquals(1, getFullHouseAABBB().compareTo(getFlushLower()));
+        assertEquals(0, getFullHouseAABBB().compareTo(getCloneHand(getFullHouseAABBB().getCards())));
+        assertEquals(-1, getFullHouseAABBB().compareTo(getFullHouseAAABB()));
+        assertEquals(-1, getFullHouseAABBB().compareTo(getCareAAAAB()));
+        assertEquals(-1, getFullHouseAABBB().compareTo(getStraightFlush()));
+        assertEquals(-1, getFullHouseAABBB().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getFullHouseAABBB().equals(getCloneHand(getFullHouseAABBB().getCards())));
+        assertEquals(false, getFullHouseAABBB().equals(getPairABCDD()));
+        assertEquals(false, getFullHouseAABBB().equals(null));
     }
     
     @Test
@@ -649,25 +490,25 @@ public class HandCombinationTest {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, 'A'));
         checkKickersList.add(new Card(CardSuit.SPADES, '2'));
-        assertEquals(FourOfKind.class, careAAAAB.getHandICombination().getClass());
-        assertEquals(checkKickersList, careAAAAB.getHandICombination().getKickersList());
-        assertEquals(8, careAAAAB.getHandICombination().getHighness());
-        assertEquals("Four Of a Kind", careAAAAB.getHandICombination().getName());
-        assertEquals(1, careAAAAB.compareTo(doesntQualifyOne));
-        assertEquals(1, careAAAAB.compareTo(aceKingLower));
-        assertEquals(1, careAAAAB.compareTo(pairABCDD));
-        assertEquals(1, careAAAAB.compareTo(twoPairsABBCC));
-        assertEquals(1, careAAAAB.compareTo(setAAABC));
-        assertEquals(1, careAAAAB.compareTo(straight));
-        assertEquals(1, careAAAAB.compareTo(flushLower));
-        assertEquals(1, careAAAAB.compareTo(fullHouseAAABB));
-        assertEquals(1, careAAAAB.compareTo(careABBBB));
-        assertEquals(0, careAAAAB.compareTo(getCloneHand(careAAAAB.getCards())));
-        assertEquals(-1, careAAAAB.compareTo(straightFlush));
-        assertEquals(-1, careAAAAB.compareTo(royalFlushTwo));
-        assertEquals(true, careAAAAB.equals(getCloneHand(careAAAAB.getCards())));
-        assertEquals(false, careAAAAB.equals(pairABCDD));
-        assertEquals(false, careAAAAB.equals(null));
+        assertEquals(FourOfKind.class, getCareAAAAB().getHandICombination().getClass());
+        assertEquals(checkKickersList, getCareAAAAB().getHandICombination().getKickersList());
+        assertEquals(8, getCareAAAAB().getHandICombination().getHighness());
+        assertEquals("Four Of a Kind", getCareAAAAB().getHandICombination().getName());
+        assertEquals(1, getCareAAAAB().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getCareAAAAB().compareTo(getAceKingLower()));
+        assertEquals(1, getCareAAAAB().compareTo(getPairABCDD()));
+        assertEquals(1, getCareAAAAB().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getCareAAAAB().compareTo(getSetAAABC()));
+        assertEquals(1, getCareAAAAB().compareTo(getStraight()));
+        assertEquals(1, getCareAAAAB().compareTo(getFlushLower()));
+        assertEquals(1, getCareAAAAB().compareTo(getFullHouseAAABB()));
+        assertEquals(1, getCareAAAAB().compareTo(getCareABBBB()));
+        assertEquals(0, getCareAAAAB().compareTo(getCloneHand(getCareAAAAB().getCards())));
+        assertEquals(-1, getCareAAAAB().compareTo(getStraightFlush()));
+        assertEquals(-1, getCareAAAAB().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getCareAAAAB().equals(getCloneHand(getCareAAAAB().getCards())));
+        assertEquals(false, getCareAAAAB().equals(getPairABCDD()));
+        assertEquals(false, getCareAAAAB().equals(null));
     }
     
     @Test
@@ -675,97 +516,97 @@ public class HandCombinationTest {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.DIAMOND, '2'));
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
-        assertEquals(FourOfKind.class, careABBBB.getHandICombination().getClass());
-        assertEquals(checkKickersList, careABBBB.getHandICombination().getKickersList());
-        assertEquals(8, careABBBB.getHandICombination().getHighness());
-        assertEquals("Four Of a Kind", careABBBB.getHandICombination().getName());
-        assertEquals(1, careABBBB.compareTo(doesntQualifyOne));
-        assertEquals(1, careABBBB.compareTo(aceKingLower));
-        assertEquals(1, careABBBB.compareTo(pairABCDD));
-        assertEquals(1, careABBBB.compareTo(twoPairsABBCC));
-        assertEquals(1, careABBBB.compareTo(setAAABC));
-        assertEquals(1, careABBBB.compareTo(straight));
-        assertEquals(1, careABBBB.compareTo(flushLower));
-        assertEquals(1, careABBBB.compareTo(fullHouseAAABB));
-        assertEquals(0, careABBBB.compareTo(getCloneHand(careABBBB.getCards())));
-        assertEquals(-1, careABBBB.compareTo(careAAAAB));
-        assertEquals(-1, careABBBB.compareTo(straightFlush));
-        assertEquals(-1, careABBBB.compareTo(royalFlushTwo));
-        assertEquals(true, careABBBB.equals(getCloneHand(careABBBB.getCards())));
-        assertEquals(false, careABBBB.equals(pairABCDD));
-        assertEquals(false, careABBBB.equals(null));
+        assertEquals(FourOfKind.class, getCareABBBB().getHandICombination().getClass());
+        assertEquals(checkKickersList, getCareABBBB().getHandICombination().getKickersList());
+        assertEquals(8, getCareABBBB().getHandICombination().getHighness());
+        assertEquals("Four Of a Kind", getCareABBBB().getHandICombination().getName());
+        assertEquals(1, getCareABBBB().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getCareABBBB().compareTo(getAceKingLower()));
+        assertEquals(1, getCareABBBB().compareTo(getPairABCDD()));
+        assertEquals(1, getCareABBBB().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getCareABBBB().compareTo(getSetAAABC()));
+        assertEquals(1, getCareABBBB().compareTo(getStraight()));
+        assertEquals(1, getCareABBBB().compareTo(getFlushLower()));
+        assertEquals(1, getCareABBBB().compareTo(getFullHouseAAABB()));
+        assertEquals(0, getCareABBBB().compareTo(getCloneHand(getCareABBBB().getCards())));
+        assertEquals(-1, getCareABBBB().compareTo(getCareAAAAB()));
+        assertEquals(-1, getCareABBBB().compareTo(getStraightFlush()));
+        assertEquals(-1, getCareABBBB().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getCareABBBB().equals(getCloneHand(getCareABBBB().getCards())));
+        assertEquals(false, getCareABBBB().equals(getPairABCDD()));
+        assertEquals(false, getCareABBBB().equals(null));
     }
 
     @Test
-    public void testIComboStraightFlush() {
+    public void testICombogetStraightFlush() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.CLUBS, 'K'));
-        assertEquals(StraightFlush.class, straightFlush.getHandICombination().getClass());
-        assertEquals(checkKickersList, straightFlush.getHandICombination().getKickersList());
-        assertEquals(9, straightFlush.getHandICombination().getHighness());
-        assertEquals("Straight Flush", straightFlush.getHandICombination().getName());
-        assertEquals(1, straightFlush.compareTo(doesntQualifyOne));
-        assertEquals(1, straightFlush.compareTo(aceKingLower));
-        assertEquals(1, straightFlush.compareTo(pairABCDD));
-        assertEquals(1, straightFlush.compareTo(twoPairsABBCC));
-        assertEquals(1, straightFlush.compareTo(setAAABC));
-        assertEquals(1, straightFlush.compareTo(straight));
-        assertEquals(1, straightFlush.compareTo(flushLower));
-        assertEquals(1, straightFlush.compareTo(fullHouseAAABB));
-        assertEquals(1, straightFlush.compareTo(careAAAAB));
-        assertEquals(1, straightFlush.compareTo(straightFlushWheel));
-        assertEquals(0, straightFlush.compareTo(getCloneHand(straightFlush.getCards())));
-        assertEquals(-1, straightFlush.compareTo(royalFlushTwo));
-        assertEquals(true, straightFlush.equals(getCloneHand(straightFlush.getCards())));
-        assertEquals(false, straightFlush.equals(pairABCDD));
-        assertEquals(false, straightFlush.equals(null));
+        assertEquals(StraightFlush.class, getStraightFlush().getHandICombination().getClass());
+        assertEquals(checkKickersList, getStraightFlush().getHandICombination().getKickersList());
+        assertEquals(9, getStraightFlush().getHandICombination().getHighness());
+        assertEquals("getStraight() Flush", getStraightFlush().getHandICombination().getName());
+        assertEquals(1, getStraightFlush().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getStraightFlush().compareTo(getAceKingLower()));
+        assertEquals(1, getStraightFlush().compareTo(getPairABCDD()));
+        assertEquals(1, getStraightFlush().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getStraightFlush().compareTo(getSetAAABC()));
+        assertEquals(1, getStraightFlush().compareTo(getStraight()));
+        assertEquals(1, getStraightFlush().compareTo(getFlushLower()));
+        assertEquals(1, getStraightFlush().compareTo(getFullHouseAAABB()));
+        assertEquals(1, getStraightFlush().compareTo(getCareAAAAB()));
+        assertEquals(1, getStraightFlush().compareTo(getStraightFlushWheel()));
+        assertEquals(0, getStraightFlush().compareTo(getCloneHand(getStraightFlush().getCards())));
+        assertEquals(-1, getStraightFlush().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getStraightFlush().equals(getCloneHand(getStraightFlush().getCards())));
+        assertEquals(false, getStraightFlush().equals(getPairABCDD()));
+        assertEquals(false, getStraightFlush().equals(null));
     }
     
     @Test
-    public void testIComboWheelStraightFlush() {
+    public void testIComboWheelgetStraightFlush() {
         List<Card> checkKickersList = new ArrayList<Card>();
         checkKickersList.add(new Card(CardSuit.CLUBS, '5'));
-        assertEquals(StraightFlush.class, straightFlushWheel.getHandICombination().getClass());
-        assertEquals(checkKickersList, straightFlushWheel.getHandICombination().getKickersList());
-        assertEquals(9, straightFlushWheel.getHandICombination().getHighness());
-        assertEquals("Straight Flush", straightFlushWheel.getHandICombination().getName());
-        assertEquals(1, straightFlushWheel.compareTo(doesntQualifyOne));
-        assertEquals(1, straightFlushWheel.compareTo(aceKingLower));
-        assertEquals(1, straightFlushWheel.compareTo(pairABCDD));
-        assertEquals(1, straightFlushWheel.compareTo(twoPairsABBCC));
-        assertEquals(1, straightFlushWheel.compareTo(setAAABC));
-        assertEquals(1, straightFlushWheel.compareTo(straight));
-        assertEquals(1, straightFlushWheel.compareTo(flushLower));
-        assertEquals(1, straightFlushWheel.compareTo(fullHouseAAABB));
-        assertEquals(1, straightFlushWheel.compareTo(careAAAAB));
-        assertEquals(0, straightFlushWheel.compareTo(getCloneHand(straightFlushWheel.getCards())));
-        assertEquals(-1, straightFlushWheel.compareTo(straightFlush));
-        assertEquals(-1, straightFlushWheel.compareTo(royalFlushTwo));
-        assertEquals(true, straightFlushWheel.equals(getCloneHand(straightFlushWheel.getCards())));
-        assertEquals(false, straightFlushWheel.equals(pairABCDD));
-        assertEquals(false, straightFlushWheel.equals(null));
+        assertEquals(StraightFlush.class, getStraightFlushWheel().getHandICombination().getClass());
+        assertEquals(checkKickersList, getStraightFlushWheel().getHandICombination().getKickersList());
+        assertEquals(9, getStraightFlushWheel().getHandICombination().getHighness());
+        assertEquals("getStraight() Flush", getStraightFlushWheel().getHandICombination().getName());
+        assertEquals(1, getStraightFlushWheel().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getStraightFlushWheel().compareTo(getAceKingLower()));
+        assertEquals(1, getStraightFlushWheel().compareTo(getPairABCDD()));
+        assertEquals(1, getStraightFlushWheel().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getStraightFlushWheel().compareTo(getSetAAABC()));
+        assertEquals(1, getStraightFlushWheel().compareTo(getStraight()));
+        assertEquals(1, getStraightFlushWheel().compareTo(getFlushLower()));
+        assertEquals(1, getStraightFlushWheel().compareTo(getFullHouseAAABB()));
+        assertEquals(1, getStraightFlushWheel().compareTo(getCareAAAAB()));
+        assertEquals(0, getStraightFlushWheel().compareTo(getCloneHand(getStraightFlushWheel().getCards())));
+        assertEquals(-1, getStraightFlushWheel().compareTo(getStraightFlush()));
+        assertEquals(-1, getStraightFlushWheel().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getStraightFlushWheel().equals(getCloneHand(getStraightFlushWheel().getCards())));
+        assertEquals(false, getStraightFlushWheel().equals(getPairABCDD()));
+        assertEquals(false, getStraightFlushWheel().equals(null));
     }
     
     @Test
     public void testIComboRoyalFlush() {
-        assertEquals(RoyalFlush.class, royalFlushOne.getHandICombination().getClass());
-        assertEquals(10, royalFlushOne.getHandICombination().getHighness());
-        assertEquals("Royal Flush", royalFlushOne.getHandICombination().getName());
-        assertEquals(1, royalFlushOne.compareTo(doesntQualifyOne));
-        assertEquals(1, royalFlushOne.compareTo(aceKingLower));
-        assertEquals(1, royalFlushOne.compareTo(pairABCDD));
-        assertEquals(1, royalFlushOne.compareTo(twoPairsABBCC));
-        assertEquals(1, royalFlushOne.compareTo(setAAABC));
-        assertEquals(1, royalFlushOne.compareTo(straight));
-        assertEquals(1, royalFlushOne.compareTo(flushLower));
-        assertEquals(1, royalFlushOne.compareTo(fullHouseAAABB));
-        assertEquals(1, royalFlushOne.compareTo(careAAAAB));
-        assertEquals(1, royalFlushOne.compareTo(straightFlushWheel));
-        assertEquals(1, royalFlushOne.compareTo(straightFlush));
-        assertEquals(0, royalFlushOne.compareTo(royalFlushTwo));
-        assertEquals(true, royalFlushOne.equals(royalFlushTwo));
-        assertEquals(false, royalFlushOne.equals(pairABCDD));
-        assertEquals(false, royalFlushOne.equals(null));
+        assertEquals(RoyalFlush.class, getRoyalFlushOne().getHandICombination().getClass());
+        assertEquals(10, getRoyalFlushOne().getHandICombination().getHighness());
+        assertEquals("Royal Flush", getRoyalFlushOne().getHandICombination().getName());
+        assertEquals(1, getRoyalFlushOne().compareTo(getDoesntQualifyOne()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getAceKingLower()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getPairABCDD()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getTwoPairsABBCC()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getSetAAABC()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getStraight()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getFlushLower()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getFullHouseAAABB()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getCareAAAAB()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getStraightFlushWheel()));
+        assertEquals(1, getRoyalFlushOne().compareTo(getStraightFlush()));
+        assertEquals(0, getRoyalFlushOne().compareTo(getRoyalFlushTwo()));
+        assertEquals(true, getRoyalFlushOne().equals(getRoyalFlushTwo()));
+        assertEquals(false, getRoyalFlushOne().equals(getPairABCDD()));
+        assertEquals(false, getRoyalFlushOne().equals(null));
         
     }
     

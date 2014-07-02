@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.rulezzz.pkr.core.basestructures.Card;
 import com.rulezzz.pkr.core.basestructures.CardSuit;
+import com.rulezzz.pkr.core.basestructures.PlayerBox;
 public class BoxTest {
 
 	@Test

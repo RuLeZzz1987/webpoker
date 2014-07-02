@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 
-import com.rulezzz.pkr.core.engine.Table;
+import com.rulezzz.pkr.core.gameengine.Table;
 
 public class StartPageTest {
 
