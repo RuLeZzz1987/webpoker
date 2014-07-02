@@ -7,10 +7,12 @@ import com.rulezzz.pkr.core.basestructures.Box;
 import com.rulezzz.pkr.core.basestructures.Deck;
 import com.rulezzz.pkr.core.basestructures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.gameengine.GameStatus;
 
 public class FiveCardDataModel {
 
     private int bankroll;
+    private GameStatus gameStatus;
     private Box dealerBox = new Box();
     private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
     private List<Card> cardList = new Deck().getDeck();
@@ -46,6 +48,12 @@ public class FiveCardDataModel {
     
     public void setDefaultBets(int bet) {
         this.defaultBets.add(bet);
+    }
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
     }
 
 }

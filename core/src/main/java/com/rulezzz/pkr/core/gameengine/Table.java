@@ -17,12 +17,12 @@ import com.rulezzz.pkr.core.datamodels.FiveCardDataModel;
 public class Table implements Serializable {
 
     private static final long serialVersionUID = -3327856908669194148L;
-    private GameStatus gameStatus;
+
     private FiveCardDataModel model = new FiveCardDataModel();
     private static final String DRAW = "draw";
 
     public Table() {
-        gameStatus = GameStatus.BETS;
+        model.setGameStatus(GameStatus.BETS);
     }
     
     public void updateDeck(){
@@ -34,11 +34,11 @@ public class Table implements Serializable {
     }
 
     public GameStatus getGameStatus() {
-        return gameStatus;
+        return model.getGameStatus();
     }
     
     public void deal() {
-        if (this.gameStatus != GameStatus.DEAL) {
+        if (model.getGameStatus() != GameStatus.DEAL) {
             throw new IllegalStateException("No money, no Cards!");
         }
         int k = Hand.FIVECARD;
@@ -55,7 +55,7 @@ public class Table implements Serializable {
             Collections.reverse(b.getHand().getCards());
             model.setDefaultBets(b.getAnte());
         }
-        this.gameStatus = GameStatus.DRAWS;
+        model.setGameStatus(GameStatus.DRAWS);
     }
 
     public List<PlayerBox> getBoxes() {
@@ -84,21 +84,21 @@ public class Table implements Serializable {
                     }
                 }
             }
-            this.gameStatus = GameStatus.SHOWDOWN;
+            model.setGameStatus(GameStatus.SHOWDOWN);
         } else {
             if (model.getPlayerBoxes().size() != 0) {
-                this.gameStatus = GameStatus.DEALER_DNQ;
+                model.setGameStatus(GameStatus.DEALER_DNQ);
             } else {
-                this.gameStatus = GameStatus.SHOWDOWN;
+                model.setGameStatus(GameStatus.SHOWDOWN);
             }
         }
     }
 
     public void handleDraws(List<String> boxChoise) {
-        if (gameStatus != GameStatus.DRAWS) {
+        if (model.getGameStatus() != GameStatus.DRAWS) {
             throw new IllegalStateException(
                     "game status don't match this operation. Expected: DRAWS. Actual: "
-                            + gameStatus);
+                            + model.getGameStatus());
         }
         Iterator<PlayerBox> boxIterator = model.getPlayerBoxes().iterator();
         Iterator<String> choiseIterator = boxChoise.iterator();
@@ -132,7 +132,7 @@ public class Table implements Serializable {
                 }
             }
         }
-        this.gameStatus = GameStatus.DETERMINATION;
+        model.setGameStatus(GameStatus.DETERMINATION);
     }
     
     public boolean checkAllDeterminated(){
@@ -191,7 +191,7 @@ public class Table implements Serializable {
             model.getPlayerBoxes().add(new PlayerBox(bets[i]));
             model.setBankroll(-bets[i]);
         }
-        gameStatus = GameStatus.DEAL;
+        model.setGameStatus(GameStatus.DEAL);
     }
 
     public void checkBoxStatus() {
