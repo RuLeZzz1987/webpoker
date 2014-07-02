@@ -2,6 +2,8 @@ package com.rulezzz.pkr.core.basestructures;
 
 import java.util.List;
 
+import com.rulezzz.pkr.core.card.Card;
+
 public class Box {
 
     private Hand hand = new Hand();

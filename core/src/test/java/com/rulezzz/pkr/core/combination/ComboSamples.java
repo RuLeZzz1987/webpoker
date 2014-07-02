@@ -1,8 +1,8 @@
 package com.rulezzz.pkr.core.combination;
 
-import com.rulezzz.pkr.core.basestructures.Card;
-import com.rulezzz.pkr.core.basestructures.CardSuit;
 import com.rulezzz.pkr.core.basestructures.Hand;
+import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.card.CardSuit;
 
 public class ComboSamples {
     

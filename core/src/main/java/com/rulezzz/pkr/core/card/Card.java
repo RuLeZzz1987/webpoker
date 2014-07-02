@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.basestructures;
+package com.rulezzz.pkr.core.card;
 
 import com.google.common.base.Objects;
 

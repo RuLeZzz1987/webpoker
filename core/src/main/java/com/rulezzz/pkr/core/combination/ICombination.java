@@ -3,7 +3,7 @@ package com.rulezzz.pkr.core.combination;
 import java.util.List;
 
 import com.google.common.base.Objects;
-import com.rulezzz.pkr.core.basestructures.Card;
+import com.rulezzz.pkr.core.card.Card;
 
 public abstract class ICombination implements Comparable<ICombination> {
 

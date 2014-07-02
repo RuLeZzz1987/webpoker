@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.rulezzz.pkr.core.basestructures.Card;
+import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.gameengine.Table;
 
 public class GameEngineTest {

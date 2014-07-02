@@ -9,6 +9,7 @@ import com.google.common.base.Objects;
 
 import com.rulezzz.pkr.core.basestructuresengine.ConsilienceCount;
 import com.rulezzz.pkr.core.basestructuresengine.ConsilienceCounter;
+import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.combination.*;
 
 

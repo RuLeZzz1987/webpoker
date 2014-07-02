@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.basestructures;
+package com.rulezzz.pkr.core.card;
 
 public enum CardSuit {
 

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rulezzz.pkr.core.basestructures.Box;
-import com.rulezzz.pkr.core.basestructures.Card;
 import com.rulezzz.pkr.core.basestructures.Deck;
 import com.rulezzz.pkr.core.basestructures.PlayerBox;
+import com.rulezzz.pkr.core.card.Card;
 
 public class FiveCardDataModel {
 

@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.card.CardSuit;
+
 public class Deck {
 
     private List<Card> deck = new LinkedList<Card>();
