@@ -360,7 +360,7 @@ public class HandCombinationTest {
         assertEquals(Straight.class, getStraight().getHandICombination().getClass());
         assertEquals(checkKickersList, getStraight().getHandICombination().getKickersList());
         assertEquals(5, getStraight().getHandICombination().getHighness());
-        assertEquals("getStraight()", getStraight().getHandICombination().getName());
+        assertEquals("Straight", getStraight().getHandICombination().getName());
         assertEquals(1, getStraight().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getStraight().compareTo(getAceKingLower()));
         assertEquals(1, getStraight().compareTo(getPairABCDD()));
@@ -386,7 +386,7 @@ public class HandCombinationTest {
         assertEquals(Straight.class, getStraightWheel().getHandICombination().getClass());
         assertEquals(checkKickersList, getStraightWheel().getHandICombination().getKickersList());
         assertEquals(5, getStraightWheel().getHandICombination().getHighness());
-        assertEquals("getStraight()", getStraightWheel().getHandICombination().getName());
+        assertEquals("Straight", getStraightWheel().getHandICombination().getName());
         assertEquals(1, getStraightWheel().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getStraightWheel().compareTo(getAceKingLower()));
         assertEquals(1, getStraightWheel().compareTo(getPairABCDD()));
@@ -544,7 +544,7 @@ public class HandCombinationTest {
         assertEquals(StraightFlush.class, getStraightFlush().getHandICombination().getClass());
         assertEquals(checkKickersList, getStraightFlush().getHandICombination().getKickersList());
         assertEquals(9, getStraightFlush().getHandICombination().getHighness());
-        assertEquals("getStraight() Flush", getStraightFlush().getHandICombination().getName());
+        assertEquals("Straight Flush", getStraightFlush().getHandICombination().getName());
         assertEquals(1, getStraightFlush().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getStraightFlush().compareTo(getAceKingLower()));
         assertEquals(1, getStraightFlush().compareTo(getPairABCDD()));
@@ -569,7 +569,7 @@ public class HandCombinationTest {
         assertEquals(StraightFlush.class, getStraightFlushWheel().getHandICombination().getClass());
         assertEquals(checkKickersList, getStraightFlushWheel().getHandICombination().getKickersList());
         assertEquals(9, getStraightFlushWheel().getHandICombination().getHighness());
-        assertEquals("getStraight() Flush", getStraightFlushWheel().getHandICombination().getName());
+        assertEquals("Straight Flush", getStraightFlushWheel().getHandICombination().getName());
         assertEquals(1, getStraightFlushWheel().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getStraightFlushWheel().compareTo(getAceKingLower()));
         assertEquals(1, getStraightFlushWheel().compareTo(getPairABCDD()));

@@ -20,13 +20,7 @@ public class TableTest {
         table = new Table();
     }
     
-    @Test
-    public void testBankRoll() {
-        table.setBankroll(1000);
-        assertEquals(1000, table.getBankroll());
-    }
-    
-    /*    @Test
+   /*    @Test
     public void testDeal() throws IOException {
         table.makeBets(10, 15);
         table.deal();
