@@ -2,7 +2,7 @@ package com.rulezzz.pkr.core.engine;
 
 import static org.junit.Assert.assertEquals;
 
-import com.rulezzz.pkr.core.basestructures.Box.BoxStatus;
+import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.gameengine.Table;
 

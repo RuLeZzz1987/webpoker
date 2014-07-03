@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.basestructures;
+package com.rulezzz.pkr.core.base.structures;
 
 import java.util.ArrayList;
 import java.util.Arrays;

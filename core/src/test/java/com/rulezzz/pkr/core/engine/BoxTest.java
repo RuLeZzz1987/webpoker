@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.rulezzz.pkr.core.basestructures.PlayerBox;
+import com.rulezzz.pkr.core.base.structures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
 public class BoxTest {

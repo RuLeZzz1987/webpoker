@@ -1,8 +1,8 @@
-package com.rulezzz.pkr.core.basestructuresengine;
+package com.rulezzz.pkr.core.base.engines;
 
 import java.util.List;
 
-import com.rulezzz.pkr.core.basestructures.Hand;
+import com.rulezzz.pkr.core.base.structures.Hand;
 import com.rulezzz.pkr.core.card.Card;
 
 public class ConsilienceCounter {

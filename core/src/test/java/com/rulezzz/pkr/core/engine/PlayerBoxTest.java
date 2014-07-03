@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.rulezzz.pkr.core.basestructures.Hand;
-import com.rulezzz.pkr.core.basestructures.PlayerBox;
+import com.rulezzz.pkr.core.base.structures.Hand;
+import com.rulezzz.pkr.core.base.structures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
 

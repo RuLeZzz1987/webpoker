@@ -6,13 +6,14 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.rulezzz.pkr.core.basestructures.Box;
-import com.rulezzz.pkr.core.basestructures.Box.BoxStatus;
-import com.rulezzz.pkr.core.basestructures.Hand;
-import com.rulezzz.pkr.core.basestructures.PlayerBox;
+import com.rulezzz.pkr.core.base.structures.Box;
+import com.rulezzz.pkr.core.base.structures.Hand;
+import com.rulezzz.pkr.core.base.structures.PlayerBox;
+import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.combination.AbstractCombination;
 import com.rulezzz.pkr.core.datamodels.FiveCardDataModel;
+import com.rulezzz.pkr.core.datamodels.GameStatus;
 
 public class Table implements Serializable {
 

@@ -3,11 +3,10 @@ package com.rulezzz.pkr.core.datamodels;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rulezzz.pkr.core.basestructures.Box;
-import com.rulezzz.pkr.core.basestructures.Deck;
-import com.rulezzz.pkr.core.basestructures.PlayerBox;
+import com.rulezzz.pkr.core.base.structures.Box;
+import com.rulezzz.pkr.core.base.structures.Deck;
+import com.rulezzz.pkr.core.base.structures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
-import com.rulezzz.pkr.core.gameengine.GameStatus;
 
 public class FiveCardDataModel {
 

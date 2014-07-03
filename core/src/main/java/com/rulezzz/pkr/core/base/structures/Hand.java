@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.basestructures;
+package com.rulezzz.pkr.core.base.structures;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,8 +7,8 @@ import java.util.List;
 import com.google.common.base.Objects;
 
 
-import com.rulezzz.pkr.core.basestructuresengine.ConsilienceCount;
-import com.rulezzz.pkr.core.basestructuresengine.ConsilienceCounter;
+import com.rulezzz.pkr.core.base.engines.ConsilienceCount;
+import com.rulezzz.pkr.core.base.engines.ConsilienceCounter;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.combination.*;
 

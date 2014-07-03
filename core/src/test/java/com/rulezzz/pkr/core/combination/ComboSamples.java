@@ -1,6 +1,6 @@
 package com.rulezzz.pkr.core.combination;
 
-import com.rulezzz.pkr.core.basestructures.Hand;
+import com.rulezzz.pkr.core.base.structures.Hand;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
 
