@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static com.rulezzz.pkr.core.combination.ComboSamples.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import org.junit.Test;
 
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.combination.ComboSamples;
 import com.rulezzz.pkr.core.datamodels.GameStatus;
 import com.rulezzz.pkr.core.gameengine.Table;
 
@@ -42,6 +44,60 @@ public class GameEngineTest {
     }
     
     @Test
+    public void testIfOneBoxBetAndBuyGame() throws ServletException, IOException {
+        table.setBankroll(1000);
+        table.makeBets(10);
+        table.deal();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getDealerBox().setHand(getDoesntQualifyOne());
+        table.getBox(0).getHand().getCards().clear();
+        table.getBox(0).setHand(getPairAABCD());
+        
+        when(req.getParameter("choice0")).thenReturn("bet");
+        when(req.getSession()).thenReturn(session);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
+        
+        session.setAttribute("table", table);
+        GameEngineServlet engine = new GameEngineServlet();
+        engine.doPost(req, resp);
+        
+        when(req.getParameter("choice0")).thenReturn("buy_game");
+        
+        engine.doPost(req, resp);
+    }
+    
+    @Test
+    public void testIfOneBoxDrawThenBetAndWin() throws ServletException, IOException {
+        table.setBankroll(1000);
+        table.makeBets(10);
+        table.deal();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getDealerBox().setHand(getAceKingLower());
+        table.getBox(0).getHand().getCards().clear();
+        table.getBox(0).setHand(getPairAABCD());
+        List<Card> handThatDraw = new ArrayList<Card>();
+        handThatDraw.addAll(table.getBox(0).getHand().getCards());
+        
+        when(req.getParameter("choice0")).thenReturn("draw");
+        when(req.getSession()).thenReturn(session);
+        when(req.getParameter(handThatDraw.get(0).toString())).thenReturn(handThatDraw.get(0).toString());
+        when(req.getParameter(handThatDraw.get(1).toString())).thenReturn(handThatDraw.get(1).toString());
+        when(req.getParameter(handThatDraw.get(2).toString())).thenReturn(null);
+        when(req.getParameter(handThatDraw.get(3).toString())).thenReturn(null);
+        when(req.getParameter(handThatDraw.get(4).toString())).thenReturn(null);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
+        
+        session.setAttribute("table", table);
+        GameEngineServlet engine = new GameEngineServlet();
+        engine.doPost(req, resp);
+        
+        when(req.getParameter("choice0")).thenReturn("bet");
+        
+        engine.doPost(req, resp);
+        
+    }
+    
+    @Test
     public void testIfOneBoxDrawThenFold() throws ServletException, IOException{
         table.makeBets(10);
         table.deal();
@@ -57,6 +113,27 @@ public class GameEngineTest {
         when(req.getParameter("choice0")).thenReturn("fold");
         
         engine.doPost(req, resp);
+    }
+    
+    @Test
+    public void testIfOneBoxBetAndWin() throws ServletException, IOException {
+        table.setBankroll(1000);
+        table.makeBets(10);
+        table.deal();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getDealerBox().setHand(getAceKingHigher());
+        table.getBox(0).getHand().getCards().clear();
+        table.getBox(0).setHand(getPairAABCD());
+        
+        when(req.getParameter("choice0")).thenReturn("bet");
+        when(req.getSession()).thenReturn(session);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
+        
+        session.setAttribute("table", table);
+        GameEngineServlet engine = new GameEngineServlet();
+        engine.doPost(req, resp);
+        
+        assertEquals(1020, table.getBankroll());
     }
     
     @Test

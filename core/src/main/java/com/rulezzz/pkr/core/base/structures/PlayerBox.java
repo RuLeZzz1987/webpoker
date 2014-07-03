@@ -52,7 +52,7 @@ public class PlayerBox extends Box {
         
         countOfNeededCards = foldCards.size();
         this.boxStatus = BoxStatus.DRAW;
-        getHand().setDrawStatus(true);        
+        getHand().setDrawStatus(true);
     }
     
     public int getCountOfNeededCards() {
@@ -83,6 +83,7 @@ public class PlayerBox extends Box {
     public void setCardsAfterDraw(List<Card> cards) {
         this.boxStatus = BoxStatus.DETERMINATION;
         addCards(cards);
+        getHand().setDrawStatus(false);
     }
 
     public void buyCard() {
@@ -90,7 +91,12 @@ public class PlayerBox extends Box {
     }
 
     public int getPayment() {
-        return this.handList.get(0).getHandICombination().getMultiplier() * this.bet;
+        int result = this.getHand().getHandICombination().getMultiplier() * this.bet;
+        return result;
+    }
+
+    public void setStatusBuyGame() {
+        this.boxStatus = BoxStatus.BUY_GAME;
     }
 
 

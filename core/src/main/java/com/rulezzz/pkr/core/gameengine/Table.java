@@ -77,7 +77,7 @@ public class Table implements Serializable {
                         break;
                     }
                     case -1 : {
-                        model.setBankroll(box.getAnte() + box.getPayment());
+                        model.setBankroll(box.getAnte() + box.getBet() + box.getPayment());
                         break;
                     }
                     default : {
@@ -188,6 +188,26 @@ public class Table implements Serializable {
         model.setBankroll(-box.getAnte());
         box.drawCards(foldCards);
         model.setGameStatus(GameStatus.DETERMINATION);
+    }
+    
+    public void takeAnte(int boxIndex) {
+        PlayerBox box = model.getPlayerBoxes().get(boxIndex);
+        model.setBankroll(box.getAnte() + box.getBet() + box.getAnte());
+        model.getPlayerBoxes().remove(boxIndex);
+    }
+
+    public void choiceBuyGameForDealer(int boxIndex) {
+        PlayerBox box = model.getPlayerBoxes().get(boxIndex);
+        model.setBankroll(-box.getAnte());
+        box.setStatusBuyGame();
+    }
+    
+    public void buyGame() {
+        model.getDealerBox().getHand().getCards().remove(0);
+        model.getDealerBox().addCard(model.getCardList().get(0));
+        model.getCardList().remove(0);
+        model.getDealerBox().sort();
+        Collections.reverse(model.getDealerBox().getHand().getCards());
     }
 
 
