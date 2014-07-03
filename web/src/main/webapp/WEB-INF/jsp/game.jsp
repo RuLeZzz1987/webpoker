@@ -64,19 +64,19 @@
                     </td>
                     <td class="choises"><c:choose>
                             <c:when test="${table.gameStatus eq 'DRAWS'}">
-                                <input type="radio" checked="checked" name="choise${loop.index}" value="fold"> fold<br>
-                                <input type="radio" name="choise${loop.index}" value="bet"> bet<br>
-                                <input type="radio" name="choise${loop.index}" value="draw"> draw<br>
-                                <input type="radio" name="choise${loop.index}" value="buy" disabled="disabled"> buy
+                                <input type="radio" checked="checked" name="choice${loop.index}" value="fold"> fold<br>
+                                <input type="radio" name="choice${loop.index}" value="bet"> bet<br>
+                                <input type="radio" name="choice${loop.index}" value="draw"> draw<br>
+                                <input type="radio" name="choice${loop.index}" value="buy" disabled="disabled"> buy
                             </c:when>
                             <c:when test="${table.gameStatus eq 'DEALER_DNQ'}">
-                                <input type="radio" checked="checked" name="choise${loop.index}" value="ante"> ante<br>
-                                <input type="radio" name="choise${loop.index}" value="buy_game"> buy game<br>
+                                <input type="radio" checked="checked" name="choice${loop.index}" value="ante"> ante<br>
+                                <input type="radio" name="choice${loop.index}" value="buy_game"> buy game<br>
                             </c:when>
                             <c:when test="${table.gameStatus eq 'DETERMINATION'}">
                                 <c:if test="${box.status ne 'BET'}">
-                                    <input type="radio" checked="checked" name="choise${loop.index}" value="fold"> fold<br>
-                                    <input type="radio" name="choise${loop.index}" value="bet"> bet<br>
+                                    <input type="radio" checked="checked" name="choice${loop.index}" value="fold"> fold<br>
+                                    <input type="radio" name="choice${loop.index}" value="bet"> bet<br>
                                 </c:if>
                             </c:when>
                     </c:choose></td>

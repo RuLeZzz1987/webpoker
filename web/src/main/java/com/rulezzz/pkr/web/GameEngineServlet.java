@@ -1,6 +1,8 @@
 package com.rulezzz.pkr.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,41 +36,41 @@ public class GameEngineServlet extends HttpServlet {
         List<String> choiseList = new LinkedList<String>();
         switch (table.getGameStatus()) {
             case BETS: {
-                //req.getRequestDispatcher("/WEB-INF/jsp/nextDealParameters.jsp").forward(req, resp);
                 break;
             }
             case DRAWS: {
-                
-                              
-                for (int i = 0; i < table.getBoxes().size(); i++) {
-                    if (!req.getParameter("choise" + i).equals("draw")) {
-                        choiseList.add(req.getParameter("choise" + i));
-                    } else {
-                        StringBuilder drawChoise = new StringBuilder("draw ");
-                        for (Card card : table.getBox(i).getHand().getCards()) {
-                            if (req.getParameter(card.toString()) != null) {
-                                drawChoise.append(1);
-                            } else {
-                                drawChoise.append(0);
-                            }
-                        }
-                        choiseList.add(drawChoise.toString());
-                    }
-                }
-                //table.handleChoices(choiseList);
+                prepareChoices(table, req);
                 table.handleDetermination();
-                if (table.checkAllDeterminated()) {
+                if ( table.checkAllDeterminated() ) {
                     table.calculateDealResult();
                 }
                 break;
             }
             case DETERMINATION: {
-                for (PlayerBox box : table.getBoxes()) {
-                    if (box.getStatus() == BoxStatus.DETERMINATION) {
-                        choiseList.add(req.getParameter("choise" + table.getBoxes().indexOf(box)));
+                Iterator<PlayerBox> boxIter = table.getBoxes().iterator();
+                while (boxIter.hasNext()) {
+                    PlayerBox current = boxIter.next();
+                    if (current.getStatus() == BoxStatus.DETERMINATION) {
+                        int currentIndex = table.getBoxes().indexOf(current);
+                        String boxChoice = req.getParameter("choice" + currentIndex);
+                        switch(boxChoice) {
+                            case "bet" : {
+                                table.bet(currentIndex);
+                                break;
+                            }
+                            case "fold" : {
+                                table.fold(currentIndex);
+                                break;
+                            }
+                            case "insurance" : {
+                                break;
+                            }
+                            default : {
+                                break;
+                            }
+                        }
                     }
                 }
-                //table.handleChoices(choiseList);
                 break;
             }
             case SHOWDOWN: {
@@ -80,5 +82,35 @@ public class GameEngineServlet extends HttpServlet {
             }
         }
         req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
+    }
+    
+    public void prepareChoices(Table table, HttpServletRequest req) {
+        for (int boxIndex = table.getBoxes().size() - 1; boxIndex >= 0 ; boxIndex--) {
+            String choice = req.getParameter("choice" + boxIndex);
+            switch(choice) {
+                case "bet" : {
+                    table.bet(boxIndex);
+                    break;
+                }
+                case "fold" : {
+                    table.fold(boxIndex);
+                    break;
+                }
+                case "draw" : {
+                    List<Card> foldCards = new ArrayList<Card>();
+                    for ( Card card : table.getBox(boxIndex).getHand().getCards()) {
+                        if ( req.getParameter(card.toString()) == null ) {
+                            foldCards.add(card);
+                        }
+                    }
+                    table.draw(boxIndex, foldCards);
+                    break;
+                }
+                default : {
+                    break;
+                }
+            }
+        }
+        
     }
 }

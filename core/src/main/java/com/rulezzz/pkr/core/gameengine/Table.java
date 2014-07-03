@@ -20,8 +20,7 @@ public class Table implements Serializable {
     private static final long serialVersionUID = -3327856908669194148L;
 
     private FiveCardDataModel model = new FiveCardDataModel();
-    private static final String DRAW = "draw";
-
+    
     public Table() {
         model.setGameStatus(GameStatus.BETS);
     }
@@ -82,6 +81,7 @@ public class Table implements Serializable {
                         break;
                     }
                     default : {
+                        model.setGameStatus(GameStatus.BETS);
                     }
                 }
             }
@@ -109,8 +109,7 @@ public class Table implements Serializable {
     public void handleDetermination() {
         for (PlayerBox box : model.getPlayerBoxes()) {
             if (box.getStatus() == BoxStatus.DRAW) {
-                box.setCardsAfterDraw(generateDrawCardList(box
-                        .getCountOfNeededCards()));
+                box.setCardsAfterDraw(generateDrawCardList(box.getCountOfNeededCards()));
                 box.sort();
                 Collections.reverse(box.getHand().getCards());
                 break;
@@ -122,7 +121,6 @@ public class Table implements Serializable {
         List<Card> result = new LinkedList<Card>();
         for (int i = 0; i < count; i++) {
             result.add(model.getCardList().get(0));
-
             model.getCardList().remove(0);
         }
         return result;
@@ -170,19 +168,29 @@ public class Table implements Serializable {
         model.getPlayerBoxes().remove(boxIndex);
         model.setGameStatus(GameStatus.DETERMINATION);
     }
-
+    
     public void bet(int boxIndex) {
         PlayerBox box = model.getPlayerBoxes().get(boxIndex);
         box.play();
         model.setBankroll(-box.getBet());
         model.setGameStatus(GameStatus.DETERMINATION);
     }
-
-    public void draw(int boxIndex, Card... holdCards) {
+    
+    public void draw(int boxIndex, Card... foldCards) {
         PlayerBox box = model.getPlayerBoxes().get(boxIndex);
         model.setBankroll(-box.getAnte());
-        box.drawCards(holdCards);
+        box.drawCards(foldCards);
         model.setGameStatus(GameStatus.DETERMINATION);
     }
+
+    public void draw(int boxIndex, List<Card> foldCards) {
+        PlayerBox box = model.getPlayerBoxes().get(boxIndex);
+        model.setBankroll(-box.getAnte());
+        box.drawCards(foldCards);
+        model.setGameStatus(GameStatus.DETERMINATION);
+    }
+
+
+
 
 }

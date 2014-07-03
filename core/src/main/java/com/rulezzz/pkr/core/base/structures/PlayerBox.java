@@ -43,6 +43,18 @@ public class PlayerBox extends Box {
         getHand().setDrawStatus(true);
     }
     
+    public void drawCards(List<Card> foldCards) {
+        if (foldCards.size() > getHand().getCards().size()) {
+            throw new ArithmeticException("count of holding cards don't match count of cards on box");
+        }
+        List<Card> cards = getHand().getCards();
+        cards.removeAll(foldCards);
+        
+        countOfNeededCards = foldCards.size();
+        this.boxStatus = BoxStatus.DRAW;
+        getHand().setDrawStatus(true);        
+    }
+    
     public int getCountOfNeededCards() {
         return countOfNeededCards;
     }
@@ -80,6 +92,8 @@ public class PlayerBox extends Box {
     public int getPayment() {
         return this.handList.get(0).getHandICombination().getMultiplier() * this.bet;
     }
+
+
 }
 
 

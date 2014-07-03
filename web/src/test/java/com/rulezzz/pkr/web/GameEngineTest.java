@@ -1,11 +1,13 @@
 package com.rulezzz.pkr.web;
 
-import static org.mockito.Mockito.atLeast;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,7 +19,9 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.datamodels.GameStatus;
 import com.rulezzz.pkr.core.gameengine.Table;
 
 public class GameEngineTest {
@@ -38,26 +42,64 @@ public class GameEngineTest {
     }
     
     @Test
-    public void testGameEngineServlet() throws ServletException, IOException {        
-        table.makeBets(20, 25, 15);
+    public void testIfOneBoxDrawThenFold() throws ServletException, IOException{
+        table.makeBets(10);
         table.deal();
-        List<Card> handThatDraw = table.getBox(0).getHand().getCards();
-
-        when(req.getParameter(handThatDraw.get(0).toString())).thenReturn(null);
-        when(req.getParameter(handThatDraw.get(2).toString())).thenReturn(null);
-        when(req.getParameter(handThatDraw.get(4).toString())).thenReturn(null);
-        when(req.getParameter("choise0")).thenReturn("draw");
-        when(req.getParameter("choise1")).thenReturn("fold");
-        when(req.getParameter("choise2")).thenReturn("bet");
+        
+        when(req.getParameter("choice0")).thenReturn("draw");
         when(req.getSession()).thenReturn(session);
-        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp"))
-        .thenReturn(reqDispatcher);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
         
         session.setAttribute("table", table);
         GameEngineServlet engine = new GameEngineServlet();
         engine.doPost(req, resp);
         
-        verify(req, atLeast(1)).getSession(); 
+        when(req.getParameter("choice0")).thenReturn("fold");
+        
+        engine.doPost(req, resp);
+    }
+    
+    @Test
+    public void testComplexGameEngineServlet() throws ServletException, IOException {        
+        table.makeBets(20, 25, 15);
+        table.deal();
+        List<Card> handThatDraw = new ArrayList<Card>();
+        handThatDraw.addAll(table.getBox(0).getHand().getCards());
+
+        when(req.getParameter(handThatDraw.get(0).toString())).thenReturn(handThatDraw.get(0).toString());
+        when(req.getParameter(handThatDraw.get(1).toString())).thenReturn(handThatDraw.get(1).toString());
+        when(req.getParameter(handThatDraw.get(2).toString())).thenReturn(null);
+        when(req.getParameter(handThatDraw.get(3).toString())).thenReturn(null);
+        when(req.getParameter(handThatDraw.get(4).toString())).thenReturn(null);
+        when(req.getParameter("choice0")).thenReturn("draw");
+        when(req.getParameter("choice1")).thenReturn("fold");
+        when(req.getParameter("choice2")).thenReturn("bet");
+        when(req.getSession()).thenReturn(session);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
+        
+        session.setAttribute("table", table);
+        GameEngineServlet engine = new GameEngineServlet();
+        engine.doPost(req, resp);
+        
+        
+        verify(req, times(1)).getSession();
+        assertEquals(2, table.getBoxes().size());
+        assertEquals(5, table.getBox(0).getHand().getCards().size());
+        int newCardsCount = 0;
+        for (Card card : table.getBox(0).getHand().getCards()) {
+            if ( !handThatDraw.contains(card) ) {
+                newCardsCount++;
+            }
+        }
+        assertEquals(3, newCardsCount);
+        assertEquals(BoxStatus.BET, table.getBox(1).getStatus());
+        assertEquals(BoxStatus.DETERMINATION, table.getBox(0).getStatus());
+        assertEquals(GameStatus.DETERMINATION, table.getGameStatus());
+        
+        when(req.getParameter("choice0")).thenReturn("fold");
+        when(req.getParameter("choice1")).thenReturn(null);
+        
+        engine.doPost(req, resp);
         
     }
     
@@ -66,7 +108,7 @@ public class GameEngineTest {
         table.makeBets(10);
         table.deal();
         
-        when(req.getParameter("choise0")).thenReturn("fold");
+        when(req.getParameter("choice0")).thenReturn("fold");
         when(req.getSession()).thenReturn(session);
         when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp"))
         .thenReturn(reqDispatcher);
@@ -77,5 +119,27 @@ public class GameEngineTest {
         GameEngineServlet engine = new GameEngineServlet();
         engine.doPost(req, resp);
         engine.doPost(req, resp);
+    }
+    
+    @Test
+    public void testPrepareDrawPhase() {
+        table.makeBets(10, 15, 30);
+        table.deal();
+        List<Card> drawCards = table.getBox(0).getHand().getCards();
+        
+        when(req.getParameter("choice2")).thenReturn("fold");
+        when(req.getParameter("choice1")).thenReturn("bet");
+        when(req.getParameter("choice0")).thenReturn("draw");
+        
+        when(req.getParameter(drawCards.get(0).toString())).thenReturn(drawCards.get(0).toString());
+        when(req.getParameter(drawCards.get(1).toString())).thenReturn(drawCards.get(1).toString());
+        when(req.getParameter(drawCards.get(2).toString())).thenReturn(null);
+        when(req.getParameter(drawCards.get(3).toString())).thenReturn(null);
+        when(req.getParameter(drawCards.get(4).toString())).thenReturn(null);
+        
+        GameEngineServlet engine = new GameEngineServlet();
+        engine.prepareChoices(table, req);
+        assertEquals(2, table.getBoxes().size());
+        
     }
 }
