@@ -7,6 +7,7 @@ import com.rulezzz.pkr.core.base.structures.Box;
 import com.rulezzz.pkr.core.base.structures.Deck;
 import com.rulezzz.pkr.core.base.structures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.statuses.GameStatus;
 
 public class FiveCardDataModel {
 

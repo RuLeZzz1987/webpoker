@@ -1,11 +1,14 @@
 package com.rulezzz.pkr.web;
 
+import static com.rulezzz.pkr.core.combination.ComboSamples.getAceKingHigher;
+import static com.rulezzz.pkr.core.combination.ComboSamples.getAceKingLower;
+import static com.rulezzz.pkr.core.combination.ComboSamples.getDoesntQualifyOne;
+import static com.rulezzz.pkr.core.combination.ComboSamples.getPairAABCD;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static com.rulezzz.pkr.core.combination.ComboSamples.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,9 +25,8 @@ import org.junit.Test;
 
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
-import com.rulezzz.pkr.core.combination.ComboSamples;
-import com.rulezzz.pkr.core.datamodels.GameStatus;
 import com.rulezzz.pkr.core.gameengine.Table;
+import com.rulezzz.pkr.core.statuses.GameStatus;
 
 public class GameEngineTest {
     
@@ -42,6 +44,8 @@ public class GameEngineTest {
         reqDispatcher = mock(RequestDispatcher.class);
         table = new Table();
     }
+    
+
     
     @Test
     public void testIfOneBoxBetAndBuyGame() throws ServletException, IOException {

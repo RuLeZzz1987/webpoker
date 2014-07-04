@@ -3,8 +3,6 @@ package com.rulezzz.pkr.core.engine;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.util.LinkedList;
-
 import org.junit.Before;
 import org.junit.Test;
 

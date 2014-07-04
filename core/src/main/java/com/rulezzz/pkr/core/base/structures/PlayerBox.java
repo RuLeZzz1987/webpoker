@@ -95,9 +95,6 @@ public class PlayerBox extends Box {
         return result;
     }
 
-    public void setStatusBuyGame() {
-        this.boxStatus = BoxStatus.BUY_GAME;
-    }
 
 
 }

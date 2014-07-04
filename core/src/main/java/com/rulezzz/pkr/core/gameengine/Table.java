@@ -13,7 +13,7 @@ import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.combination.AbstractCombination;
 import com.rulezzz.pkr.core.datamodels.FiveCardDataModel;
-import com.rulezzz.pkr.core.datamodels.GameStatus;
+import com.rulezzz.pkr.core.statuses.GameStatus;
 
 public class Table implements Serializable {
 
@@ -67,8 +67,8 @@ public class Table implements Serializable {
     }
 
     public void calculateDealResult() {
-        if (model.getDealerBox().getHand().getHandICombination().getHighness() != 0) {
-            AbstractCombination dealerCombo = model.getDealerBox().getHand().getHandICombination();
+        AbstractCombination dealerCombo = model.getDealerBox().getHand().getHandICombination();
+        if (dealerCombo.getHighness() != 0) {
             for (PlayerBox box : model.getPlayerBoxes()) {
                 int compareResult = dealerCombo.compareTo(box.getHand().getHandICombination());
                 switch ( compareResult ) {
@@ -87,11 +87,12 @@ public class Table implements Serializable {
             }
             model.setGameStatus(GameStatus.SHOWDOWN);
         } else {
-            if (model.getPlayerBoxes().size() != 0) {
-                model.setGameStatus(GameStatus.DEALER_DNQ);
-            } else {
-                model.setGameStatus(GameStatus.SHOWDOWN);
-            }
+            
+                if (model.getPlayerBoxes().size() != 0) {
+                    model.setGameStatus(GameStatus.DEALER_DNQ);
+                } else {
+                    model.setGameStatus(GameStatus.SHOWDOWN);
+                }
         }
     }
     
@@ -199,7 +200,6 @@ public class Table implements Serializable {
     public void choiceBuyGameForDealer(int boxIndex) {
         PlayerBox box = model.getPlayerBoxes().get(boxIndex);
         model.setBankroll(-box.getAnte());
-        box.setStatusBuyGame();
     }
     
     public void buyGame() {
