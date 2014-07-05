@@ -87,12 +87,18 @@ public class Table implements Serializable {
             }
             model.setGameStatus(GameStatus.SHOWDOWN);
         } else {
-            
+            if (model.getGameStatus() != GameStatus.GAME_BOUGHT) {
                 if (model.getPlayerBoxes().size() != 0) {
                     model.setGameStatus(GameStatus.DEALER_DNQ);
                 } else {
                     model.setGameStatus(GameStatus.SHOWDOWN);
                 }
+            } else {
+                for (PlayerBox box : model.getPlayerBoxes()) {
+                    model.setBankroll(box.getAnte() + box.getBet());
+                }
+                model.setGameStatus(GameStatus.SHOWDOWN);
+            }
         }
     }
     
@@ -208,6 +214,7 @@ public class Table implements Serializable {
         model.getCardList().remove(0);
         model.getDealerBox().sort();
         Collections.reverse(model.getDealerBox().getHand().getCards());
+        model.setGameStatus(GameStatus.GAME_BOUGHT);
     }
 
 
