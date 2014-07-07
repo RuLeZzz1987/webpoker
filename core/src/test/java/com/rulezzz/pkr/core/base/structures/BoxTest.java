@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.engine;
+package com.rulezzz.pkr.core.base.structures;
 
 import java.util.LinkedList;
 import java.util.List;
