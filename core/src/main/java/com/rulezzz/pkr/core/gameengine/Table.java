@@ -2,14 +2,13 @@ package com.rulezzz.pkr.core.gameengine;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.rulezzz.pkr.core.base.structures.Box;
+import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.base.structures.Hand;
 import com.rulezzz.pkr.core.base.structures.PlayerBox;
-import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.combination.AbstractCombination;
 import com.rulezzz.pkr.core.datamodels.FiveCardDataModel;
@@ -38,11 +37,7 @@ public class Table implements Serializable {
     }
     
     public void deal() {
-        if (model.getGameStatus() != GameStatus.DEAL) {
-            throw new IllegalStateException("No money, no Cards!");
-        }
-        int k = Hand.FIVECARD;
-        for (int i = 0; i < k; i++) {
+        for (int i = 0; i < Hand.FIVECARD; i++) {
             for (PlayerBox b : model.getPlayerBoxes()) {
                 b.addCard(model.getCardList().get(0));
                 model.getCardList().remove(0);
@@ -139,15 +134,6 @@ public class Table implements Serializable {
             model.setBankroll(-bet);
         }
         model.setGameStatus(GameStatus.DEAL);
-    }
-
-    public void checkBoxStatus() {
-        Iterator<PlayerBox> iter = model.getPlayerBoxes().iterator();
-        while (iter.hasNext()) {
-            if (iter.next().getStatus() == BoxStatus.FOLD) {
-                iter.remove();
-            }
-        }
     }
 
     @Override

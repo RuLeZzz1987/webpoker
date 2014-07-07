@@ -1,10 +1,12 @@
 package com.rulezzz.pkr.core.gameengine;
 
 import static org.junit.Assert.assertEquals;
+import static com.rulezzz.pkr.core.combination.ComboSamples.*;
 
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.gameengine.Table;
+import com.rulezzz.pkr.core.statuses.GameStatus;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,5 +58,97 @@ public class TableTest {
         
         assertEquals(BoxStatus.DRAW, table.getBoxes().get(boxIndex).getStatus());
         assertEquals(3, table.getBoxes().get(boxIndex).getHand().getCards().size());
+    }
+    
+    @Test
+    public void testCalculateDealResultDealerQualify() {
+        table.setBankroll(1000);
+        table.makeBets(10, 15, 20);
+        table.deal();
+        table.getBox(0).getHand().getCards().clear();
+        table.getBox(1).getHand().getCards().clear();
+        table.getBox(2).getHand().getCards().clear();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getBox(0).setHand(getPairAABCD());
+        table.getBox(1).setHand(getFullHouseAAABB());
+        table.getBox(2).setHand(getStraight());
+        table.getDealerBox().setHand(getStraight());
+        table.bet(0);
+        table.bet(1);
+        table.bet(2);
+        table.calculateDealResult();
+        assertEquals(1180, table.getBankroll());
+        assertEquals(GameStatus.SHOWDOWN, table.getGameStatus());
+    }
+    
+    @Test
+    public void testCalculateDealResultDealerDNQandTakeAnte() {
+        table.setBankroll(1000);
+        table.makeBets(10);
+        table.deal();
+        table.getBox(0).getHand().getCards().clear();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getBox(0).setHand(getPairAABCD());
+        table.getDealerBox().setHand(getDoesntQualifyOne());
+        table.bet(0);
+        table.calculateDealResult();
+        assertEquals(GameStatus.DEALER_DNQ, table.getGameStatus());
+        table.takeAnte(0);
+        table.calculateDealResult();
+        assertEquals(GameStatus.SHOWDOWN, table.getGameStatus());
+        assertEquals(1010, table.getBankroll());
+    }
+    
+    @Test
+    public void testCalculateDealResultDealerDNQandBuyGameDealerDNQagain() {
+        table.setBankroll(1000);
+        table.makeBets(10);
+        table.deal();
+        table.getBox(0).getHand().getCards().clear();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getBox(0).setHand(getStraight());
+        table.getDealerBox().setHand(getDoesntQualifyOne());
+        table.bet(0);
+        table.calculateDealResult();
+        table.choiceBuyGameForDealer(0);
+        assertEquals(960, table.getBankroll());
+        table.buyGame();
+        assertEquals(GameStatus.GAME_BOUGHT, table.getGameStatus());
+        assertEquals(5, table.getDealerBox().getHand().getCards().size());
+        table.getDealerBox().getHand().getCards().clear();
+        table.getDealerBox().setHand(getDoesntQualifyOne());
+        table.calculateDealResult();
+        assertEquals(990, table.getBankroll());
+        assertEquals(GameStatus.SHOWDOWN, table.getGameStatus());
+        
+    }
+    
+    @Test
+    public void testCalculateDealResultDealerDNQandBuyGameThenDealerQualify() {
+        table.setBankroll(1000);
+        table.makeBets(10, 20);
+        table.deal();
+        table.getBox(0).getHand().getCards().clear();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getBox(0).setHand(getStraight());
+        table.getDealerBox().setHand(getDoesntQualifyOne());
+        assertEquals(false, table.checkAllDeterminated());
+        assertEquals(2, table.getBoxes().size());
+        table.bet(0);
+        table.fold(1);
+        assertEquals(1, table.getBoxes().size());
+        assertEquals(true, table.checkAllDeterminated());
+        table.calculateDealResult();
+        table.choiceBuyGameForDealer(0);
+        assertEquals(940, table.getBankroll());
+        table.buyGame();
+        assertEquals(GameStatus.GAME_BOUGHT, table.getGameStatus());
+        assertEquals(5, table.getDealerBox().getHand().getCards().size());
+        table.getDealerBox().getHand().getCards().clear();
+        table.getDealerBox().setHand(getPairAABCD());
+        table.calculateDealResult();
+        assertEquals(1050, table.getBankroll());
+        assertEquals(GameStatus.SHOWDOWN, table.getGameStatus());
+        
     }
 }
