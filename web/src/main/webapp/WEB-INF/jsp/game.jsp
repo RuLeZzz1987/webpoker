@@ -60,7 +60,7 @@
                     <td class="handDiscription">
                         <div class="whiteChip">
                             <div class="mid">${box.ante}</div>
-                        </div> <br> ${box.hand.handICombination.name}
+                        </div> <br> ${box.hand.handAbstractCombination.name}
                     </td>
                     <td class="choises"><c:choose>
                             <c:when test="${table.gameStatus eq 'DRAWS'}">
