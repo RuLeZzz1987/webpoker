@@ -45,6 +45,31 @@ public class GameEngineTest {
         table = new Table();
     }
     
+    @Test
+    public void testIfOneBoxBetAndTakeAnte() throws ServletException, IOException {
+        table.setBankroll(1000);
+        table.makeBets(10);
+        table.deal();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getDealerBox().setHand(getDoesntQualifyOne());
+        table.getBox(0).getHand().getCards().clear();
+        table.getBox(0).setHand(getPairAABCD());
+        
+        when(req.getParameter("choice0")).thenReturn("bet");
+        when(req.getSession()).thenReturn(session);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
+        
+        session.setAttribute("table", table);
+        GameEngineServlet engine = new GameEngineServlet();
+        
+        engine.doGet(req, resp);
+        engine.doPost(req, resp);
+        
+        when(req.getParameter("choice0")).thenReturn("ante");
+        
+        engine.doPost(req, resp);
+    }
+    
 
     
     @Test
@@ -63,6 +88,8 @@ public class GameEngineTest {
         
         session.setAttribute("table", table);
         GameEngineServlet engine = new GameEngineServlet();
+        
+        engine.doGet(req, resp);
         engine.doPost(req, resp);
         
         when(req.getParameter("choice0")).thenReturn("buy_game");

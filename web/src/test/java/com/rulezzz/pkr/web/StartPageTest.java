@@ -27,6 +27,7 @@ public class StartPageTest {
     public void testStartPage() throws ServletException, IOException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
+        HttpServletRequest startReq = mock(HttpServletRequest.class);
         HttpSession session = MockSession.createMockSession();
         RequestDispatcher reqDispatcher = mock(RequestDispatcher.class);
         List<String> testBets = new LinkedList<String>();
@@ -46,10 +47,12 @@ public class StartPageTest {
                 when(req.getParameter("bankroll")).thenReturn("1000");
                 when(req.getParameter("bet")).thenReturn(bets);
                 when(req.getSession()).thenReturn(session);
-                when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp"))
-                        .thenReturn(reqDispatcher);
+                when(startReq.getRequestDispatcher("/WEB-INF/jsp/startPage.jsp")).thenReturn(reqDispatcher);
+                when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
 
                 StartPageServlet startPage = new StartPageServlet();
+
+                startPage.doGet(startReq, resp);
                 startPage.doPost(req, resp);
 
                 verify(req, atLeast(1)).getSession();

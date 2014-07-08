@@ -32,9 +32,6 @@ public class GameEngineServlet extends HttpServlet {
             throws ServletException, IOException {
         Table table = (Table) req.getSession().getAttribute("table");
         switch (table.getGameStatus()) {
-            case BETS: {
-                break;
-            }
             case DRAWS: {
                 prepareChoices(table, req);
                 table.handleDetermination();
