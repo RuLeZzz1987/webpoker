@@ -49,25 +49,7 @@ public class GameEngineServlet extends HttpServlet {
                 return;
             }
             case DEALER_DNQ: {
-                int boxIndex = table.getBoxes().size() - 1;
-                while ( boxIndex >= 0 ) {
-                    String choice = req.getParameter("choice" + boxIndex);
-                    switch (choice) {
-                        case "ante" : {
-                            table.takeAnte(boxIndex);
-                            break;
-                        }
-                        case "buy_game" : {
-                            table.choiceBuyGameForDealer(boxIndex);
-                            break;
-                        }
-                        default : {
-                            break;
-                        }
-                    }
-                    boxIndex--;
-                }
-                table.buyGame();
+                handleChoiceAfterDealerDNQ(req, table);
                 break;
             }
             default: {
@@ -78,6 +60,28 @@ public class GameEngineServlet extends HttpServlet {
             table.calculateDealResult();
         }
         req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
+    }
+
+    private void handleChoiceAfterDealerDNQ(HttpServletRequest req, Table table) {
+        int boxIndex = table.getBoxes().size() - 1;
+        while ( boxIndex >= 0 ) {
+            String choice = req.getParameter("choice" + boxIndex);
+            switch (choice) {
+                case "ante" : {
+                    table.takeAnte(boxIndex);
+                    break;
+                }
+                case "buy_game" : {
+                    table.choiceBuyGameForDealer(boxIndex);
+                    break;
+                }
+                default : {
+                    break;
+                }
+            }
+            boxIndex--;
+        }
+        table.buyGame();
     }
 
     private void handleChoiceAfterDrawPhase(HttpServletRequest req, Table table) {

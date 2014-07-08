@@ -1,9 +1,9 @@
 package com.rulezzz.pkr.web;
 
-import static com.rulezzz.pkr.core.combination.ComboSamples.getAceKingHigher;
-import static com.rulezzz.pkr.core.combination.ComboSamples.getAceKingLower;
-import static com.rulezzz.pkr.core.combination.ComboSamples.getDoesntQualifyOne;
-import static com.rulezzz.pkr.core.combination.ComboSamples.getPairAABCD;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getAceKingHigher;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getAceKingLower;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getDoesntQualifyOne;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getPairAABCD;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;

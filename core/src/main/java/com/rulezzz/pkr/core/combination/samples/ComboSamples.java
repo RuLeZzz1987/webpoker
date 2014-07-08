@@ -1,4 +1,4 @@
-package com.rulezzz.pkr.core.combination;
+package com.rulezzz.pkr.core.combination.samples;
 
 import com.rulezzz.pkr.core.base.structures.Hand;
 import com.rulezzz.pkr.core.card.Card;
@@ -7,6 +7,7 @@ import com.rulezzz.pkr.core.card.CardSuit;
 public class ComboSamples {
     
 
+    private ComboSamples() {}
     
     public static Hand getDoesntQualifyOne() {
         Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),

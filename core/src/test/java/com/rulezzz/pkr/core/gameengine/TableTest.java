@@ -1,7 +1,7 @@
 package com.rulezzz.pkr.core.gameengine;
 
 import static org.junit.Assert.assertEquals;
-import static com.rulezzz.pkr.core.combination.ComboSamples.*;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.*;
 
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;

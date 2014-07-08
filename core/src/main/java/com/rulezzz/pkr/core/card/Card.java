@@ -1,5 +1,7 @@
 package com.rulezzz.pkr.core.card;
 
+import java.util.HashMap;
+
 import com.google.common.base.Objects;
 
 public class Card implements Comparable<Card> {
@@ -9,14 +11,24 @@ public class Card implements Comparable<Card> {
     public static final int QUEEN_SCORE = 12;
     public static final int JACK_SCORE = 11;
     public static final int TEN_SCORE = 10;
-    
+    private static HashMap<Character, Integer> parseCharRateToInt;
+
     private static final int MAX_NONCHAR_RANK = 9;
-    
+
     static final int DELTAUT_FCHAR = 48;
-    
+
     private CardSuit suit;
     private char rate;
     private int score;
+
+    static {
+        parseCharRateToInt = new HashMap<Character, Integer>();
+        parseCharRateToInt.put('A', 14);
+        parseCharRateToInt.put('K', 13);
+        parseCharRateToInt.put('Q', 12);
+        parseCharRateToInt.put('J', 11);
+        parseCharRateToInt.put('T', 10);
+    }
 
     public Card(final CardSuit cardSuit, final int cardRate, final int cardScore) {
         this.score = cardScore;
@@ -24,8 +36,7 @@ public class Card implements Comparable<Card> {
         setRate(cardRate);
     }
 
-    public Card(final CardSuit cardSuit, final char cardRate,
-            final int cardScore) {
+    public Card(final CardSuit cardSuit, final char cardRate, final int cardScore) {
         this.score = cardScore;
         this.suit = cardSuit;
         this.rate = cardRate;
@@ -34,30 +45,10 @@ public class Card implements Comparable<Card> {
     public Card(final CardSuit cardSuit, final char cardRate) {
         this.suit = cardSuit;
         this.rate = cardRate;
-        switch ( cardRate ) {
-            case 'A' : {
-                this.score = ACE_SCORE;
-                break;
-            }
-            case 'K' : {
-                this.score = KING_SCORE;
-                break;
-            }
-            case 'Q' : {
-                this.score = QUEEN_SCORE;
-                break;
-            }
-            case 'J' : {
-                this.score = JACK_SCORE;
-                break;
-            }
-            case 'T' : {
-                this.score = TEN_SCORE;
-                break;
-            }
-            default : {
-                this.score = cardRate - DELTAUT_FCHAR;
-            }
+        try {
+            this.score = parseCharRateToInt.get(cardRate);
+        } catch (NullPointerException e) {
+            this.score = cardRate - DELTAUT_FCHAR;
         }
     }
 
@@ -68,7 +59,7 @@ public class Card implements Comparable<Card> {
     public char getRate() {
         return this.rate;
     }
-    
+
     public boolean equalsByRate(final Object obj) {
         if (obj == null) {
             return false;
@@ -104,7 +95,6 @@ public class Card implements Comparable<Card> {
 
     public int getScore() {
         return this.score;
-
     }
 
     @Override
@@ -138,8 +128,7 @@ public class Card implements Comparable<Card> {
                     break;
                 }
                 default : {
-                    throw new IllegalArgumentException(
-                            "Unknow card rate.(2-9, T, J, Q, K, A");
+                    throw new IllegalArgumentException("Unknow card rate.(2-9, T, J, Q, K, A");
                 }
             }
         }

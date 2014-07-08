@@ -1,11 +1,12 @@
 package com.rulezzz.pkr.core.combination;
 
 import static org.junit.Assert.*;
-import static com.rulezzz.pkr.core.combination.ComboSamples.*;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 
 
