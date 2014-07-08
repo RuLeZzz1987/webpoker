@@ -27,7 +27,7 @@ public class CardsDraw {
 
     public Boolean isSameSet(CardsDraw draw) {
         draw.sort();
-        sort();
+        this.sort();
         for (int i = 0; i < this.cardsForChange.size(); i++) {
             if (draw.getDrawList().get(i) != this.cardsForChange.get(i)) {
                 return false;

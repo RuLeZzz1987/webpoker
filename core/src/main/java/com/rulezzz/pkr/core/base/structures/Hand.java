@@ -67,7 +67,7 @@ public class Hand implements Comparable<Hand>{
         return true;
     }
 
-    public AbstractCombination getHandICombination() {
+    public AbstractCombination getHandAbstractCombination() {
         Collections.sort(this.cards);
         Collections.reverse(this.cards);
         if (drawStatus) {
@@ -244,7 +244,7 @@ public class Hand implements Comparable<Hand>{
             return false;
         }
         final Hand other = (Hand) obj;
-        return Objects.equal(this.getHandICombination(), other.getHandICombination());
+        return Objects.equal(this.getHandAbstractCombination(), other.getHandAbstractCombination());
     }
 
     @Override
@@ -254,6 +254,6 @@ public class Hand implements Comparable<Hand>{
 
     @Override
     public int compareTo(Hand other) {
-        return this.getHandICombination().compareTo(other.getHandICombination());
+        return this.getHandAbstractCombination().compareTo(other.getHandAbstractCombination());
     }
 }

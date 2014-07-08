@@ -10,7 +10,7 @@ import com.rulezzz.pkr.core.card.CardSuit;
 public class CardTest {
 
     @Test
-    public void testIsSameCard() {
+    public void testEqualsCard() {
         Card card1 = new Card(CardSuit.CLUBS, 'A');
         Card card2 = new Card(CardSuit.CLUBS, 'A');
         assertTrue(card1.equals(card2));
@@ -20,6 +20,9 @@ public class CardTest {
         
         assertFalse(card1.equals(null));
         assertFalse(card1.equals(new Object()));
+        
+        assertFalse(card1.equalsByRate(null));
+        assertFalse(card1.equalsByRate(new Object()));
     }
 
     @Test

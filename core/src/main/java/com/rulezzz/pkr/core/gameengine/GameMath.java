@@ -10,8 +10,7 @@ public final class GameMath {
     private static int f = 0;
     private static List<ArrayList<Card>> combin = new ArrayList<ArrayList<Card>>();
 
-    private GameMath() {
-    }
+    private GameMath() {}
 
     public static List<ArrayList<Card>> generateCombinations(List<Card> list,
             int k) {

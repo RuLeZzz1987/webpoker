@@ -11,6 +11,7 @@ import com.rulezzz.pkr.core.statuses.GameStatus;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableTest {
@@ -20,6 +21,44 @@ public class TableTest {
     @Before
     public void setUp() {
         table = new Table();
+    }
+    
+    @Test
+    public void testDefaultBets(){
+        table.makeBets(10, 15);
+        table.deal();
+        
+        assertEquals(2, table.getDefaultBets().size());
+        assertEquals(10, table.getDefaultBets().get(0).intValue());
+        assertEquals(15, table.getDefaultBets().get(1).intValue());
+    }
+    
+    @Test
+    public void testBoxDraw(){
+        table.updateDeck();
+        table.setBankroll(1000);
+        table.makeBets(10);
+        table.deal();
+        
+        List<Card> foldCards = new ArrayList<Card>();
+        foldCards.add(table.getBox(0).getHand().getCards().get(2));
+        foldCards.add(table.getBox(0).getHand().getCards().get(3));
+        foldCards.add(table.getBox(0).getHand().getCards().get(4));
+        
+        table.draw(0, foldCards);
+        
+        assertEquals(2, table.getBox(0).getHand().getCards().size());
+        assertEquals(980, table.getBankroll());
+        assertEquals(BoxStatus.DRAW, table.getBox(0).getStatus());
+        
+        table.handleDetermination();
+        
+        assertEquals(5, table.getBox(0).getHand().getCards().size());
+        
+        table.bet(0);
+        table.handleDetermination();
+        
+        assertEquals(BoxStatus.BET, table.getBox(0).getStatus());
     }
     
     @Test
@@ -77,6 +116,7 @@ public class TableTest {
         table.bet(1);
         table.bet(2);
         table.calculateDealResult();
+        
         assertEquals(1180, table.getBankroll());
         assertEquals(GameStatus.SHOWDOWN, table.getGameStatus());
     }
@@ -92,9 +132,12 @@ public class TableTest {
         table.getDealerBox().setHand(getDoesntQualifyOne());
         table.bet(0);
         table.calculateDealResult();
+        
         assertEquals(GameStatus.DEALER_DNQ, table.getGameStatus());
+        
         table.takeAnte(0);
         table.calculateDealResult();
+        
         assertEquals(GameStatus.SHOWDOWN, table.getGameStatus());
         assertEquals(1010, table.getBankroll());
     }
@@ -111,13 +154,18 @@ public class TableTest {
         table.bet(0);
         table.calculateDealResult();
         table.choiceBuyGameForDealer(0);
+        
         assertEquals(960, table.getBankroll());
+        
         table.buyGame();
+        
         assertEquals(GameStatus.GAME_BOUGHT, table.getGameStatus());
         assertEquals(5, table.getDealerBox().getHand().getCards().size());
+        
         table.getDealerBox().getHand().getCards().clear();
         table.getDealerBox().setHand(getDoesntQualifyOne());
         table.calculateDealResult();
+        
         assertEquals(990, table.getBankroll());
         assertEquals(GameStatus.SHOWDOWN, table.getGameStatus());
         
@@ -132,21 +180,30 @@ public class TableTest {
         table.getDealerBox().getHand().getCards().clear();
         table.getBox(0).setHand(getStraight());
         table.getDealerBox().setHand(getDoesntQualifyOne());
+        
         assertEquals(false, table.checkAllDeterminated());
         assertEquals(2, table.getBoxes().size());
+        
         table.bet(0);
         table.fold(1);
+        
         assertEquals(1, table.getBoxes().size());
         assertEquals(true, table.checkAllDeterminated());
+        
         table.calculateDealResult();
         table.choiceBuyGameForDealer(0);
+        
         assertEquals(940, table.getBankroll());
+        
         table.buyGame();
+        
         assertEquals(GameStatus.GAME_BOUGHT, table.getGameStatus());
         assertEquals(5, table.getDealerBox().getHand().getCards().size());
+        
         table.getDealerBox().getHand().getCards().clear();
         table.getDealerBox().setHand(getPairAABCD());
         table.calculateDealResult();
+        
         assertEquals(1050, table.getBankroll());
         assertEquals(GameStatus.SHOWDOWN, table.getGameStatus());
         

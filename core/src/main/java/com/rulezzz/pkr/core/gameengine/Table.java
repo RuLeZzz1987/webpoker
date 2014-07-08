@@ -21,95 +21,95 @@ public class Table implements Serializable {
     private FiveCardDataModel model = new FiveCardDataModel();
     
     public Table() {
-        model.setGameStatus(GameStatus.BETS);
+        this.model.setGameStatus(GameStatus.BETS);
     }
     
     public void updateDeck(){
-        model.updateCardList();
+        this.model.updateCardList();
     }
     
     public List<Integer> getDefaultBets() {
-        return model.getDefaultBets();
+        return this.model.getDefaultBets();
     }
 
     public GameStatus getGameStatus() {
-        return model.getGameStatus();
+        return this.model.getGameStatus();
     }
     
     public void deal() {
         for (int i = 0; i < Hand.FIVECARD; i++) {
-            for (PlayerBox b : model.getPlayerBoxes()) {
-                b.addCard(model.getCardList().get(0));
-                model.getCardList().remove(0);
+            for (PlayerBox b : this.model.getPlayerBoxes()) {
+                b.addCard(this.model.getCardList().get(0));
+                this.model.getCardList().remove(0);
             }
-            model.getDealerBox().addCard(model.getCardList().get(0));
-            model.getCardList().remove(0);
+            this.model.getDealerBox().addCard(this.model.getCardList().get(0));
+            this.model.getCardList().remove(0);
         }
-        for (PlayerBox b : model.getPlayerBoxes()) {
+        for (PlayerBox b : this.model.getPlayerBoxes()) {
             b.sort();
             Collections.reverse(b.getHand().getCards());
-            model.setDefaultBets(b.getAnte());
+            this.model.setDefaultBets(b.getAnte());
         }
-        model.setGameStatus(GameStatus.DRAWS);
+        this.model.setGameStatus(GameStatus.DRAWS);
     }
 
     public List<PlayerBox> getBoxes() {
-        return model.getPlayerBoxes();
+        return this.model.getPlayerBoxes();
     }
 
-    public PlayerBox getBox(int i) {
-        return model.getPlayerBoxes().get(i);
+    public PlayerBox getBox(final int i) {
+        return this.model.getPlayerBoxes().get(i);
     }
 
     public void calculateDealResult() {
-        AbstractCombination dealerCombo = model.getDealerBox().getHand().getHandICombination();
+        final AbstractCombination dealerCombo = this.model.getDealerBox().getHand().getHandAbstractCombination();
         if (dealerCombo.getHighness() != 0) {
-            for (PlayerBox box : model.getPlayerBoxes()) {
-                int compareResult = dealerCombo.compareTo(box.getHand().getHandICombination());
+            for (PlayerBox box : this.model.getPlayerBoxes()) {
+                final int compareResult = dealerCombo.compareTo(box.getHand().getHandAbstractCombination());
                 switch ( compareResult ) {
                     case 0 : {
-                        model.setBankroll(box.getAnte() + box.getBet());
+                        this.model.setBankroll(box.getAnte() + box.getBet());
                         break;
                     }
                     case -1 : {
-                        model.setBankroll(box.getAnte() + box.getBet() + box.getPayment());
+                        this.model.setBankroll(box.getAnte() + box.getBet() + box.getPayment());
                         break;
                     }
                     default : {
-                        model.setGameStatus(GameStatus.BETS);
+                        this.model.setGameStatus(GameStatus.BETS);
                     }
                 }
             }
-            model.setGameStatus(GameStatus.SHOWDOWN);
+            this.model.setGameStatus(GameStatus.SHOWDOWN);
         } else {
-            if (model.getGameStatus() != GameStatus.GAME_BOUGHT) {
-                if (model.getPlayerBoxes().size() != 0) {
-                    model.setGameStatus(GameStatus.DEALER_DNQ);
+            if (this.model.getGameStatus() != GameStatus.GAME_BOUGHT) {
+                if (this.model.getPlayerBoxes().size() != 0) {
+                    this.model.setGameStatus(GameStatus.DEALER_DNQ);
                 } else {
-                    model.setGameStatus(GameStatus.SHOWDOWN);
+                    this.model.setGameStatus(GameStatus.SHOWDOWN);
                 }
             } else {
-                for (PlayerBox box : model.getPlayerBoxes()) {
-                    model.setBankroll(box.getAnte() + box.getBet());
+                for (PlayerBox box : this.model.getPlayerBoxes()) {
+                    this.model.setBankroll(box.getAnte() + box.getBet());
                 }
-                model.setGameStatus(GameStatus.SHOWDOWN);
+                this.model.setGameStatus(GameStatus.SHOWDOWN);
             }
         }
     }
     
     public boolean checkAllDeterminated(){
-            for (PlayerBox box : model.getPlayerBoxes()) {
+            for (PlayerBox box : this.model.getPlayerBoxes()) {
                 if ( box.getStatus() != BoxStatus.BET) {
                     return false;
                 }
             }
-            model.getDealerBox().sort();
-            Collections.reverse(model.getDealerBox().getHand().getCards());
+            this.model.getDealerBox().sort();
+            Collections.reverse(this.model.getDealerBox().getHand().getCards());
             return true;
     }
 
     public void handleDetermination() {
-        for (PlayerBox box : model.getPlayerBoxes()) {
+        for (PlayerBox box : this.model.getPlayerBoxes()) {
             if (box.getStatus() == BoxStatus.DRAW) {
                 box.setCardsAfterDraw(generateDrawCardList(box.getCountOfNeededCards()));
                 box.sort();
@@ -119,88 +119,88 @@ public class Table implements Serializable {
         }
     }
 
-    private List<Card> generateDrawCardList(int count) {
-        List<Card> result = new LinkedList<Card>();
+    private List<Card> generateDrawCardList(final int count) {
+        final List<Card> result = new LinkedList<Card>();
         for (int i = 0; i < count; i++) {
-            result.add(model.getCardList().get(0));
-            model.getCardList().remove(0);
+            result.add(this.model.getCardList().get(0));
+            this.model.getCardList().remove(0);
         }
         return result;
     }
 
     public void makeBets(int... bets) {
         for (int bet: bets) {
-            model.getPlayerBoxes().add(new PlayerBox(bet));
-            model.setBankroll(-bet);
+            this.model.getPlayerBoxes().add(new PlayerBox(bet));
+            this.model.setBankroll(-bet);
         }
-        model.setGameStatus(GameStatus.DEAL);
+        this.model.setGameStatus(GameStatus.DEAL);
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < model.getPlayerBoxes().size(); i++) {
-            result.append(" " + model.getPlayerBoxes().get(i).toString());
+        for (int i = 0; i < this.model.getPlayerBoxes().size(); i++) {
+            result.append(" " + this.model.getPlayerBoxes().get(i).toString());
         }
-        return result.toString() + " | " + model.getDealerBox().getHand().toString();
+        return result.toString() + " | " + this.model.getDealerBox().getHand().toString();
     }
 
     public Box getDealerBox() {
-        return model.getDealerBox();
+        return this.model.getDealerBox();
     }
 
     public void setBankroll(int bankroll) {
-        model.setBankroll(bankroll);
+        this.model.setBankroll(bankroll);
     }
     
     public int getBankroll(){
-        return model.getBankroll();
+        return this.model.getBankroll();
     }
 
-    public void fold(int boxIndex) {
-        model.getPlayerBoxes().remove(boxIndex);
-        model.setGameStatus(GameStatus.DETERMINATION);
+    public void fold(final int boxIndex) {
+        this.model.getPlayerBoxes().remove(boxIndex);
+        this.model.setGameStatus(GameStatus.DETERMINATION);
     }
     
-    public void bet(int boxIndex) {
-        PlayerBox box = model.getPlayerBoxes().get(boxIndex);
+    public void bet(final int boxIndex) {
+        final PlayerBox box = this.model.getPlayerBoxes().get(boxIndex);
         box.play();
-        model.setBankroll(-box.getBet());
-        model.setGameStatus(GameStatus.DETERMINATION);
+        this.model.setBankroll(-box.getBet());
+        this.model.setGameStatus(GameStatus.DETERMINATION);
     }
     
-    public void draw(int boxIndex, Card... foldCards) {
-        PlayerBox box = model.getPlayerBoxes().get(boxIndex);
-        model.setBankroll(-box.getAnte());
+    public void draw(final int boxIndex, Card... foldCards) {
+        final PlayerBox box = this.model.getPlayerBoxes().get(boxIndex);
+        this.model.setBankroll(-box.getAnte());
         box.drawCards(foldCards);
-        model.setGameStatus(GameStatus.DETERMINATION);
+        this.model.setGameStatus(GameStatus.DETERMINATION);
     }
 
-    public void draw(int boxIndex, List<Card> foldCards) {
-        PlayerBox box = model.getPlayerBoxes().get(boxIndex);
-        model.setBankroll(-box.getAnte());
+    public void draw(final int boxIndex, List<Card> foldCards) {
+        final PlayerBox box = this.model.getPlayerBoxes().get(boxIndex);
+        this.model.setBankroll(-box.getAnte());
         box.drawCards(foldCards);
-        model.setGameStatus(GameStatus.DETERMINATION);
+        this.model.setGameStatus(GameStatus.DETERMINATION);
     }
     
-    public void takeAnte(int boxIndex) {
-        PlayerBox box = model.getPlayerBoxes().get(boxIndex);
-        model.setBankroll(box.getAnte() + box.getBet() + box.getAnte());
-        model.getPlayerBoxes().remove(boxIndex);
+    public void takeAnte(final int boxIndex) {
+        PlayerBox box = this.model.getPlayerBoxes().get(boxIndex);
+        this.model.setBankroll(box.getAnte() + box.getBet() + box.getAnte());
+        this.model.getPlayerBoxes().remove(boxIndex);
     }
 
-    public void choiceBuyGameForDealer(int boxIndex) {
-        PlayerBox box = model.getPlayerBoxes().get(boxIndex);
-        model.setBankroll(-box.getAnte());
+    public void choiceBuyGameForDealer(final int boxIndex) {
+        PlayerBox box = this.model.getPlayerBoxes().get(boxIndex);
+        this.model.setBankroll(-box.getAnte());
     }
     
     public void buyGame() {
-        model.getDealerBox().getHand().getCards().remove(0);
-        model.getDealerBox().addCard(model.getCardList().get(0));
-        model.getCardList().remove(0);
-        model.getDealerBox().sort();
-        Collections.reverse(model.getDealerBox().getHand().getCards());
-        model.setGameStatus(GameStatus.GAME_BOUGHT);
+        this.model.getDealerBox().getHand().getCards().remove(0);
+        this.model.getDealerBox().addCard(this.model.getCardList().get(0));
+        this.model.getCardList().remove(0);
+        this.model.getDealerBox().sort();
+        Collections.reverse(this.model.getDealerBox().getHand().getCards());
+        this.model.setGameStatus(GameStatus.GAME_BOUGHT);
     }
 
 

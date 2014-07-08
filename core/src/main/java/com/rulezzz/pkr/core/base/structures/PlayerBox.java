@@ -91,7 +91,7 @@ public class PlayerBox extends Box {
     }
 
     public int getPayment() {
-        return this.getHand().getHandICombination().getMultiplier() * this.bet;
+        return this.getHand().getHandAbstractCombination().getMultiplier() * this.bet;
     }
 
 
