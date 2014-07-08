@@ -4,7 +4,7 @@ import com.rulezzz.pkr.core.base.structures.Hand;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
 
-public class ComboSamples {
+public final class ComboSamples {
     
 
     private ComboSamples() {}

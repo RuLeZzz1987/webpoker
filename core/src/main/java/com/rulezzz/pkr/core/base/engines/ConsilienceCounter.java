@@ -1,6 +1,8 @@
 package com.rulezzz.pkr.core.base.engines;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.rulezzz.pkr.core.base.structures.Hand;
 import com.rulezzz.pkr.core.card.Card;
@@ -13,6 +15,15 @@ public class ConsilienceCounter {
     private int consilience1 = 0;
     private int flagFirstPairFound = 0;
     private List<Card> hand;
+    private static Map<Integer, ConsilienceCount> consilCount;
+    
+    static {
+        consilCount = new HashMap<Integer, ConsilienceCount>();
+        consilCount.put(0, ConsilienceCount.NOCONSILIENCE);
+        consilCount.put(1, ConsilienceCount.PAIR);
+        consilCount.put(2, ConsilienceCount.SET);
+        consilCount.put(3, ConsilienceCount.SQUARE);
+    }
 
     public ConsilienceCounter(List<Card> incomeHand) {
         if (incomeHand.size() != Hand.FIVECARD) {
@@ -71,23 +82,7 @@ public class ConsilienceCounter {
     }
     
     private ConsilienceCount getEnumCountFromInt(int count) {
-        switch(count) {
-            case 0: {
-                return ConsilienceCount.NOCONSILIENCE;
-            }
-            case 1: {
-                return ConsilienceCount.PAIR;
-            }
-            case 2: {
-                return ConsilienceCount.SET;
-            }
-            case 3: {
-                return ConsilienceCount.SQUARE;
-            }
-            default : {
-                throw new ArithmeticException("unknown consilience count");
-            }
-        }
+        return consilCount.get(count);
     }
 
 }

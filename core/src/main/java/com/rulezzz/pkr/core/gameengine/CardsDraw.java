@@ -3,14 +3,13 @@ package com.rulezzz.pkr.core.gameengine;
 import java.util.Collections;
 import java.util.List;
 
-import com.rulezzz.pkr.core.base.structures.Hand;
 import com.rulezzz.pkr.core.card.Card;
 
 public class CardsDraw {
 
     private List<Card> cardsForChange;
 
-    public CardsDraw(Hand hand, List<Card> knownCards, List<Card> cardsForChange) {
+    public CardsDraw(List<Card> cardsForChange) {
         this.cardsForChange = cardsForChange;
     }
 

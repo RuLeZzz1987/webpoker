@@ -1,6 +1,7 @@
 package com.rulezzz.pkr.core.card;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.google.common.base.Objects;
 
@@ -11,7 +12,9 @@ public class Card implements Comparable<Card> {
     public static final int QUEEN_SCORE = 12;
     public static final int JACK_SCORE = 11;
     public static final int TEN_SCORE = 10;
-    private static HashMap<Character, Integer> parseCharRateToInt;
+    private static Map<Character, Integer> parseCharRateToInt;
+
+
 
     private static final int MAX_NONCHAR_RANK = 9;
 
@@ -20,14 +23,15 @@ public class Card implements Comparable<Card> {
     private CardSuit suit;
     private char rate;
     private int score;
+    
 
     static {
         parseCharRateToInt = new HashMap<Character, Integer>();
-        parseCharRateToInt.put('A', 14);
-        parseCharRateToInt.put('K', 13);
-        parseCharRateToInt.put('Q', 12);
-        parseCharRateToInt.put('J', 11);
-        parseCharRateToInt.put('T', 10);
+        parseCharRateToInt.put('A', ACE_SCORE);
+        parseCharRateToInt.put('K', KING_SCORE);
+        parseCharRateToInt.put('Q', QUEEN_SCORE);
+        parseCharRateToInt.put('J', JACK_SCORE);
+        parseCharRateToInt.put('T', TEN_SCORE);
     }
 
     public Card(final CardSuit cardSuit, final int cardRate, final int cardScore) {
@@ -45,9 +49,9 @@ public class Card implements Comparable<Card> {
     public Card(final CardSuit cardSuit, final char cardRate) {
         this.suit = cardSuit;
         this.rate = cardRate;
-        try {
+        if ( parseCharRateToInt.containsKey(cardRate) ) {
             this.score = parseCharRateToInt.get(cardRate);
-        } catch (NullPointerException e) {
+        } else {
             this.score = cardRate - DELTAUT_FCHAR;
         }
     }
