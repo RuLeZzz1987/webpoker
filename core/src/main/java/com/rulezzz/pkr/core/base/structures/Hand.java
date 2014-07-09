@@ -1,6 +1,7 @@
 package com.rulezzz.pkr.core.base.structures;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import com.rulezzz.pkr.core.base.engines.ConsilienceCount;
 import com.rulezzz.pkr.core.base.engines.ConsilienceCounter;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.combination.*;
+import com.rulezzz.pkr.core.gameengine.GameMath;
 
 
 public class Hand implements Comparable<Hand>{
@@ -18,74 +20,123 @@ public class Hand implements Comparable<Hand>{
     public static final int FIVECARD = 5;
     private static final int DELTAFLC = 4;
     private static final int DELTAFLCWH = 9;
-    private List<Card> cards = new ArrayList<Card>();
+    private List<Card> mainComboCards = new ArrayList<Card>();
+    private List<Card> additComboCards = new ArrayList<Card>();
+    private List<Card> wholeCards = new ArrayList<Card>();
     private Boolean drawStatus = false;
-
+    private AbstractCombination main;
+    private AbstractCombination additional;
+    private Boolean flChangesInHand;
+    
     public void setDrawStatus(Boolean status) {
         this.drawStatus = status;
+        this.flChangesInHand = true;
     }
 
     public Hand(Card... card) {
         for (int i = 0; i < card.length; i++) {
-            this.cards.add(card[i]);
+            this.wholeCards.add(card[i]);
         }
+        this.flChangesInHand = true;
     }
 
     public Hand() {
+        this.flChangesInHand = true;
     }
 
     public void add(Card card) {
-        this.cards.add(card);
+        this.wholeCards.add(card);
+        this.flChangesInHand = true;
     }
 
     public void add(List<Card> cards) {
-        this.cards.addAll(cards);
+        this.wholeCards.addAll(cards);
+        this.flChangesInHand = true;
     }
 
     public void removeCardByMask(int... mask) {
         for (int i = mask.length - 1; i >= 0; i--) {
             if (mask[i] == 1) {
-                this.cards.remove(i);
+                this.wholeCards.remove(i);
             }
         }
+        this.flChangesInHand = true;
     }
 
     public List<Card> getCards() {
-        return this.cards;
+        return this.wholeCards;
     }
 
     public void sort() {
-        Collections.sort(this.cards);
+        Collections.sort(this.wholeCards);
     }
 
-    protected boolean isFlush() {
-        for (int i = 1; i < this.cards.size(); i++) {
-            if (this.cards.get(0).getSuit() != this.cards.get(i).getSuit()) {
+    protected boolean isFlush(List<Card> fiveCardCombo) {
+        for (int i = 1; i < fiveCardCombo.size(); i++) {
+            if (fiveCardCombo.get(0).getSuit() != fiveCardCombo.get(i).getSuit()) {
                 return false;
             }
         }
         return true;
     }
-
+    
     public AbstractCombination getHandAbstractCombination() {
-        Collections.sort(this.cards);
-        Collections.reverse(this.cards);
+        if (!this.mainComboCards.equals(this.wholeCards)) {
+            this.flChangesInHand = true;
+        }
+        if (this.wholeCards.size() == Hand.FIVECARD) {
+            if (this.mainComboCards.size() == 0) {
+                this.mainComboCards.clear();
+                this.mainComboCards.addAll(this.wholeCards);
+            }
+        } else {
+            this.generateMainComboFromWholeCards();
+        }
+        
+        if (this.flChangesInHand) {
+            this.main = this.getHandAbstractCombination(this.mainComboCards);
+            this.flChangesInHand = false;
+        }
+        return this.main;
+    }
+    
+    private void generateMainComboFromWholeCards() {
+        List<ArrayList<Card>> fiveCardsLists = new ArrayList<ArrayList<Card>>();
+        fiveCardsLists = GameMath.generateCombinations(this.wholeCards, Hand.FIVECARD);
+        this.mainComboCards = fiveCardsLists.get(0);
+        this.main = this.getHandAbstractCombination(this.mainComboCards);
+        for (ArrayList<Card> cards : fiveCardsLists) {
+            if (main.compareTo(getHandAbstractCombination(cards)) < 0) {
+                this.mainComboCards.clear();
+                this.mainComboCards.addAll(cards);
+            }
+        }
+    }
+
+    public AbstractCombination getHandAdditionalAbstractCombination() {
+        this.additional = this.getHandAbstractCombination(this.additComboCards);
+        return this.additional;
+    }
+
+    public AbstractCombination getHandAbstractCombination(List<Card> fiveCardCombo) {
+        Collections.sort(fiveCardCombo);
+        Collections.reverse(fiveCardCombo);
         if (drawStatus) {
             return null;
         }
-        ConsilienceCounter counter = new ConsilienceCounter(this.cards);
+        ConsilienceCounter counter = new ConsilienceCounter(fiveCardCombo);
         switch (counter.getConsilience()) {
             case NOCONSILIENCE: {
-                return createNonPairICombination();
+                return createNonPairICombination(fiveCardCombo);
             }
             case PAIR: {
-                return createPairTypeICombination(counter);
+                return createPairTypeICombination(fiveCardCombo, counter);
             }
             case SET: {
-                return createSetTypeICombination(counter);
+                return createSetTypeICombination(fiveCardCombo, counter);
             }
             case SQUARE: {
-                return createFourOfaKindICombination(counter);
+                return createFourOfaKindICombination(fiveCardCombo, counter);
             }
             default: {
                 throw new IllegalStateException("Unknown combination");
@@ -93,12 +144,12 @@ public class Hand implements Comparable<Hand>{
         }
     }
 
-    protected StraightTypes straightCheck() {
-        if (this.cards.get(0).getScore()
-                - this.cards.get(this.cards.size() - 1).getScore() == DELTAFLC) {
+    protected StraightTypes straightCheck(List<Card> fiveCardCombo) {
+        if (fiveCardCombo.get(0).getScore()
+                - fiveCardCombo.get(fiveCardCombo.size() - 1).getScore() == DELTAFLC) {
             return StraightTypes.STRAIGHT;
         } else {
-            if (this.cards.get(0).getScore() - this.cards.get(1).getScore() == DELTAFLCWH) {
+            if (fiveCardCombo.get(0).getScore() - fiveCardCombo.get(1).getScore() == DELTAFLCWH) {
                 return StraightTypes.WHEEL_STRAIGHT;
             } else {
                 return StraightTypes.NOT_A_STRAIGHT;
@@ -106,13 +157,13 @@ public class Hand implements Comparable<Hand>{
         }
     }
 
-    private AbstractCombination createPairTypeICombination(ConsilienceCounter counter) {
+    private AbstractCombination createPairTypeICombination(List<Card> fiveCardCombo, ConsilienceCounter counter) {
         List<Card> cardsCompare = new ArrayList<Card>();
         AbstractCombination result;
         switch (counter.getConsilience1()) {
             case NOCONSILIENCE: {
-                cardsCompare.add(this.cards.get(counter.getPairPosition()));
-                for (Card card : this.cards) {
+                cardsCompare.add(fiveCardCombo.get(counter.getPairPosition()));
+                for (Card card : fiveCardCombo) {
                     if (!card.equalsByRate(cardsCompare.get(0))) {
                         cardsCompare.add(card);
                     }
@@ -121,9 +172,9 @@ public class Hand implements Comparable<Hand>{
                 break;
             }
             case PAIR: {
-                cardsCompare.add(this.cards.get(counter.getFirstPairPosition()));
-                cardsCompare.add(this.cards.get(counter.getPairPosition()));
-                for (Card card : this.cards) {
+                cardsCompare.add(fiveCardCombo.get(counter.getFirstPairPosition()));
+                cardsCompare.add(fiveCardCombo.get(counter.getPairPosition()));
+                for (Card card : fiveCardCombo) {
                     if (!card.equalsByRate(cardsCompare.get(0))
                             && !card.equalsByRate(cardsCompare.get(1))) {
                         cardsCompare.add(card);
@@ -133,8 +184,8 @@ public class Hand implements Comparable<Hand>{
                 break;
             }
             case SET: {
-                cardsCompare.add(this.cards.get(counter.getFirstPairPosition()));
-                cardsCompare.add(this.cards.get(counter.getPairPosition()));
+                cardsCompare.add(fiveCardCombo.get(counter.getFirstPairPosition()));
+                cardsCompare.add(fiveCardCombo.get(counter.getPairPosition()));
                 result = new FullHouse(cardsCompare);
                 break;
             }
@@ -145,29 +196,29 @@ public class Hand implements Comparable<Hand>{
         return result;
     }
 
-    private AbstractCombination createSetTypeICombination(ConsilienceCounter counter) {
+    private AbstractCombination createSetTypeICombination(List<Card> fiveCardCombo, ConsilienceCounter counter) {
         List<Card> cardsCompare = new ArrayList<Card>();
         if (counter.getConsilience1().equals(ConsilienceCount.NOCONSILIENCE)) {
-            cardsCompare.add(this.cards.get(counter.getPairPosition()));
-            for (Card card : this.cards) {
+            cardsCompare.add(fiveCardCombo.get(counter.getPairPosition()));
+            for (Card card : fiveCardCombo) {
                 if (!card.equalsByRate(cardsCompare.get(0))) {
                     cardsCompare.add(card);
                 }
             }
             return new TreeOfKind(cardsCompare);
         } else {
-            cardsCompare.add(this.cards.get(counter.getPairPosition()));
-            cardsCompare.add(this.cards.get(counter.getFirstPairPosition()));
+            cardsCompare.add(fiveCardCombo.get(counter.getPairPosition()));
+            cardsCompare.add(fiveCardCombo.get(counter.getFirstPairPosition()));
             return new FullHouse(cardsCompare);
         }
 
     }
 
-    private AbstractCombination createFourOfaKindICombination(
+    private AbstractCombination createFourOfaKindICombination(List<Card> fiveCardCombo,
             ConsilienceCounter counter) {
         List<Card> cardsCompare = new ArrayList<Card>();
-        cardsCompare.add(this.cards.get(counter.getPairPosition()));
-        for (Card card : this.cards) {
+        cardsCompare.add(fiveCardCombo.get(counter.getPairPosition()));
+        for (Card card : fiveCardCombo) {
             if (!card.equalsByRate(cardsCompare.get(0))) {
                 cardsCompare.add(card);
             }
@@ -175,14 +226,14 @@ public class Hand implements Comparable<Hand>{
         return new FourOfKind(cardsCompare);
     }
 
-    private AbstractCombination createNonPairICombination() {
+    private AbstractCombination createNonPairICombination(List<Card> fiveCardCombo) {
         List<Card> cardsCompare = new ArrayList<Card>();
-        if (!isFlush()) {
-            switch (this.straightCheck()) {
+        if (!isFlush(fiveCardCombo)) {
+            switch (this.straightCheck(fiveCardCombo)) {
                 case NOT_A_STRAIGHT: {
-                    if (this.cards.get(1).getScore() == Card.KING_SCORE) {
-                        for (int i = 2; i < this.cards.size(); i++) {
-                            cardsCompare.add(this.cards.get(i));
+                    if (fiveCardCombo.get(1).getScore() == Card.KING_SCORE) {
+                        for (int i = 2; i < fiveCardCombo.size(); i++) {
+                            cardsCompare.add(fiveCardCombo.get(i));
                         }
                         return new AceKing(cardsCompare);
                     } else {
@@ -190,11 +241,11 @@ public class Hand implements Comparable<Hand>{
                     }
                 }
                 case WHEEL_STRAIGHT: {
-                    cardsCompare.add(this.cards.get(1));
+                    cardsCompare.add(fiveCardCombo.get(1));
                     return new Straight(cardsCompare);
                 }
                 case STRAIGHT: {
-                    cardsCompare.add(this.cards.get(0));
+                    cardsCompare.add(fiveCardCombo.get(0));
                     return new Straight(cardsCompare);
                 }
                 default: {
@@ -203,22 +254,22 @@ public class Hand implements Comparable<Hand>{
                 }
             }
         } else {
-            switch (this.straightCheck()) {
+            switch (this.straightCheck(fiveCardCombo)) {
                 case NOT_A_STRAIGHT: {
-                    for (Card card : this.cards) {
+                    for (Card card : fiveCardCombo) {
                         cardsCompare.add(card);
                     }
                     return new Flush(cardsCompare);
                 }
                 case WHEEL_STRAIGHT: {
-                    cardsCompare.add(this.cards.get(1));
+                    cardsCompare.add(fiveCardCombo.get(1));
                     return new StraightFlush(cardsCompare);
                 }
                 case STRAIGHT: {
-                    if (this.cards.get(1).getScore() == Card.KING_SCORE) {
+                    if (fiveCardCombo.get(1).getScore() == Card.KING_SCORE) {
                         return new RoyalFlush(cardsCompare);
                     } else {
-                        cardsCompare.add(this.cards.get(0));
+                        cardsCompare.add(fiveCardCombo.get(0));
                         return new StraightFlush(cardsCompare);
                     }
                 }
@@ -232,7 +283,7 @@ public class Hand implements Comparable<Hand>{
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(cards);
+        return Objects.hashCode(mainComboCards);
     }
 
     @Override
@@ -249,7 +300,7 @@ public class Hand implements Comparable<Hand>{
 
     @Override
     public String toString() {
-        return this.cards.toString();
+        return this.mainComboCards.toString();
     }
 
     @Override
