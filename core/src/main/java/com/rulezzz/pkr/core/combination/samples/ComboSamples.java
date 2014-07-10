@@ -242,4 +242,14 @@ public final class ComboSamples {
             new Card(CardSuit.HEART, '2'));
     return hand;
     }
+    
+    public static Hand getLongStraight() {
+    Hand hand = new Hand(new Card(CardSuit.CLUBS, 'K'),
+        new Card(CardSuit.DIAMOND, 'Q'),
+        new Card(CardSuit.HEART, 'J'),
+        new Card(CardSuit.SPADES, 'T'),
+        new Card(CardSuit.CLUBS, '9'),
+        new Card(CardSuit.HEART, 'A'));
+    return hand;
+    }
 }

@@ -3,11 +3,10 @@ package com.rulezzz.pkr.core.base.structures;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import com.rulezzz.pkr.core.base.structures.Hand;
-import com.rulezzz.pkr.core.base.structures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
 import com.rulezzz.pkr.core.gameengine.GameMath;
@@ -20,7 +19,7 @@ public class HandTest {
     public void setUp() {
         hand = new Hand();
     }
-
+    
     @Test
     public void testRemoveCardFromHand() {
         hand = new Hand(new Card(CardSuit.CLUBS, 'A', 14),

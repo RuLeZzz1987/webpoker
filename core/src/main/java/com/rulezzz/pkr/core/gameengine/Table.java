@@ -203,6 +203,13 @@ public class Table implements Serializable {
         this.model.setGameStatus(GameStatus.GAME_BOUGHT);
     }
 
+    public void buyCard(final int boxIndex) {
+        PlayerBox box = this.model.getPlayerBoxes().get(boxIndex);
+        this.model.setBankroll(-box.getAnte());
+        box.buyCard();
+        this.model.setGameStatus(GameStatus.DETERMINATION);
+    }
+
 
 
 

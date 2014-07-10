@@ -131,6 +131,10 @@ public class GameEngineServlet extends HttpServlet {
                     table.draw(boxIndex, foldCards);
                     break;
                 }
+                case "buy" : {
+                    table.buyCard(boxIndex);
+                    break;
+                }
                 default : {
                     break;
                 }

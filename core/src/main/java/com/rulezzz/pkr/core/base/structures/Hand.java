@@ -1,17 +1,26 @@
 package com.rulezzz.pkr.core.base.structures;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Objects;
-
-
 import com.rulezzz.pkr.core.base.engines.ConsilienceCount;
 import com.rulezzz.pkr.core.base.engines.ConsilienceCounter;
 import com.rulezzz.pkr.core.card.Card;
-import com.rulezzz.pkr.core.combination.*;
+import com.rulezzz.pkr.core.combination.AbstractCombination;
+import com.rulezzz.pkr.core.combination.AceKing;
+import com.rulezzz.pkr.core.combination.DoesntQualify;
+import com.rulezzz.pkr.core.combination.Flush;
+import com.rulezzz.pkr.core.combination.FourOfKind;
+import com.rulezzz.pkr.core.combination.FullHouse;
+import com.rulezzz.pkr.core.combination.Pair;
+import com.rulezzz.pkr.core.combination.RoyalFlush;
+import com.rulezzz.pkr.core.combination.Straight;
+import com.rulezzz.pkr.core.combination.StraightFlush;
+import com.rulezzz.pkr.core.combination.StraightTypes;
+import com.rulezzz.pkr.core.combination.TreeOfKind;
+import com.rulezzz.pkr.core.combination.TwoPairs;
 import com.rulezzz.pkr.core.gameengine.GameMath;
 
 
@@ -26,32 +35,25 @@ public class Hand implements Comparable<Hand>{
     private Boolean drawStatus = false;
     private AbstractCombination main;
     private AbstractCombination additional;
-    private Boolean flChangesInHand;
-    
     public void setDrawStatus(Boolean status) {
         this.drawStatus = status;
-        this.flChangesInHand = true;
     }
 
     public Hand(Card... card) {
         for (int i = 0; i < card.length; i++) {
             this.wholeCards.add(card[i]);
         }
-        this.flChangesInHand = true;
     }
 
     public Hand() {
-        this.flChangesInHand = true;
     }
 
     public void add(Card card) {
         this.wholeCards.add(card);
-        this.flChangesInHand = true;
     }
 
     public void add(List<Card> cards) {
         this.wholeCards.addAll(cards);
-        this.flChangesInHand = true;
     }
 
     public void removeCardByMask(int... mask) {
@@ -60,7 +62,6 @@ public class Hand implements Comparable<Hand>{
                 this.wholeCards.remove(i);
             }
         }
-        this.flChangesInHand = true;
     }
 
     public List<Card> getCards() {
@@ -82,20 +83,11 @@ public class Hand implements Comparable<Hand>{
     
     public AbstractCombination getHandAbstractCombination() {
         if (!this.mainComboCards.equals(this.wholeCards)) {
-            this.flChangesInHand = true;
-        }
-        if (this.wholeCards.size() == Hand.FIVECARD) {
-            if (this.mainComboCards.size() == 0) {
-                this.mainComboCards.clear();
-                this.mainComboCards.addAll(this.wholeCards);
+            if (this.wholeCards.size() == Hand.FIVECARD) {
+                this.main = this.getHandAbstractCombination(this.wholeCards);
+            } else {
+                this.generateMainComboFromWholeCards();
             }
-        } else {
-            this.generateMainComboFromWholeCards();
-        }
-        
-        if (this.flChangesInHand) {
-            this.main = this.getHandAbstractCombination(this.mainComboCards);
-            this.flChangesInHand = false;
         }
         return this.main;
     }
@@ -118,7 +110,7 @@ public class Hand implements Comparable<Hand>{
         return this.additional;
     }
 
-    public AbstractCombination getHandAbstractCombination(List<Card> fiveCardCombo) {
+    private AbstractCombination getHandAbstractCombination(List<Card> fiveCardCombo) {
         Collections.sort(fiveCardCombo);
         Collections.reverse(fiveCardCombo);
         if (drawStatus) {

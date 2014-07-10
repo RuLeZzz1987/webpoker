@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.combination.DoesntQualify;
 import com.rulezzz.pkr.core.gameengine.Table;
 import com.rulezzz.pkr.core.statuses.GameStatus;
 
@@ -44,6 +45,35 @@ public class GameEngineTest {
         reqDispatcher = mock(RequestDispatcher.class);
         table = new Table();
     }
+    
+    @Test
+    public void testIfOneBuyCardAndBet() throws ServletException, IOException {
+        table.setBankroll(1000);
+        table.makeBets(10);
+        table.deal();
+        table.getDealerBox().getHand().getCards().clear();
+        table.getDealerBox().setHand(getAceKingLower());
+        table.getBox(0).getHand().getCards().clear();
+        table.getBox(0).setHand(getDoesntQualifyOne());
+        
+        when(req.getParameter("choice0")).thenReturn("buy");
+        when(req.getSession()).thenReturn(session);
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
+        
+        session.setAttribute("table", table);
+        GameEngineServlet engine = new GameEngineServlet();
+        
+        engine.doPost(req, resp);
+        
+        assertEquals(DoesntQualify.class, table.getBox(0).getHand().getHandAbstractCombination().getClass());
+        
+        when(req.getParameter("choice0")).thenReturn("bet");
+        
+        engine.doPost(req, resp);
+
+        assertEquals("Doesn't qualifier", table.getBox(0).getHand().getHandAbstractCombination().getName());
+    }
+    
     
     @Test
     public void testIfOneBoxBetAndTakeAnte() throws ServletException, IOException {
