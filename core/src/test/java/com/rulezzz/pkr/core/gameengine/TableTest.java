@@ -5,7 +5,10 @@ import static com.rulezzz.pkr.core.combination.samples.ComboSamples.*;
 
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.card.CardSuit;
+import com.rulezzz.pkr.core.combination.DoesntQualify;
 import com.rulezzz.pkr.core.combination.Straight;
+import com.rulezzz.pkr.core.combination.samples.DeckSample;
 import com.rulezzz.pkr.core.gameengine.Table;
 import com.rulezzz.pkr.core.statuses.GameStatus;
 
@@ -28,20 +31,17 @@ public class TableTest {
     public void testBuy6Card() {
         table.setBankroll(1000);
         table.makeBets(10);
+        table.usePreparedDeck(DeckSample.getHandAvsHandB(getDoesntQualifyOne(), getAceKingHigher(), new Card(CardSuit.HEART, '8')));
         table.deal();
-        table.getBox(0).setHand(getStraight());
-        table.getDealerBox().setHand(getPairAABCD());
         
-        assertEquals(Straight.class, table.getBox(0).getHand().getHandAbstractCombination().getClass());
+        assertEquals(DoesntQualify.class, table.getBox(0).getHand().getHandAbstractCombination().getClass());
         
         table.buyCard(0);
         table.handleDetermination();
         
         assertEquals(6, table.getBox(0).getHand().getCards().size());
         
-        table.getBox(0).setHand(getLongStraight());
-        
-        assertEquals(Straight.class, table.getBox(0).getHand().getHandAbstractCombination().getClass());
+        assertEquals(DoesntQualify.class, table.getBox(0).getHand().getHandAbstractCombination().getClass());
     }
     
     @Test

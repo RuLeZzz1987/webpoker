@@ -119,6 +119,7 @@ public class Table implements Serializable {
                 box.setCardsAfterDraw(generateDrawCardList(box.getCountOfNeededCards()));
                 box.sort();
                 Collections.reverse(box.getHand().getCards());
+                box.getHand().getHandAbstractCombination();
                 break;
             }
         }

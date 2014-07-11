@@ -29,6 +29,7 @@ import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
 import com.rulezzz.pkr.core.combination.DoesntQualify;
+import com.rulezzz.pkr.core.combination.FullHouse;
 import com.rulezzz.pkr.core.combination.samples.ComboSamples;
 import com.rulezzz.pkr.core.combination.samples.DeckSample;
 import com.rulezzz.pkr.core.gameengine.Table;
@@ -88,6 +89,24 @@ public class GameEngineTest {
         currName = objTable.getBox(0).getHand().getHandAbstractCombination().getName();
         assertEquals(dnqName, currName);
         assertEquals(900, objTable.getBankroll());
+        
+        when(req.getParameter("boxCount")).thenReturn("1");
+        when(req.getParameter("bet0")).thenReturn("25");
+        
+        DealPreferences preferences = new DealPreferences();
+        
+        preferences.doPost(req, resp);
+        
+        when(req.getParameter("choice0")).thenReturn("buy");
+        
+        engine.doPost(req, resp);
+        
+        assertEquals(FullHouse.class, objTable.getBox(0).getHand().getHandAbstractCombination().getClass());
+        assertEquals(FullHouse.class.getName(), objTable.getBox(0).getHand().getHandAbstractCombination().getName());
+        
+        when(req.getParameter("choice0")).thenReturn("bet");
+        
+        engine.doPost(req, resp);
     }
     
     @Test
