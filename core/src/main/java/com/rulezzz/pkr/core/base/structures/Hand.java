@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.common.base.Objects;
 import com.rulezzz.pkr.core.base.engines.ConsilienceCount;
 import com.rulezzz.pkr.core.base.engines.ConsilienceCounter;
+import com.rulezzz.pkr.core.base.engines.GameMath;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.combination.AbstractCombination;
 import com.rulezzz.pkr.core.combination.AceKing;
@@ -21,7 +22,6 @@ import com.rulezzz.pkr.core.combination.StraightFlush;
 import com.rulezzz.pkr.core.combination.StraightTypes;
 import com.rulezzz.pkr.core.combination.TreeOfKind;
 import com.rulezzz.pkr.core.combination.TwoPairs;
-import com.rulezzz.pkr.core.gameengine.GameMath;
 
 
 public class Hand implements Comparable<Hand>{
@@ -93,7 +93,7 @@ public class Hand implements Comparable<Hand>{
     }
     
     private void generateMainComboFromWholeCards() {
-        List<ArrayList<Card>> fiveCardsLists = new ArrayList<ArrayList<Card>>();
+        List<ArrayList<Card>> fiveCardsLists;
         fiveCardsLists = GameMath.generateCombinations(this.wholeCards, Hand.FIVECARD);
         this.mainComboCards = fiveCardsLists.get(0);
         this.main = this.getHandAbstractCombination(this.mainComboCards);

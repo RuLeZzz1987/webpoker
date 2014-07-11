@@ -7,9 +7,9 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.rulezzz.pkr.core.base.engines.GameMath;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
-import com.rulezzz.pkr.core.gameengine.GameMath;
 
 public class HandTest {
 
