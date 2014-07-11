@@ -35,6 +35,7 @@ public class TableTest {
         assertEquals(Straight.class, table.getBox(0).getHand().getHandAbstractCombination().getClass());
         
         table.buyCard(0);
+        table.handleDetermination();
         
         assertEquals(6, table.getBox(0).getHand().getCards().size());
         

@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.rulezzz.pkr.core.base.structures.Box;
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
+import com.rulezzz.pkr.core.base.structures.Deck;
 import com.rulezzz.pkr.core.base.structures.Hand;
 import com.rulezzz.pkr.core.base.structures.PlayerBox;
 import com.rulezzz.pkr.core.card.Card;
@@ -22,6 +23,10 @@ public class Table implements Serializable {
     
     public Table() {
         this.model.setGameStatus(GameStatus.BETS);
+    }
+    
+    public void usePreparedDeck(Deck deck){
+        this.model.setDeck(deck);
     }
     
     public void updateDeck(){

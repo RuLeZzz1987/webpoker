@@ -27,6 +27,10 @@ public class FiveCardDataModel {
     public Box getDealerBox() {
         return dealerBox;
     }
+    
+    public void setDeck(Deck deck) {
+        this.cardList = deck.getDeck();
+    }
     public void setDealerBox(Box dealerBox) {
         this.dealerBox = dealerBox;
     }

@@ -43,7 +43,7 @@ public class StartPageTest {
             for (String bets : testBets) {
 
                 when(req.getParameter("gametype")).thenReturn(type);
-                when(req.getParameter("boxCount")).thenReturn("2");
+                when(req.getParameter("boxCount")).thenReturn("1");
                 when(req.getParameter("bankroll")).thenReturn("1000");
                 when(req.getParameter("bet")).thenReturn(bets);
                 when(req.getSession()).thenReturn(session);

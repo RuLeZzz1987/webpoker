@@ -25,7 +25,10 @@ public class Deck {
             }
         }
         Collections.shuffle(this.deck);
-
+    }
+    
+    public Deck(List<Card> cards){
+        deck.addAll(cards);
     }
 
     public List<Card> getUsed() {

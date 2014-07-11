@@ -5,6 +5,8 @@ import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getAceKingLo
 import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getDoesntQualifyOne;
 import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getPairAABCD;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,7 +27,10 @@ import org.junit.Test;
 
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.card.CardSuit;
 import com.rulezzz.pkr.core.combination.DoesntQualify;
+import com.rulezzz.pkr.core.combination.samples.ComboSamples;
+import com.rulezzz.pkr.core.combination.samples.DeckSample;
 import com.rulezzz.pkr.core.gameengine.Table;
 import com.rulezzz.pkr.core.statuses.GameStatus;
 
@@ -48,32 +53,42 @@ public class GameEngineTest {
     
     @Test
     public void testIfOneBuyCardAndBet() throws ServletException, IOException {
-        table.setBankroll(1000);
-        table.makeBets(10);
-        table.deal();
-        table.getDealerBox().getHand().getCards().clear();
-        table.getDealerBox().setHand(getAceKingLower());
-        table.getBox(0).getHand().getCards().clear();
-        table.getBox(0).setHand(getDoesntQualifyOne());
+        when(req.getParameter("bet")).thenReturn("25");
+        when(req.getParameter("bankroll")).thenReturn("1000");
+        when(req.getParameter("boxCount")).thenReturn("1");
+        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
+        when(req.getSession()).thenReturn(session);
+        
+        StartPageServlet startPage = new StartPageServlet();
+        startPage.doPost(req, resp);
+        
+        verify(req, atLeast(1)).getSession();
+        Table objTable = (Table) req.getSession().getAttribute("table");
+        assertNotNull(objTable);
+        assertEquals(getAceKingHigher(), objTable.getDealerBox().getHand());
+        assertEquals(getDoesntQualifyOne(), objTable.getBox(0).getHand());
         
         when(req.getParameter("choice0")).thenReturn("buy");
-        when(req.getSession()).thenReturn(session);
-        when(req.getRequestDispatcher("/WEB-INF/jsp/game.jsp")).thenReturn(reqDispatcher);
-        
-        session.setAttribute("table", table);
+    
         GameEngineServlet engine = new GameEngineServlet();
-        
         engine.doPost(req, resp);
         
-        assertEquals(DoesntQualify.class, table.getBox(0).getHand().getHandAbstractCombination().getClass());
+        objTable = (Table) req.getSession().getAttribute("table");
+        verify(req, atLeast(1)).getSession();
+        String dnqName = getDoesntQualifyOne().getHandAbstractCombination().getName();
+        String currName = objTable.getBox(0).getHand().getHandAbstractCombination().getName();
+        assertEquals(dnqName, currName);
+        assertEquals(6, objTable.getBox(0).getHand().getCards().size());
         
         when(req.getParameter("choice0")).thenReturn("bet");
         
         engine.doPost(req, resp);
-
-        assertEquals("Doesn't qualifier", table.getBox(0).getHand().getHandAbstractCombination().getName());
+        
+        objTable = (Table) req.getSession().getAttribute("table");
+        currName = objTable.getBox(0).getHand().getHandAbstractCombination().getName();
+        assertEquals(dnqName, currName);
+        assertEquals(900, objTable.getBankroll());
     }
-    
     
     @Test
     public void testIfOneBoxBetAndTakeAnte() throws ServletException, IOException {
