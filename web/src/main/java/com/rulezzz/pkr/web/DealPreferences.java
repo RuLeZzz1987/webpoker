@@ -1,7 +1,5 @@
 package com.rulezzz.pkr.web;
 
-import static com.rulezzz.pkr.core.combination.samples.ComboSamples.*;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rulezzz.pkr.core.card.Card;
-import com.rulezzz.pkr.core.card.CardSuit;
-import com.rulezzz.pkr.core.combination.samples.DeckSample;
 import com.rulezzz.pkr.core.gameengine.Table;
 
 public class DealPreferences extends HttpServlet {
@@ -31,7 +26,6 @@ public class DealPreferences extends HttpServlet {
         Table table = (Table) req.getSession().getAttribute("table");
         table.getBoxes().clear();
         table.getDefaultBets().clear();
-        table.usePreparedDeck(DeckSample.getHandAvsHandB(getFullHouseAAABB(), getTwoPairsAABBC(), new Card(CardSuit.DIAMOND, '5')));
         table.getDealerBox().getHand().getCards().clear();
         int boxCount = Integer.parseInt(req.getParameter("boxCount"));
         int[] antes = new int[boxCount];

@@ -7,25 +7,25 @@ import com.rulezzz.pkr.core.card.Card;
 
 public final class GameMath {
 
-    private static int f = 0;
-    private static List<ArrayList<Card>> combin = new ArrayList<ArrayList<Card>>();
+    private int f = 0;
+    private List<ArrayList<Card>> combin = new ArrayList<ArrayList<Card>>();
 
-    private GameMath() {}
+    public GameMath() {}
 
-    public static List<ArrayList<Card>> generateCombinations(List<Card> list,
+    public List<ArrayList<Card>> generateCombinations(List<Card> list,
             int k) {
         int g = list.size();
         combinate(list, g, k);
         return combin;
     }
 
-    private static void combinate(List<Card> cardList, int size, int k) {
+    private void combinate(List<Card> cardList, int size, int k) {
         Card[] data = new Card[k];
         combinationUtil(cardList, data, 0, size - 1, 0, k);
 
     }
 
-    private static void combinationUtil(List<Card> cardList, Card[] data,
+    private void combinationUtil(List<Card> cardList, Card[] data,
             int start, int end, int index, int k) {
         if (index == k) {
             combin.add(new ArrayList<Card>());

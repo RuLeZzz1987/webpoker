@@ -93,14 +93,14 @@ public class Hand implements Comparable<Hand>{
     }
     
     private void generateMainComboFromWholeCards() {
-        List<ArrayList<Card>> fiveCardsLists;
-        fiveCardsLists = GameMath.generateCombinations(this.wholeCards, Hand.FIVECARD);
+        List<ArrayList<Card>> fiveCardsLists = new GameMath().generateCombinations(this.wholeCards, Hand.FIVECARD);
         this.mainComboCards = fiveCardsLists.get(0);
         this.main = this.getHandAbstractCombination(this.mainComboCards);
         for (ArrayList<Card> cards : fiveCardsLists) {
             if (main.compareTo(getHandAbstractCombination(cards)) < 0) {
                 this.mainComboCards.clear();
                 this.mainComboCards.addAll(cards);
+                this.main = this.getHandAbstractCombination(this.mainComboCards);
             }
         }
     }

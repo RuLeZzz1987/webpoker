@@ -1,8 +1,5 @@
 package com.rulezzz.pkr.web;
 
-import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getAceKingHigher;
-import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getDoesntQualifyOne;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -10,10 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rulezzz.pkr.core.card.Card;
-import com.rulezzz.pkr.core.card.CardSuit;
-import com.rulezzz.pkr.core.combination.samples.ComboSamples;
-import com.rulezzz.pkr.core.combination.samples.DeckSample;
 import com.rulezzz.pkr.core.gameengine.Table;
 
 
@@ -62,7 +55,6 @@ public class StartPageServlet extends HttpServlet {
         Table t = new Table();
         t.setBankroll(bankroll);
         t.makeBets(bets);
-        t.usePreparedDeck(DeckSample.getHandAvsHandB(getDoesntQualifyOne(), getAceKingHigher(), new Card(CardSuit.HEART, '8')));
         t.deal();
         req.getSession().setAttribute("table", t);
         req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);
