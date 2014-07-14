@@ -35,8 +35,13 @@ public class Hand implements Comparable<Hand>{
     private Boolean drawStatus = false;
     private AbstractCombination main;
     private AbstractCombination additional;
+    
     public void setDrawStatus(Boolean status) {
         this.drawStatus = status;
+    }
+    
+    public Boolean getDrawStatus() {
+        return this.drawStatus;
     }
 
     public Hand(Card... card) {

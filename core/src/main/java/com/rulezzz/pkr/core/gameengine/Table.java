@@ -216,7 +216,4 @@ public class Table implements Serializable {
         this.model.setGameStatus(GameStatus.DETERMINATION);
     }
 
-
-
-
 }

@@ -60,7 +60,10 @@
                     <td class="handDiscription">
                         <div class="whiteChip">
                             <div class="mid">${box.ante}</div>
-                        </div> <br> ${box.hand.handAbstractCombination.name}
+                        </div> 
+                            <c:if test="${box.hand.cards.size() > 4}">
+                                   <br>${box.hand.handAbstractCombination.name}
+                            </c:if>
                     </td>
                     <td class="choises"><c:choose>
                             <c:when test="${table.gameStatus eq 'DRAWS'}">
@@ -74,7 +77,7 @@
                                 <input type="radio" name="choice${loop.index}" value="buy_game"> buy game<br>
                             </c:when>
                             <c:when test="${table.gameStatus eq 'DETERMINATION'}">
-                                <c:if test="${box.status ne 'BET'}">
+                                <c:if test="${box.status ne 'BET' && !box.hand.drawStatus}">
                                     <input type="radio" checked="checked" name="choice${loop.index}" value="fold"> fold<br>
                                     <input type="radio" name="choice${loop.index}" value="bet"> bet<br>
                                 </c:if>

@@ -27,12 +27,6 @@ import org.junit.Test;
 
 import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
 import com.rulezzz.pkr.core.card.Card;
-import com.rulezzz.pkr.core.card.CardSuit;
-import com.rulezzz.pkr.core.combination.AbstractCombination;
-import com.rulezzz.pkr.core.combination.DoesntQualify;
-import com.rulezzz.pkr.core.combination.FullHouse;
-import com.rulezzz.pkr.core.combination.samples.ComboSamples;
-import com.rulezzz.pkr.core.combination.samples.DeckSample;
 import com.rulezzz.pkr.core.gameengine.Table;
 import com.rulezzz.pkr.core.statuses.GameStatus;
 
@@ -53,7 +47,7 @@ public class GameEngineTest {
         table = new Table();
     }
     
- /*   @Test
+    @Test
     public void testIfOneBuyCardAndBet() throws ServletException, IOException {
         when(req.getParameter("bet")).thenReturn("25");
         when(req.getParameter("bankroll")).thenReturn("1000");
@@ -67,8 +61,6 @@ public class GameEngineTest {
         verify(req, atLeast(1)).getSession();
         Table objTable = (Table) req.getSession().getAttribute("table");
         assertNotNull(objTable);
-        assertEquals(getAceKingHigher(), objTable.getDealerBox().getHand());
-        assertEquals(getDoesntQualifyOne(), objTable.getBox(0).getHand());
         
         when(req.getParameter("choice0")).thenReturn("buy");
     
@@ -91,23 +83,24 @@ public class GameEngineTest {
         assertEquals(dnqName, currName);
         assertEquals(900, objTable.getBankroll());
         
-        when(req.getParameter("boxCount")).thenReturn("1");
+        when(req.getParameter("boxCount")).thenReturn("2");
         when(req.getParameter("bet0")).thenReturn("25");
+        when(req.getParameter("bet1")).thenReturn("25");
         
         DealPreferences preferences = new DealPreferences();
         
         preferences.doPost(req, resp);
         
         when(req.getParameter("choice0")).thenReturn("buy");
+        when(req.getParameter("choice1")).thenReturn("buy");
         
         engine.doPost(req, resp);
-        
-        assertEquals(FullHouse.class, objTable.getBox(0).getHand().getHandAbstractCombination().getClass());
         
         when(req.getParameter("choice0")).thenReturn("bet");
+        when(req.getParameter("choice1")).thenReturn("bet");
         
         engine.doPost(req, resp);
-    } */
+    } 
     
     @Test
     public void testIfOneBoxBetAndTakeAnte() throws ServletException, IOException {

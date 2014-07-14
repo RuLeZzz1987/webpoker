@@ -89,6 +89,7 @@ public class PlayerBox extends Box {
     public void buyCard() {
         this.boxStatus = BoxStatus.DRAW;
         this.countOfNeededCards = 1;
+        getHand().setDrawStatus(true);
     }
 
     public int getPayment() {

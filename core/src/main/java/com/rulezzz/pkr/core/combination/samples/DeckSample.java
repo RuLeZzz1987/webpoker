@@ -15,6 +15,8 @@ import com.rulezzz.pkr.core.card.CardSuit;
 
 public class DeckSample {
 
+    private DeckSample() {}
+    
     public static Deck getSetAAABCvsAceKingHigh() {
         List<Card> result = new LinkedList<Card>();
         for (int i = getSetAAABC().getCards().size() - 1; i >= 0; i--) {

@@ -39,6 +39,7 @@ public class GameEngineServlet extends HttpServlet {
             }
             case DETERMINATION: {
                 handleChoiceAfterDrawPhase(req, table);
+                table.handleDetermination();
                 break;
             }
             case SHOWDOWN: {
