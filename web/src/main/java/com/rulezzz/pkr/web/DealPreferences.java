@@ -32,6 +32,7 @@ public class DealPreferences extends HttpServlet {
         for (int i = 0; i < boxCount; i++) {
             antes[i] = Integer.parseInt(req.getParameter("bet" + i));
         }
+        table.updateDeck();
         table.makeBets(antes);
         table.deal();
         req.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(req, resp);

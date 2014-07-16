@@ -46,9 +46,9 @@ public final class ComboSamples {
     }
 
     public static Hand getPairAABCD() {
-    Hand hand = new Hand(new Card(CardSuit.CLUBS, 'K'),
-        new Card(CardSuit.DIAMOND, 'K'),
-        new Card(CardSuit.SPADES, '7'),
+    Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),
+        new Card(CardSuit.DIAMOND, 'A'),
+        new Card(CardSuit.SPADES, 'K'),
         new Card(CardSuit.CLUBS, '5'),
         new Card(CardSuit.CLUBS, '2'));
     return hand;
@@ -56,8 +56,8 @@ public final class ComboSamples {
     
     public static Hand getPairABBCD() {
     Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),    
-        new Card(CardSuit.DIAMOND, 'J'),
-        new Card(CardSuit.CLUBS, 'J'),
+        new Card(CardSuit.DIAMOND, 'K'),
+        new Card(CardSuit.CLUBS, 'K'),
         new Card(CardSuit.SPADES, '3'),
         new Card(CardSuit.SPADES, '2'));
     return hand;
@@ -65,7 +65,7 @@ public final class ComboSamples {
     
     public static Hand getPairABCCD() {
     Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),    
-        new Card(CardSuit.DIAMOND, 'J'),
+        new Card(CardSuit.DIAMOND, 'K'),
         new Card(CardSuit.CLUBS, '6'),
         new Card(CardSuit.HEART, '6'),
         new Card(CardSuit.CLUBS, '2'));
@@ -84,8 +84,8 @@ public final class ComboSamples {
     public static Hand getTwoPairsAABBC() {
     Hand hand= new Hand(new Card(CardSuit.CLUBS, 'A'),
         new Card(CardSuit.DIAMOND, 'A'),
-        new Card(CardSuit.CLUBS, '6'),
-        new Card(CardSuit.HEART, '6'),
+        new Card(CardSuit.CLUBS, 'K'),
+        new Card(CardSuit.HEART, 'K'),
         new Card(CardSuit.CLUBS, '2'));
     return hand;
     }
@@ -93,7 +93,7 @@ public final class ComboSamples {
     public static Hand getTwoPairsAABCC() {
     Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),
         new Card(CardSuit.DIAMOND, 'A'),
-        new Card(CardSuit.CLUBS, '7'),
+        new Card(CardSuit.CLUBS, 'K'),
         new Card(CardSuit.HEART, '6'),
         new Card(CardSuit.CLUBS, '6'));
     return hand;
@@ -101,8 +101,8 @@ public final class ComboSamples {
     
     public static Hand getTwoPairsABBCC() {
     Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),
-        new Card(CardSuit.DIAMOND, '7'),
-        new Card(CardSuit.CLUBS, '7'),
+        new Card(CardSuit.DIAMOND, 'K'),
+        new Card(CardSuit.CLUBS, 'K'),
         new Card(CardSuit.HEART, '6'),
         new Card(CardSuit.CLUBS, '6'));
     return hand;

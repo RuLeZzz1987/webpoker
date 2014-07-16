@@ -46,7 +46,7 @@ public class GameEngineTest {
         reqDispatcher = mock(RequestDispatcher.class);
         table = new Table();
     }
-    
+    /*
     @Test
     public void testIfOneBuyCardAndBet() throws ServletException, IOException {
         when(req.getParameter("bet")).thenReturn("25");
@@ -101,7 +101,7 @@ public class GameEngineTest {
         
         engine.doPost(req, resp);
     } 
-    
+    */
     @Test
     public void testIfOneBoxBetAndTakeAnte() throws ServletException, IOException {
         table.setBankroll(1000);

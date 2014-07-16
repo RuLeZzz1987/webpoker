@@ -1,6 +1,7 @@
 package com.rulezzz.pkr.core.base.structures;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
@@ -10,6 +11,10 @@ import org.junit.Test;
 import com.rulezzz.pkr.core.base.engines.GameMath;
 import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
+import com.rulezzz.pkr.core.combination.AceKing;
+import com.rulezzz.pkr.core.combination.Pair;
+import com.rulezzz.pkr.core.combination.TwoPairs;
+import com.rulezzz.pkr.core.combination.samples.ComboSamples;
 
 public class HandTest {
 
@@ -18,6 +23,28 @@ public class HandTest {
     @Before
     public void setUp() {
         hand = new Hand();
+    }
+    
+    @Test
+    public void testAddAceKingFromFiveCard() {
+        hand = ComboSamples.getPairABBCD();
+        assertEquals(Pair.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
+        hand = ComboSamples.getPairAABCD();
+        assertEquals(Pair.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
+        hand = ComboSamples.getPairABCCD();
+        assertEquals(Pair.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
+        hand = ComboSamples.getTwoPairsAABBC();
+        assertEquals(TwoPairs.class, hand.getHandAbstractCombination().getClass());
+        assertNull(null, hand.getHandAdditionalAbstractCombination());
+        hand = ComboSamples.getTwoPairsABBCC();
+        assertEquals(TwoPairs.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
+        hand = ComboSamples.getTwoPairsAABCC();
+        assertEquals(TwoPairs.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
     }
     
     @Test
