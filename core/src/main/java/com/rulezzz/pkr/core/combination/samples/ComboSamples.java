@@ -117,6 +117,24 @@ public final class ComboSamples {
     return hand;
     }
     
+    public static Hand getSetKKKBC() {
+    Hand hand = new Hand(new Card(CardSuit.CLUBS, 'K'),
+        new Card(CardSuit.DIAMOND, 'K'),
+        new Card(CardSuit.SPADES, 'K'),
+        new Card(CardSuit.CLUBS, '5'),
+        new Card(CardSuit.CLUBS, '2'));
+    return hand;
+    }
+    
+    public static Hand getSetAAACD() {
+    Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),
+        new Card(CardSuit.DIAMOND, 'A'),
+        new Card(CardSuit.SPADES, 'A'),
+        new Card(CardSuit.CLUBS, '5'),
+        new Card(CardSuit.CLUBS, '2'));
+    return hand;
+    }
+    
     public static Hand getSetABBBC() {
     Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),
         new Card(CardSuit.DIAMOND, 'J'),
