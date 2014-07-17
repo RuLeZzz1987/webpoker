@@ -29,8 +29,6 @@ public class Hand implements Comparable<Hand> {
     public static final int FIVECARD = 5;
     private static final int DELTAFLC = 4;
     private static final int DELTAFLCWH = 9;
-    private List<Card> mainComboCards = new ArrayList<Card>();
-    private List<Card> additComboCards = new ArrayList<Card>();
     private List<Card> wholeCards = new ArrayList<Card>();
     private Boolean drawStatus = false;
     private AbstractCombination main;
@@ -88,35 +86,82 @@ public class Hand implements Comparable<Hand> {
     }
 
     public AbstractCombination getHandAbstractCombination() {
-        if (!this.mainComboCards.equals(this.wholeCards)) {
-            if (this.wholeCards.size() == Hand.FIVECARD) {
-                this.main = this.getHandAbstractCombination(this.wholeCards);
-            } else {
-                this.generateMainComboFromWholeCards();
-            }
+        if (this.wholeCards.size() == Hand.FIVECARD) {
+            this.main = this.getHandAbstractCombination(this.wholeCards);
+        } else {
+            this.generateMainComboFromWholeCards();
         }
         return this.main;
     }
 
     private void generateMainComboFromWholeCards() {
+        this.main = null;
         List<ArrayList<Card>> fiveCardsLists = new GameMath()
                 .generateCombinations(this.wholeCards, Hand.FIVECARD);
-        List<AbstractCombination> r = this.sortGeneratedCardLists(fiveCardsLists);
-        this.mainComboCards = fiveCardsLists.get(0);
-        this.main = this.getHandAbstractCombination(this.mainComboCards);
-        for (ArrayList<Card> cards : fiveCardsLists) {
-            AbstractCombination currCardsCombo = getHandAbstractCombination(cards);
-            if (main.compareTo(currCardsCombo) < 0) {
-                this.mainComboCards.clear();
-                this.mainComboCards.addAll(cards);
-                this.main = this.getHandAbstractCombination(this.mainComboCards);
+        List<AbstractCombination> wholeComboList = this.sortGeneratedCardLists(fiveCardsLists);
+        this.main = wholeComboList.get(0);
+        wholeComboList.remove(0);
+        if (!this.main.getClass().equals(AceKing.class) && !this.main.getClass().equals(DoesntQualify.class)) {
+            for (int i = wholeComboList.size() - 1; i >= 0; i--) {
+                if (this.rulesForCalcAdditCombo(this.main, wholeComboList.get(i))) {
+                    wholeComboList.remove(i);
+                }
             }
+            if ( wholeComboList.size() != 0 ) {
+                this.additional = wholeComboList.get(0);
+            }
+        } 
+        if (this.main.getClass().equals(FullHouse.class) && !this.additional.getClass().equals(FullHouse.class)) {
+            this.additional = searchAdditionalAceKingOnFiveCards(this.additional);
         }
     }
 
+    private boolean rulesForCalcAdditCombo(AbstractCombination highest, AbstractCombination current) {
+        boolean highEqCur = highest.equals(current);
+        boolean highIsStr = highest.getClass().equals(Straight.class);
+        boolean curIsDnq = current.getClass().equals(DoesntQualify.class);
+        
+        if ( ( highEqCur && !highIsStr ) || curIsDnq) {
+                return true;
+            }
+        
+        boolean highEq1P = highest.getClass().equals(Pair.class);
+        boolean highEqCurClass = highest.getClass().equals(current.getClass());
+        boolean highEqFull = highest.getClass().equals(FullHouse.class);
+        boolean highEqSet = highest.getClass().equals(TreeOfKind.class);
+        
+        if ( highEq1P || ( highEqCurClass && ( highEqFull || highEqSet ) ) ) {
+                char highestRate = highest.getKickersList().get(0).getRate();
+                char currentRate = current.getKickersList().get(0).getRate();
+                if (highestRate == currentRate) {
+                    return true;
+                }
+        }
+        
+        boolean highEq2P = highest.getClass().equals(TwoPairs.class);
+        boolean curEq2P = current.getClass().equals(TwoPairs.class);
+        
+        if ( highEq2P && curEq2P) {
+            char highestRate1 = highest.getKickersList().get(0).getRate();
+            char currentRate1 = current.getKickersList().get(0).getRate();
+            char highestRate2 = highest.getKickersList().get(1).getRate();
+            char currentRate2 = current.getKickersList().get(1).getRate();
+            if (highestRate1 == currentRate1 && highestRate2 == currentRate2) {
+                return true;
+            }
+        }
+        
+        boolean curEq1P = current.getClass().equals(Pair.class);
+        
+        if ( highEq2P && curEq1P) {
+            return true;
+        }
+        return false;
+    }
+
     public AbstractCombination getHandAdditionalAbstractCombination() {
-        if (this.wholeCards.size() == Hand.FIVECARD) {
-            this.searchAdditionalAceKingOnFiveCards();
+        if ( this.wholeCards.size() == Hand.FIVECARD) {
+            this.additional = this.searchAdditionalAceKingOnFiveCards(this.main);
         }
         return this.additional;
     }
@@ -131,12 +176,14 @@ public class Hand implements Comparable<Hand> {
         return result;
     }
 
-    private void searchAdditionalAceKingOnFiveCards() {
-        this.additional = null;
-        this.additComboCards.clear();
+    private AbstractCombination searchAdditionalAceKingOnFiveCards(AbstractCombination wholeCards) {
+        if (wholeCards.getClass().equals(AceKing.class)) {
+            return null;
+        }
+        AbstractCombination result = null;
         Boolean aces = false;
         Boolean kings = false;
-        for (Card card : this.main.getKickersList()) {
+        for (Card card : wholeCards.getKickersList()) {
             if (card.getRate() == 'K') {
                 kings = true;
             }
@@ -146,18 +193,17 @@ public class Hand implements Comparable<Hand> {
         }
         if (aces
                 && kings
-                && (this.main.getClass() == Pair.class || this.main.getClass() == Set.class)) {
-            this.additional = new AceKing(this.mainComboCards);
+                && (wholeCards.getClass().equals(Pair.class) || wholeCards.getClass().equals(TreeOfKind.class))) {
+            result = new AceKing(wholeCards.getKickersList());
         }
-        if (aces && kings && this.main.getClass() == TwoPairs.class
-                && this.main.getKickersList().get(1).getRate() != 'K') {
-            this.additional = new AceKing(this.mainComboCards);
+        if (aces && kings && wholeCards.getClass() == TwoPairs.class
+                && wholeCards.getKickersList().get(1).getRate() != 'K') {
+            result = new AceKing(wholeCards.getKickersList());
         }
-
+        return result;
     }
 
-    private AbstractCombination getHandAbstractCombination(
-            List<Card> fiveCardCombo) {
+    private AbstractCombination getHandAbstractCombination(List<Card> fiveCardCombo) {
         Collections.sort(fiveCardCombo);
         Collections.reverse(fiveCardCombo);
         if (drawStatus) {
@@ -328,7 +374,7 @@ public class Hand implements Comparable<Hand> {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(mainComboCards);
+        return Objects.hashCode(this.wholeCards);
     }
 
     @Override
