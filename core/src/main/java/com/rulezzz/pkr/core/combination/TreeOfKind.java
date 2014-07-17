@@ -1,5 +1,6 @@
 package com.rulezzz.pkr.core.combination;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.rulezzz.pkr.core.card.Card;
@@ -32,6 +33,14 @@ public class TreeOfKind extends AbstractCombination {
     @Override
     public int getMultiplier() {
         return MULTIPLIER;
+    }
+    
+    @Override
+    public String toString() {
+        List<Card> tempToStr = new ArrayList<Card>();
+        tempToStr.addAll(kickers);
+        tempToStr.remove(0);
+        return this.getName() + " of " + kickers.get(0).getRate() + " | " + tempToStr.toString();
     }
 
 }

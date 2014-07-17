@@ -26,6 +26,13 @@ public class HandTest {
     }
     
     @Test
+    public void testCombosFromCardLists(){
+        hand = ComboSamples.getTwoPairsAABBC();
+        hand.add(new Card(CardSuit.HEART, '2'));
+        assertEquals(TwoPairs.class, hand.getHandAbstractCombination().getClass());
+    }
+    
+    @Test
     public void testAddAceKingFromFiveCard() {
         hand = ComboSamples.getPairABBCD();
         assertEquals(Pair.class, hand.getHandAbstractCombination().getClass());

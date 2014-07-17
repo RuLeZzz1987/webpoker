@@ -40,7 +40,6 @@ public final class GameMath {
             data[index] = cardList.get(i);
             combinationUtil(cardList, data, i + 1, end, index + 1, k);
         }
-
     }
 
 }

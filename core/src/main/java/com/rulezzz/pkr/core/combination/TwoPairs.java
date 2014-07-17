@@ -34,4 +34,9 @@ public class TwoPairs extends AbstractCombination {
         return MULTIPLIER;
     }
 
+    @Override
+    public String toString() {
+        return this.getName() + " of " + kickers.get(0).getRate() + " over " + kickers.get(1).getRate() + " | "
+                + kickers.get(2);
+    }
 }

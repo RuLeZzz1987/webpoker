@@ -34,5 +34,10 @@ public class AceKing extends AbstractCombination {
     public int getMultiplier() {
         return MULTIPLIER;
     }
+    
+    @Override
+    public String toString() {
+        return this.getName()+" "+kickers.toString();
+    }
 
 }

@@ -29,6 +29,22 @@ public class HandCombinationTest {
     }
     
     @Test
+    public void testAceKingToString() {
+        System.out.println(getDoesntQualifyOne().toString());
+        System.out.println(getAceKingHigher().toString());
+        System.out.println(getPairAABCD().toString());
+        System.out.println(getTwoPairsAABBC().toString());
+        System.out.println(getSetAAABC().toString());
+        System.out.println(getStraight().toString());
+        System.out.println(getStraightWheel().toString());
+        System.out.println(getFlushHigher().toString());
+        System.out.println(getFullHouseAAABB().toString());
+        System.out.println(getCareAAAAB().toString());
+        System.out.println(getStraightFlush().toString());
+        System.out.println(getRoyalFlushTwo().toString());
+    }
+    
+    @Test
     public void testIComboDoesntQualify() {
         assertEquals(DoesntQualify.class, getDoesntQualifyOne().getHandAbstractCombination().getClass());
         assertEquals(0, getDoesntQualifyOne().getHandAbstractCombination().getHighness());
@@ -513,7 +529,7 @@ public class HandCombinationTest {
         assertEquals(FourOfKind.class, getCareAAAAB().getHandAbstractCombination().getClass());
         //assertEquals(checkKickersList, getCareAAAAB().getHandICombination().getKickersList());
         assertEquals(8, getCareAAAAB().getHandAbstractCombination().getHighness());
-        assertEquals("Four Of a Kind", getCareAAAAB().getHandAbstractCombination().getName());
+        assertEquals("Four of a Kind", getCareAAAAB().getHandAbstractCombination().getName());
         assertEquals(1, getCareAAAAB().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getCareAAAAB().compareTo(getAceKingLower()));
         assertEquals(1, getCareAAAAB().compareTo(getPairABCDD()));
@@ -540,7 +556,7 @@ public class HandCombinationTest {
         assertEquals(FourOfKind.class, getCareABBBB().getHandAbstractCombination().getClass());
         //assertEquals(checkKickersList, getCareABBBB().getHandICombination().getKickersList());
         assertEquals(8, getCareABBBB().getHandAbstractCombination().getHighness());
-        assertEquals("Four Of a Kind", getCareABBBB().getHandAbstractCombination().getName());
+        assertEquals("Four of a Kind", getCareABBBB().getHandAbstractCombination().getName());
         assertEquals(1, getCareABBBB().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getCareABBBB().compareTo(getAceKingLower()));
         assertEquals(1, getCareABBBB().compareTo(getPairABCDD()));

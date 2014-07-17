@@ -21,7 +21,7 @@ public class FourOfKind extends AbstractCombination {
 
     @Override
     public String getName() {
-        return "Four Of a Kind";
+        return "Four of a Kind";
     }
 
     @Override
@@ -32,6 +32,11 @@ public class FourOfKind extends AbstractCombination {
     @Override
     public int getMultiplier() {
         return MULTIPLIER;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getName() + " of " + kickers.get(0).getRate() + " | " + kickers.get(1);
     }
 
 }

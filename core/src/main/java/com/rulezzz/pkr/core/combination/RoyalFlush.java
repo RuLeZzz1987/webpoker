@@ -33,5 +33,10 @@ public class RoyalFlush extends AbstractCombination {
     public int getMultiplier() {
         return MULTIPLIER;
     }
+    
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 
 }

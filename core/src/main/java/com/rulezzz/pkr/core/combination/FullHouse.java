@@ -33,5 +33,10 @@ public class FullHouse extends AbstractCombination {
     public int getMultiplier() {
         return MULTIPLIER;
     }
+    
+    @Override
+    public String toString() {
+        return this.getName() + " of " + kickers.get(0).getRate() + " over " + kickers.get(1).getRate();
+    }
 
 }

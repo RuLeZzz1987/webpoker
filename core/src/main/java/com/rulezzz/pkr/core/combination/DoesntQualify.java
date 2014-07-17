@@ -34,4 +34,8 @@ public class DoesntQualify extends AbstractCombination {
         return MULTIPLIER;
     }
 
+    @Override
+    public String toString() {
+        return "Hand " + this.getName();
+    }
 }

@@ -33,5 +33,10 @@ public class Flush extends AbstractCombination {
     public int getMultiplier() {
         return MULTIPLIER;
     }
+    
+    @Override
+    public String toString() {
+        return this.getName() + " Suit " + kickers.get(0).getSuit().getCharSuit() + " | " + kickers;
+    }
 
 }

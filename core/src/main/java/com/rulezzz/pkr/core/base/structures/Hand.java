@@ -101,14 +101,15 @@ public class Hand implements Comparable<Hand> {
     private void generateMainComboFromWholeCards() {
         List<ArrayList<Card>> fiveCardsLists = new GameMath()
                 .generateCombinations(this.wholeCards, Hand.FIVECARD);
+        List<AbstractCombination> r = this.sortGeneratedCardLists(fiveCardsLists);
         this.mainComboCards = fiveCardsLists.get(0);
         this.main = this.getHandAbstractCombination(this.mainComboCards);
         for (ArrayList<Card> cards : fiveCardsLists) {
-            if (main.compareTo(getHandAbstractCombination(cards)) < 0) {
+            AbstractCombination currCardsCombo = getHandAbstractCombination(cards);
+            if (main.compareTo(currCardsCombo) < 0) {
                 this.mainComboCards.clear();
                 this.mainComboCards.addAll(cards);
-                this.main = this
-                        .getHandAbstractCombination(this.mainComboCards);
+                this.main = this.getHandAbstractCombination(this.mainComboCards);
             }
         }
     }
@@ -118,6 +119,16 @@ public class Hand implements Comparable<Hand> {
             this.searchAdditionalAceKingOnFiveCards();
         }
         return this.additional;
+    }
+    
+    private List<AbstractCombination> sortGeneratedCardLists(List<ArrayList<Card>> fiveCardLists) {
+        List<AbstractCombination> result = new ArrayList<AbstractCombination>();
+        for (ArrayList<Card> cards : fiveCardLists) {
+            result.add(this.getHandAbstractCombination(cards));
+        }
+        Collections.sort(result);
+        Collections.reverse(result);
+        return result;
     }
 
     private void searchAdditionalAceKingOnFiveCards() {
@@ -335,7 +346,8 @@ public class Hand implements Comparable<Hand> {
 
     @Override
     public String toString() {
-        return this.mainComboCards.toString();
+        this.getHandAbstractCombination();
+        return this.main.toString();
     }
 
     @Override
