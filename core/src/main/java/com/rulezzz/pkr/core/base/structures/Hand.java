@@ -155,7 +155,7 @@ public class Hand implements Comparable<Hand> {
         
         if ( highEq2P && curEq1P) {
             return true;
-        }
+        } 
         return false;
     }
 
