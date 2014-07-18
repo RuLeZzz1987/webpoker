@@ -101,7 +101,10 @@ public class Hand implements Comparable<Hand> {
         List<AbstractCombination> wholeComboList = this.sortGeneratedCardLists(fiveCardsLists);
         this.main = wholeComboList.get(0);
         wholeComboList.remove(0);
-        if (!this.main.getClass().equals(AceKing.class) && !this.main.getClass().equals(DoesntQualify.class)) {
+        boolean mainEqAK = this.main.getClass().equals(AceKing.class);
+        boolean mainEqDnq = this.main.getClass().equals(DoesntQualify.class);
+        
+        if (!mainEqAK && !mainEqDnq) {
             for (int i = wholeComboList.size() - 1; i >= 0; i--) {
                 if (this.rulesForCalcAdditCombo(this.main, wholeComboList.get(i))) {
                     wholeComboList.remove(i);
@@ -110,8 +113,21 @@ public class Hand implements Comparable<Hand> {
             if ( wholeComboList.size() != 0 ) {
                 this.additional = wholeComboList.get(0);
             }
+            boolean mainEq2P = this.main.getClass().equals(TwoPairs.class);
+            boolean mainEqSet = this.main.getClass().equals(TreeOfKind.class);
+            
+            if ((mainEq2P || mainEqSet) && this.additional.getClass().equals(Pair.class)) {
+                char rate1p = this.main.getKickersList().get(0).getRate();
+                char rate2p = this.main.getKickersList().get(1).getRate();
+                this.additional = searchAdditionalAceKingOnFiveCards(this.additional);
+                if (rate1p == 'A' && rate2p == 'K') {
+                    this.additional = null;
+                }
+            }
         } 
-        if (this.main.getClass().equals(FullHouse.class) && !this.additional.getClass().equals(FullHouse.class)) {
+        boolean mainEqFull = this.main.getClass().equals(FullHouse.class);
+        
+        if (mainEqFull && !this.additional.getClass().equals(FullHouse.class)) {
             this.additional = searchAdditionalAceKingOnFiveCards(this.additional);
         }
     }
@@ -150,12 +166,7 @@ public class Hand implements Comparable<Hand> {
                 return true;
             }
         }
-        
-        boolean curEq1P = current.getClass().equals(Pair.class);
-        
-        if ( highEq2P && curEq1P) {
-            return true;
-        } 
+
         return false;
     }
 
