@@ -163,8 +163,8 @@ public final class ComboSamples {
     }
 
     public static Hand getFullHouseAABBB() {
-    Hand hand = new Hand(new Card(CardSuit.CLUBS, 'A'),
-            new Card(CardSuit.DIAMOND, 'A'),
+    Hand hand = new Hand(new Card(CardSuit.CLUBS, 'K'),
+            new Card(CardSuit.DIAMOND, 'K'),
             new Card(CardSuit.SPADES, '2'),
             new Card(CardSuit.HEART, '2'),
             new Card(CardSuit.CLUBS, '2'));
@@ -255,9 +255,9 @@ public final class ComboSamples {
     public static Hand getFlushLower() {
     Hand hand = new Hand(new Card(CardSuit.HEART, 'Q'),
             new Card(CardSuit.HEART, '9'),
-            new Card(CardSuit.HEART, '6'),
-            new Card(CardSuit.HEART, '5'),
-            new Card(CardSuit.HEART, '2'));
+            new Card(CardSuit.HEART, '8'),
+            new Card(CardSuit.HEART, '7'),
+            new Card(CardSuit.HEART, '6'));
     return hand;
     }
     

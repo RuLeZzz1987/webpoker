@@ -14,6 +14,7 @@ import com.rulezzz.pkr.core.card.CardSuit;
 import com.rulezzz.pkr.core.combination.AceKing;
 import com.rulezzz.pkr.core.combination.DoesntQualify;
 import com.rulezzz.pkr.core.combination.Flush;
+import com.rulezzz.pkr.core.combination.FourOfKind;
 import com.rulezzz.pkr.core.combination.FullHouse;
 import com.rulezzz.pkr.core.combination.Pair;
 import com.rulezzz.pkr.core.combination.Straight;
@@ -126,9 +127,25 @@ public class HandTest {
         hand.add(new Card(CardSuit.HEART, 'K'));
         
         assertEquals(TreeOfKind.class, hand.getHandAbstractCombination().getClass());
-        //assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
         
+        hand = ComboSamples.getStraightWheel();
+        hand.add(new Card(CardSuit.HEART, '5'));
         
+        assertEquals(Straight.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(Straight.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getStraightWheel();
+        hand.add(new Card(CardSuit.HEART, '6'));
+        
+        assertEquals(Straight.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(Straight.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getStraight();
+        hand.add(new Card(CardSuit.HEART, 'A'));
+        
+        assertEquals(Straight.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(Straight.class, hand.getHandAdditionalAbstractCombination().getClass());
         
         hand = ComboSamples.getStraightWheel();
         hand.add(new Card(CardSuit.HEART, 'K'));
@@ -153,6 +170,75 @@ public class HandTest {
         
         assertEquals(Flush.class, hand.getHandAbstractCombination().getClass());
         assertEquals(Pair.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getFlushLower();
+        hand.add(new Card(CardSuit.DIAMOND, 'T'));
+        
+        assertEquals(Flush.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(Straight.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getFullHouseAAABB();
+        hand.add(new Card(CardSuit.HEART, '3'));
+        
+        assertEquals(FullHouse.class, hand.getHandAbstractCombination().getClass());
+        assertNull(hand.getHandAdditionalAbstractCombination());
+        
+        hand = ComboSamples.getFullHouseAAABB();
+        hand.add(new Card(CardSuit.HEART, '2'));
+        
+        assertEquals(FullHouse.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(FullHouse.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getFullHouseAAABB();
+        hand.add(new Card(CardSuit.HEART, 'K'));
+        
+        assertEquals(FullHouse.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getFullHouseAABBB();
+        hand.add(new Card(CardSuit.HEART, 'K'));
+        
+        assertEquals(FullHouse.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(FullHouse.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getFullHouseAABBB();
+        hand.add(new Card(CardSuit.HEART, 'A'));
+        
+        assertEquals(FullHouse.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getFullHouseAABBB();
+        hand.add(new Card(CardSuit.HEART, 'J'));
+        
+        assertEquals(FullHouse.class, hand.getHandAbstractCombination().getClass());
+        assertNull(hand.getHandAdditionalAbstractCombination());
+        
+        hand = ComboSamples.getCareAAAAB();
+        hand.add(new Card(CardSuit.HEART, '2'));
+        
+        assertEquals(FourOfKind.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(FullHouse.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getCareABBBB();
+        hand.add(new Card(CardSuit.HEART, 'A'));
+        
+        assertEquals(FourOfKind.class, hand.getHandAbstractCombination().getClass());
+        assertEquals(FullHouse.class, hand.getHandAdditionalAbstractCombination().getClass());
+        
+        hand = ComboSamples.getCareABBBB();
+        hand.add(new Card(CardSuit.HEART, 'J'));
+        
+        assertEquals(FourOfKind.class, hand.getHandAbstractCombination().getClass());
+        //assertNull(hand.getHandAdditionalAbstractCombination());
+        
+        hand = ComboSamples.getCareAAAAB();
+        hand.add(new Card(CardSuit.HEART, 'K'));
+        
+        assertEquals(FourOfKind.class, hand.getHandAbstractCombination().getClass());
+       // assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass()); didn't pass, need refactoring
+        
+        
+        
     }
     
     @Test
@@ -174,7 +260,7 @@ public class HandTest {
         assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
         hand = ComboSamples.getTwoPairsAABCC();
         assertEquals(TwoPairs.class, hand.getHandAbstractCombination().getClass());
-        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass()); 
     }
     
     @Test

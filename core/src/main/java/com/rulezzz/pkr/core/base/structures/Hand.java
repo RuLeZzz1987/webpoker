@@ -110,7 +110,7 @@ public class Hand implements Comparable<Hand> {
                     wholeComboList.remove(i);
                 }
             }
-            if ( wholeComboList.size() != 0 ) {
+            if ( wholeComboList.size() > 0 ) {
                 this.additional = wholeComboList.get(0);
             }
             boolean mainEq2P = this.main.getClass().equals(TwoPairs.class);
@@ -120,7 +120,7 @@ public class Hand implements Comparable<Hand> {
                 char rate1p = this.main.getKickersList().get(0).getRate();
                 char rate2p = this.main.getKickersList().get(1).getRate();
                 this.additional = searchAdditionalAceKingOnFiveCards(this.additional);
-                if (rate1p == 'A' && rate2p == 'K') {
+                if (rate1p == 'A' && rate2p == 'K' && mainEq2P) {
                     this.additional = null;
                 }
             }
