@@ -229,13 +229,13 @@ public class HandTest {
         hand.add(new Card(CardSuit.HEART, 'J'));
         
         assertEquals(FourOfKind.class, hand.getHandAbstractCombination().getClass());
-        //assertNull(hand.getHandAdditionalAbstractCombination());
+        assertNull(hand.getHandAdditionalAbstractCombination());
         
         hand = ComboSamples.getCareAAAAB();
         hand.add(new Card(CardSuit.HEART, 'K'));
         
         assertEquals(FourOfKind.class, hand.getHandAbstractCombination().getClass());
-       // assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass()); didn't pass, need refactoring
+        assertEquals(AceKing.class, hand.getHandAdditionalAbstractCombination().getClass());
         
         
         
