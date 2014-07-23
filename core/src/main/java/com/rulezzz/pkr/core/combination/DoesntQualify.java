@@ -1,6 +1,7 @@
 package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
+import java.util.Set;
 
 import com.rulezzz.pkr.core.card.Card;
 
@@ -37,5 +38,10 @@ public class DoesntQualify extends AbstractCombination {
     @Override
     public String toString() {
         return "Hand " + this.getName();
+    }
+
+    @Override
+    public Set<AbstractCombination> getAllowedAdditionalCombo() {
+        return null;
     }
 }

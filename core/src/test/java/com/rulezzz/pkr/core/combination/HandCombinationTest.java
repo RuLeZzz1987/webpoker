@@ -306,10 +306,10 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.DIAMOND, '7'));
         checkKickersList.add(new Card(CardSuit.SPADES, '5'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '2'));
-        assertEquals(TreeOfKind.class, getSetAAABC().getHandAbstractCombination().getClass());
+        assertEquals(ThreeOfKind.class, getSetAAABC().getHandAbstractCombination().getClass());
         //assertEquals(checkKickersList, getSetAAABC().getHandICombination().getKickersList());
         assertEquals(4, getSetAAABC().getHandAbstractCombination().getHighness());
-        assertEquals("Tree of a Kind", getSetAAABC().getHandAbstractCombination().getName());
+        assertEquals("Three of a Kind", getSetAAABC().getHandAbstractCombination().getName());
         assertEquals(1, getSetAAABC().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getSetAAABC().compareTo(getAceKingLower()));
         assertEquals(1, getSetAAABC().compareTo(getPairABCDD()));
@@ -334,10 +334,10 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.DIAMOND, 'J'));
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
         checkKickersList.add(new Card(CardSuit.CLUBS, '2'));
-        assertEquals(TreeOfKind.class, getSetABBBC().getHandAbstractCombination().getClass());
+        assertEquals(ThreeOfKind.class, getSetABBBC().getHandAbstractCombination().getClass());
         //assertEquals(checkKickersList, getSetABBBC().getHandICombination().getKickersList());
         assertEquals(4, getSetABBBC().getHandAbstractCombination().getHighness());
-        assertEquals("Tree of a Kind", getSetABBBC().getHandAbstractCombination().getName());
+        assertEquals("Three of a Kind", getSetABBBC().getHandAbstractCombination().getName());
         assertEquals(1, getSetABBBC().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getSetABBBC().compareTo(getAceKingLower()));
         assertEquals(1, getSetABBBC().compareTo(getPairABCDD()));
@@ -362,10 +362,10 @@ public class HandCombinationTest {
         checkKickersList.add(new Card(CardSuit.DIAMOND, '2'));
         checkKickersList.add(new Card(CardSuit.SPADES, 'A'));
         checkKickersList.add(new Card(CardSuit.CLUBS, 'J'));
-        assertEquals(TreeOfKind.class, getSetABCCC().getHandAbstractCombination().getClass());
+        assertEquals(ThreeOfKind.class, getSetABCCC().getHandAbstractCombination().getClass());
         //assertEquals(checkKickersList, getSetABCCC().getHandICombination().getKickersList());
         assertEquals(4, getSetABCCC().getHandAbstractCombination().getHighness());
-        assertEquals("Tree of a Kind", getSetABCCC().getHandAbstractCombination().getName());
+        assertEquals("Three of a Kind", getSetABCCC().getHandAbstractCombination().getName());
         assertEquals(1, getSetABCCC().compareTo(getDoesntQualifyOne()));
         assertEquals(1, getSetABCCC().compareTo(getAceKingLower()));
         assertEquals(1, getSetABCCC().compareTo(getPairABCDD()));

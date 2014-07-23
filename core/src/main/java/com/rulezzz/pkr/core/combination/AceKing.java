@@ -1,6 +1,7 @@
 package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
+import java.util.Set;
 
 import com.rulezzz.pkr.core.card.Card;
 
@@ -13,6 +14,9 @@ public class AceKing extends AbstractCombination {
 
     public AceKing(List<Card> cardList) {
         this.kickers = cardList;
+    }
+    
+    public AceKing() {
     }
 
     @Override
@@ -38,6 +42,11 @@ public class AceKing extends AbstractCombination {
     @Override
     public String toString() {
         return this.getName()+" "+kickers.toString();
+    }
+
+    @Override
+    public Set<AbstractCombination> getAllowedAdditionalCombo() {
+        return null;
     }
 
 }

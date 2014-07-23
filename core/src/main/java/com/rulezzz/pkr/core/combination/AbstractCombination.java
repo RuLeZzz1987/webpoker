@@ -1,6 +1,7 @@
 package com.rulezzz.pkr.core.combination;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.base.Objects;
 import com.rulezzz.pkr.core.card.Card;
@@ -59,4 +60,6 @@ public abstract class AbstractCombination implements Comparable<AbstractCombinat
     public abstract List<Card> getKickersList();
 
     public abstract int getMultiplier();
+    
+    public abstract Set<AbstractCombination> getAllowedAdditionalCombo();
 }

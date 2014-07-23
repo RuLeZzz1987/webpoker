@@ -3,7 +3,6 @@ package com.rulezzz.pkr.core.base.structures;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import com.google.common.base.Objects;
 import com.rulezzz.pkr.core.base.engines.ConsilienceCount;
@@ -21,7 +20,7 @@ import com.rulezzz.pkr.core.combination.RoyalFlush;
 import com.rulezzz.pkr.core.combination.Straight;
 import com.rulezzz.pkr.core.combination.StraightFlush;
 import com.rulezzz.pkr.core.combination.StraightTypes;
-import com.rulezzz.pkr.core.combination.TreeOfKind;
+import com.rulezzz.pkr.core.combination.ThreeOfKind;
 import com.rulezzz.pkr.core.combination.TwoPairs;
 
 public class Hand implements Comparable<Hand> {
@@ -112,7 +111,7 @@ public class Hand implements Comparable<Hand> {
                 this.additional = wholeComboList.get(0);
             }
             boolean mainEq2P = this.main.getClass().equals(TwoPairs.class);
-            boolean mainEqSet = this.main.getClass().equals(TreeOfKind.class);
+            boolean mainEqSet = this.main.getClass().equals(ThreeOfKind.class);
 
             if ((mainEq2P || mainEqSet) && this.additional.getClass().equals(Pair.class)) {
                 char rate1p = this.main.getKickersList().get(0).getRate();
@@ -157,7 +156,7 @@ public class Hand implements Comparable<Hand> {
         boolean highEq1P = highest.getClass().equals(Pair.class);
         boolean highEqCurClass = highest.getClass().equals(current.getClass());
         boolean highEqFull = highest.getClass().equals(FullHouse.class);
-        boolean highEqSet = highest.getClass().equals(TreeOfKind.class);
+        boolean highEqSet = highest.getClass().equals(ThreeOfKind.class);
 
         if (highEq1P || (highEqCurClass && (highEqFull || highEqSet))) {
             char highestRate = highest.getKickersList().get(0).getRate();
@@ -216,7 +215,7 @@ public class Hand implements Comparable<Hand> {
             }
         }
         if (aces && kings
-                && (wholeCards.getClass().equals(Pair.class) || wholeCards.getClass().equals(TreeOfKind.class))) {
+                && (wholeCards.getClass().equals(Pair.class) || wholeCards.getClass().equals(ThreeOfKind.class))) {
             result = new AceKing(wholeCards.getKickersList());
         }
         if (aces && kings && wholeCards.getClass() == TwoPairs.class
@@ -311,7 +310,7 @@ public class Hand implements Comparable<Hand> {
                     cardsCompare.add(card);
                 }
             }
-            return new TreeOfKind(cardsCompare);
+            return new ThreeOfKind(cardsCompare);
         } else {
             cardsCompare.add(fiveCardCombo.get(counter.getPairPosition()));
             cardsCompare.add(fiveCardCombo.get(counter.getFirstPairPosition()));
