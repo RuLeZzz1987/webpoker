@@ -94,43 +94,62 @@ public class Hand implements Comparable<Hand> {
 
     private void generateMainComboFromWholeCards() {
         this.main = null;
+        this.additional = null;
         List<ArrayList<Card>> fiveCardsLists = new GameMath().generateCombinations(this.wholeCards, Hand.FIVECARD);
         List<AbstractCombination> wholeComboList = this.sortGeneratedCardLists(fiveCardsLists);
         this.main = wholeComboList.get(0);
         wholeComboList.remove(0);
-        boolean mainEqAK = this.main.getClass().equals(AceKing.class);
-        boolean mainEqDnq = this.main.getClass().equals(DoesntQualify.class);
-
-        if (!mainEqAK && !mainEqDnq) {
-            for (int i = wholeComboList.size() - 1; i >= 0; i--) {
-                if (this.rulesForCalcAdditCombo(this.main, wholeComboList.get(i))) {
-                    wholeComboList.remove(i);
+        for(AbstractCombination absCombo : wholeComboList) {
+            if ( this.main.getAllowedAdditionalCombo() != null) {
+                for (AbstractCombination allowedCombo : this.main.getAllowedAdditionalCombo()) {
+                    if (absCombo.getClass().equals(allowedCombo.getClass())) {
+                        if ( !specialCaseForTwoPairs(this.main, absCombo) ) {
+                            this.additional = absCombo;
+                            break;
+                        } else {
+                            this.additional = null;
+                        }
+                    }
                 }
-            }
-            if (wholeComboList.size() > 0) {
-                this.additional = wholeComboList.get(0);
-            }
-            boolean mainEq2P = this.main.getClass().equals(TwoPairs.class);
-            boolean mainEqSet = this.main.getClass().equals(ThreeOfKind.class);
-
-            if ((mainEq2P || mainEqSet) && this.additional.getClass().equals(Pair.class)) {
-                char rate1p = this.main.getKickersList().get(0).getRate();
-                char rate2p = this.main.getKickersList().get(1).getRate();
-                this.additional = searchAdditionalAceKing(this.additional);
-                if (rate1p == 'A' && rate2p == 'K' && mainEq2P) {
-                    this.additional = null;
+                if (this.additional != null) {
+                    break;
                 }
             }
         }
-        boolean mainEqFull = this.main.getClass().equals(FullHouse.class);
-        boolean mainEqCare = this.main.getClass().equals(FourOfKind.class);
-        
-        if ((mainEqFull || mainEqCare) && !this.additional.getClass().equals(FullHouse.class)) {
-            this.additional = searchAdditionalAceKing(this.wholeCards);
+        if (this.additional == null && this.main.getAllowedAdditionalCombo() != null) {
+            if (this.main.getAllowedAdditionalCombo().contains(new AceKing())) {
+                if ( !specialCaseForAAKKTwoPairs(this.main) ) {
+                this.additional = this.searchAdditionalAceKing(wholeCards, this.main);
+                }
+            }
         }
     }
+    
+    private boolean specialCaseForAAKKTwoPairs(AbstractCombination current) {
+        if (current.getClass().equals(TwoPairs.class)) {
+            char firstPairRate = current.getKickersList().get(0).getRate();
+            char secondPairRate = current.getKickersList().get(1).getRate();
+            if ( firstPairRate == 'A' && secondPairRate == 'K' ) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean specialCaseForTwoPairs(AbstractCombination currentMain, AbstractCombination currentAdd) {
+        if ( currentMain.getClass().equals(TwoPairs.class) && currentAdd.getClass().equals(TwoPairs.class) ) {
+            char firstPairRate = currentMain.getKickersList().get(0).getRate();
+            char secondPairRate = currentMain.getKickersList().get(1).getRate();
+            char firstPairRateAdd = currentAdd.getKickersList().get(0).getRate();
+            char secondPairRateAdd = currentAdd.getKickersList().get(1).getRate();
+            if (firstPairRate == firstPairRateAdd && secondPairRate == secondPairRateAdd) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    private AbstractCombination searchAdditionalAceKing(List<Card> listCard) {
+    private AbstractCombination searchAdditionalAceKing(List<Card> listCard, AbstractCombination currentMain) {
         boolean aceRate = false;
         boolean kingRate = false;
         for (Card card : listCard) {
@@ -143,45 +162,7 @@ public class Hand implements Comparable<Hand> {
         }
         return aceRate && kingRate ? new AceKing(listCard) : null;
     }
-
-    private boolean rulesForCalcAdditCombo(AbstractCombination highest, AbstractCombination current) {
-        boolean highEqCur = highest.equals(current);
-        boolean highIsStr = highest.getClass().equals(Straight.class);
-        boolean curIsDnq = current.getClass().equals(DoesntQualify.class);
-
-        if ((highEqCur && !highIsStr) || curIsDnq) {
-            return true;
-        }
-
-        boolean highEq1P = highest.getClass().equals(Pair.class);
-        boolean highEqCurClass = highest.getClass().equals(current.getClass());
-        boolean highEqFull = highest.getClass().equals(FullHouse.class);
-        boolean highEqSet = highest.getClass().equals(ThreeOfKind.class);
-
-        if (highEq1P || (highEqCurClass && (highEqFull || highEqSet))) {
-            char highestRate = highest.getKickersList().get(0).getRate();
-            char currentRate = current.getKickersList().get(0).getRate();
-            if (highestRate == currentRate) {
-                return true;
-            }
-        }
-
-        boolean highEq2P = highest.getClass().equals(TwoPairs.class);
-        boolean curEq2P = current.getClass().equals(TwoPairs.class);
-
-        if (highEq2P && curEq2P) {
-            char highestRate1 = highest.getKickersList().get(0).getRate();
-            char currentRate1 = current.getKickersList().get(0).getRate();
-            char highestRate2 = highest.getKickersList().get(1).getRate();
-            char currentRate2 = current.getKickersList().get(1).getRate();
-            if (highestRate1 == currentRate1 && highestRate2 == currentRate2) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
+    
     public AbstractCombination getHandAdditionalAbstractCombination() {
         if (this.wholeCards.size() == Hand.FIVECARD) {
             this.additional = this.searchAdditionalAceKing(this.main);

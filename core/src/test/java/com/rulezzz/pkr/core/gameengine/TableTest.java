@@ -1,22 +1,20 @@
 package com.rulezzz.pkr.core.gameengine;
 
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getDoesntQualifyOne;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getFullHouseAAABB;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getPairAABCD;
+import static com.rulezzz.pkr.core.combination.samples.ComboSamples.getStraight;
 import static org.junit.Assert.assertEquals;
-import static com.rulezzz.pkr.core.combination.samples.ComboSamples.*;
 
-import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
-import com.rulezzz.pkr.core.card.Card;
-import com.rulezzz.pkr.core.card.CardSuit;
-import com.rulezzz.pkr.core.combination.DoesntQualify;
-import com.rulezzz.pkr.core.combination.Straight;
-import com.rulezzz.pkr.core.combination.samples.DeckSample;
-import com.rulezzz.pkr.core.gameengine.Table;
-import com.rulezzz.pkr.core.statuses.GameStatus;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.rulezzz.pkr.core.base.structures.Box.BoxStatus;
+import com.rulezzz.pkr.core.card.Card;
+import com.rulezzz.pkr.core.statuses.GameStatus;
 
 public class TableTest {
 

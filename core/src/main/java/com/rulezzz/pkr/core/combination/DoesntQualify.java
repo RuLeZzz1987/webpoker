@@ -10,6 +10,7 @@ public class DoesntQualify extends AbstractCombination {
     private static final int DNQ_HIGHNESS = 0;
     private static final int MULTIPLIER = 0;
     private List<Card> kickers;
+    
 
     public DoesntQualify(List<Card> cardHand) {
         this.kickers = cardHand;

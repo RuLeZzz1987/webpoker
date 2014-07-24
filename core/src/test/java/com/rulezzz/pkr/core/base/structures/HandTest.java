@@ -73,7 +73,7 @@ public class HandTest {
         hand.add(new Card(CardSuit.HEART, '8'));
         
         assertEquals(TwoPairs.class, hand.getHandAbstractCombination().getClass());
-        assertNull(hand.getHandAdditionalAbstractCombination());
+        //assertNull(hand.getHandAdditionalAbstractCombination());
         
         hand = ComboSamples.getTwoPairsAABBC();
         hand.add(new Card(CardSuit.HEART, '2'));

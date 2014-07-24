@@ -1,8 +1,9 @@
 package com.rulezzz.pkr.core.combination;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import com.rulezzz.pkr.core.card.Card;
 
@@ -10,8 +11,8 @@ public class RoyalFlush extends AbstractCombination {
 
     private static final int ROYAL_FLUSH_HIGHNESS = 10;
     private static final int MULTIPLIER = 100;
-    private List<Card> kickers;
-    private static Set<AbstractCombination> allowedAdditCombos = new HashSet<AbstractCombination>();
+    private List<Card> kickers = new ArrayList<Card>();
+    private static Set<AbstractCombination> allowedAdditCombos = new TreeSet<AbstractCombination>();
     
     static {
         RoyalFlush.allowedAdditCombos.add(new StraightFlush());
