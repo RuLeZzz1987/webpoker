@@ -13,7 +13,7 @@ import com.rulezzz.pkr.core.card.Card;
 import com.rulezzz.pkr.core.card.CardSuit;
 
 
-public class DeckSample {
+public final class DeckSample {
 
     private DeckSample() {}
     

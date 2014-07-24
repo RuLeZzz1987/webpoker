@@ -99,30 +99,28 @@ public class Hand implements Comparable<Hand> {
         List<AbstractCombination> wholeComboList = this.sortGeneratedCardLists(fiveCardsLists);
         this.main = wholeComboList.get(0);
         wholeComboList.remove(0);
-        for(AbstractCombination absCombo : wholeComboList) {
-            if ( this.main.getAllowedAdditionalCombo() != null) {
-                for (AbstractCombination allowedCombo : this.main.getAllowedAdditionalCombo()) {
-                    if (absCombo.getClass().equals(allowedCombo.getClass())) {
-                        if ( !specialCaseForTwoPairs(this.main, absCombo) ) {
-                            this.additional = absCombo;
-                            break;
-                        } else {
-                            this.additional = null;
-                        }
+        this.additional = extractAddCombo(wholeComboList, this.main);
+    }
+
+    private AbstractCombination extractAddCombo(List<AbstractCombination> wholeComboList,
+            AbstractCombination currentMain) {
+        if (currentMain.getAllowedAdditionalCombo() != null) {
+            for (AbstractCombination absCombo : wholeComboList) {
+                for (AbstractCombination allowedCombo : currentMain.getAllowedAdditionalCombo()) {
+                    if (absCombo.getClass().equals(allowedCombo.getClass())
+                            && !specialCaseForTwoPairs(currentMain, absCombo)) {
+                        return absCombo;
                     }
                 }
-                if (this.additional != null) {
-                    break;
-                }
             }
+        } else {
+            return null;
         }
-        if (this.additional == null && this.main.getAllowedAdditionalCombo() != null) {
-            if (this.main.getAllowedAdditionalCombo().contains(new AceKing())) {
-                if ( !specialCaseForAAKKTwoPairs(this.main) ) {
-                this.additional = this.searchAdditionalAceKing(wholeCards, this.main);
-                }
-            }
+        if (currentMain.getAllowedAdditionalCombo().contains(new AceKing())
+                && !specialCaseForAAKKTwoPairs(currentMain)) {
+            return this.searchAdditionalAceKing(wholeCards);
         }
+        return null;
     }
     
     private boolean specialCaseForAAKKTwoPairs(AbstractCombination current) {
@@ -149,7 +147,7 @@ public class Hand implements Comparable<Hand> {
         return false;
     }
 
-    private AbstractCombination searchAdditionalAceKing(List<Card> listCard, AbstractCombination currentMain) {
+    private AbstractCombination searchAdditionalAceKing(List<Card> listCard) {
         boolean aceRate = false;
         boolean kingRate = false;
         for (Card card : listCard) {

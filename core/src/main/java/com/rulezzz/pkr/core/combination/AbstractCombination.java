@@ -46,20 +46,17 @@ public abstract class AbstractCombination implements Comparable<AbstractCombinat
         }
         AbstractCombination other = (AbstractCombination) obj;
         if (this.getKickersList() != null) {
-            if (other.getKickersList() != null)
-            for (int i = 0; i < this.getKickersList().size(); i++) {
-                if (!this.getKickersList().get(i).equalsByRate(other.getKickersList().get(i))) {
-                    return false;
+            if (other.getKickersList() != null) {
+                for (int i = 0; i < this.getKickersList().size(); i++) {
+                    if (!this.getKickersList().get(i).equalsByRate(other.getKickersList().get(i))) {
+                        return false;
+                    }
                 }
             } else {
                 return false;
             }
         } else {
-            if (other.getKickersList() == null) {
-                return true;
-            } else {
-                return false;
-            }
+            return other.getKickersList() == null ? true : false;
         }
         return true;
     }
